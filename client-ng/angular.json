@@ -1,0 +1,44 @@
+{
+  "$schema": "../node_modules/nx/schemas/workspace-schema.json",
+  "version": 1.0,
+  "projects": {
+    "client-ng": {
+      "projectType": "application",
+      "root": "client-ng",
+      "sourceRoot": "client-ng/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/client-ng",
+            "index": "client-ng/src/index.html",
+            "main": "client-ng/src/main.ts",
+            "polyfills": "client-ng/src/polyfills.ts",
+            "tsConfig": "client-ng/tsconfig.app.json",
+            "assets": ["client-ng/src/favicon.ico", "client-ng/src/assets"],
+            "styles": ["client-ng/src/styles.css"],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+          }
+        }      
+      }
+    }
+  },
+  "options": {
+    "defaultProject": "client-ng",
+    "appName": "AsmSite",
+    "npmScope": "asmsite",
+    "nxCloud": false,
+    "baseHref": "/dist/client-ng/browser/"
+  },
+
+  "defaultProject": "client-ng",
+
+  "npmScope": "asmsite",
+  "cli": {
+    "analytics": "3acc31f9-23d4-41df-978f-2d97bdd9f365"
+  }
+}

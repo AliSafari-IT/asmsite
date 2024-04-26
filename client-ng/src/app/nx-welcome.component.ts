@@ -432,7 +432,7 @@ import { CommonModule } from '@angular/common';
         <div id="welcome">
           <h1>
             <span> Hello there, </span>
-            Welcome client-ng 👋
+            Welcome client-angular 👋
           </h1>
         </div>
         <!--  HERO  -->
@@ -454,7 +454,8 @@ import { CommonModule } from '@angular/common';
               </svg>
               <span>You&apos;re up and running</span>
             </h2>
-            <a href="#commands"> What&apos;s next? </a>
+            <a href="https://asafarim.com/_index.html"> ASAFARIM&apos;s content ... </a>
+            <a href="/login"> Login to ASAFARIM </a>
           </div>
           <div class="logo-container">
             <svg

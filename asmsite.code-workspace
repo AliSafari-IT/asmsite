@@ -1,8 +1,25 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": ".",
+			"workspaceFolder": true
+		},
+		{
+			"path": "client-ng",
+			"workspaceFolder": false
+		},
+		{
+			"path": "client-react",
+			"workspaceFolder": false
+		},
+		{
+			"path": "client-docu",
+			"workspaceFolder": false
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"tailwindcss"
+		]
+	}
 }
