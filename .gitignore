@@ -10,3 +10,6 @@ node_modules
 /nx
 /nx.*
 
+# Generated Docusaurus files
+.docusaurus/
+.cache-loader/

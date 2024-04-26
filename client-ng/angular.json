@@ -25,6 +25,51 @@
           }
         }      
       }
+    },
+    "client-react": {
+      "projectType": "application",
+      "root": "client-react",
+      "sourceRoot": "client-react/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/client-react",
+            "index": "client-react/src/index.html",
+            "main": "client-react/src/main.ts",
+            "polyfills": "client-react/src/polyfills.ts",
+            "tsConfig": "client-react/tsconfig.app.json",
+            "assets": ["client-react/src/favicon.ico", "client-react/src/assets"],
+            "styles": ["client-react/src/styles.css"],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "client-docs": {
+      "projectType": "application",
+      "root": "client-docs",
+      "sourceRoot": "client-docs/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/client-docs",
+            "index": "client-docs/src/index.html",
+            "main": "client-docs/src/main.ts",
+            "polyfills": "client-docs/src/polyfills.ts",
+            "tsConfig": "client-docs/tsconfig.app.json",
+            "assets": ["client-docs/src/favicon.ico", "client-docs/src/assets"],
+            "styles": ["client-docs/src/styles.css"],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+          }
+        }
+      }
     }
   },
   "options": {
