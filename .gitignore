@@ -1,0 +1,12 @@
+
+.nx/installation
+.nx/cache
+.nx/installation
+.nx/cache
+.angular
+
+node_modules
+
+/nx
+/nx.*
+
