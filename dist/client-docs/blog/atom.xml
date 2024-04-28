@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://asafarim.com/dist/client-docs/blog</id>
+    <title>ASafariM Learn Docs Blog</title>
+    <updated>2023-08-26T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://asafarim.com/dist/client-docs/blog"/>
+    <subtitle>ASafariM Learn Docs Blog</subtitle>
+    <icon>https://asafarim.com/dist/client-docs/dist/client-docs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[What is happening behind the scene?]]></title>
+        <id>https://asafarim.com/dist/client-docs/blog/styletron-react</id>
+        <link href="https://asafarim.com/dist/client-docs/blog/styletron-react"/>
+        <updated>2023-08-26T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:]]></summary>
+        <content type="html"><![CDATA[<p>Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:</p>
+<div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">yarn add styletron</span><span class="token operator" style="color:rgb(137, 221, 255)">-</span><span class="token plain">engine</span><span class="token operator" style="color:rgb(137, 221, 255)">-</span><span class="token plain">atomic styletron</span><span class="token operator" style="color:rgb(137, 221, 255)">-</span><span class="token plain">react</span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain" style="display:inline-block"></span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Use the power of React to create interactive blog posts.</p><div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token plain">html</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  </span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token plain">head</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    </span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token plain">style</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">      </span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token property-access">foo</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(199, 146, 234)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">        font</span><span class="token operator" style="color:rgb(137, 221, 255)">-</span><span class="token plain">size</span><span class="token operator" style="color:rgb(137, 221, 255)">:</span><span class="token plain"> 20px</span><span class="token punctuation" style="color:rgb(199, 146, 234)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">      </span><span class="token punctuation" style="color:rgb(199, 146, 234)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">      </span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token property-access">bar</span><span class="token plain"> </span><span class="token punctuation" style="color:rgb(199, 146, 234)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">        </span><span class="token literal-property property">color</span><span class="token operator" style="color:rgb(137, 221, 255)">:</span><span class="token plain"> red</span><span class="token punctuation" style="color:rgb(199, 146, 234)">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">      </span><span class="token punctuation" style="color:rgb(199, 146, 234)">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    </span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token operator" style="color:rgb(137, 221, 255)">/</span><span class="token plain">style</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  </span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token operator" style="color:rgb(137, 221, 255)">/</span><span class="token plain">head</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  </span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token plain">body</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    </span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token plain">a href</span><span class="token operator" style="color:rgb(137, 221, 255)">=</span><span class="token string" style="color:rgb(195, 232, 141)">"/welcome"</span><span class="token plain"> </span><span class="token keyword" style="font-style:italic">class</span><span class="token operator" style="color:rgb(137, 221, 255)">=</span><span class="token string" style="color:rgb(195, 232, 141)">"foo bar"</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token maybe-class-name">Start</span><span class="token operator" style="color:rgb(137, 221, 255)">!</span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token operator" style="color:rgb(137, 221, 255)">/</span><span class="token plain">a</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  </span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token operator" style="color:rgb(137, 221, 255)">/</span><span class="token plain">body</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token operator" style="color:rgb(137, 221, 255)">&lt;</span><span class="token operator" style="color:rgb(137, 221, 255)">/</span><span class="token plain">html</span><span class="token operator" style="color:rgb(137, 221, 255)">&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div><button>Click me!</button></div></div>]]></content>
+        <author>
+            <name>Ali Safari</name>
+        </author>
+        <category label="styletron-react" term="styletron-react"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Challenges in lab automation]]></title>
+        <id>https://asafarim.com/dist/client-docs/blog/lab-automation-main-challenges</id>
+        <link href="https://asafarim.com/dist/client-docs/blog/lab-automation-main-challenges"/>
+        <updated>2023-05-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:]]></summary>
+        <content type="html"><![CDATA[<p>Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:</p>
+<table><tbody><tr><th>Opportunities</th><th>Challenges</th></tr><tr><td>Increased efficiency and accuracy of lab processes</td><td>Cost of implementing automation</td></tr><tr><td>Improved reproducibility of experiments</td><td>Complexity of lab processes</td></tr><tr><td>Ability to handle large volumes of data</td><td>Integration with existing lab systems</td></tr><tr><td>Improved safety of lab personnel</td><td>Training of staff on how to use automated systems</td></tr><tr><td></td><td>Temporary shut down of lab operations during implementation</td></tr></tbody></table>
+<p>Technically, one of the most common concerns in lab automation is ensuring the accuracy and reproducibility of automated processes. Lab automation systems may introduce errors or variations that can impact experimental results.
+Therefore, it is critical to validate and verify the performance of automated systems to ensure that they are producing accurate and reliable results. Additionally, it is important to establish standard operating procedures (SOPs) and quality control measures to ensure that automated processes are consistent and reproducible over time.</p>]]></content>
+        <author>
+            <name>Ali Safari</name>
+            <uri>https://github.com/AliSafari-IT</uri>
+        </author>
+        <category label="automation" term="automation"/>
+        <category label="lab automation" term="lab automation"/>
+        <category label="technology" term="technology"/>
+        <category label="future challenges" term="future challenges"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Some general benefits of lab automation]]></title>
+        <id>https://asafarim.com/dist/client-docs/blog/lab-automation-benefits</id>
+        <link href="https://asafarim.com/dist/client-docs/blog/lab-automation-benefits"/>
+        <updated>2023-05-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:]]></summary>
+        <content type="html"><![CDATA[<p>Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:</p>
+<ul>
+<li>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="increased-efficiency">Increased Efficiency<a href="https://asafarim.com/dist/client-docs/blog/lab-automation-benefits#increased-efficiency" class="hash-link" aria-label="Direct link to Increased Efficiency" title="Direct link to Increased Efficiency">​</a></h5>
+</li>
+</ul>
+<p>Lab automation can help to streamline laboratory processes and workflows, reducing the time and effort required to perform routine tasks. This can lead to increased efficiency, productivity, and throughput.</p>
+<ul>
+<li>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="improved-accuracy">Improved Accuracy<a href="https://asafarim.com/dist/client-docs/blog/lab-automation-benefits#improved-accuracy" class="hash-link" aria-label="Direct link to Improved Accuracy" title="Direct link to Improved Accuracy">​</a></h5>
+</li>
+</ul>
+<p>Automation can help to reduce errors and variability in laboratory processes, leading to more consistent and reliable results.</p>
+<ul>
+<li>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="cost-savings">Cost Savings<a href="https://asafarim.com/dist/client-docs/blog/lab-automation-benefits#cost-savings" class="hash-link" aria-label="Direct link to Cost Savings" title="Direct link to Cost Savings">​</a></h5>
+</li>
+</ul>
+<p>Lab automation can help to reduce the cost of labor, materials, and equipment, leading to cost savings over time.</p>
+<ul>
+<li>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="data-management">Data Management<a href="https://asafarim.com/dist/client-docs/blog/lab-automation-benefits#data-management" class="hash-link" aria-label="Direct link to Data Management" title="Direct link to Data Management">​</a></h5>
+</li>
+</ul>
+<p>Automation can help to manage and analyze large amounts of data generated by laboratory processes, leading to better insights and decision-making.</p>
+<ul>
+<li>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="standardization">Standardization<a href="https://asafarim.com/dist/client-docs/blog/lab-automation-benefits#standardization" class="hash-link" aria-label="Direct link to Standardization" title="Direct link to Standardization">​</a></h5>
+</li>
+</ul>
+<p>Automation can help to standardize laboratory processes and workflows, ensuring consistency and compliance with regulatory requirements.</p>
+<ul>
+<li>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="scalability">Scalability<a href="https://asafarim.com/dist/client-docs/blog/lab-automation-benefits#scalability" class="hash-link" aria-label="Direct link to Scalability" title="Direct link to Scalability">​</a></h5>
+</li>
+</ul>
+<p>Automation can help to scale laboratory processes and workflows to meet changing demands and increasing throughput.</p>
+<p>Overall, lab automation can help to improve the efficiency, accuracy, and cost-effectiveness of laboratory processes, while also providing better data management and analysis capabilities.</p>]]></content>
+        <author>
+            <name>Ali Safari</name>
+            <uri>https://github.com/AliSafari-IT</uri>
+        </author>
+        <category label="automation" term="automation"/>
+        <category label="lab automation" term="lab automation"/>
+        <category label="technology" term="technology"/>
+        <category label="Data Management" term="Data Management"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Computer coding for science]]></title>
+        <id>https://asafarim.com/dist/client-docs/blog/opening-post</id>
+        <link href="https://asafarim.com/dist/client-docs/blog/opening-post"/>
+        <updated>2021-06-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.]]></summary>
+        <content type="html"><![CDATA[<p>The statistical package <code>R</code> for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.</p>
+<p>However, programming for a reasearch focused branch is not limited to R any more, but highly likely starts often with R.</p>
+<p>Sometimes, having knowledge in other operating systems other than the popular Windows is needed. Sometimes, an analytical tool require a <code>Linux Operating System</code>. In such case, maybe you need to set up a virtual machine (VM), in order to install and work with a linux based software.</p>
+<p>Fortunately, by having the Internet and googling in you side, you can have access to a lot of open source packages and shared repositories that are developed by both researchers and professional developers.</p>
+<p>Nowadays, as a researcher if you want to do an analysis, most probably you can find a software or a tool that is available online, or can be further developed by you to fulfill your requirements.</p>
+<p>This is the way that science trajectory is leading to, and to be a successful researcher you need to gain some knowledge and skills in computer programming.</p>
+<p>As a developer for scientific applications, I have the passion and motivation to go further across deciplines and share my knowledge in programming with scientific comunities and developers.</p>]]></content>
+        <author>
+            <name>Ali Safari</name>
+            <uri>https://github.com/AliSafari-IT</uri>
+        </author>
+        <category label="xitechnix" term="xitechnix"/>
+        <category label="programming" term="programming"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Welcome!]]></title>
+        <id>https://asafarim.com/dist/client-docs/blog/welcome</id>
+        <link href="https://asafarim.com/dist/client-docs/blog/welcome"/>
+        <updated>2021-06-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Hi there!]]></summary>
+        <content type="html"><![CDATA[<h5 class="anchor anchorWithStickyNavbar_LWe7" id="hi-there">Hi there!<a href="https://asafarim.com/dist/client-docs/blog/welcome#hi-there" class="hash-link" aria-label="Direct link to Hi there!" title="Direct link to Hi there!">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_LWe7" id="this-is-ali">This is Ali!<a href="https://asafarim.com/dist/client-docs/blog/welcome#this-is-ali" class="hash-link" aria-label="Direct link to This is Ali!" title="Direct link to This is Ali!">​</a></h6>
+<p>And <a href="https://github.com/AliSafari-IT/asafarim-src" target="_blank" rel="noopener noreferrer">this is the repo</a> contains the code and content that empowers my website. All the content is generated with Docusaurus, a modern Static Site Generator, in which using a static contents hosting service the content can be served. You may view the site at <a href="https://asafarim.com/" target="_blank" rel="noopener noreferrer">my website</a>.</p>]]></content>
+        <author>
+            <name>Ali Safari</name>
+            <uri>https://github.com/AliSafari-IT</uri>
+        </author>
+        <category label="Docusaurus" term="Docusaurus"/>
+        <category label="Static Site Generator" term="Static Site Generator"/>
+    </entry>
+</feed>

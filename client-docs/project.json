@@ -7,8 +7,9 @@
     "build": {
       "executor": "@nx-plus/docusaurus:browser",
       "options": {
-        "outputPath": "dist/./client-docs"
-      }
+        "outputPath": "dist/client-docs",
+        "baseHref": "https://asafarim.com/dist/client-docs/",
+        "root": "client-docs/src"      }
     },
     "serve": {
       "executor": "@nx-plus/docusaurus:dev-server",
