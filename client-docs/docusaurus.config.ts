@@ -1,6 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+import { fchown } from "fs";
+
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.vsDark;
 
@@ -24,18 +26,18 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/AliSafari-IT/asmsite',
+          editUrl: 'https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/',
           remarkPlugins: [require('mdx-mermaid')],
           rehypePlugins: [],
           showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
+          showLastUpdateTime: true, 
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/',
-        },
+            'https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/',
+        }, 
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -82,7 +84,20 @@ const config = {
         logo: {
           alt: 'ASafariM Logo',
           src: 'img/logoT.svg',
-          width: '50px',
+          className: 'client-docs-navbar-logo',
+          target: '_blank',
+          style: {
+            height: 'auto',
+            width: '20px',
+            padding: '0px 0px 0px 0px',
+            margin: '0px 10px 0px 20px',
+            float: 'left',
+            display: 'inline',
+            verticalAlign: 'middle',
+            textAlign: 'center',
+            
+          }
+          
         },
         items: [
           {

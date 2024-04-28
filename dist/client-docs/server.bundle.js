@@ -1,1353 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 7990:
-/***/ ((module) => {
-
-module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
-
-
-/***/ }),
-
-/***/ 858:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var isarray = __webpack_require__(7990)
-
-/**
- * Expose `pathToRegexp`.
- */
-module.exports = pathToRegexp
-module.exports.parse = parse
-module.exports.compile = compile
-module.exports.tokensToFunction = tokensToFunction
-module.exports.tokensToRegExp = tokensToRegExp
-
-/**
- * The main path matching regexp utility.
- *
- * @type {RegExp}
- */
-var PATH_REGEXP = new RegExp([
-  // Match escaped characters that would otherwise appear in future matches.
-  // This allows the user to escape special characters that won't transform.
-  '(\\\\.)',
-  // Match Express-style parameters and un-named parameters with a prefix
-  // and optional suffixes. Matches appear as:
-  //
-  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
-  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
-  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
-  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
-].join('|'), 'g')
-
-/**
- * Parse a string for the raw tokens.
- *
- * @param  {string}  str
- * @param  {Object=} options
- * @return {!Array}
- */
-function parse (str, options) {
-  var tokens = []
-  var key = 0
-  var index = 0
-  var path = ''
-  var defaultDelimiter = options && options.delimiter || '/'
-  var res
-
-  while ((res = PATH_REGEXP.exec(str)) != null) {
-    var m = res[0]
-    var escaped = res[1]
-    var offset = res.index
-    path += str.slice(index, offset)
-    index = offset + m.length
-
-    // Ignore already escaped sequences.
-    if (escaped) {
-      path += escaped[1]
-      continue
-    }
-
-    var next = str[index]
-    var prefix = res[2]
-    var name = res[3]
-    var capture = res[4]
-    var group = res[5]
-    var modifier = res[6]
-    var asterisk = res[7]
-
-    // Push the current path onto the tokens.
-    if (path) {
-      tokens.push(path)
-      path = ''
-    }
-
-    var partial = prefix != null && next != null && next !== prefix
-    var repeat = modifier === '+' || modifier === '*'
-    var optional = modifier === '?' || modifier === '*'
-    var delimiter = res[2] || defaultDelimiter
-    var pattern = capture || group
-
-    tokens.push({
-      name: name || key++,
-      prefix: prefix || '',
-      delimiter: delimiter,
-      optional: optional,
-      repeat: repeat,
-      partial: partial,
-      asterisk: !!asterisk,
-      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
-    })
-  }
-
-  // Match any characters still remaining.
-  if (index < str.length) {
-    path += str.substr(index)
-  }
-
-  // If the path exists, push it onto the end.
-  if (path) {
-    tokens.push(path)
-  }
-
-  return tokens
-}
-
-/**
- * Compile a string to a template function for the path.
- *
- * @param  {string}             str
- * @param  {Object=}            options
- * @return {!function(Object=, Object=)}
- */
-function compile (str, options) {
-  return tokensToFunction(parse(str, options), options)
-}
-
-/**
- * Prettier encoding of URI path segments.
- *
- * @param  {string}
- * @return {string}
- */
-function encodeURIComponentPretty (str) {
-  return encodeURI(str).replace(/[\/?#]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-  })
-}
-
-/**
- * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
- *
- * @param  {string}
- * @return {string}
- */
-function encodeAsterisk (str) {
-  return encodeURI(str).replace(/[?#]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-  })
-}
-
-/**
- * Expose a method for transforming tokens into the path function.
- */
-function tokensToFunction (tokens, options) {
-  // Compile all the tokens into regexps.
-  var matches = new Array(tokens.length)
-
-  // Compile all the patterns before compilation.
-  for (var i = 0; i < tokens.length; i++) {
-    if (typeof tokens[i] === 'object') {
-      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$', flags(options))
-    }
-  }
-
-  return function (obj, opts) {
-    var path = ''
-    var data = obj || {}
-    var options = opts || {}
-    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
-
-    for (var i = 0; i < tokens.length; i++) {
-      var token = tokens[i]
-
-      if (typeof token === 'string') {
-        path += token
-
-        continue
-      }
-
-      var value = data[token.name]
-      var segment
-
-      if (value == null) {
-        if (token.optional) {
-          // Prepend partial segment prefixes.
-          if (token.partial) {
-            path += token.prefix
-          }
-
-          continue
-        } else {
-          throw new TypeError('Expected "' + token.name + '" to be defined')
-        }
-      }
-
-      if (isarray(value)) {
-        if (!token.repeat) {
-          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
-        }
-
-        if (value.length === 0) {
-          if (token.optional) {
-            continue
-          } else {
-            throw new TypeError('Expected "' + token.name + '" to not be empty')
-          }
-        }
-
-        for (var j = 0; j < value.length; j++) {
-          segment = encode(value[j])
-
-          if (!matches[i].test(segment)) {
-            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
-          }
-
-          path += (j === 0 ? token.prefix : token.delimiter) + segment
-        }
-
-        continue
-      }
-
-      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
-
-      if (!matches[i].test(segment)) {
-        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
-      }
-
-      path += token.prefix + segment
-    }
-
-    return path
-  }
-}
-
-/**
- * Escape a regular expression string.
- *
- * @param  {string} str
- * @return {string}
- */
-function escapeString (str) {
-  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
-}
-
-/**
- * Escape the capturing group by escaping special characters and meaning.
- *
- * @param  {string} group
- * @return {string}
- */
-function escapeGroup (group) {
-  return group.replace(/([=!:$\/()])/g, '\\$1')
-}
-
-/**
- * Attach the keys as a property of the regexp.
- *
- * @param  {!RegExp} re
- * @param  {Array}   keys
- * @return {!RegExp}
- */
-function attachKeys (re, keys) {
-  re.keys = keys
-  return re
-}
-
-/**
- * Get the flags for a regexp from the options.
- *
- * @param  {Object} options
- * @return {string}
- */
-function flags (options) {
-  return options && options.sensitive ? '' : 'i'
-}
-
-/**
- * Pull out keys from a regexp.
- *
- * @param  {!RegExp} path
- * @param  {!Array}  keys
- * @return {!RegExp}
- */
-function regexpToRegexp (path, keys) {
-  // Use a negative lookahead to match only capturing groups.
-  var groups = path.source.match(/\((?!\?)/g)
-
-  if (groups) {
-    for (var i = 0; i < groups.length; i++) {
-      keys.push({
-        name: i,
-        prefix: null,
-        delimiter: null,
-        optional: false,
-        repeat: false,
-        partial: false,
-        asterisk: false,
-        pattern: null
-      })
-    }
-  }
-
-  return attachKeys(path, keys)
-}
-
-/**
- * Transform an array into a regexp.
- *
- * @param  {!Array}  path
- * @param  {Array}   keys
- * @param  {!Object} options
- * @return {!RegExp}
- */
-function arrayToRegexp (path, keys, options) {
-  var parts = []
-
-  for (var i = 0; i < path.length; i++) {
-    parts.push(pathToRegexp(path[i], keys, options).source)
-  }
-
-  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
-
-  return attachKeys(regexp, keys)
-}
-
-/**
- * Create a path regexp from string input.
- *
- * @param  {string}  path
- * @param  {!Array}  keys
- * @param  {!Object} options
- * @return {!RegExp}
- */
-function stringToRegexp (path, keys, options) {
-  return tokensToRegExp(parse(path, options), keys, options)
-}
-
-/**
- * Expose a function for taking tokens and returning a RegExp.
- *
- * @param  {!Array}          tokens
- * @param  {(Array|Object)=} keys
- * @param  {Object=}         options
- * @return {!RegExp}
- */
-function tokensToRegExp (tokens, keys, options) {
-  if (!isarray(keys)) {
-    options = /** @type {!Object} */ (keys || options)
-    keys = []
-  }
-
-  options = options || {}
-
-  var strict = options.strict
-  var end = options.end !== false
-  var route = ''
-
-  // Iterate over the tokens and create our regexp string.
-  for (var i = 0; i < tokens.length; i++) {
-    var token = tokens[i]
-
-    if (typeof token === 'string') {
-      route += escapeString(token)
-    } else {
-      var prefix = escapeString(token.prefix)
-      var capture = '(?:' + token.pattern + ')'
-
-      keys.push(token)
-
-      if (token.repeat) {
-        capture += '(?:' + prefix + capture + ')*'
-      }
-
-      if (token.optional) {
-        if (!token.partial) {
-          capture = '(?:' + prefix + '(' + capture + '))?'
-        } else {
-          capture = prefix + '(' + capture + ')?'
-        }
-      } else {
-        capture = prefix + '(' + capture + ')'
-      }
-
-      route += capture
-    }
-  }
-
-  var delimiter = escapeString(options.delimiter || '/')
-  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
-
-  // In non-strict mode we allow a slash at the end of match. If the path to
-  // match already ends with a slash, we remove it for consistency. The slash
-  // is valid at the end of a path match, not in the middle. This is important
-  // in non-ending mode, where "/test/" shouldn't match "/test//route".
-  if (!strict) {
-    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
-  }
-
-  if (end) {
-    route += '$'
-  } else {
-    // In non-ending mode, we need the capturing groups to match as much as
-    // possible by using a positive lookahead to the end or next path segment.
-    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
-  }
-
-  return attachKeys(new RegExp('^' + route, flags(options)), keys)
-}
-
-/**
- * Normalize the given path string, returning a regular expression.
- *
- * An empty array can be passed in for the keys, which will hold the
- * placeholder key descriptions. For example, using `/user/:id`, `keys` will
- * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
- *
- * @param  {(string|RegExp|Array)} path
- * @param  {(Array|Object)=}       keys
- * @param  {Object=}               options
- * @return {!RegExp}
- */
-function pathToRegexp (path, keys, options) {
-  if (!isarray(keys)) {
-    options = /** @type {!Object} */ (keys || options)
-    keys = []
-  }
-
-  options = options || {}
-
-  if (path instanceof RegExp) {
-    return regexpToRegexp(path, /** @type {!Array} */ (keys))
-  }
-
-  if (isarray(path)) {
-    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
-  }
-
-  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
-}
-
-
-/***/ }),
-
-/***/ 7715:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-/** @license React v16.13.1
- * react-is.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
-Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
-function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}exports.AsyncMode=l;exports.ConcurrentMode=m;exports.ContextConsumer=k;exports.ContextProvider=h;exports.Element=c;exports.ForwardRef=n;exports.Fragment=e;exports.Lazy=t;exports.Memo=r;exports.Portal=d;
-exports.Profiler=g;exports.StrictMode=f;exports.Suspense=p;exports.isAsyncMode=function(a){return A(a)||z(a)===l};exports.isConcurrentMode=A;exports.isContextConsumer=function(a){return z(a)===k};exports.isContextProvider=function(a){return z(a)===h};exports.isElement=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===c};exports.isForwardRef=function(a){return z(a)===n};exports.isFragment=function(a){return z(a)===e};exports.isLazy=function(a){return z(a)===t};
-exports.isMemo=function(a){return z(a)===r};exports.isPortal=function(a){return z(a)===d};exports.isProfiler=function(a){return z(a)===g};exports.isStrictMode=function(a){return z(a)===f};exports.isSuspense=function(a){return z(a)===p};
-exports.isValidElementType=function(a){return"string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};exports.typeOf=z;
-
-
-/***/ }),
-
-/***/ 1191:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-if (true) {
-  module.exports = __webpack_require__(7715);
-} else {}
-
-
-/***/ }),
-
-/***/ 5527:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   B6: () => (/* binding */ matchPath),
-/* harmony export */   Ix: () => (/* binding */ Router),
-/* harmony export */   W6: () => (/* binding */ useHistory),
-/* harmony export */   XZ: () => (/* binding */ context),
-/* harmony export */   dO: () => (/* binding */ Switch),
-/* harmony export */   kO: () => (/* binding */ StaticRouter),
-/* harmony export */   qh: () => (/* binding */ Route),
-/* harmony export */   zy: () => (/* binding */ useLocation)
-/* harmony export */ });
-/* unused harmony exports MemoryRouter, Prompt, Redirect, __HistoryContext, generatePath, useParams, useRouteMatch, withRouter */
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2892);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6540);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5556);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var history__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1513);
-/* harmony import */ var tiny_invariant__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1561);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(8168);
-/* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(858);
-/* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path_to_regexp__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1191);
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(8587);
-/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4146);
-/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-
-
-
-
-
-
-
-
-var MAX_SIGNED_31_BIT_INT = 1073741823;
-var commonjsGlobal = typeof globalThis !== "undefined" // 'global proper'
-? // eslint-disable-next-line no-undef
-globalThis : typeof window !== "undefined" ? window // Browser
-: typeof global !== "undefined" ? global // node.js
-: {};
-
-function getUniqueId() {
-  var key = "__global_unique_id__";
-  return commonjsGlobal[key] = (commonjsGlobal[key] || 0) + 1;
-} // Inlined Object.is polyfill.
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-
-
-function objectIs(x, y) {
-  if (x === y) {
-    return x !== 0 || 1 / x === 1 / y;
-  } else {
-    // eslint-disable-next-line no-self-compare
-    return x !== x && y !== y;
-  }
-}
-
-function createEventEmitter(value) {
-  var handlers = [];
-  return {
-    on: function on(handler) {
-      handlers.push(handler);
-    },
-    off: function off(handler) {
-      handlers = handlers.filter(function (h) {
-        return h !== handler;
-      });
-    },
-    get: function get() {
-      return value;
-    },
-    set: function set(newValue, changedBits) {
-      value = newValue;
-      handlers.forEach(function (handler) {
-        return handler(value, changedBits);
-      });
-    }
-  };
-}
-
-function onlyChild(children) {
-  return Array.isArray(children) ? children[0] : children;
-}
-
-function createReactContext(defaultValue, calculateChangedBits) {
-  var _Provider$childContex, _Consumer$contextType;
-
-  var contextProp = "__create-react-context-" + getUniqueId() + "__";
-
-  var Provider = /*#__PURE__*/function (_React$Component) {
-    (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Provider, _React$Component);
-
-    function Provider() {
-      var _this;
-
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-      _this.emitter = createEventEmitter(_this.props.value);
-      return _this;
-    }
-
-    var _proto = Provider.prototype;
-
-    _proto.getChildContext = function getChildContext() {
-      var _ref;
-
-      return _ref = {}, _ref[contextProp] = this.emitter, _ref;
-    };
-
-    _proto.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-      if (this.props.value !== nextProps.value) {
-        var oldValue = this.props.value;
-        var newValue = nextProps.value;
-        var changedBits;
-
-        if (objectIs(oldValue, newValue)) {
-          changedBits = 0; // No change
-        } else {
-          changedBits = typeof calculateChangedBits === "function" ? calculateChangedBits(oldValue, newValue) : MAX_SIGNED_31_BIT_INT;
-
-          if (false) {}
-
-          changedBits |= 0;
-
-          if (changedBits !== 0) {
-            this.emitter.set(nextProps.value, changedBits);
-          }
-        }
-      }
-    };
-
-    _proto.render = function render() {
-      return this.props.children;
-    };
-
-    return Provider;
-  }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-  Provider.childContextTypes = (_Provider$childContex = {}, _Provider$childContex[contextProp] = (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object).isRequired, _Provider$childContex);
-
-  var Consumer = /*#__PURE__*/function (_React$Component2) {
-    (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Consumer, _React$Component2);
-
-    function Consumer() {
-      var _this2;
-
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-
-      _this2 = _React$Component2.call.apply(_React$Component2, [this].concat(args)) || this;
-      _this2.observedBits = void 0;
-      _this2.state = {
-        value: _this2.getValue()
-      };
-
-      _this2.onUpdate = function (newValue, changedBits) {
-        var observedBits = _this2.observedBits | 0;
-
-        if ((observedBits & changedBits) !== 0) {
-          _this2.setState({
-            value: _this2.getValue()
-          });
-        }
-      };
-
-      return _this2;
-    }
-
-    var _proto2 = Consumer.prototype;
-
-    _proto2.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-      var observedBits = nextProps.observedBits;
-      this.observedBits = observedBits === undefined || observedBits === null ? MAX_SIGNED_31_BIT_INT // Subscribe to all changes by default
-      : observedBits;
-    };
-
-    _proto2.componentDidMount = function componentDidMount() {
-      if (this.context[contextProp]) {
-        this.context[contextProp].on(this.onUpdate);
-      }
-
-      var observedBits = this.props.observedBits;
-      this.observedBits = observedBits === undefined || observedBits === null ? MAX_SIGNED_31_BIT_INT // Subscribe to all changes by default
-      : observedBits;
-    };
-
-    _proto2.componentWillUnmount = function componentWillUnmount() {
-      if (this.context[contextProp]) {
-        this.context[contextProp].off(this.onUpdate);
-      }
-    };
-
-    _proto2.getValue = function getValue() {
-      if (this.context[contextProp]) {
-        return this.context[contextProp].get();
-      } else {
-        return defaultValue;
-      }
-    };
-
-    _proto2.render = function render() {
-      return onlyChild(this.props.children)(this.state.value);
-    };
-
-    return Consumer;
-  }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-  Consumer.contextTypes = (_Consumer$contextType = {}, _Consumer$contextType[contextProp] = (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object), _Consumer$contextType);
-  return {
-    Provider: Provider,
-    Consumer: Consumer
-  };
-}
-
-// MIT License
-var createContext = react__WEBPACK_IMPORTED_MODULE_0__.createContext || createReactContext;
-
-// TODO: Replace with React.createContext once we can assume React 16+
-
-var createNamedContext = function createNamedContext(name) {
-  var context = createContext();
-  context.displayName = name;
-  return context;
-};
-
-var historyContext = /*#__PURE__*/createNamedContext("Router-History");
-
-var context = /*#__PURE__*/createNamedContext("Router");
-
-/**
- * The public API for putting history on context.
- */
-
-var Router = /*#__PURE__*/function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Router, _React$Component);
-
-  Router.computeRootMatch = function computeRootMatch(pathname) {
-    return {
-      path: "/",
-      url: "/",
-      params: {},
-      isExact: pathname === "/"
-    };
-  };
-
-  function Router(props) {
-    var _this;
-
-    _this = _React$Component.call(this, props) || this;
-    _this.state = {
-      location: props.history.location
-    }; // This is a bit of a hack. We have to start listening for location
-    // changes here in the constructor in case there are any <Redirect>s
-    // on the initial render. If there are, they will replace/push when
-    // they mount and since cDM fires in children before parents, we may
-    // get a new location before the <Router> is mounted.
-
-    _this._isMounted = false;
-    _this._pendingLocation = null;
-
-    if (!props.staticContext) {
-      _this.unlisten = props.history.listen(function (location) {
-        _this._pendingLocation = location;
-      });
-    }
-
-    return _this;
-  }
-
-  var _proto = Router.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    var _this2 = this;
-
-    this._isMounted = true;
-
-    if (this.unlisten) {
-      // Any pre-mount location changes have been captured at
-      // this point, so unregister the listener.
-      this.unlisten();
-    }
-
-    if (!this.props.staticContext) {
-      this.unlisten = this.props.history.listen(function (location) {
-        if (_this2._isMounted) {
-          _this2.setState({
-            location: location
-          });
-        }
-      });
-    }
-
-    if (this._pendingLocation) {
-      this.setState({
-        location: this._pendingLocation
-      });
-    }
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    if (this.unlisten) {
-      this.unlisten();
-      this._isMounted = false;
-      this._pendingLocation = null;
-    }
-  };
-
-  _proto.render = function render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(context.Provider, {
-      value: {
-        history: this.props.history,
-        location: this.state.location,
-        match: Router.computeRootMatch(this.state.location.pathname),
-        staticContext: this.props.staticContext
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(historyContext.Provider, {
-      children: this.props.children || null,
-      value: this.props.history
-    }));
-  };
-
-  return Router;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-if (false) {}
-
-/**
- * The public API for a <Router> that stores location in memory.
- */
-
-var MemoryRouter = /*#__PURE__*/function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(MemoryRouter, _React$Component);
-
-  function MemoryRouter() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.history = (0,history__WEBPACK_IMPORTED_MODULE_6__/* .createMemoryHistory */ .sC)(_this.props);
-    return _this;
-  }
-
-  var _proto = MemoryRouter.prototype;
-
-  _proto.render = function render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Router, {
-      history: this.history,
-      children: this.props.children
-    });
-  };
-
-  return MemoryRouter;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-if (false) {}
-
-var Lifecycle = /*#__PURE__*/function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Lifecycle, _React$Component);
-
-  function Lifecycle() {
-    return _React$Component.apply(this, arguments) || this;
-  }
-
-  var _proto = Lifecycle.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    if (this.props.onMount) this.props.onMount.call(this, this);
-  };
-
-  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
-    if (this.props.onUpdate) this.props.onUpdate.call(this, this, prevProps);
-  };
-
-  _proto.componentWillUnmount = function componentWillUnmount() {
-    if (this.props.onUnmount) this.props.onUnmount.call(this, this);
-  };
-
-  _proto.render = function render() {
-    return null;
-  };
-
-  return Lifecycle;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/**
- * The public API for prompting the user before navigating away from a screen.
- */
-
-function Prompt(_ref) {
-  var message = _ref.message,
-      _ref$when = _ref.when,
-      when = _ref$when === void 0 ? true : _ref$when;
-  return /*#__PURE__*/React.createElement(context.Consumer, null, function (context) {
-    !context ?  false ? 0 : invariant(false) : void 0;
-    if (!when || context.staticContext) return null;
-    var method = context.history.block;
-    return /*#__PURE__*/React.createElement(Lifecycle, {
-      onMount: function onMount(self) {
-        self.release = method(message);
-      },
-      onUpdate: function onUpdate(self, prevProps) {
-        if (prevProps.message !== message) {
-          self.release();
-          self.release = method(message);
-        }
-      },
-      onUnmount: function onUnmount(self) {
-        self.release();
-      },
-      message: message
-    });
-  });
-}
-
-if (false) { var messageType; }
-
-var cache = {};
-var cacheLimit = 10000;
-var cacheCount = 0;
-
-function compilePath(path) {
-  if (cache[path]) return cache[path];
-  var generator = pathToRegexp.compile(path);
-
-  if (cacheCount < cacheLimit) {
-    cache[path] = generator;
-    cacheCount++;
-  }
-
-  return generator;
-}
-/**
- * Public API for generating a URL pathname from a path and parameters.
- */
-
-
-function generatePath(path, params) {
-  if (path === void 0) {
-    path = "/";
-  }
-
-  if (params === void 0) {
-    params = {};
-  }
-
-  return path === "/" ? path : compilePath(path)(params, {
-    pretty: true
-  });
-}
-
-/**
- * The public API for navigating programmatically with a component.
- */
-
-function Redirect(_ref) {
-  var computedMatch = _ref.computedMatch,
-      to = _ref.to,
-      _ref$push = _ref.push,
-      push = _ref$push === void 0 ? false : _ref$push;
-  return /*#__PURE__*/React.createElement(context.Consumer, null, function (context) {
-    !context ?  false ? 0 : invariant(false) : void 0;
-    var history = context.history,
-        staticContext = context.staticContext;
-    var method = push ? history.push : history.replace;
-    var location = createLocation(computedMatch ? typeof to === "string" ? generatePath(to, computedMatch.params) : _extends({}, to, {
-      pathname: generatePath(to.pathname, computedMatch.params)
-    }) : to); // When rendering in a static context,
-    // set the new location immediately.
-
-    if (staticContext) {
-      method(location);
-      return null;
-    }
-
-    return /*#__PURE__*/React.createElement(Lifecycle, {
-      onMount: function onMount() {
-        method(location);
-      },
-      onUpdate: function onUpdate(self, prevProps) {
-        var prevLocation = createLocation(prevProps.to);
-
-        if (!locationsAreEqual(prevLocation, _extends({}, location, {
-          key: prevLocation.key
-        }))) {
-          method(location);
-        }
-      },
-      to: to
-    });
-  });
-}
-
-if (false) {}
-
-var cache$1 = {};
-var cacheLimit$1 = 10000;
-var cacheCount$1 = 0;
-
-function compilePath$1(path, options) {
-  var cacheKey = "" + options.end + options.strict + options.sensitive;
-  var pathCache = cache$1[cacheKey] || (cache$1[cacheKey] = {});
-  if (pathCache[path]) return pathCache[path];
-  var keys = [];
-  var regexp = path_to_regexp__WEBPACK_IMPORTED_MODULE_1___default()(path, keys, options);
-  var result = {
-    regexp: regexp,
-    keys: keys
-  };
-
-  if (cacheCount$1 < cacheLimit$1) {
-    pathCache[path] = result;
-    cacheCount$1++;
-  }
-
-  return result;
-}
-/**
- * Public API for matching a URL pathname to a path.
- */
-
-
-function matchPath(pathname, options) {
-  if (options === void 0) {
-    options = {};
-  }
-
-  if (typeof options === "string" || Array.isArray(options)) {
-    options = {
-      path: options
-    };
-  }
-
-  var _options = options,
-      path = _options.path,
-      _options$exact = _options.exact,
-      exact = _options$exact === void 0 ? false : _options$exact,
-      _options$strict = _options.strict,
-      strict = _options$strict === void 0 ? false : _options$strict,
-      _options$sensitive = _options.sensitive,
-      sensitive = _options$sensitive === void 0 ? false : _options$sensitive;
-  var paths = [].concat(path);
-  return paths.reduce(function (matched, path) {
-    if (!path && path !== "") return null;
-    if (matched) return matched;
-
-    var _compilePath = compilePath$1(path, {
-      end: exact,
-      strict: strict,
-      sensitive: sensitive
-    }),
-        regexp = _compilePath.regexp,
-        keys = _compilePath.keys;
-
-    var match = regexp.exec(pathname);
-    if (!match) return null;
-    var url = match[0],
-        values = match.slice(1);
-    var isExact = pathname === url;
-    if (exact && !isExact) return null;
-    return {
-      path: path,
-      // the path used to match
-      url: path === "/" && url === "" ? "/" : url,
-      // the matched portion of the URL
-      isExact: isExact,
-      // whether or not we matched exactly
-      params: keys.reduce(function (memo, key, index) {
-        memo[key.name] = values[index];
-        return memo;
-      }, {})
-    };
-  }, null);
-}
-
-function isEmptyChildren(children) {
-  return react__WEBPACK_IMPORTED_MODULE_0__.Children.count(children) === 0;
-}
-
-function evalChildrenDev(children, props, path) {
-  var value = children(props);
-   false ? 0 : void 0;
-  return value || null;
-}
-/**
- * The public API for matching a single path and rendering.
- */
-
-
-var Route = /*#__PURE__*/function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Route, _React$Component);
-
-  function Route() {
-    return _React$Component.apply(this, arguments) || this;
-  }
-
-  var _proto = Route.prototype;
-
-  _proto.render = function render() {
-    var _this = this;
-
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(context.Consumer, null, function (context$1) {
-      !context$1 ?  false ? 0 : (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .A)(false) : void 0;
-      var location = _this.props.location || context$1.location;
-      var match = _this.props.computedMatch ? _this.props.computedMatch // <Switch> already computed the match for us
-      : _this.props.path ? matchPath(location.pathname, _this.props) : context$1.match;
-
-      var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, context$1, {
-        location: location,
-        match: match
-      });
-
-      var _this$props = _this.props,
-          children = _this$props.children,
-          component = _this$props.component,
-          render = _this$props.render; // Preact uses an empty array as children by
-      // default, so use null if that's the case.
-
-      if (Array.isArray(children) && isEmptyChildren(children)) {
-        children = null;
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(context.Provider, {
-        value: props
-      }, props.match ? children ? typeof children === "function" ?  false ? 0 : children(props) : children : component ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(component, props) : render ? render(props) : null : typeof children === "function" ?  false ? 0 : children(props) : null);
-    });
-  };
-
-  return Route;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-if (false) {}
-
-function addLeadingSlash(path) {
-  return path.charAt(0) === "/" ? path : "/" + path;
-}
-
-function addBasename(basename, location) {
-  if (!basename) return location;
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, location, {
-    pathname: addLeadingSlash(basename) + location.pathname
-  });
-}
-
-function stripBasename(basename, location) {
-  if (!basename) return location;
-  var base = addLeadingSlash(basename);
-  if (location.pathname.indexOf(base) !== 0) return location;
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, location, {
-    pathname: location.pathname.substr(base.length)
-  });
-}
-
-function createURL(location) {
-  return typeof location === "string" ? location : (0,history__WEBPACK_IMPORTED_MODULE_6__/* .createPath */ .AO)(location);
-}
-
-function staticHandler(methodName) {
-  return function () {
-      false ? 0 : (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .A)(false) ;
-  };
-}
-
-function noop() {}
-/**
- * The public top-level API for a "static" <Router>, so-called because it
- * can't actually change the current location. Instead, it just records
- * location changes in a context object. Useful mainly in testing and
- * server-rendering scenarios.
- */
-
-
-var StaticRouter = /*#__PURE__*/function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(StaticRouter, _React$Component);
-
-  function StaticRouter() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-
-    _this.handlePush = function (location) {
-      return _this.navigateTo(location, "PUSH");
-    };
-
-    _this.handleReplace = function (location) {
-      return _this.navigateTo(location, "REPLACE");
-    };
-
-    _this.handleListen = function () {
-      return noop;
-    };
-
-    _this.handleBlock = function () {
-      return noop;
-    };
-
-    return _this;
-  }
-
-  var _proto = StaticRouter.prototype;
-
-  _proto.navigateTo = function navigateTo(location, action) {
-    var _this$props = this.props,
-        _this$props$basename = _this$props.basename,
-        basename = _this$props$basename === void 0 ? "" : _this$props$basename,
-        _this$props$context = _this$props.context,
-        context = _this$props$context === void 0 ? {} : _this$props$context;
-    context.action = action;
-    context.location = addBasename(basename, (0,history__WEBPACK_IMPORTED_MODULE_6__/* .createLocation */ .yJ)(location));
-    context.url = createURL(context.location);
-  };
-
-  _proto.render = function render() {
-    var _this$props2 = this.props,
-        _this$props2$basename = _this$props2.basename,
-        basename = _this$props2$basename === void 0 ? "" : _this$props2$basename,
-        _this$props2$context = _this$props2.context,
-        context = _this$props2$context === void 0 ? {} : _this$props2$context,
-        _this$props2$location = _this$props2.location,
-        location = _this$props2$location === void 0 ? "/" : _this$props2$location,
-        rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .A)(_this$props2, ["basename", "context", "location"]);
-
-    var history = {
-      createHref: function createHref(path) {
-        return addLeadingSlash(basename + createURL(path));
-      },
-      action: "POP",
-      location: stripBasename(basename, (0,history__WEBPACK_IMPORTED_MODULE_6__/* .createLocation */ .yJ)(location)),
-      push: this.handlePush,
-      replace: this.handleReplace,
-      go: staticHandler("go"),
-      goBack: staticHandler("goBack"),
-      goForward: staticHandler("goForward"),
-      listen: this.handleListen,
-      block: this.handleBlock
-    };
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Router, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, rest, {
-      history: history,
-      staticContext: context
-    }));
-  };
-
-  return StaticRouter;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-if (false) {}
-
-/**
- * The public API for rendering the first <Route> that matches.
- */
-
-var Switch = /*#__PURE__*/function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Switch, _React$Component);
-
-  function Switch() {
-    return _React$Component.apply(this, arguments) || this;
-  }
-
-  var _proto = Switch.prototype;
-
-  _proto.render = function render() {
-    var _this = this;
-
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(context.Consumer, null, function (context) {
-      !context ?  false ? 0 : (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .A)(false) : void 0;
-      var location = _this.props.location || context.location;
-      var element, match; // We use React.Children.forEach instead of React.Children.toArray().find()
-      // here because toArray adds keys to all child elements and we do not want
-      // to trigger an unmount/remount for two <Route>s that render the same
-      // component at different URLs.
-
-      react__WEBPACK_IMPORTED_MODULE_0__.Children.forEach(_this.props.children, function (child) {
-        if (match == null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.isValidElement(child)) {
-          element = child;
-          var path = child.props.path || child.props.from;
-          match = path ? matchPath(location.pathname, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, child.props, {
-            path: path
-          })) : context.match;
-        }
-      });
-      return match ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(element, {
-        location: location,
-        computedMatch: match
-      }) : null;
-    });
-  };
-
-  return Switch;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-if (false) {}
-
-/**
- * A public higher-order component to access the imperative API
- */
-
-function withRouter(Component) {
-  var displayName = "withRouter(" + (Component.displayName || Component.name) + ")";
-
-  var C = function C(props) {
-    var wrappedComponentRef = props.wrappedComponentRef,
-        remainingProps = _objectWithoutPropertiesLoose(props, ["wrappedComponentRef"]);
-
-    return /*#__PURE__*/React.createElement(context.Consumer, null, function (context) {
-      !context ?  false ? 0 : invariant(false) : void 0;
-      return /*#__PURE__*/React.createElement(Component, _extends({}, remainingProps, context, {
-        ref: wrappedComponentRef
-      }));
-    });
-  };
-
-  C.displayName = displayName;
-  C.WrappedComponent = Component;
-
-  if (false) {}
-
-  return hoistStatics(C, Component);
-}
-
-var useContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext;
-function useHistory() {
-  if (false) {}
-
-  return useContext(historyContext);
-}
-function useLocation() {
-  if (false) {}
-
-  return useContext(context).location;
-}
-function useParams() {
-  if (false) {}
-
-  var match = useContext(context).match;
-  return match ? match.params : {};
-}
-function useRouteMatch(path) {
-  if (false) {}
-
-  var location = useLocation();
-  var match = useContext(context).match;
-  return path ? matchPath(location.pathname, path) : match;
-}
-
-if (false) { var secondaryBuildName, initialBuildName, buildNames, key, global$1; }
-
-
-//# sourceMappingURL=react-router.js.map
-
-
-/***/ }),
-
 /***/ 8775:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2075,7 +728,7 @@ const metadata = {
   "permalink": "/docs/software-development/Requirements/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0101-Requirements/01-intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0101-Requirements/01-intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -2161,7 +814,7 @@ const metadata = {
   "permalink": "/docs/software-development/Planning/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0102-Planning/02-intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0102-Planning/02-intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -2247,7 +900,7 @@ const metadata = {
   "permalink": "/docs/software-development/Designing/designPatterns/façade-pattern",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0103-Designing/001-designPatterns/façade-pattern.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/001-designPatterns/façade-pattern.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -2366,7 +1019,7 @@ const metadata = {
   "permalink": "/docs/software-development/Designing/designPatterns/overview",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0103-Designing/001-designPatterns/overview.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/001-designPatterns/overview.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -2496,7 +1149,7 @@ const metadata = {
   "permalink": "/docs/software-development/Designing/designPatterns/singleton-pattern",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0103-Designing/001-designPatterns/singleton-pattern.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/001-designPatterns/singleton-pattern.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -2619,7 +1272,7 @@ const metadata = {
   "permalink": "/docs/software-development/Designing/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0103-Designing/03-intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/03-intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -2714,7 +1367,7 @@ const metadata = {
   "permalink": "/docs/software-development/Designing/uml/wireframing",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0103-Designing/uml/Wireframing.mdx",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/uml/Wireframing.mdx",
   "tags": [],
   "version": "current",
   "sidebarPosition": 2,
@@ -2821,11 +1474,11 @@ const metadata = {
   "permalink": "/docs/software-development/Designing/uml/user-story-user-case",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0103-Designing/uml/userStory-userCase.mdx",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/uml/userStory-userCase.mdx",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
-  "lastUpdatedAt": 1714173849000,
+  "lastUpdatedAt": 1714313160000,
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1,
@@ -2881,17 +1534,19 @@ function _createMdxContent(props) {
       children: "User stories"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_src_components_Box__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .A, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-        children: "User stories describe what may be built in the software project. User stories may follow one of several formats or templates. The most common is the Connextra template, stated below."
+        children: "User stories describe what may be built in the software project. User stories\r\nmay follow one of several formats or templates. The most common is the\r\nConnextra template, stated below."
       })
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        className: "language-gherkin",
         children: "As a <role> I can <capability>, so that <receive benefit>.\n"
       })
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
       children: "or"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "In order to <receive benefit> as a <role>, I can <goal/desire>.\n"
+        className: "language-gherkin",
+        children: "    Feature: Achieve a specific goal\r\n        In order to <receive benefit> as a <role>,\r\n        As a <role>,\r\n        I want to <goal/desire>.\r\n\r\n    Scenario: Describe the scenario\r\n        Given <initial context>\r\n        When <action taken>\r\n        Then <expected outcome>\n"
       })
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.h3, {
       id: "story-mapping",
@@ -2983,7 +1638,7 @@ const metadata = {
   "permalink": "/docs/software-development/Coding/codebase/codebase",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0104-Coding/01-codebase/001-codebase.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/01-codebase/001-codebase.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3069,7 +1724,7 @@ const metadata = {
   "permalink": "/docs/software-development/Coding/programming/writing-code",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0104-Coding/02-programming/002-writing-code.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/02-programming/002-writing-code.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3155,7 +1810,7 @@ const metadata = {
   "permalink": "/docs/software-development/Coding/testing/testing",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0104-Coding/03-testing/003-testing.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/03-testing/003-testing.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3247,7 +1902,7 @@ const metadata = {
   "permalink": "/docs/software-development/Coding/debugging/debugging",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0104-Coding/04-debugging/004-debugging.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/04-debugging/004-debugging.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3333,7 +1988,7 @@ const metadata = {
   "permalink": "/docs/software-development/Coding/refactoring/refactoring",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0104-Coding/05-refactoring/005-refactoring.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/05-refactoring/005-refactoring.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3419,7 +2074,7 @@ const metadata = {
   "permalink": "/docs/software-development/Coding/documentation/documenting",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0104-Coding/06-documentation/006-documenting.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/06-documentation/006-documenting.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3509,7 +2164,7 @@ const metadata = {
   "permalink": "/docs/software-development/Testing/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0105-Testing/03-intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0105-Testing/03-intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3589,7 +2244,7 @@ const metadata = {
   "permalink": "/docs/cicd/overview",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/010-software-development/0106-Automation/01-cicd-processes.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0106-Automation/01-cicd-processes.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3728,7 +2383,7 @@ const metadata = {
   "permalink": "/docs/devtools/languages/opp",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/01-languages/00-opp.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/01-languages/00-opp.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3841,7 +2496,7 @@ const metadata = {
   "permalink": "/docs/json-overview",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/001-json/json-overview/01-json.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/001-json/json-overview/01-json.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -3963,7 +2618,7 @@ const metadata = {
   "permalink": "/docs/json-schema",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/001-json/json-overview/02-json-schema.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/001-json/json-overview/02-json-schema.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4143,7 +2798,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/json/json-overview/sch-dev",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/001-json/json-overview/03-Schema-Driven-Development.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/001-json/json-overview/03-Schema-Driven-Development.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4243,7 +2898,7 @@ const metadata = {
   "permalink": "/docs/how-to-use/json-in-ts",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/001-json/json-overview/04-how-to-use-json-in-ts.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/001-json/json-overview/04-how-to-use-json-in-ts.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4339,7 +2994,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/xml/xml",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/002-xml/01-xml.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/002-xml/01-xml.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4433,7 +3088,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/csv/csv",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/003-csv/01-csv.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/003-csv/01-csv.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4519,7 +3174,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/yaml/yaml",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/004-yaml/01-yaml.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/004-yaml/01-yaml.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4605,7 +3260,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/protobufjs/protobufjs",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/005-protobufjs/01-protobufjs.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/005-protobufjs/01-protobufjs.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4711,7 +3366,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/protobufjs/example",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/005-protobufjs/02-example.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/005-protobufjs/02-example.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4831,7 +3486,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/msgpack-lite/msgpack",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/006-msgpack-lite/01-msgpack.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/006-msgpack-lite/01-msgpack.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -4917,7 +3572,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/msgpack-lite/ts-example",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/006-msgpack-lite/02-ts-example.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/006-msgpack-lite/02-ts-example.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -5032,7 +3687,7 @@ const metadata = {
   "permalink": "/docs/devtools/dataformats/msgpack-lite/csharp-example",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/02-dataformats/006-msgpack-lite/03-csharp-example.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/006-msgpack-lite/03-csharp-example.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -5148,11 +3803,11 @@ const metadata = {
   "permalink": "/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/03-frameworks-libraries/01-nx-workspace/nx-Basics.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/03-frameworks-libraries/01-nx-workspace/nx-Basics.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
-  "lastUpdatedAt": 1714173849000,
+  "lastUpdatedAt": 1714313160000,
   "sidebarPosition": 1,
   "frontMatter": {
     "sidebar_position": 1,
@@ -5313,7 +3968,7 @@ const metadata = {
   "permalink": "/docs/devtools/frameworks-libraries/site-generators/create-a-page",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/03-frameworks-libraries/02-site-generators/create-a-page.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/03-frameworks-libraries/02-site-generators/create-a-page.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -5411,7 +4066,7 @@ const metadata = {
   "permalink": "/docs/devtools/frameworks-libraries/site-generators/docusaurus",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/03-frameworks-libraries/02-site-generators/docusaurus.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/03-frameworks-libraries/02-site-generators/docusaurus.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -5923,7 +4578,7 @@ const metadata = {
   "permalink": "/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/03-frameworks-libraries/03-syncfusion/syncfusion-Basics.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/03-frameworks-libraries/03-syncfusion/syncfusion-Basics.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6032,7 +4687,7 @@ const metadata = {
   "permalink": "/docs/devtools/versioncontrol/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/04-versioncontrol/00-intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/04-versioncontrol/00-intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6130,7 +4785,7 @@ const metadata = {
   "permalink": "/docs/devtools/versioncontrol/git",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/04-versioncontrol/01-git.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/04-versioncontrol/01-git.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6261,7 +4916,7 @@ const metadata = {
   "permalink": "/docs/devtools/versioncontrol/svn",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/04-versioncontrol/02-svn.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/04-versioncontrol/02-svn.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6392,7 +5047,7 @@ const metadata = {
   "permalink": "/docs/devtools/versioncontrol/mercurial",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/04-versioncontrol/03-mercurial.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/04-versioncontrol/03-mercurial.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6523,7 +5178,7 @@ const metadata = {
   "permalink": "/docs/devtools/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/015-devtools/intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6609,7 +5264,7 @@ const metadata = {
   "permalink": "/docs/learn/dotnet/dotnet.core/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0201-dotnet/dotnet.core/intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0201-dotnet/dotnet.core/intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6695,7 +5350,7 @@ const metadata = {
   "permalink": "/docs/learn/react/Axios/",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0202-react/Axios/axios.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/Axios/axios.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6804,7 +5459,7 @@ const metadata = {
   "permalink": "/docs/learn/react/Basics/handle-data-from-api",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0202-react/Basics/handle-data-from-api.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/Basics/handle-data-from-api.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -6961,7 +5616,7 @@ const metadata = {
   "permalink": "/docs/learn/react/Hooks/useFetch",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0202-react/Hooks/useFetch.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/Hooks/useFetch.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -7047,7 +5702,7 @@ const metadata = {
   "permalink": "/docs/learn/react/Redux/Redux-Basic-Example",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0202-react/Redux/Redux-Basic-Example.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/Redux/Redux-Basic-Example.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -7282,7 +5937,7 @@ const metadata = {
   "permalink": "/docs/learn/react/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0202-react/intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -7375,7 +6030,7 @@ const metadata = {
   "permalink": "/docs/learn/git/overwriting-local-repo",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0203-git/how-to/overwite-local-repo.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/how-to/overwite-local-repo.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -7547,7 +6202,7 @@ const metadata = {
   "permalink": "/docs/learn/git/deserialization",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0203-git/how-to/remove-last-changes.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/how-to/remove-last-changes.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -7755,7 +6410,7 @@ const metadata = {
   "permalink": "/docs/learn/git/rollback-commit",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0203-git/how-to/rollback.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/how-to/rollback.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -7952,7 +6607,7 @@ const metadata = {
   "permalink": "/docs/learn/git/fetchpull",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0203-git/overview/fetch-pull.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/overview/fetch-pull.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -8082,7 +6737,7 @@ const metadata = {
   "permalink": "/docs/learn/git",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0203-git/overview/set-up-git.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/overview/set-up-git.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -8277,7 +6932,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/azure-devops-services",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-azure-devops-services.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-azure-devops-services.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -8441,7 +7096,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/01-print-dir-contents.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/01-print-dir-contents.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -8552,7 +7207,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/02-triggers.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/02-triggers.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -8702,7 +7357,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/03-Yaml-templates.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/03-Yaml-templates.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -8812,7 +7467,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/04-reuse-template.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/04-reuse-template.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -9011,7 +7666,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/05-agent.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/05-agent.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -9188,7 +7843,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0101-intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0101-intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -9334,7 +7989,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-pipeline",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0102-test-pipeline.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0102-test-pipeline.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -9476,7 +8131,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/azure-pipelines",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0103-azure-pipelines.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0103-azure-pipelines.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -9686,7 +8341,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/01-test-plans.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/01-test-plans.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -9827,7 +8482,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/02-create-testcases.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/02-create-testcases.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -9967,7 +8622,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/03-test-env.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/03-test-env.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10120,7 +8775,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure/010-intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure/010-intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10231,7 +8886,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure/vs-devops-services",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure/020-vs-devops-services.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure/020-vs-devops-services.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10382,7 +9037,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure/cloud-shell/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure/cloud-shell/intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure/cloud-shell/intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10464,7 +9119,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/azure/tasks/build-tasks/dotnet.core.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure/tasks/build-tasks/dotnet.core.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10550,7 +9205,7 @@ const metadata = {
   "permalink": "/docs/learn/cicd-pipelines/gitlab-cicd/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/020-learn/0204-cicd-pipelines/gitlab-cicd/01-intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/gitlab-cicd/01-intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10690,7 +9345,7 @@ const metadata = {
   "permalink": "/docs/guide/azure-deploy-webapi",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/030-guide/azure-deploy-webapi.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/030-guide/azure-deploy-webapi.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10792,7 +9447,7 @@ const metadata = {
   "permalink": "/docs/guide/azure-deploy-webapp",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/030-guide/azure-deploy-webapp.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/030-guide/azure-deploy-webapp.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10894,7 +9549,7 @@ const metadata = {
   "permalink": "/docs/guide/guide-list",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/030-guide/guide-list.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/030-guide/guide-list.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -10974,7 +9629,7 @@ const metadata = {
   "permalink": "/docs/content-type-mime",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/Glossary/MIME-type.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/MIME-type.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -11190,7 +9845,7 @@ const metadata = {
   "permalink": "/docs/serialization",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/Glossary/Serialization.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/Serialization.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -11299,7 +9954,7 @@ const metadata = {
   "permalink": "/docs/science-applications",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/Glossary/applications-of-science.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/applications-of-science.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -11400,7 +10055,7 @@ const metadata = {
   "permalink": "/docs/deserialization",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/Glossary/deserialization.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/deserialization.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -11526,7 +10181,7 @@ const metadata = {
   "permalink": "/docs/engineering",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/Glossary/engineering.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/engineering.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -11640,7 +10295,7 @@ const metadata = {
   "permalink": "/docs/technology",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/Glossary/technology.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/technology.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -11730,7 +10385,7 @@ const metadata = {
   "permalink": "/docs/intro",
   "draft": false,
   "unlisted": false,
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/docs/intro.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/intro.md",
   "tags": [],
   "version": "current",
   "lastUpdatedBy": "asafarim",
@@ -11867,7 +10522,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/welcome",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2021-06-15-welcome.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-15-welcome.md",
   "source": "@site/blog/2021-06-15-welcome.md",
   "title": "Welcome!",
   "description": "Hi there!",
@@ -12001,7 +10656,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/welcome",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2021-06-15-welcome.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-15-welcome.md",
   "source": "@site/blog/2021-06-15-welcome.md",
   "title": "Welcome!",
   "description": "Hi there!",
@@ -12135,7 +10790,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/opening-post",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2021-06-16-StartPost.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-16-StartPost.md",
   "source": "@site/blog/2021-06-16-StartPost.md",
   "title": "Computer coding for science",
   "description": "The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.",
@@ -12267,7 +10922,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/opening-post",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2021-06-16-StartPost.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-16-StartPost.md",
   "source": "@site/blog/2021-06-16-StartPost.md",
   "title": "Computer coding for science",
   "description": "The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.",
@@ -12401,7 +11056,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/lab-automation-benefits",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-05-12-LabAutomationBenefits.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-12-LabAutomationBenefits.md",
   "source": "@site/blog/2023-05-12-LabAutomationBenefits.md",
   "title": "Some general benefits of lab automation",
   "description": "Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:",
@@ -12611,7 +11266,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/lab-automation-benefits",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-05-12-LabAutomationBenefits.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-12-LabAutomationBenefits.md",
   "source": "@site/blog/2023-05-12-LabAutomationBenefits.md",
   "title": "Some general benefits of lab automation",
   "description": "Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:",
@@ -12821,7 +11476,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/lab-automation-main-challenges",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-05-15-LabAutomationChallenges.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-15-LabAutomationChallenges.md",
   "source": "@site/blog/2023-05-15-LabAutomationChallenges.md",
   "title": "Challenges in lab automation",
   "description": "Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:",
@@ -12986,7 +11641,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/lab-automation-main-challenges",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-05-15-LabAutomationChallenges.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-15-LabAutomationChallenges.md",
   "source": "@site/blog/2023-05-15-LabAutomationChallenges.md",
   "title": "Challenges in lab automation",
   "description": "Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:",
@@ -13145,7 +11800,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/styletron-react",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-08-26-styletron/index.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-08-26-styletron/index.md",
   "source": "@site/blog/2023-08-26-styletron/index.md",
   "title": "What is happening behind the scene?",
   "description": "Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:",
@@ -13262,7 +11917,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "permalink": "/blog/styletron-react",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-08-26-styletron/index.md",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-08-26-styletron/index.md",
   "source": "@site/blog/2023-08-26-styletron/index.md",
   "title": "What is happening behind the scene?",
   "description": "Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:",
@@ -13456,54 +12111,7 @@ const SvgWm = _ref => {
 
 /***/ }),
 
-/***/ 6819:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   A: () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _emotion_memoize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1889);
-
-
-var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|inert|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
-
-var index = (0,_emotion_memoize__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A)(function (prop) {
-  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
-  /* o */
-  && prop.charCodeAt(1) === 110
-  /* n */
-  && prop.charCodeAt(2) < 91;
-}
-/* Z+1 */
-);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (index);
-
-
-/***/ }),
-
-/***/ 1889:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   A: () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function memoize(fn) {
-  var cache = {};
-  return function (arg) {
-    if (cache[arg] === undefined) cache[arg] = fn(arg);
-    return cache[arg];
-  };
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (memoize);
-
-
-/***/ }),
-
-/***/ 9218:
+/***/ 1172:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -13554,8 +12162,34 @@ function _defineProperty(obj, key, value) {
 }
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__(6540);
-// EXTERNAL MODULE: ./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.esm.js
-var is_prop_valid_esm = __webpack_require__(6819);
+;// CONCATENATED MODULE: ./node_modules/@emotion/styled-base/node_modules/@emotion/memoize/dist/memoize.esm.js
+function memoize(fn) {
+  var cache = {};
+  return function (arg) {
+    if (cache[arg] === undefined) cache[arg] = fn(arg);
+    return cache[arg];
+  };
+}
+
+/* harmony default export */ const memoize_esm = (memoize);
+
+;// CONCATENATED MODULE: ./node_modules/@emotion/styled-base/node_modules/@emotion/is-prop-valid/dist/is-prop-valid.esm.js
+
+
+var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|inert|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
+
+var index = memoize_esm(function (prop) {
+  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
+  /* o */
+  && prop.charCodeAt(1) === 110
+  /* n */
+  && prop.charCodeAt(2) < 91;
+}
+/* Z+1 */
+);
+
+/* harmony default export */ const is_prop_valid_esm = (index);
+
 ;// CONCATENATED MODULE: ./node_modules/@emotion/sheet/dist/sheet.esm.js
 /*
 
@@ -14671,7 +13305,7 @@ function murmur2(str) {
 
 /* harmony default export */ const hash_esm = (murmur2);
 
-;// CONCATENATED MODULE: ./node_modules/@emotion/unitless/dist/unitless.esm.js
+;// CONCATENATED MODULE: ./node_modules/@emotion/serialize/node_modules/@emotion/unitless/dist/unitless.esm.js
 var unitlessKeys = {
   animationIterationCount: 1,
   borderImageOutset: 1,
@@ -14723,8 +13357,17 @@ var unitlessKeys = {
 
 /* harmony default export */ const unitless_esm = (unitlessKeys);
 
-// EXTERNAL MODULE: ./node_modules/@emotion/memoize/dist/memoize.esm.js
-var memoize_esm = __webpack_require__(1889);
+;// CONCATENATED MODULE: ./node_modules/@emotion/serialize/node_modules/@emotion/memoize/dist/memoize.esm.js
+function memoize_esm_memoize(fn) {
+  var cache = {};
+  return function (arg) {
+    if (cache[arg] === undefined) cache[arg] = fn(arg);
+    return cache[arg];
+  };
+}
+
+/* harmony default export */ const dist_memoize_esm = (memoize_esm_memoize);
+
 ;// CONCATENATED MODULE: ./node_modules/@emotion/serialize/dist/serialize.esm.js
 
 
@@ -14743,7 +13386,7 @@ var isProcessableValue = function isProcessableValue(value) {
   return value != null && typeof value !== 'boolean';
 };
 
-var processStyleName = (0,memoize_esm/* default */.A)(function (styleName) {
+var processStyleName = dist_memoize_esm(function (styleName) {
   return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
 });
 
@@ -15460,7 +14103,7 @@ var ClassNames = emotion_element_39b82f0b_esm_withEmotionCache(function (props, 
 
 
 
-var testOmitPropsOnStringTag = is_prop_valid_esm/* default */.A;
+var testOmitPropsOnStringTag = is_prop_valid_esm;
 
 var testOmitPropsOnComponent = function testOmitPropsOnComponent(key) {
   return key !== 'theme' && key !== 'innerRef';
@@ -15875,31 +14518,74 @@ var css = function css(args) {
 
 /***/ }),
 
-/***/ 2842:
+/***/ 6649:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createShouldForwardProp: () => (/* binding */ createShouldForwardProp),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   props: () => (/* binding */ props)
-/* harmony export */ });
-/* harmony import */ var _emotion_memoize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1889);
-/* harmony import */ var _emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6819);
-/* harmony import */ var styled_system__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1812);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  createShouldForwardProp: () => (/* binding */ createShouldForwardProp),
+  "default": () => (/* binding */ dist_index_esm),
+  props: () => (/* binding */ props)
+});
+
+;// CONCATENATED MODULE: ./node_modules/@styled-system/should-forward-prop/node_modules/@emotion/memoize/dist/emotion-memoize.esm.js
+function memoize(fn) {
+  var cache = Object.create(null);
+  return function (arg) {
+    if (cache[arg] === undefined) cache[arg] = fn(arg);
+    return cache[arg];
+  };
+}
+
+/* harmony default export */ const emotion_memoize_esm = (memoize);
+
+;// CONCATENATED MODULE: ./node_modules/@styled-system/should-forward-prop/node_modules/@emotion/is-prop-valid/node_modules/@emotion/memoize/dist/memoize.esm.js
+function memoize_esm_memoize(fn) {
+  var cache = {};
+  return function (arg) {
+    if (cache[arg] === undefined) cache[arg] = fn(arg);
+    return cache[arg];
+  };
+}
+
+/* harmony default export */ const memoize_esm = (memoize_esm_memoize);
+
+;// CONCATENATED MODULE: ./node_modules/@styled-system/should-forward-prop/node_modules/@emotion/is-prop-valid/dist/is-prop-valid.esm.js
+
+
+var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|inert|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
+
+var index = memoize_esm(function (prop) {
+  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
+  /* o */
+  && prop.charCodeAt(1) === 110
+  /* n */
+  && prop.charCodeAt(2) < 91;
+}
+/* Z+1 */
+);
+
+/* harmony default export */ const is_prop_valid_esm = (index);
+
+// EXTERNAL MODULE: ./node_modules/styled-system/dist/index.esm.js + 12 modules
+var index_esm = __webpack_require__(1812);
+;// CONCATENATED MODULE: ./node_modules/@styled-system/should-forward-prop/dist/index.esm.js
 
 
 
-var all = (0,styled_system__WEBPACK_IMPORTED_MODULE_1__.compose)(styled_system__WEBPACK_IMPORTED_MODULE_1__.space, styled_system__WEBPACK_IMPORTED_MODULE_1__.typography, styled_system__WEBPACK_IMPORTED_MODULE_1__.color, styled_system__WEBPACK_IMPORTED_MODULE_1__.layout, styled_system__WEBPACK_IMPORTED_MODULE_1__.flexbox, styled_system__WEBPACK_IMPORTED_MODULE_1__.border, styled_system__WEBPACK_IMPORTED_MODULE_1__.background, styled_system__WEBPACK_IMPORTED_MODULE_1__.position, styled_system__WEBPACK_IMPORTED_MODULE_1__.grid, styled_system__WEBPACK_IMPORTED_MODULE_1__.shadow, styled_system__WEBPACK_IMPORTED_MODULE_1__.buttonStyle, styled_system__WEBPACK_IMPORTED_MODULE_1__.textStyle, styled_system__WEBPACK_IMPORTED_MODULE_1__.colorStyle);
-var props = all.propNames;
+var index_esm_all = (0,index_esm.compose)(index_esm.space, index_esm.typography, index_esm.color, index_esm.layout, index_esm.flexbox, index_esm.border, index_esm.background, index_esm.position, index_esm.grid, index_esm.shadow, index_esm.buttonStyle, index_esm.textStyle, index_esm.colorStyle);
+var props = index_esm_all.propNames;
 var createShouldForwardProp = function createShouldForwardProp(props) {
   var regex = new RegExp("^(" + props.join('|') + ")$");
-  return (0,_emotion_memoize__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .A)(function (prop) {
-    return (0,_emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .A)(prop) && !regex.test(prop);
+  return emotion_memoize_esm(function (prop) {
+    return is_prop_valid_esm(prop) && !regex.test(prop);
   });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createShouldForwardProp(props));
+/* harmony default export */ const dist_index_esm = (createShouldForwardProp(props));
 
 
 /***/ }),
@@ -15949,7 +14635,7 @@ function _interopRequireWildcard(e, r) {
 var lib = __webpack_require__(3259);
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 ;// CONCATENATED MODULE: ./client-docs/.docusaurus/routesChunkNames.json
-const routesChunkNames_namespaceObject = /*#__PURE__*/JSON.parse('{"/about-us-b0c":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"ccee9b10"},"/blog-2ba":{"__comp":"a6aa9e1f","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"0e6a07db"},{"content":"babce472"},{"content":"39cd7291"},{"content":"1e8aa8e5"},{"content":"a8d51800"}],"metadata":"b2b675dd"},"/blog/archive-4f6":{"__comp":"9e4087bc","__context":{"plugin":"04f5f57a"},"archive":"b2f554cd"},"/blog/lab-automation-benefits-cf5":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"dfacd4f5"},"/blog/lab-automation-main-challenges-842":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"597c8688"},"/blog/opening-post-09f":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"90981a12"},"/blog/styletron-react-575":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"3ac80af1"},"/blog/tags-cc3":{"__comp":"01a85c17","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","tags":"a7023ddc"},"/blog/tags/automation-234":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"4bd5fd33","listMetadata":"0abe3c97"},"/blog/tags/data-management-445":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"39cd7291"}],"tag":"9b5de985","listMetadata":"6db22764"},"/blog/tags/docusaurus-953":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"a8d51800"}],"tag":"a80da1cf","listMetadata":"608ae6a4"},"/blog/tags/future-challenges-a67":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"}],"tag":"d809e4f5","listMetadata":"328d46a1"},"/blog/tags/lab-automation-82d":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"774607ab","listMetadata":"ed737e2e"},"/blog/tags/programming-b0d":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"1e8aa8e5"}],"tag":"f5426078","listMetadata":"448c2acc"},"/blog/tags/static-site-generator-a71":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"a8d51800"}],"tag":"8a248bbe","listMetadata":"92dacbd5"},"/blog/tags/styletron-react-8cb":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"0e6a07db"}],"tag":"673128bd","listMetadata":"d3cf3c3b"},"/blog/tags/technology-0e8":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"55207995","listMetadata":"d7f54ba9"},"/blog/tags/xitechnix-ad8":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"1e8aa8e5"}],"tag":"9dd638df","listMetadata":"fa0dcaff"},"/blog/welcome-a71":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"5372cbae"},"/contact/-c63":{"__comp":"08462523","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/ContactUs-0f7":{"__comp":"a2685df2","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/cookies_en-8ef":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"8ac4b9bc"},"/disclaimers-ce1":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"2cc5ab56"},"/eula-0d2":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"a6735169"},"/markdown-page-b04":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"393be207"},"/docs-6f3":{"__comp":"5e95c892","__context":{"plugin":"76741422"}},"/docs-703":{"__comp":"a7bd4aaa","version":"935f2afb"},"/docs-f08":{"__comp":"a94703ab"},"/docs/cicd/overview-432":{"__comp":"17896441","content":"4eaedc3c"},"/docs/content-type-mime-d7c":{"__comp":"17896441","content":"8d47eece"},"/docs/deserialization-7dd":{"__comp":"17896441","content":"9c2ff75d"},"/docs/devtools/dataformats/csv/csv-ca9":{"__comp":"17896441","content":"7abb66ec"},"/docs/devtools/dataformats/json/json-overview/sch-dev-17e":{"__comp":"17896441","content":"a4a0a316"},"/docs/devtools/dataformats/msgpack-lite/csharp-example-48a":{"__comp":"17896441","content":"87454bc4"},"/docs/devtools/dataformats/msgpack-lite/msgpack-4aa":{"__comp":"17896441","content":"a76e5ed3"},"/docs/devtools/dataformats/msgpack-lite/ts-example-77d":{"__comp":"17896441","content":"46f3c203"},"/docs/devtools/dataformats/protobufjs/example-e85":{"__comp":"17896441","content":"68629bfb"},"/docs/devtools/dataformats/protobufjs/protobufjs-f02":{"__comp":"17896441","content":"666b7c06"},"/docs/devtools/dataformats/xml/xml-693":{"__comp":"17896441","content":"a2511f1c"},"/docs/devtools/dataformats/yaml/yaml-d41":{"__comp":"17896441","content":"42aca346"},"/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics-3c6":{"__comp":"17896441","content":"0e6d2c2e"},"/docs/devtools/frameworks-libraries/site-generators/create-a-page-ed1":{"__comp":"17896441","content":"8c8ad2a2"},"/docs/devtools/frameworks-libraries/site-generators/docusaurus-f5f":{"__comp":"17896441","content":"ed179930"},"/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics-5d5":{"__comp":"17896441","content":"e7b604ac"},"/docs/devtools/intro-37b":{"__comp":"17896441","content":"21d4c7f5"},"/docs/devtools/languages/opp-972":{"__comp":"17896441","content":"4feea794"},"/docs/devtools/versioncontrol/git-6d4":{"__comp":"17896441","content":"7e6e2bc0"},"/docs/devtools/versioncontrol/intro-456":{"__comp":"17896441","content":"a0992fef"},"/docs/devtools/versioncontrol/mercurial-1e2":{"__comp":"17896441","content":"62abd68f"},"/docs/devtools/versioncontrol/svn-9c5":{"__comp":"17896441","content":"e5339692"},"/docs/engineering-35b":{"__comp":"17896441","content":"3bfb1537"},"/docs/guide/azure-deploy-webapi-323":{"__comp":"17896441","content":"002585d6"},"/docs/guide/azure-deploy-webapp-3a5":{"__comp":"17896441","content":"fc06f22a"},"/docs/guide/guide-list-9f8":{"__comp":"17896441","content":"ac7b6bfe"},"/docs/how-to-use/json-in-ts-860":{"__comp":"17896441","content":"b7042d0a"},"/docs/intro-e66":{"__comp":"17896441","content":"0e384e19"},"/docs/json-overview-5c2":{"__comp":"17896441","content":"7944e72e"},"/docs/json-schema-1dd":{"__comp":"17896441","content":"7c72bda6"},"/docs/learn/cicd-pipelines/azure-devops/azure-devops-services-265":{"__comp":"17896441","content":"7970ee92"},"/docs/learn/cicd-pipelines/azure-devops/azure-pipelines-ef0":{"__comp":"17896441","content":"ebb30ef0"},"/docs/learn/cicd-pipelines/azure-devops/intro-89e":{"__comp":"17896441","content":"0736b6f5"},"/docs/learn/cicd-pipelines/azure-devops/test-pipeline-2a6":{"__comp":"17896441","content":"3acce02b"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases-4bb":{"__comp":"17896441","content":"baa60d94"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env-ac8":{"__comp":"17896441","content":"a72842ee"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans-aaa":{"__comp":"17896441","content":"c2f2b10c"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent-18c":{"__comp":"17896441","content":"555e935d"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents-d42":{"__comp":"17896441","content":"90bb0703"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template-7da":{"__comp":"17896441","content":"92f97443"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers-1b0":{"__comp":"17896441","content":"42e7a3d0"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates-648":{"__comp":"17896441","content":"9bdd6486"},"/docs/learn/cicd-pipelines/azure/cloud-shell/intro-fef":{"__comp":"17896441","content":"834bd84e"},"/docs/learn/cicd-pipelines/azure/intro-58b":{"__comp":"17896441","content":"f80db4b4"},"/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core-6f5":{"__comp":"17896441","content":"702381eb"},"/docs/learn/cicd-pipelines/azure/vs-devops-services-8ea":{"__comp":"17896441","content":"bdeef73b"},"/docs/learn/cicd-pipelines/gitlab-cicd/intro-5f7":{"__comp":"17896441","content":"f1115065"},"/docs/learn/dotnet/dotnet.core/intro-94e":{"__comp":"17896441","content":"1233c84f"},"/docs/learn/git-1b9":{"__comp":"17896441","content":"0e083131"},"/docs/learn/git/deserialization-3ea":{"__comp":"17896441","content":"84bfc253"},"/docs/learn/git/fetchpull-f09":{"__comp":"17896441","content":"ad033327"},"/docs/learn/git/overwriting-local-repo-fcf":{"__comp":"17896441","content":"36476823"},"/docs/learn/git/rollback-commit-f73":{"__comp":"17896441","content":"ce35382b"},"/docs/learn/react/Axios/-ab3":{"__comp":"17896441","content":"8069f130"},"/docs/learn/react/Basics/handle-data-from-api-b83":{"__comp":"17896441","content":"7c9df2f0"},"/docs/learn/react/Hooks/useFetch-6bb":{"__comp":"17896441","content":"3ecb155c"},"/docs/learn/react/intro-168":{"__comp":"17896441","content":"6267104f"},"/docs/learn/react/Redux/Redux-Basic-Example-c55":{"__comp":"17896441","content":"f2dc99bb"},"/docs/science-applications-6fd":{"__comp":"17896441","content":"6cbee453"},"/docs/serialization-434":{"__comp":"17896441","content":"a9a111a3"},"/docs/software-development/Coding/codebase/codebase-670":{"__comp":"17896441","content":"f7c7000c"},"/docs/software-development/Coding/debugging/debugging-9ce":{"__comp":"17896441","content":"b370d96e"},"/docs/software-development/Coding/documentation/documenting-2bf":{"__comp":"17896441","content":"2b0d8931"},"/docs/software-development/Coding/programming/writing-code-e25":{"__comp":"17896441","content":"32bf57e0"},"/docs/software-development/Coding/refactoring/refactoring-601":{"__comp":"17896441","content":"45075572"},"/docs/software-development/Coding/testing/testing-4b0":{"__comp":"17896441","content":"f87193e1"},"/docs/software-development/Designing/designPatterns/façade-pattern-400":{"__comp":"17896441","content":"a89ecf35"},"/docs/software-development/Designing/designPatterns/overview-311":{"__comp":"17896441","content":"b5a51f93"},"/docs/software-development/Designing/designPatterns/singleton-pattern-e5d":{"__comp":"17896441","content":"482f5955"},"/docs/software-development/Designing/intro-8cd":{"__comp":"17896441","content":"d85ea180"},"/docs/software-development/Designing/uml/user-story-user-case-7ac":{"__comp":"17896441","content":"f0930f4f"},"/docs/software-development/Designing/uml/wireframing-01b":{"__comp":"17896441","content":"430c9138"},"/docs/software-development/Planning/intro-747":{"__comp":"17896441","content":"ef2cc497"},"/docs/software-development/Requirements/intro-140":{"__comp":"17896441","content":"d14fd6d9"},"/docs/software-development/Testing/intro-a38":{"__comp":"17896441","content":"6e8c7bbb"},"/docs/technology-d2a":{"__comp":"17896441","content":"22bae8f6"},"/-558":{"__comp":"c4f5d8e4","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/-dc3":{"__comp":"1df93b7f","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"}}');
+const routesChunkNames_namespaceObject = /*#__PURE__*/JSON.parse('{"/about-us-b0c":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"ccee9b10"},"/blog-2ba":{"__comp":"a6aa9e1f","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"0e6a07db"},{"content":"babce472"},{"content":"39cd7291"},{"content":"1e8aa8e5"},{"content":"a8d51800"}],"metadata":"b2b675dd"},"/blog/archive-4f6":{"__comp":"9e4087bc","__context":{"plugin":"04f5f57a"},"archive":"b2f554cd"},"/blog/lab-automation-benefits-cf5":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"dfacd4f5"},"/blog/lab-automation-main-challenges-842":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"597c8688"},"/blog/opening-post-09f":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"90981a12"},"/blog/styletron-react-575":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"3ac80af1"},"/blog/tags-cc3":{"__comp":"01a85c17","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","tags":"a7023ddc"},"/blog/tags/automation-234":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"4bd5fd33","listMetadata":"0abe3c97"},"/blog/tags/data-management-445":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"39cd7291"}],"tag":"9b5de985","listMetadata":"6db22764"},"/blog/tags/docusaurus-953":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"a8d51800"}],"tag":"a80da1cf","listMetadata":"608ae6a4"},"/blog/tags/future-challenges-a67":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"}],"tag":"d809e4f5","listMetadata":"328d46a1"},"/blog/tags/lab-automation-82d":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"774607ab","listMetadata":"ed737e2e"},"/blog/tags/programming-b0d":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"1e8aa8e5"}],"tag":"f5426078","listMetadata":"448c2acc"},"/blog/tags/static-site-generator-a71":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"a8d51800"}],"tag":"8a248bbe","listMetadata":"92dacbd5"},"/blog/tags/styletron-react-8cb":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"0e6a07db"}],"tag":"673128bd","listMetadata":"d3cf3c3b"},"/blog/tags/technology-0e8":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"55207995","listMetadata":"d7f54ba9"},"/blog/tags/xitechnix-ad8":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"1e8aa8e5"}],"tag":"9dd638df","listMetadata":"fa0dcaff"},"/blog/welcome-a71":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"5372cbae"},"/contact/-c63":{"__comp":"08462523","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/ContactUs-0f7":{"__comp":"a2685df2","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/cookies_en-8ef":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"8ac4b9bc"},"/disclaimers-ce1":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"2cc5ab56"},"/eula-0d2":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"a6735169"},"/markdown-page-b04":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"393be207"},"/docs-81b":{"__comp":"5e95c892","__context":{"plugin":"76741422"}},"/docs-dcb":{"__comp":"a7bd4aaa","version":"935f2afb"},"/docs-c9a":{"__comp":"a94703ab"},"/docs/cicd/overview-432":{"__comp":"17896441","content":"4eaedc3c"},"/docs/content-type-mime-d7c":{"__comp":"17896441","content":"8d47eece"},"/docs/deserialization-7dd":{"__comp":"17896441","content":"9c2ff75d"},"/docs/devtools/dataformats/csv/csv-ca9":{"__comp":"17896441","content":"7abb66ec"},"/docs/devtools/dataformats/json/json-overview/sch-dev-17e":{"__comp":"17896441","content":"a4a0a316"},"/docs/devtools/dataformats/msgpack-lite/csharp-example-48a":{"__comp":"17896441","content":"87454bc4"},"/docs/devtools/dataformats/msgpack-lite/msgpack-4aa":{"__comp":"17896441","content":"a76e5ed3"},"/docs/devtools/dataformats/msgpack-lite/ts-example-77d":{"__comp":"17896441","content":"46f3c203"},"/docs/devtools/dataformats/protobufjs/example-e85":{"__comp":"17896441","content":"68629bfb"},"/docs/devtools/dataformats/protobufjs/protobufjs-f02":{"__comp":"17896441","content":"666b7c06"},"/docs/devtools/dataformats/xml/xml-693":{"__comp":"17896441","content":"a2511f1c"},"/docs/devtools/dataformats/yaml/yaml-d41":{"__comp":"17896441","content":"42aca346"},"/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics-6a6":{"__comp":"17896441","content":"0e6d2c2e"},"/docs/devtools/frameworks-libraries/site-generators/create-a-page-ed1":{"__comp":"17896441","content":"8c8ad2a2"},"/docs/devtools/frameworks-libraries/site-generators/docusaurus-f5f":{"__comp":"17896441","content":"ed179930"},"/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics-5d5":{"__comp":"17896441","content":"e7b604ac"},"/docs/devtools/intro-37b":{"__comp":"17896441","content":"21d4c7f5"},"/docs/devtools/languages/opp-972":{"__comp":"17896441","content":"4feea794"},"/docs/devtools/versioncontrol/git-6d4":{"__comp":"17896441","content":"7e6e2bc0"},"/docs/devtools/versioncontrol/intro-456":{"__comp":"17896441","content":"a0992fef"},"/docs/devtools/versioncontrol/mercurial-1e2":{"__comp":"17896441","content":"62abd68f"},"/docs/devtools/versioncontrol/svn-9c5":{"__comp":"17896441","content":"e5339692"},"/docs/engineering-35b":{"__comp":"17896441","content":"3bfb1537"},"/docs/guide/azure-deploy-webapi-323":{"__comp":"17896441","content":"002585d6"},"/docs/guide/azure-deploy-webapp-3a5":{"__comp":"17896441","content":"fc06f22a"},"/docs/guide/guide-list-9f8":{"__comp":"17896441","content":"ac7b6bfe"},"/docs/how-to-use/json-in-ts-860":{"__comp":"17896441","content":"b7042d0a"},"/docs/intro-e66":{"__comp":"17896441","content":"0e384e19"},"/docs/json-overview-5c2":{"__comp":"17896441","content":"7944e72e"},"/docs/json-schema-1dd":{"__comp":"17896441","content":"7c72bda6"},"/docs/learn/cicd-pipelines/azure-devops/azure-devops-services-265":{"__comp":"17896441","content":"7970ee92"},"/docs/learn/cicd-pipelines/azure-devops/azure-pipelines-ef0":{"__comp":"17896441","content":"ebb30ef0"},"/docs/learn/cicd-pipelines/azure-devops/intro-89e":{"__comp":"17896441","content":"0736b6f5"},"/docs/learn/cicd-pipelines/azure-devops/test-pipeline-2a6":{"__comp":"17896441","content":"3acce02b"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases-4bb":{"__comp":"17896441","content":"baa60d94"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env-ac8":{"__comp":"17896441","content":"a72842ee"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans-aaa":{"__comp":"17896441","content":"c2f2b10c"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent-18c":{"__comp":"17896441","content":"555e935d"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents-d42":{"__comp":"17896441","content":"90bb0703"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template-7da":{"__comp":"17896441","content":"92f97443"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers-1b0":{"__comp":"17896441","content":"42e7a3d0"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates-648":{"__comp":"17896441","content":"9bdd6486"},"/docs/learn/cicd-pipelines/azure/cloud-shell/intro-fef":{"__comp":"17896441","content":"834bd84e"},"/docs/learn/cicd-pipelines/azure/intro-58b":{"__comp":"17896441","content":"f80db4b4"},"/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core-6f5":{"__comp":"17896441","content":"702381eb"},"/docs/learn/cicd-pipelines/azure/vs-devops-services-8ea":{"__comp":"17896441","content":"bdeef73b"},"/docs/learn/cicd-pipelines/gitlab-cicd/intro-5f7":{"__comp":"17896441","content":"f1115065"},"/docs/learn/dotnet/dotnet.core/intro-94e":{"__comp":"17896441","content":"1233c84f"},"/docs/learn/git-1b9":{"__comp":"17896441","content":"0e083131"},"/docs/learn/git/deserialization-3ea":{"__comp":"17896441","content":"84bfc253"},"/docs/learn/git/fetchpull-f09":{"__comp":"17896441","content":"ad033327"},"/docs/learn/git/overwriting-local-repo-fcf":{"__comp":"17896441","content":"36476823"},"/docs/learn/git/rollback-commit-f73":{"__comp":"17896441","content":"ce35382b"},"/docs/learn/react/Axios/-ab3":{"__comp":"17896441","content":"8069f130"},"/docs/learn/react/Basics/handle-data-from-api-b83":{"__comp":"17896441","content":"7c9df2f0"},"/docs/learn/react/Hooks/useFetch-6bb":{"__comp":"17896441","content":"3ecb155c"},"/docs/learn/react/intro-168":{"__comp":"17896441","content":"6267104f"},"/docs/learn/react/Redux/Redux-Basic-Example-c55":{"__comp":"17896441","content":"f2dc99bb"},"/docs/science-applications-6fd":{"__comp":"17896441","content":"6cbee453"},"/docs/serialization-434":{"__comp":"17896441","content":"a9a111a3"},"/docs/software-development/Coding/codebase/codebase-670":{"__comp":"17896441","content":"f7c7000c"},"/docs/software-development/Coding/debugging/debugging-9ce":{"__comp":"17896441","content":"b370d96e"},"/docs/software-development/Coding/documentation/documenting-2bf":{"__comp":"17896441","content":"2b0d8931"},"/docs/software-development/Coding/programming/writing-code-e25":{"__comp":"17896441","content":"32bf57e0"},"/docs/software-development/Coding/refactoring/refactoring-601":{"__comp":"17896441","content":"45075572"},"/docs/software-development/Coding/testing/testing-4b0":{"__comp":"17896441","content":"f87193e1"},"/docs/software-development/Designing/designPatterns/façade-pattern-400":{"__comp":"17896441","content":"a89ecf35"},"/docs/software-development/Designing/designPatterns/overview-311":{"__comp":"17896441","content":"b5a51f93"},"/docs/software-development/Designing/designPatterns/singleton-pattern-e5d":{"__comp":"17896441","content":"482f5955"},"/docs/software-development/Designing/intro-8cd":{"__comp":"17896441","content":"d85ea180"},"/docs/software-development/Designing/uml/user-story-user-case-d33":{"__comp":"17896441","content":"f0930f4f"},"/docs/software-development/Designing/uml/wireframing-01b":{"__comp":"17896441","content":"430c9138"},"/docs/software-development/Planning/intro-747":{"__comp":"17896441","content":"ef2cc497"},"/docs/software-development/Requirements/intro-140":{"__comp":"17896441","content":"d14fd6d9"},"/docs/software-development/Testing/intro-a38":{"__comp":"17896441","content":"6e8c7bbb"},"/docs/technology-d2a":{"__comp":"17896441","content":"22bae8f6"},"/-558":{"__comp":"c4f5d8e4","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/-dc3":{"__comp":"1df93b7f","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"}}');
 ;// CONCATENATED MODULE: ./client-docs/.docusaurus/registry.js
 /* harmony default export */ const registry = ({"002585d6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2187))),"@site/docs/030-guide/azure-deploy-webapi.md",/*require.resolve*/(2187)],"01a85c17":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5068))),"@theme/BlogTagsListPage",/*require.resolve*/(5068)],"04f5f57a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4535))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-blog\\default\\plugin-route-context-module-100.json",/*require.resolve*/(4535)],"0736b6f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2414))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0101-intro.md",/*require.resolve*/(2414)],"08462523":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1964))),"@site/src/pages/contact/index.js",/*require.resolve*/(1964)],"0abe3c97":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8295))),"~blog/default/blog-tags-automation-1d1-list.json",/*require.resolve*/(8295)],"0e083131":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1894))),"@site/docs/020-learn/0203-git/overview/set-up-git.md",/*require.resolve*/(1894)],"0e384e19":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2598))),"@site/docs/intro.md",/*require.resolve*/(2598)],"0e6a07db":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8159))),"@site/blog/2023-08-26-styletron/index.md?truncated=true",/*require.resolve*/(8159)],"0e6d2c2e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9887))),"@site/docs/015-devtools/03-frameworks-libraries/01-nx-workspace/nx-Basics.md",/*require.resolve*/(9887)],"1233c84f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1897))),"@site/docs/020-learn/0201-dotnet/dotnet.core/intro.md",/*require.resolve*/(1897)],"17896441":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3628))),"@theme/DocItem",/*require.resolve*/(3628)],"1df93b7f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1472))),"@site/src/pages/index.tsx",/*require.resolve*/(1472)],"1e8aa8e5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6135))),"@site/blog/2021-06-16-StartPost.md?truncated=true",/*require.resolve*/(6135)],"1f391b9e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4250))),"@theme/MDXPage",/*require.resolve*/(4250)],"21d4c7f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6008))),"@site/docs/015-devtools/intro.md",/*require.resolve*/(6008)],"22bae8f6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6935))),"@site/docs/Glossary/technology.md",/*require.resolve*/(6935)],"2b0d8931":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4541))),"@site/docs/010-software-development/0104-Coding/06-documentation/006-documenting.md",/*require.resolve*/(4541)],"2cc5ab56":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1231))),"@site/src/pages/disclaimers.md",/*require.resolve*/(1231)],"328d46a1":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2075))),"~blog/default/blog-tags-future-challenges-81b-list.json",/*require.resolve*/(2075)],"32bf57e0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1239))),"@site/docs/010-software-development/0104-Coding/02-programming/002-writing-code.md",/*require.resolve*/(1239)],"36476823":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9452))),"@site/docs/020-learn/0203-git/how-to/overwite-local-repo.md",/*require.resolve*/(9452)],"393be207":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(256))),"@site/src/pages/markdown-page.md",/*require.resolve*/(256)],"39cd7291":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7806))),"@site/blog/2023-05-12-LabAutomationBenefits.md?truncated=true",/*require.resolve*/(7806)],"3ac80af1":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7805))),"@site/blog/2023-08-26-styletron/index.md",/*require.resolve*/(7805)],"3acce02b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8091))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0102-test-pipeline.md",/*require.resolve*/(8091)],"3bfb1537":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4418))),"@site/docs/Glossary/engineering.md",/*require.resolve*/(4418)],"3d259b09":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9843))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-pages\\default\\plugin-route-context-module-100.json",/*require.resolve*/(9843)],"3ecb155c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5085))),"@site/docs/020-learn/0202-react/Hooks/useFetch.md",/*require.resolve*/(5085)],"42aca346":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7628))),"@site/docs/015-devtools/02-dataformats/004-yaml/01-yaml.md",/*require.resolve*/(7628)],"42e7a3d0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1921))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/02-triggers.md",/*require.resolve*/(1921)],"430c9138":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2664))),"@site/docs/010-software-development/0103-Designing/uml/Wireframing.mdx",/*require.resolve*/(2664)],"448c2acc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4590))),"~blog/default/blog-tags-programming-1aa-list.json",/*require.resolve*/(4590)],"45075572":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5344))),"@site/docs/010-software-development/0104-Coding/05-refactoring/005-refactoring.md",/*require.resolve*/(5344)],"46f3c203":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3128))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/02-ts-example.md",/*require.resolve*/(3128)],"482f5955":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2524))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/singleton-pattern.md",/*require.resolve*/(2524)],"4bd5fd33":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8240))),"~blog/default/blog-tags-automation-1d1.json",/*require.resolve*/(8240)],"4eaedc3c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3741))),"@site/docs/010-software-development/0106-Automation/01-cicd-processes.md",/*require.resolve*/(3741)],"4feea794":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8156))),"@site/docs/015-devtools/01-languages/00-opp.md",/*require.resolve*/(8156)],"5372cbae":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9622))),"@site/blog/2021-06-15-welcome.md",/*require.resolve*/(9622)],"55207995":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2311))),"~blog/default/blog-tags-technology-3f7.json",/*require.resolve*/(2311)],"555e935d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1182))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/05-agent.md",/*require.resolve*/(1182)],"597c8688":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9997))),"@site/blog/2023-05-15-LabAutomationChallenges.md",/*require.resolve*/(9997)],"5e95c892":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7121))),"@theme/DocsRoot",/*require.resolve*/(7121)],"5e9f5e1a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3050))),"@generated/docusaurus.config",/*require.resolve*/(3050)],"608ae6a4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1079))),"~blog/default/blog-tags-docusaurus-0e0-list.json",/*require.resolve*/(1079)],"6267104f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9163))),"@site/docs/020-learn/0202-react/intro.md",/*require.resolve*/(9163)],"62abd68f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2635))),"@site/docs/015-devtools/04-versioncontrol/03-mercurial.md",/*require.resolve*/(2635)],"666b7c06":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1041))),"@site/docs/015-devtools/02-dataformats/005-protobufjs/01-protobufjs.md",/*require.resolve*/(1041)],"673128bd":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3258))),"~blog/default/blog-tags-styletron-react-d94.json",/*require.resolve*/(3258)],"68629bfb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4726))),"@site/docs/015-devtools/02-dataformats/005-protobufjs/02-example.md",/*require.resolve*/(4726)],"6875c492":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3069))),"@theme/BlogTagsPostsPage",/*require.resolve*/(3069)],"6cbee453":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6749))),"@site/docs/Glossary/applications-of-science.md",/*require.resolve*/(6749)],"6db22764":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7337))),"~blog/default/blog-tags-data-management-f89-list.json",/*require.resolve*/(7337)],"6e8c7bbb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5780))),"@site/docs/010-software-development/0105-Testing/03-intro.md",/*require.resolve*/(5780)],"702381eb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3087))),"@site/docs/020-learn/0204-cicd-pipelines/azure/tasks/build-tasks/dotnet.core.md",/*require.resolve*/(3087)],"76741422":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(156))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-docs\\default\\plugin-route-context-module-100.json",/*require.resolve*/(156)],"774607ab":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8624))),"~blog/default/blog-tags-lab-automation-c05.json",/*require.resolve*/(8624)],"7944e72e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3980))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/01-json.md",/*require.resolve*/(3980)],"7970ee92":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1137))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-azure-devops-services.md",/*require.resolve*/(1137)],"7abb66ec":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9529))),"@site/docs/015-devtools/02-dataformats/003-csv/01-csv.md",/*require.resolve*/(9529)],"7c72bda6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7211))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/02-json-schema.md",/*require.resolve*/(7211)],"7c9df2f0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5336))),"@site/docs/020-learn/0202-react/Basics/handle-data-from-api.md",/*require.resolve*/(5336)],"7e6e2bc0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9745))),"@site/docs/015-devtools/04-versioncontrol/01-git.md",/*require.resolve*/(9745)],"8069f130":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9549))),"@site/docs/020-learn/0202-react/Axios/axios.md",/*require.resolve*/(9549)],"814f3328":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8363))),"~blog/default/blog-post-list-prop-default.json",/*require.resolve*/(8363)],"834bd84e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6934))),"@site/docs/020-learn/0204-cicd-pipelines/azure/cloud-shell/intro.md",/*require.resolve*/(6934)],"84bfc253":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8233))),"@site/docs/020-learn/0203-git/how-to/remove-last-changes.md",/*require.resolve*/(8233)],"87454bc4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1911))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/03-csharp-example.md",/*require.resolve*/(1911)],"8a248bbe":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3742))),"~blog/default/blog-tags-static-site-generator-8b7.json",/*require.resolve*/(3742)],"8ac4b9bc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8740))),"@site/src/pages/cookies_en.md",/*require.resolve*/(8740)],"8c8ad2a2":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4042))),"@site/docs/015-devtools/03-frameworks-libraries/02-site-generators/create-a-page.md",/*require.resolve*/(4042)],"8d47eece":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7566))),"@site/docs/Glossary/MIME-type.md",/*require.resolve*/(7566)],"90981a12":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8149))),"@site/blog/2021-06-16-StartPost.md",/*require.resolve*/(8149)],"90bb0703":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6033))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/01-print-dir-contents.md",/*require.resolve*/(6033)],"92dacbd5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9093))),"~blog/default/blog-tags-static-site-generator-8b7-list.json",/*require.resolve*/(9093)],"92f97443":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8499))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/04-reuse-template.md",/*require.resolve*/(8499)],"935f2afb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9120))),"~docs/default/version-current-metadata-prop-751.json",/*require.resolve*/(9120)],"9b5de985":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5122))),"~blog/default/blog-tags-data-management-f89.json",/*require.resolve*/(5122)],"9bdd6486":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5100))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/03-Yaml-templates.md",/*require.resolve*/(5100)],"9c2ff75d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(416))),"@site/docs/Glossary/deserialization.md",/*require.resolve*/(416)],"9dd638df":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1744))),"~blog/default/blog-tags-xitechnix-dd7.json",/*require.resolve*/(1744)],"9e4087bc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9331))),"@theme/BlogArchivePage",/*require.resolve*/(9331)],"a0992fef":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3948))),"@site/docs/015-devtools/04-versioncontrol/00-intro.md",/*require.resolve*/(3948)],"a2511f1c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3974))),"@site/docs/015-devtools/02-dataformats/002-xml/01-xml.md",/*require.resolve*/(3974)],"a2685df2":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2294))),"@site/src/pages/ContactUs.js",/*require.resolve*/(2294)],"a4a0a316":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9094))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/03-Schema-Driven-Development.md",/*require.resolve*/(9094)],"a6735169":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4446))),"@site/src/pages/eula.md",/*require.resolve*/(4446)],"a6aa9e1f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5124))),"@theme/BlogListPage",/*require.resolve*/(5124)],"a7023ddc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3471))),"~blog/default/blog-tags-tags-4c2.json",/*require.resolve*/(3471)],"a72842ee":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7196))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/03-test-env.md",/*require.resolve*/(7196)],"a76e5ed3":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6537))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/01-msgpack.md",/*require.resolve*/(6537)],"a7bd4aaa":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4532))),"@theme/DocVersionRoot",/*require.resolve*/(4532)],"a80da1cf":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3616))),"~blog/default/blog-tags-docusaurus-0e0.json",/*require.resolve*/(3616)],"a89ecf35":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5421))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/façade-pattern.md",/*require.resolve*/(5421)],"a8d51800":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4314))),"@site/blog/2021-06-15-welcome.md?truncated=true",/*require.resolve*/(4314)],"a94703ab":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7151))),"@theme/DocRoot",/*require.resolve*/(7151)],"a9a111a3":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6973))),"@site/docs/Glossary/Serialization.md",/*require.resolve*/(6973)],"ac7b6bfe":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1098))),"@site/docs/030-guide/guide-list.md",/*require.resolve*/(1098)],"acecf23e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5746))),"~blog/default/blogMetadata-default.json",/*require.resolve*/(5746)],"ad033327":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3909))),"@site/docs/020-learn/0203-git/overview/fetch-pull.md",/*require.resolve*/(3909)],"b2b675dd":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4197))),"~blog/default/blog-c06.json",/*require.resolve*/(4197)],"b2f554cd":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9752))),"~blog/default/blog-archive-80c.json",/*require.resolve*/(9752)],"b370d96e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(400))),"@site/docs/010-software-development/0104-Coding/04-debugging/004-debugging.md",/*require.resolve*/(400)],"b5a51f93":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3991))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/overview.md",/*require.resolve*/(3991)],"b7042d0a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1174))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/04-how-to-use-json-in-ts.md",/*require.resolve*/(1174)],"baa60d94":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1811))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/02-create-testcases.md",/*require.resolve*/(1811)],"babce472":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7503))),"@site/blog/2023-05-15-LabAutomationChallenges.md?truncated=true",/*require.resolve*/(7503)],"bdeef73b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5942))),"@site/docs/020-learn/0204-cicd-pipelines/azure/020-vs-devops-services.md",/*require.resolve*/(5942)],"c2f2b10c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(81))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/01-test-plans.md",/*require.resolve*/(81)],"c4f5d8e4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8522))),"@site/src/pages/index.js",/*require.resolve*/(8522)],"ccc49370":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3858))),"@theme/BlogPostPage",/*require.resolve*/(3858)],"ccee9b10":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8775))),"@site/src/pages/about-us.md",/*require.resolve*/(8775)],"ce35382b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7499))),"@site/docs/020-learn/0203-git/how-to/rollback.md",/*require.resolve*/(7499)],"d14fd6d9":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8974))),"@site/docs/010-software-development/0101-Requirements/01-intro.md",/*require.resolve*/(8974)],"d3cf3c3b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9585))),"~blog/default/blog-tags-styletron-react-d94-list.json",/*require.resolve*/(9585)],"d7f54ba9":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8166))),"~blog/default/blog-tags-technology-3f7-list.json",/*require.resolve*/(8166)],"d809e4f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2276))),"~blog/default/blog-tags-future-challenges-81b.json",/*require.resolve*/(2276)],"d85ea180":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1448))),"@site/docs/010-software-development/0103-Designing/03-intro.md",/*require.resolve*/(1448)],"dfacd4f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3594))),"@site/blog/2023-05-12-LabAutomationBenefits.md",/*require.resolve*/(3594)],"e5339692":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4213))),"@site/docs/015-devtools/04-versioncontrol/02-svn.md",/*require.resolve*/(4213)],"e7b604ac":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5995))),"@site/docs/015-devtools/03-frameworks-libraries/03-syncfusion/syncfusion-Basics.md",/*require.resolve*/(5995)],"ebb30ef0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4219))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0103-azure-pipelines.md",/*require.resolve*/(4219)],"ed179930":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9256))),"@site/docs/015-devtools/03-frameworks-libraries/02-site-generators/docusaurus.md",/*require.resolve*/(9256)],"ed737e2e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7671))),"~blog/default/blog-tags-lab-automation-c05-list.json",/*require.resolve*/(7671)],"ef2cc497":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5529))),"@site/docs/010-software-development/0102-Planning/02-intro.md",/*require.resolve*/(5529)],"f0930f4f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1919))),"@site/docs/010-software-development/0103-Designing/uml/userStory-userCase.mdx",/*require.resolve*/(1919)],"f1115065":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4899))),"@site/docs/020-learn/0204-cicd-pipelines/gitlab-cicd/01-intro.md",/*require.resolve*/(4899)],"f2dc99bb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8978))),"@site/docs/020-learn/0202-react/Redux/Redux-Basic-Example.md",/*require.resolve*/(8978)],"f5426078":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4639))),"~blog/default/blog-tags-programming-1aa.json",/*require.resolve*/(4639)],"f7c7000c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9922))),"@site/docs/010-software-development/0104-Coding/01-codebase/001-codebase.md",/*require.resolve*/(9922)],"f80db4b4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(491))),"@site/docs/020-learn/0204-cicd-pipelines/azure/010-intro.md",/*require.resolve*/(491)],"f87193e1":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5800))),"@site/docs/010-software-development/0104-Coding/03-testing/003-testing.md",/*require.resolve*/(5800)],"fa0dcaff":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1319))),"~blog/default/blog-tags-xitechnix-dd7-list.json",/*require.resolve*/(1319)],"fc06f22a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7644))),"@site/docs/030-guide/azure-deploy-webapp.md",/*require.resolve*/(7644)]});
 // EXTERNAL MODULE: ./node_modules/react/jsx-runtime.js
@@ -16015,7 +14701,7 @@ if(typeof chunk==='object'||typeof chunk==='function'){Object.keys(loadedModule)
 let val=loadedModules;const keyPaths=keyPath.split('.');keyPaths.slice(0,-1).forEach(k=>{val=val[k];});val[keyPaths[keyPaths.length-1]]=chunk;});/* eslint-disable no-underscore-dangle */const Component=loadedModules.__comp;delete loadedModules.__comp;const routeContext=loadedModules.__context;delete loadedModules.__context;/* eslint-enable no-underscore-dangle */ // Is there any way to put this RouteContextProvider upper in the tree?
 return/*#__PURE__*/(0,jsx_runtime.jsx)(client_routeContext/* RouteContextProvider */.W,{value:routeContext,children:/*#__PURE__*/(0,jsx_runtime.jsx)(Component,{...loadedModules,...props})});}});}
 ;// CONCATENATED MODULE: ./client-docs/.docusaurus/routes.js
-/* harmony default export */ const routes = ([{path:'/about-us',component:ComponentCreator('/about-us','b0c'),exact:true},{path:'/blog',component:ComponentCreator('/blog','2ba'),exact:true},{path:'/blog/archive',component:ComponentCreator('/blog/archive','4f6'),exact:true},{path:'/blog/lab-automation-benefits',component:ComponentCreator('/blog/lab-automation-benefits','cf5'),exact:true},{path:'/blog/lab-automation-main-challenges',component:ComponentCreator('/blog/lab-automation-main-challenges','842'),exact:true},{path:'/blog/opening-post',component:ComponentCreator('/blog/opening-post','09f'),exact:true},{path:'/blog/styletron-react',component:ComponentCreator('/blog/styletron-react','575'),exact:true},{path:'/blog/tags',component:ComponentCreator('/blog/tags','cc3'),exact:true},{path:'/blog/tags/automation',component:ComponentCreator('/blog/tags/automation','234'),exact:true},{path:'/blog/tags/data-management',component:ComponentCreator('/blog/tags/data-management','445'),exact:true},{path:'/blog/tags/docusaurus',component:ComponentCreator('/blog/tags/docusaurus','953'),exact:true},{path:'/blog/tags/future-challenges',component:ComponentCreator('/blog/tags/future-challenges','a67'),exact:true},{path:'/blog/tags/lab-automation',component:ComponentCreator('/blog/tags/lab-automation','82d'),exact:true},{path:'/blog/tags/programming',component:ComponentCreator('/blog/tags/programming','b0d'),exact:true},{path:'/blog/tags/static-site-generator',component:ComponentCreator('/blog/tags/static-site-generator','a71'),exact:true},{path:'/blog/tags/styletron-react',component:ComponentCreator('/blog/tags/styletron-react','8cb'),exact:true},{path:'/blog/tags/technology',component:ComponentCreator('/blog/tags/technology','0e8'),exact:true},{path:'/blog/tags/xitechnix',component:ComponentCreator('/blog/tags/xitechnix','ad8'),exact:true},{path:'/blog/welcome',component:ComponentCreator('/blog/welcome','a71'),exact:true},{path:'/contact/',component:ComponentCreator('/contact/','c63'),exact:true},{path:'/ContactUs',component:ComponentCreator('/ContactUs','0f7'),exact:true},{path:'/cookies_en',component:ComponentCreator('/cookies_en','8ef'),exact:true},{path:'/disclaimers',component:ComponentCreator('/disclaimers','ce1'),exact:true},{path:'/eula',component:ComponentCreator('/eula','0d2'),exact:true},{path:'/markdown-page',component:ComponentCreator('/markdown-page','b04'),exact:true},{path:'/docs',component:ComponentCreator('/docs','6f3'),routes:[{path:'/docs',component:ComponentCreator('/docs','703'),routes:[{path:'/docs',component:ComponentCreator('/docs','f08'),routes:[{path:'/docs/cicd/overview',component:ComponentCreator('/docs/cicd/overview','432'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/content-type-mime',component:ComponentCreator('/docs/content-type-mime','d7c'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/deserialization',component:ComponentCreator('/docs/deserialization','7dd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/csv/csv',component:ComponentCreator('/docs/devtools/dataformats/csv/csv','ca9'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/json/json-overview/sch-dev',component:ComponentCreator('/docs/devtools/dataformats/json/json-overview/sch-dev','17e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/csharp-example',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/csharp-example','48a'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/msgpack',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/msgpack','4aa'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/ts-example',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/ts-example','77d'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/protobufjs/example',component:ComponentCreator('/docs/devtools/dataformats/protobufjs/example','e85'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/protobufjs/protobufjs',component:ComponentCreator('/docs/devtools/dataformats/protobufjs/protobufjs','f02'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/xml/xml',component:ComponentCreator('/docs/devtools/dataformats/xml/xml','693'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/yaml/yaml',component:ComponentCreator('/docs/devtools/dataformats/yaml/yaml','d41'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics',component:ComponentCreator('/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics','3c6'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/site-generators/create-a-page',component:ComponentCreator('/docs/devtools/frameworks-libraries/site-generators/create-a-page','ed1'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/site-generators/docusaurus',component:ComponentCreator('/docs/devtools/frameworks-libraries/site-generators/docusaurus','f5f'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics',component:ComponentCreator('/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics','5d5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/intro',component:ComponentCreator('/docs/devtools/intro','37b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/languages/opp',component:ComponentCreator('/docs/devtools/languages/opp','972'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/git',component:ComponentCreator('/docs/devtools/versioncontrol/git','6d4'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/intro',component:ComponentCreator('/docs/devtools/versioncontrol/intro','456'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/mercurial',component:ComponentCreator('/docs/devtools/versioncontrol/mercurial','1e2'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/svn',component:ComponentCreator('/docs/devtools/versioncontrol/svn','9c5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/engineering',component:ComponentCreator('/docs/engineering','35b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/azure-deploy-webapi',component:ComponentCreator('/docs/guide/azure-deploy-webapi','323'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/azure-deploy-webapp',component:ComponentCreator('/docs/guide/azure-deploy-webapp','3a5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/guide-list',component:ComponentCreator('/docs/guide/guide-list','9f8'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/how-to-use/json-in-ts',component:ComponentCreator('/docs/how-to-use/json-in-ts','860'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/intro',component:ComponentCreator('/docs/intro','e66'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/json-overview',component:ComponentCreator('/docs/json-overview','5c2'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/json-schema',component:ComponentCreator('/docs/json-schema','1dd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/azure-devops-services',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/azure-devops-services','265'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/azure-pipelines',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/azure-pipelines','ef0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/intro','89e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-pipeline',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-pipeline','2a6'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases','4bb'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env','ac8'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans','aaa'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent','18c'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents','d42'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template','7da'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers','1b0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates','648'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/cloud-shell/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/cloud-shell/intro','fef'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/intro','58b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core','6f5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/vs-devops-services',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/vs-devops-services','8ea'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/gitlab-cicd/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/gitlab-cicd/intro','5f7'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/dotnet/dotnet.core/intro',component:ComponentCreator('/docs/learn/dotnet/dotnet.core/intro','94e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git',component:ComponentCreator('/docs/learn/git','1b9'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/deserialization',component:ComponentCreator('/docs/learn/git/deserialization','3ea'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/fetchpull',component:ComponentCreator('/docs/learn/git/fetchpull','f09'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/overwriting-local-repo',component:ComponentCreator('/docs/learn/git/overwriting-local-repo','fcf'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/rollback-commit',component:ComponentCreator('/docs/learn/git/rollback-commit','f73'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Axios/',component:ComponentCreator('/docs/learn/react/Axios/','ab3'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Basics/handle-data-from-api',component:ComponentCreator('/docs/learn/react/Basics/handle-data-from-api','b83'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Hooks/useFetch',component:ComponentCreator('/docs/learn/react/Hooks/useFetch','6bb'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/intro',component:ComponentCreator('/docs/learn/react/intro','168'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Redux/Redux-Basic-Example',component:ComponentCreator('/docs/learn/react/Redux/Redux-Basic-Example','c55'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/science-applications',component:ComponentCreator('/docs/science-applications','6fd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/serialization',component:ComponentCreator('/docs/serialization','434'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/codebase/codebase',component:ComponentCreator('/docs/software-development/Coding/codebase/codebase','670'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/debugging/debugging',component:ComponentCreator('/docs/software-development/Coding/debugging/debugging','9ce'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/documentation/documenting',component:ComponentCreator('/docs/software-development/Coding/documentation/documenting','2bf'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/programming/writing-code',component:ComponentCreator('/docs/software-development/Coding/programming/writing-code','e25'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/refactoring/refactoring',component:ComponentCreator('/docs/software-development/Coding/refactoring/refactoring','601'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/testing/testing',component:ComponentCreator('/docs/software-development/Coding/testing/testing','4b0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/façade-pattern',component:ComponentCreator('/docs/software-development/Designing/designPatterns/façade-pattern','400'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/overview',component:ComponentCreator('/docs/software-development/Designing/designPatterns/overview','311'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/singleton-pattern',component:ComponentCreator('/docs/software-development/Designing/designPatterns/singleton-pattern','e5d'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/intro',component:ComponentCreator('/docs/software-development/Designing/intro','8cd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/uml/user-story-user-case',component:ComponentCreator('/docs/software-development/Designing/uml/user-story-user-case','7ac'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/uml/wireframing',component:ComponentCreator('/docs/software-development/Designing/uml/wireframing','01b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Planning/intro',component:ComponentCreator('/docs/software-development/Planning/intro','747'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Requirements/intro',component:ComponentCreator('/docs/software-development/Requirements/intro','140'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Testing/intro',component:ComponentCreator('/docs/software-development/Testing/intro','a38'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/technology',component:ComponentCreator('/docs/technology','d2a'),exact:true,sidebar:"tutorialSidebar"}]}]}]},{path:'/',component:ComponentCreator('/','558'),exact:true},{path:'/',component:ComponentCreator('/','dc3'),exact:true},{path:'*',component:ComponentCreator('*')}]);
+/* harmony default export */ const routes = ([{path:'/about-us',component:ComponentCreator('/about-us','b0c'),exact:true},{path:'/blog',component:ComponentCreator('/blog','2ba'),exact:true},{path:'/blog/archive',component:ComponentCreator('/blog/archive','4f6'),exact:true},{path:'/blog/lab-automation-benefits',component:ComponentCreator('/blog/lab-automation-benefits','cf5'),exact:true},{path:'/blog/lab-automation-main-challenges',component:ComponentCreator('/blog/lab-automation-main-challenges','842'),exact:true},{path:'/blog/opening-post',component:ComponentCreator('/blog/opening-post','09f'),exact:true},{path:'/blog/styletron-react',component:ComponentCreator('/blog/styletron-react','575'),exact:true},{path:'/blog/tags',component:ComponentCreator('/blog/tags','cc3'),exact:true},{path:'/blog/tags/automation',component:ComponentCreator('/blog/tags/automation','234'),exact:true},{path:'/blog/tags/data-management',component:ComponentCreator('/blog/tags/data-management','445'),exact:true},{path:'/blog/tags/docusaurus',component:ComponentCreator('/blog/tags/docusaurus','953'),exact:true},{path:'/blog/tags/future-challenges',component:ComponentCreator('/blog/tags/future-challenges','a67'),exact:true},{path:'/blog/tags/lab-automation',component:ComponentCreator('/blog/tags/lab-automation','82d'),exact:true},{path:'/blog/tags/programming',component:ComponentCreator('/blog/tags/programming','b0d'),exact:true},{path:'/blog/tags/static-site-generator',component:ComponentCreator('/blog/tags/static-site-generator','a71'),exact:true},{path:'/blog/tags/styletron-react',component:ComponentCreator('/blog/tags/styletron-react','8cb'),exact:true},{path:'/blog/tags/technology',component:ComponentCreator('/blog/tags/technology','0e8'),exact:true},{path:'/blog/tags/xitechnix',component:ComponentCreator('/blog/tags/xitechnix','ad8'),exact:true},{path:'/blog/welcome',component:ComponentCreator('/blog/welcome','a71'),exact:true},{path:'/contact/',component:ComponentCreator('/contact/','c63'),exact:true},{path:'/ContactUs',component:ComponentCreator('/ContactUs','0f7'),exact:true},{path:'/cookies_en',component:ComponentCreator('/cookies_en','8ef'),exact:true},{path:'/disclaimers',component:ComponentCreator('/disclaimers','ce1'),exact:true},{path:'/eula',component:ComponentCreator('/eula','0d2'),exact:true},{path:'/markdown-page',component:ComponentCreator('/markdown-page','b04'),exact:true},{path:'/docs',component:ComponentCreator('/docs','81b'),routes:[{path:'/docs',component:ComponentCreator('/docs','dcb'),routes:[{path:'/docs',component:ComponentCreator('/docs','c9a'),routes:[{path:'/docs/cicd/overview',component:ComponentCreator('/docs/cicd/overview','432'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/content-type-mime',component:ComponentCreator('/docs/content-type-mime','d7c'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/deserialization',component:ComponentCreator('/docs/deserialization','7dd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/csv/csv',component:ComponentCreator('/docs/devtools/dataformats/csv/csv','ca9'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/json/json-overview/sch-dev',component:ComponentCreator('/docs/devtools/dataformats/json/json-overview/sch-dev','17e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/csharp-example',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/csharp-example','48a'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/msgpack',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/msgpack','4aa'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/ts-example',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/ts-example','77d'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/protobufjs/example',component:ComponentCreator('/docs/devtools/dataformats/protobufjs/example','e85'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/protobufjs/protobufjs',component:ComponentCreator('/docs/devtools/dataformats/protobufjs/protobufjs','f02'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/xml/xml',component:ComponentCreator('/docs/devtools/dataformats/xml/xml','693'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/yaml/yaml',component:ComponentCreator('/docs/devtools/dataformats/yaml/yaml','d41'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics',component:ComponentCreator('/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics','6a6'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/site-generators/create-a-page',component:ComponentCreator('/docs/devtools/frameworks-libraries/site-generators/create-a-page','ed1'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/site-generators/docusaurus',component:ComponentCreator('/docs/devtools/frameworks-libraries/site-generators/docusaurus','f5f'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics',component:ComponentCreator('/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics','5d5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/intro',component:ComponentCreator('/docs/devtools/intro','37b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/languages/opp',component:ComponentCreator('/docs/devtools/languages/opp','972'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/git',component:ComponentCreator('/docs/devtools/versioncontrol/git','6d4'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/intro',component:ComponentCreator('/docs/devtools/versioncontrol/intro','456'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/mercurial',component:ComponentCreator('/docs/devtools/versioncontrol/mercurial','1e2'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/svn',component:ComponentCreator('/docs/devtools/versioncontrol/svn','9c5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/engineering',component:ComponentCreator('/docs/engineering','35b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/azure-deploy-webapi',component:ComponentCreator('/docs/guide/azure-deploy-webapi','323'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/azure-deploy-webapp',component:ComponentCreator('/docs/guide/azure-deploy-webapp','3a5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/guide-list',component:ComponentCreator('/docs/guide/guide-list','9f8'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/how-to-use/json-in-ts',component:ComponentCreator('/docs/how-to-use/json-in-ts','860'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/intro',component:ComponentCreator('/docs/intro','e66'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/json-overview',component:ComponentCreator('/docs/json-overview','5c2'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/json-schema',component:ComponentCreator('/docs/json-schema','1dd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/azure-devops-services',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/azure-devops-services','265'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/azure-pipelines',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/azure-pipelines','ef0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/intro','89e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-pipeline',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-pipeline','2a6'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases','4bb'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env','ac8'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans','aaa'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent','18c'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents','d42'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template','7da'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers','1b0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates','648'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/cloud-shell/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/cloud-shell/intro','fef'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/intro','58b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core','6f5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/vs-devops-services',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/vs-devops-services','8ea'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/gitlab-cicd/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/gitlab-cicd/intro','5f7'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/dotnet/dotnet.core/intro',component:ComponentCreator('/docs/learn/dotnet/dotnet.core/intro','94e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git',component:ComponentCreator('/docs/learn/git','1b9'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/deserialization',component:ComponentCreator('/docs/learn/git/deserialization','3ea'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/fetchpull',component:ComponentCreator('/docs/learn/git/fetchpull','f09'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/overwriting-local-repo',component:ComponentCreator('/docs/learn/git/overwriting-local-repo','fcf'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/rollback-commit',component:ComponentCreator('/docs/learn/git/rollback-commit','f73'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Axios/',component:ComponentCreator('/docs/learn/react/Axios/','ab3'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Basics/handle-data-from-api',component:ComponentCreator('/docs/learn/react/Basics/handle-data-from-api','b83'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Hooks/useFetch',component:ComponentCreator('/docs/learn/react/Hooks/useFetch','6bb'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/intro',component:ComponentCreator('/docs/learn/react/intro','168'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Redux/Redux-Basic-Example',component:ComponentCreator('/docs/learn/react/Redux/Redux-Basic-Example','c55'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/science-applications',component:ComponentCreator('/docs/science-applications','6fd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/serialization',component:ComponentCreator('/docs/serialization','434'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/codebase/codebase',component:ComponentCreator('/docs/software-development/Coding/codebase/codebase','670'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/debugging/debugging',component:ComponentCreator('/docs/software-development/Coding/debugging/debugging','9ce'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/documentation/documenting',component:ComponentCreator('/docs/software-development/Coding/documentation/documenting','2bf'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/programming/writing-code',component:ComponentCreator('/docs/software-development/Coding/programming/writing-code','e25'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/refactoring/refactoring',component:ComponentCreator('/docs/software-development/Coding/refactoring/refactoring','601'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/testing/testing',component:ComponentCreator('/docs/software-development/Coding/testing/testing','4b0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/façade-pattern',component:ComponentCreator('/docs/software-development/Designing/designPatterns/façade-pattern','400'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/overview',component:ComponentCreator('/docs/software-development/Designing/designPatterns/overview','311'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/singleton-pattern',component:ComponentCreator('/docs/software-development/Designing/designPatterns/singleton-pattern','e5d'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/intro',component:ComponentCreator('/docs/software-development/Designing/intro','8cd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/uml/user-story-user-case',component:ComponentCreator('/docs/software-development/Designing/uml/user-story-user-case','d33'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/uml/wireframing',component:ComponentCreator('/docs/software-development/Designing/uml/wireframing','01b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Planning/intro',component:ComponentCreator('/docs/software-development/Planning/intro','747'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Requirements/intro',component:ComponentCreator('/docs/software-development/Requirements/intro','140'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Testing/intro',component:ComponentCreator('/docs/software-development/Testing/intro','a38'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/technology',component:ComponentCreator('/docs/technology','d2a'),exact:true,sidebar:"tutorialSidebar"}]}]}]},{path:'/',component:ComponentCreator('/','558'),exact:true},{path:'/',component:ComponentCreator('/','dc3'),exact:true},{path:'*',component:ComponentCreator('*')}]);
 
 /***/ }),
 
@@ -20437,8 +19123,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__(6540);
-// EXTERNAL MODULE: ./node_modules/@docusaurus/core/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(5527);
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
+var react_router = __webpack_require__(6347);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js + 1 modules
 var inheritsLoose = __webpack_require__(2892);
 // EXTERNAL MODULE: ./node_modules/history/esm/history.js + 1 modules
@@ -21026,8 +19712,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__(6540);
-// EXTERNAL MODULE: ./node_modules/@docusaurus/core/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(5527);
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
+var react_router = __webpack_require__(6347);
 // EXTERNAL MODULE: ./node_modules/react-helmet-async/lib/index.module.js
 var index_module = __webpack_require__(545);
 // EXTERNAL MODULE: ./node_modules/react-loadable/lib/index.js
@@ -21295,8 +19981,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // UNUSED EXPORTS: useActivePluginAndVersion, useActiveVersion
 
-// EXTERNAL MODULE: ./node_modules/@docusaurus/core/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(5527);
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
+var react_router = __webpack_require__(6347);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/core/lib/client/exports/useDocusaurusContext.js
 var useDocusaurusContext = __webpack_require__(4586);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/core/lib/client/exports/constants.js
@@ -21586,8 +20272,8 @@ var useWindowSize = __webpack_require__(4581);
 var Link = __webpack_require__(3109);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/core/lib/client/exports/Translate.js + 1 modules
 var Translate = __webpack_require__(1312);
-// EXTERNAL MODULE: ./node_modules/@docusaurus/core/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(5527);
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
+var react_router = __webpack_require__(6347);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/theme-common/lib/utils/routesUtils.js
 var routesUtils = __webpack_require__(9169);
 ;// CONCATENATED MODULE: ./node_modules/@docusaurus/theme-common/lib/utils/blogUtils.js
@@ -22323,8 +21009,8 @@ var jsx_runtime = __webpack_require__(4848);
  */function BackToTopButton(){const{shown,scrollToTop}=useBackToTopButton({threshold:300});return/*#__PURE__*/(0,jsx_runtime.jsx)("button",{"aria-label":(0,Translate/* translate */.T)({id:'theme.BackToTopButton.buttonAriaLabel',message:'Scroll back to top',description:'The ARIA label for the back to top button'}),className:(0,clsx/* default */.A)('clean-btn',ThemeClassNames/* ThemeClassNames */.G.common.backToTopButton,(styles_module_default()).backToTopButton,shown&&(styles_module_default()).backToTopButtonShow),type:"button",onClick:scrollToTop});}
 // EXTERNAL MODULE: ./node_modules/@docusaurus/theme-common/lib/utils/accessibilityUtils.js
 var accessibilityUtils = __webpack_require__(5490);
-// EXTERNAL MODULE: ./node_modules/@docusaurus/core/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(5527);
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
+var react_router = __webpack_require__(6347);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/theme-common/lib/hooks/useWindowSize.js
 var useWindowSize = __webpack_require__(4581);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/theme-common/lib/utils/useThemeConfig.js
@@ -22706,8 +21392,8 @@ var clsx = __webpack_require__(4164);
 var ErrorBoundary = __webpack_require__(7489);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/theme-common/lib/utils/metadataUtils.js + 1 modules
 var metadataUtils = __webpack_require__(1213);
-// EXTERNAL MODULE: ./node_modules/@docusaurus/core/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(5527);
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
+var react_router = __webpack_require__(6347);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/core/lib/client/exports/Translate.js + 1 modules
 var Translate = __webpack_require__(1312);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/theme-common/lib/utils/useLocationChange.js
@@ -24362,8 +23048,8 @@ var react = __webpack_require__(6540);
 var content = __webpack_require__(5600);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/theme-common/lib/hooks/useWindowSize.js
 var useWindowSize = __webpack_require__(4581);
-// EXTERNAL MODULE: ./node_modules/@docusaurus/core/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(5527);
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
+var react_router = __webpack_require__(6347);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/theme-common/lib/utils/reactUtils.js
 var reactUtils = __webpack_require__(9532);
 ;// CONCATENATED MODULE: ./node_modules/@docusaurus/theme-common/lib/utils/historyUtils.js
@@ -24596,8 +23282,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__(6540);
-// EXTERNAL MODULE: ./node_modules/@docusaurus/core/node_modules/react-router/esm/react-router.js
-var react_router = __webpack_require__(5527);
+// EXTERNAL MODULE: ./node_modules/react-router/esm/react-router.js
+var react_router = __webpack_require__(6347);
 // EXTERNAL MODULE: ./node_modules/react-router-config/esm/react-router-config.js
 var react_router_config = __webpack_require__(2831);
 // EXTERNAL MODULE: ./node_modules/@docusaurus/plugin-content-docs/lib/client/index.js + 2 modules
@@ -25063,7 +23749,7 @@ return{'@context':'https://schema.org','@type':'BlogPosting','@id':url,mainEntit
 /* harmony export */   o: () => (/* binding */ useAlternatePageUtils)
 /* harmony export */ });
 /* harmony import */ var _docusaurus_useDocusaurusContext__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4586);
-/* harmony import */ var _docusaurus_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5527);
+/* harmony import */ var _docusaurus_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6347);
 /* harmony import */ var _docusaurus_utils_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(440);
 /* harmony import */ var _docusaurus_utils_common__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_docusaurus_utils_common__WEBPACK_IMPORTED_MODULE_2__);
 /**
@@ -25092,7 +23778,7 @@ function createUrl({locale,fullyQualified}){return`${fullyQualified?url:''}${get
 /* harmony export */   $: () => (/* binding */ useLocationChange)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6540);
-/* harmony import */ var _docusaurus_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5527);
+/* harmony import */ var _docusaurus_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6347);
 /* harmony import */ var _reactUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9532);
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -27196,7 +25882,7 @@ function createMemoryHistory(props) {
 "use strict";
 
 
-var reactIs = __webpack_require__(1191);
+var reactIs = __webpack_require__(3404);
 
 /**
  * Copyright 2015, Yahoo! Inc.
@@ -27297,6 +25983,42 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 }
 
 module.exports = hoistNonReactStatics;
+
+
+/***/ }),
+
+/***/ 3072:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
+Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
+function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}exports.AsyncMode=l;exports.ConcurrentMode=m;exports.ContextConsumer=k;exports.ContextProvider=h;exports.Element=c;exports.ForwardRef=n;exports.Fragment=e;exports.Lazy=t;exports.Memo=r;exports.Portal=d;
+exports.Profiler=g;exports.StrictMode=f;exports.Suspense=p;exports.isAsyncMode=function(a){return A(a)||z(a)===l};exports.isConcurrentMode=A;exports.isContextConsumer=function(a){return z(a)===k};exports.isContextProvider=function(a){return z(a)===h};exports.isElement=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===c};exports.isForwardRef=function(a){return z(a)===n};exports.isFragment=function(a){return z(a)===e};exports.isLazy=function(a){return z(a)===t};
+exports.isMemo=function(a){return z(a)===r};exports.isPortal=function(a){return z(a)===d};exports.isProfiler=function(a){return z(a)===g};exports.isStrictMode=function(a){return z(a)===f};exports.isSuspense=function(a){return z(a)===p};
+exports.isValidElementType=function(a){return"string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};exports.typeOf=z;
+
+
+/***/ }),
+
+/***/ 3404:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+if (true) {
+  module.exports = __webpack_require__(3072);
+} else {}
 
 
 /***/ }),
@@ -29806,7 +28528,7 @@ module.exports = Loadable;
 /* harmony export */   u: () => (/* binding */ matchRoutes),
 /* harmony export */   v: () => (/* binding */ renderRoutes)
 /* harmony export */ });
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5527);
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6347);
 /* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8168);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6540);
 
@@ -29868,6 +28590,1354 @@ function renderRoutes(routes, extraProps, switchProps) {
 
 
 //# sourceMappingURL=react-router-config.js.map
+
+
+/***/ }),
+
+/***/ 6347:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   B6: () => (/* binding */ matchPath),
+/* harmony export */   Ix: () => (/* binding */ Router),
+/* harmony export */   W6: () => (/* binding */ useHistory),
+/* harmony export */   XZ: () => (/* binding */ context),
+/* harmony export */   dO: () => (/* binding */ Switch),
+/* harmony export */   kO: () => (/* binding */ StaticRouter),
+/* harmony export */   qh: () => (/* binding */ Route),
+/* harmony export */   zy: () => (/* binding */ useLocation)
+/* harmony export */ });
+/* unused harmony exports MemoryRouter, Prompt, Redirect, __HistoryContext, generatePath, useParams, useRouteMatch, withRouter */
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2892);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6540);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5556);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var history__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1513);
+/* harmony import */ var tiny_invariant__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1561);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(8168);
+/* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8505);
+/* harmony import */ var path_to_regexp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path_to_regexp__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7564);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(8587);
+/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4146);
+/* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+
+
+
+
+
+
+
+var MAX_SIGNED_31_BIT_INT = 1073741823;
+var commonjsGlobal = typeof globalThis !== "undefined" // 'global proper'
+? // eslint-disable-next-line no-undef
+globalThis : typeof window !== "undefined" ? window // Browser
+: typeof global !== "undefined" ? global // node.js
+: {};
+
+function getUniqueId() {
+  var key = "__global_unique_id__";
+  return commonjsGlobal[key] = (commonjsGlobal[key] || 0) + 1;
+} // Inlined Object.is polyfill.
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+
+
+function objectIs(x, y) {
+  if (x === y) {
+    return x !== 0 || 1 / x === 1 / y;
+  } else {
+    // eslint-disable-next-line no-self-compare
+    return x !== x && y !== y;
+  }
+}
+
+function createEventEmitter(value) {
+  var handlers = [];
+  return {
+    on: function on(handler) {
+      handlers.push(handler);
+    },
+    off: function off(handler) {
+      handlers = handlers.filter(function (h) {
+        return h !== handler;
+      });
+    },
+    get: function get() {
+      return value;
+    },
+    set: function set(newValue, changedBits) {
+      value = newValue;
+      handlers.forEach(function (handler) {
+        return handler(value, changedBits);
+      });
+    }
+  };
+}
+
+function onlyChild(children) {
+  return Array.isArray(children) ? children[0] : children;
+}
+
+function createReactContext(defaultValue, calculateChangedBits) {
+  var _Provider$childContex, _Consumer$contextType;
+
+  var contextProp = "__create-react-context-" + getUniqueId() + "__";
+
+  var Provider = /*#__PURE__*/function (_React$Component) {
+    (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Provider, _React$Component);
+
+    function Provider() {
+      var _this;
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+      _this.emitter = createEventEmitter(_this.props.value);
+      return _this;
+    }
+
+    var _proto = Provider.prototype;
+
+    _proto.getChildContext = function getChildContext() {
+      var _ref;
+
+      return _ref = {}, _ref[contextProp] = this.emitter, _ref;
+    };
+
+    _proto.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+      if (this.props.value !== nextProps.value) {
+        var oldValue = this.props.value;
+        var newValue = nextProps.value;
+        var changedBits;
+
+        if (objectIs(oldValue, newValue)) {
+          changedBits = 0; // No change
+        } else {
+          changedBits = typeof calculateChangedBits === "function" ? calculateChangedBits(oldValue, newValue) : MAX_SIGNED_31_BIT_INT;
+
+          if (false) {}
+
+          changedBits |= 0;
+
+          if (changedBits !== 0) {
+            this.emitter.set(nextProps.value, changedBits);
+          }
+        }
+      }
+    };
+
+    _proto.render = function render() {
+      return this.props.children;
+    };
+
+    return Provider;
+  }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+  Provider.childContextTypes = (_Provider$childContex = {}, _Provider$childContex[contextProp] = (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object).isRequired, _Provider$childContex);
+
+  var Consumer = /*#__PURE__*/function (_React$Component2) {
+    (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Consumer, _React$Component2);
+
+    function Consumer() {
+      var _this2;
+
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      _this2 = _React$Component2.call.apply(_React$Component2, [this].concat(args)) || this;
+      _this2.observedBits = void 0;
+      _this2.state = {
+        value: _this2.getValue()
+      };
+
+      _this2.onUpdate = function (newValue, changedBits) {
+        var observedBits = _this2.observedBits | 0;
+
+        if ((observedBits & changedBits) !== 0) {
+          _this2.setState({
+            value: _this2.getValue()
+          });
+        }
+      };
+
+      return _this2;
+    }
+
+    var _proto2 = Consumer.prototype;
+
+    _proto2.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+      var observedBits = nextProps.observedBits;
+      this.observedBits = observedBits === undefined || observedBits === null ? MAX_SIGNED_31_BIT_INT // Subscribe to all changes by default
+      : observedBits;
+    };
+
+    _proto2.componentDidMount = function componentDidMount() {
+      if (this.context[contextProp]) {
+        this.context[contextProp].on(this.onUpdate);
+      }
+
+      var observedBits = this.props.observedBits;
+      this.observedBits = observedBits === undefined || observedBits === null ? MAX_SIGNED_31_BIT_INT // Subscribe to all changes by default
+      : observedBits;
+    };
+
+    _proto2.componentWillUnmount = function componentWillUnmount() {
+      if (this.context[contextProp]) {
+        this.context[contextProp].off(this.onUpdate);
+      }
+    };
+
+    _proto2.getValue = function getValue() {
+      if (this.context[contextProp]) {
+        return this.context[contextProp].get();
+      } else {
+        return defaultValue;
+      }
+    };
+
+    _proto2.render = function render() {
+      return onlyChild(this.props.children)(this.state.value);
+    };
+
+    return Consumer;
+  }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+  Consumer.contextTypes = (_Consumer$contextType = {}, _Consumer$contextType[contextProp] = (prop_types__WEBPACK_IMPORTED_MODULE_5___default().object), _Consumer$contextType);
+  return {
+    Provider: Provider,
+    Consumer: Consumer
+  };
+}
+
+// MIT License
+var createContext = react__WEBPACK_IMPORTED_MODULE_0__.createContext || createReactContext;
+
+// TODO: Replace with React.createContext once we can assume React 16+
+
+var createNamedContext = function createNamedContext(name) {
+  var context = createContext();
+  context.displayName = name;
+  return context;
+};
+
+var historyContext = /*#__PURE__*/createNamedContext("Router-History");
+
+var context = /*#__PURE__*/createNamedContext("Router");
+
+/**
+ * The public API for putting history on context.
+ */
+
+var Router = /*#__PURE__*/function (_React$Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Router, _React$Component);
+
+  Router.computeRootMatch = function computeRootMatch(pathname) {
+    return {
+      path: "/",
+      url: "/",
+      params: {},
+      isExact: pathname === "/"
+    };
+  };
+
+  function Router(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this;
+    _this.state = {
+      location: props.history.location
+    }; // This is a bit of a hack. We have to start listening for location
+    // changes here in the constructor in case there are any <Redirect>s
+    // on the initial render. If there are, they will replace/push when
+    // they mount and since cDM fires in children before parents, we may
+    // get a new location before the <Router> is mounted.
+
+    _this._isMounted = false;
+    _this._pendingLocation = null;
+
+    if (!props.staticContext) {
+      _this.unlisten = props.history.listen(function (location) {
+        _this._pendingLocation = location;
+      });
+    }
+
+    return _this;
+  }
+
+  var _proto = Router.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    var _this2 = this;
+
+    this._isMounted = true;
+
+    if (this.unlisten) {
+      // Any pre-mount location changes have been captured at
+      // this point, so unregister the listener.
+      this.unlisten();
+    }
+
+    if (!this.props.staticContext) {
+      this.unlisten = this.props.history.listen(function (location) {
+        if (_this2._isMounted) {
+          _this2.setState({
+            location: location
+          });
+        }
+      });
+    }
+
+    if (this._pendingLocation) {
+      this.setState({
+        location: this._pendingLocation
+      });
+    }
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    if (this.unlisten) {
+      this.unlisten();
+      this._isMounted = false;
+      this._pendingLocation = null;
+    }
+  };
+
+  _proto.render = function render() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(context.Provider, {
+      value: {
+        history: this.props.history,
+        location: this.state.location,
+        match: Router.computeRootMatch(this.state.location.pathname),
+        staticContext: this.props.staticContext
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(historyContext.Provider, {
+      children: this.props.children || null,
+      value: this.props.history
+    }));
+  };
+
+  return Router;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+if (false) {}
+
+/**
+ * The public API for a <Router> that stores location in memory.
+ */
+
+var MemoryRouter = /*#__PURE__*/function (_React$Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(MemoryRouter, _React$Component);
+
+  function MemoryRouter() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.history = (0,history__WEBPACK_IMPORTED_MODULE_6__/* .createMemoryHistory */ .sC)(_this.props);
+    return _this;
+  }
+
+  var _proto = MemoryRouter.prototype;
+
+  _proto.render = function render() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Router, {
+      history: this.history,
+      children: this.props.children
+    });
+  };
+
+  return MemoryRouter;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+if (false) {}
+
+var Lifecycle = /*#__PURE__*/function (_React$Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Lifecycle, _React$Component);
+
+  function Lifecycle() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Lifecycle.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    if (this.props.onMount) this.props.onMount.call(this, this);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (this.props.onUpdate) this.props.onUpdate.call(this, this, prevProps);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    if (this.props.onUnmount) this.props.onUnmount.call(this, this);
+  };
+
+  _proto.render = function render() {
+    return null;
+  };
+
+  return Lifecycle;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/**
+ * The public API for prompting the user before navigating away from a screen.
+ */
+
+function Prompt(_ref) {
+  var message = _ref.message,
+      _ref$when = _ref.when,
+      when = _ref$when === void 0 ? true : _ref$when;
+  return /*#__PURE__*/React.createElement(context.Consumer, null, function (context) {
+    !context ?  false ? 0 : invariant(false) : void 0;
+    if (!when || context.staticContext) return null;
+    var method = context.history.block;
+    return /*#__PURE__*/React.createElement(Lifecycle, {
+      onMount: function onMount(self) {
+        self.release = method(message);
+      },
+      onUpdate: function onUpdate(self, prevProps) {
+        if (prevProps.message !== message) {
+          self.release();
+          self.release = method(message);
+        }
+      },
+      onUnmount: function onUnmount(self) {
+        self.release();
+      },
+      message: message
+    });
+  });
+}
+
+if (false) { var messageType; }
+
+var cache = {};
+var cacheLimit = 10000;
+var cacheCount = 0;
+
+function compilePath(path) {
+  if (cache[path]) return cache[path];
+  var generator = pathToRegexp.compile(path);
+
+  if (cacheCount < cacheLimit) {
+    cache[path] = generator;
+    cacheCount++;
+  }
+
+  return generator;
+}
+/**
+ * Public API for generating a URL pathname from a path and parameters.
+ */
+
+
+function generatePath(path, params) {
+  if (path === void 0) {
+    path = "/";
+  }
+
+  if (params === void 0) {
+    params = {};
+  }
+
+  return path === "/" ? path : compilePath(path)(params, {
+    pretty: true
+  });
+}
+
+/**
+ * The public API for navigating programmatically with a component.
+ */
+
+function Redirect(_ref) {
+  var computedMatch = _ref.computedMatch,
+      to = _ref.to,
+      _ref$push = _ref.push,
+      push = _ref$push === void 0 ? false : _ref$push;
+  return /*#__PURE__*/React.createElement(context.Consumer, null, function (context) {
+    !context ?  false ? 0 : invariant(false) : void 0;
+    var history = context.history,
+        staticContext = context.staticContext;
+    var method = push ? history.push : history.replace;
+    var location = createLocation(computedMatch ? typeof to === "string" ? generatePath(to, computedMatch.params) : _extends({}, to, {
+      pathname: generatePath(to.pathname, computedMatch.params)
+    }) : to); // When rendering in a static context,
+    // set the new location immediately.
+
+    if (staticContext) {
+      method(location);
+      return null;
+    }
+
+    return /*#__PURE__*/React.createElement(Lifecycle, {
+      onMount: function onMount() {
+        method(location);
+      },
+      onUpdate: function onUpdate(self, prevProps) {
+        var prevLocation = createLocation(prevProps.to);
+
+        if (!locationsAreEqual(prevLocation, _extends({}, location, {
+          key: prevLocation.key
+        }))) {
+          method(location);
+        }
+      },
+      to: to
+    });
+  });
+}
+
+if (false) {}
+
+var cache$1 = {};
+var cacheLimit$1 = 10000;
+var cacheCount$1 = 0;
+
+function compilePath$1(path, options) {
+  var cacheKey = "" + options.end + options.strict + options.sensitive;
+  var pathCache = cache$1[cacheKey] || (cache$1[cacheKey] = {});
+  if (pathCache[path]) return pathCache[path];
+  var keys = [];
+  var regexp = path_to_regexp__WEBPACK_IMPORTED_MODULE_1___default()(path, keys, options);
+  var result = {
+    regexp: regexp,
+    keys: keys
+  };
+
+  if (cacheCount$1 < cacheLimit$1) {
+    pathCache[path] = result;
+    cacheCount$1++;
+  }
+
+  return result;
+}
+/**
+ * Public API for matching a URL pathname to a path.
+ */
+
+
+function matchPath(pathname, options) {
+  if (options === void 0) {
+    options = {};
+  }
+
+  if (typeof options === "string" || Array.isArray(options)) {
+    options = {
+      path: options
+    };
+  }
+
+  var _options = options,
+      path = _options.path,
+      _options$exact = _options.exact,
+      exact = _options$exact === void 0 ? false : _options$exact,
+      _options$strict = _options.strict,
+      strict = _options$strict === void 0 ? false : _options$strict,
+      _options$sensitive = _options.sensitive,
+      sensitive = _options$sensitive === void 0 ? false : _options$sensitive;
+  var paths = [].concat(path);
+  return paths.reduce(function (matched, path) {
+    if (!path && path !== "") return null;
+    if (matched) return matched;
+
+    var _compilePath = compilePath$1(path, {
+      end: exact,
+      strict: strict,
+      sensitive: sensitive
+    }),
+        regexp = _compilePath.regexp,
+        keys = _compilePath.keys;
+
+    var match = regexp.exec(pathname);
+    if (!match) return null;
+    var url = match[0],
+        values = match.slice(1);
+    var isExact = pathname === url;
+    if (exact && !isExact) return null;
+    return {
+      path: path,
+      // the path used to match
+      url: path === "/" && url === "" ? "/" : url,
+      // the matched portion of the URL
+      isExact: isExact,
+      // whether or not we matched exactly
+      params: keys.reduce(function (memo, key, index) {
+        memo[key.name] = values[index];
+        return memo;
+      }, {})
+    };
+  }, null);
+}
+
+function isEmptyChildren(children) {
+  return react__WEBPACK_IMPORTED_MODULE_0__.Children.count(children) === 0;
+}
+
+function evalChildrenDev(children, props, path) {
+  var value = children(props);
+   false ? 0 : void 0;
+  return value || null;
+}
+/**
+ * The public API for matching a single path and rendering.
+ */
+
+
+var Route = /*#__PURE__*/function (_React$Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Route, _React$Component);
+
+  function Route() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Route.prototype;
+
+  _proto.render = function render() {
+    var _this = this;
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(context.Consumer, null, function (context$1) {
+      !context$1 ?  false ? 0 : (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .A)(false) : void 0;
+      var location = _this.props.location || context$1.location;
+      var match = _this.props.computedMatch ? _this.props.computedMatch // <Switch> already computed the match for us
+      : _this.props.path ? matchPath(location.pathname, _this.props) : context$1.match;
+
+      var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, context$1, {
+        location: location,
+        match: match
+      });
+
+      var _this$props = _this.props,
+          children = _this$props.children,
+          component = _this$props.component,
+          render = _this$props.render; // Preact uses an empty array as children by
+      // default, so use null if that's the case.
+
+      if (Array.isArray(children) && isEmptyChildren(children)) {
+        children = null;
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(context.Provider, {
+        value: props
+      }, props.match ? children ? typeof children === "function" ?  false ? 0 : children(props) : children : component ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(component, props) : render ? render(props) : null : typeof children === "function" ?  false ? 0 : children(props) : null);
+    });
+  };
+
+  return Route;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+if (false) {}
+
+function addLeadingSlash(path) {
+  return path.charAt(0) === "/" ? path : "/" + path;
+}
+
+function addBasename(basename, location) {
+  if (!basename) return location;
+  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, location, {
+    pathname: addLeadingSlash(basename) + location.pathname
+  });
+}
+
+function stripBasename(basename, location) {
+  if (!basename) return location;
+  var base = addLeadingSlash(basename);
+  if (location.pathname.indexOf(base) !== 0) return location;
+  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, location, {
+    pathname: location.pathname.substr(base.length)
+  });
+}
+
+function createURL(location) {
+  return typeof location === "string" ? location : (0,history__WEBPACK_IMPORTED_MODULE_6__/* .createPath */ .AO)(location);
+}
+
+function staticHandler(methodName) {
+  return function () {
+      false ? 0 : (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .A)(false) ;
+  };
+}
+
+function noop() {}
+/**
+ * The public top-level API for a "static" <Router>, so-called because it
+ * can't actually change the current location. Instead, it just records
+ * location changes in a context object. Useful mainly in testing and
+ * server-rendering scenarios.
+ */
+
+
+var StaticRouter = /*#__PURE__*/function (_React$Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(StaticRouter, _React$Component);
+
+  function StaticRouter() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+
+    _this.handlePush = function (location) {
+      return _this.navigateTo(location, "PUSH");
+    };
+
+    _this.handleReplace = function (location) {
+      return _this.navigateTo(location, "REPLACE");
+    };
+
+    _this.handleListen = function () {
+      return noop;
+    };
+
+    _this.handleBlock = function () {
+      return noop;
+    };
+
+    return _this;
+  }
+
+  var _proto = StaticRouter.prototype;
+
+  _proto.navigateTo = function navigateTo(location, action) {
+    var _this$props = this.props,
+        _this$props$basename = _this$props.basename,
+        basename = _this$props$basename === void 0 ? "" : _this$props$basename,
+        _this$props$context = _this$props.context,
+        context = _this$props$context === void 0 ? {} : _this$props$context;
+    context.action = action;
+    context.location = addBasename(basename, (0,history__WEBPACK_IMPORTED_MODULE_6__/* .createLocation */ .yJ)(location));
+    context.url = createURL(context.location);
+  };
+
+  _proto.render = function render() {
+    var _this$props2 = this.props,
+        _this$props2$basename = _this$props2.basename,
+        basename = _this$props2$basename === void 0 ? "" : _this$props2$basename,
+        _this$props2$context = _this$props2.context,
+        context = _this$props2$context === void 0 ? {} : _this$props2$context,
+        _this$props2$location = _this$props2.location,
+        location = _this$props2$location === void 0 ? "/" : _this$props2$location,
+        rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .A)(_this$props2, ["basename", "context", "location"]);
+
+    var history = {
+      createHref: function createHref(path) {
+        return addLeadingSlash(basename + createURL(path));
+      },
+      action: "POP",
+      location: stripBasename(basename, (0,history__WEBPACK_IMPORTED_MODULE_6__/* .createLocation */ .yJ)(location)),
+      push: this.handlePush,
+      replace: this.handleReplace,
+      go: staticHandler("go"),
+      goBack: staticHandler("goBack"),
+      goForward: staticHandler("goForward"),
+      listen: this.handleListen,
+      block: this.handleBlock
+    };
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Router, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, rest, {
+      history: history,
+      staticContext: context
+    }));
+  };
+
+  return StaticRouter;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+if (false) {}
+
+/**
+ * The public API for rendering the first <Route> that matches.
+ */
+
+var Switch = /*#__PURE__*/function (_React$Component) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(Switch, _React$Component);
+
+  function Switch() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Switch.prototype;
+
+  _proto.render = function render() {
+    var _this = this;
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(context.Consumer, null, function (context) {
+      !context ?  false ? 0 : (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .A)(false) : void 0;
+      var location = _this.props.location || context.location;
+      var element, match; // We use React.Children.forEach instead of React.Children.toArray().find()
+      // here because toArray adds keys to all child elements and we do not want
+      // to trigger an unmount/remount for two <Route>s that render the same
+      // component at different URLs.
+
+      react__WEBPACK_IMPORTED_MODULE_0__.Children.forEach(_this.props.children, function (child) {
+        if (match == null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.isValidElement(child)) {
+          element = child;
+          var path = child.props.path || child.props.from;
+          match = path ? matchPath(location.pathname, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .A)({}, child.props, {
+            path: path
+          })) : context.match;
+        }
+      });
+      return match ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(element, {
+        location: location,
+        computedMatch: match
+      }) : null;
+    });
+  };
+
+  return Switch;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+if (false) {}
+
+/**
+ * A public higher-order component to access the imperative API
+ */
+
+function withRouter(Component) {
+  var displayName = "withRouter(" + (Component.displayName || Component.name) + ")";
+
+  var C = function C(props) {
+    var wrappedComponentRef = props.wrappedComponentRef,
+        remainingProps = _objectWithoutPropertiesLoose(props, ["wrappedComponentRef"]);
+
+    return /*#__PURE__*/React.createElement(context.Consumer, null, function (context) {
+      !context ?  false ? 0 : invariant(false) : void 0;
+      return /*#__PURE__*/React.createElement(Component, _extends({}, remainingProps, context, {
+        ref: wrappedComponentRef
+      }));
+    });
+  };
+
+  C.displayName = displayName;
+  C.WrappedComponent = Component;
+
+  if (false) {}
+
+  return hoistStatics(C, Component);
+}
+
+var useContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext;
+function useHistory() {
+  if (false) {}
+
+  return useContext(historyContext);
+}
+function useLocation() {
+  if (false) {}
+
+  return useContext(context).location;
+}
+function useParams() {
+  if (false) {}
+
+  var match = useContext(context).match;
+  return match ? match.params : {};
+}
+function useRouteMatch(path) {
+  if (false) {}
+
+  var location = useLocation();
+  var match = useContext(context).match;
+  return path ? matchPath(location.pathname, path) : match;
+}
+
+if (false) { var secondaryBuildName, initialBuildName, buildNames, key, global$1; }
+
+
+//# sourceMappingURL=react-router.js.map
+
+
+/***/ }),
+
+/***/ 9375:
+/***/ ((module) => {
+
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
+/***/ 8505:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isarray = __webpack_require__(9375)
+
+/**
+ * Expose `pathToRegexp`.
+ */
+module.exports = pathToRegexp
+module.exports.parse = parse
+module.exports.compile = compile
+module.exports.tokensToFunction = tokensToFunction
+module.exports.tokensToRegExp = tokensToRegExp
+
+/**
+ * The main path matching regexp utility.
+ *
+ * @type {RegExp}
+ */
+var PATH_REGEXP = new RegExp([
+  // Match escaped characters that would otherwise appear in future matches.
+  // This allows the user to escape special characters that won't transform.
+  '(\\\\.)',
+  // Match Express-style parameters and un-named parameters with a prefix
+  // and optional suffixes. Matches appear as:
+  //
+  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
+  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
+  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
+  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
+].join('|'), 'g')
+
+/**
+ * Parse a string for the raw tokens.
+ *
+ * @param  {string}  str
+ * @param  {Object=} options
+ * @return {!Array}
+ */
+function parse (str, options) {
+  var tokens = []
+  var key = 0
+  var index = 0
+  var path = ''
+  var defaultDelimiter = options && options.delimiter || '/'
+  var res
+
+  while ((res = PATH_REGEXP.exec(str)) != null) {
+    var m = res[0]
+    var escaped = res[1]
+    var offset = res.index
+    path += str.slice(index, offset)
+    index = offset + m.length
+
+    // Ignore already escaped sequences.
+    if (escaped) {
+      path += escaped[1]
+      continue
+    }
+
+    var next = str[index]
+    var prefix = res[2]
+    var name = res[3]
+    var capture = res[4]
+    var group = res[5]
+    var modifier = res[6]
+    var asterisk = res[7]
+
+    // Push the current path onto the tokens.
+    if (path) {
+      tokens.push(path)
+      path = ''
+    }
+
+    var partial = prefix != null && next != null && next !== prefix
+    var repeat = modifier === '+' || modifier === '*'
+    var optional = modifier === '?' || modifier === '*'
+    var delimiter = res[2] || defaultDelimiter
+    var pattern = capture || group
+
+    tokens.push({
+      name: name || key++,
+      prefix: prefix || '',
+      delimiter: delimiter,
+      optional: optional,
+      repeat: repeat,
+      partial: partial,
+      asterisk: !!asterisk,
+      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
+    })
+  }
+
+  // Match any characters still remaining.
+  if (index < str.length) {
+    path += str.substr(index)
+  }
+
+  // If the path exists, push it onto the end.
+  if (path) {
+    tokens.push(path)
+  }
+
+  return tokens
+}
+
+/**
+ * Compile a string to a template function for the path.
+ *
+ * @param  {string}             str
+ * @param  {Object=}            options
+ * @return {!function(Object=, Object=)}
+ */
+function compile (str, options) {
+  return tokensToFunction(parse(str, options), options)
+}
+
+/**
+ * Prettier encoding of URI path segments.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeURIComponentPretty (str) {
+  return encodeURI(str).replace(/[\/?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeAsterisk (str) {
+  return encodeURI(str).replace(/[?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Expose a method for transforming tokens into the path function.
+ */
+function tokensToFunction (tokens, options) {
+  // Compile all the tokens into regexps.
+  var matches = new Array(tokens.length)
+
+  // Compile all the patterns before compilation.
+  for (var i = 0; i < tokens.length; i++) {
+    if (typeof tokens[i] === 'object') {
+      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$', flags(options))
+    }
+  }
+
+  return function (obj, opts) {
+    var path = ''
+    var data = obj || {}
+    var options = opts || {}
+    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
+
+    for (var i = 0; i < tokens.length; i++) {
+      var token = tokens[i]
+
+      if (typeof token === 'string') {
+        path += token
+
+        continue
+      }
+
+      var value = data[token.name]
+      var segment
+
+      if (value == null) {
+        if (token.optional) {
+          // Prepend partial segment prefixes.
+          if (token.partial) {
+            path += token.prefix
+          }
+
+          continue
+        } else {
+          throw new TypeError('Expected "' + token.name + '" to be defined')
+        }
+      }
+
+      if (isarray(value)) {
+        if (!token.repeat) {
+          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
+        }
+
+        if (value.length === 0) {
+          if (token.optional) {
+            continue
+          } else {
+            throw new TypeError('Expected "' + token.name + '" to not be empty')
+          }
+        }
+
+        for (var j = 0; j < value.length; j++) {
+          segment = encode(value[j])
+
+          if (!matches[i].test(segment)) {
+            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
+          }
+
+          path += (j === 0 ? token.prefix : token.delimiter) + segment
+        }
+
+        continue
+      }
+
+      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
+
+      if (!matches[i].test(segment)) {
+        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
+      }
+
+      path += token.prefix + segment
+    }
+
+    return path
+  }
+}
+
+/**
+ * Escape a regular expression string.
+ *
+ * @param  {string} str
+ * @return {string}
+ */
+function escapeString (str) {
+  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
+}
+
+/**
+ * Escape the capturing group by escaping special characters and meaning.
+ *
+ * @param  {string} group
+ * @return {string}
+ */
+function escapeGroup (group) {
+  return group.replace(/([=!:$\/()])/g, '\\$1')
+}
+
+/**
+ * Attach the keys as a property of the regexp.
+ *
+ * @param  {!RegExp} re
+ * @param  {Array}   keys
+ * @return {!RegExp}
+ */
+function attachKeys (re, keys) {
+  re.keys = keys
+  return re
+}
+
+/**
+ * Get the flags for a regexp from the options.
+ *
+ * @param  {Object} options
+ * @return {string}
+ */
+function flags (options) {
+  return options && options.sensitive ? '' : 'i'
+}
+
+/**
+ * Pull out keys from a regexp.
+ *
+ * @param  {!RegExp} path
+ * @param  {!Array}  keys
+ * @return {!RegExp}
+ */
+function regexpToRegexp (path, keys) {
+  // Use a negative lookahead to match only capturing groups.
+  var groups = path.source.match(/\((?!\?)/g)
+
+  if (groups) {
+    for (var i = 0; i < groups.length; i++) {
+      keys.push({
+        name: i,
+        prefix: null,
+        delimiter: null,
+        optional: false,
+        repeat: false,
+        partial: false,
+        asterisk: false,
+        pattern: null
+      })
+    }
+  }
+
+  return attachKeys(path, keys)
+}
+
+/**
+ * Transform an array into a regexp.
+ *
+ * @param  {!Array}  path
+ * @param  {Array}   keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function arrayToRegexp (path, keys, options) {
+  var parts = []
+
+  for (var i = 0; i < path.length; i++) {
+    parts.push(pathToRegexp(path[i], keys, options).source)
+  }
+
+  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
+
+  return attachKeys(regexp, keys)
+}
+
+/**
+ * Create a path regexp from string input.
+ *
+ * @param  {string}  path
+ * @param  {!Array}  keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function stringToRegexp (path, keys, options) {
+  return tokensToRegExp(parse(path, options), keys, options)
+}
+
+/**
+ * Expose a function for taking tokens and returning a RegExp.
+ *
+ * @param  {!Array}          tokens
+ * @param  {(Array|Object)=} keys
+ * @param  {Object=}         options
+ * @return {!RegExp}
+ */
+function tokensToRegExp (tokens, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  var strict = options.strict
+  var end = options.end !== false
+  var route = ''
+
+  // Iterate over the tokens and create our regexp string.
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i]
+
+    if (typeof token === 'string') {
+      route += escapeString(token)
+    } else {
+      var prefix = escapeString(token.prefix)
+      var capture = '(?:' + token.pattern + ')'
+
+      keys.push(token)
+
+      if (token.repeat) {
+        capture += '(?:' + prefix + capture + ')*'
+      }
+
+      if (token.optional) {
+        if (!token.partial) {
+          capture = '(?:' + prefix + '(' + capture + '))?'
+        } else {
+          capture = prefix + '(' + capture + ')?'
+        }
+      } else {
+        capture = prefix + '(' + capture + ')'
+      }
+
+      route += capture
+    }
+  }
+
+  var delimiter = escapeString(options.delimiter || '/')
+  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
+
+  // In non-strict mode we allow a slash at the end of match. If the path to
+  // match already ends with a slash, we remove it for consistency. The slash
+  // is valid at the end of a path match, not in the middle. This is important
+  // in non-ending mode, where "/test/" shouldn't match "/test//route".
+  if (!strict) {
+    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
+  }
+
+  if (end) {
+    route += '$'
+  } else {
+    // In non-ending mode, we need the capturing groups to match as much as
+    // possible by using a positive lookahead to the end or next path segment.
+    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
+  }
+
+  return attachKeys(new RegExp('^' + route, flags(options)), keys)
+}
+
+/**
+ * Normalize the given path string, returning a regular expression.
+ *
+ * An empty array can be passed in for the keys, which will hold the
+ * placeholder key descriptions. For example, using `/user/:id`, `keys` will
+ * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
+ *
+ * @param  {(string|RegExp|Array)} path
+ * @param  {(Array|Object)=}       keys
+ * @param  {Object=}               options
+ * @return {!RegExp}
+ */
+function pathToRegexp (path, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  if (path instanceof RegExp) {
+    return regexpToRegexp(path, /** @type {!Array} */ (keys))
+  }
+
+  if (isarray(path)) {
+    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
+  }
+
+  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
+}
+
+
+/***/ }),
+
+/***/ 4912:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+var __webpack_unused_export__;
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
+Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
+function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}__webpack_unused_export__=l;__webpack_unused_export__=m;__webpack_unused_export__=k;__webpack_unused_export__=h;__webpack_unused_export__=c;__webpack_unused_export__=n;__webpack_unused_export__=e;__webpack_unused_export__=t;__webpack_unused_export__=r;__webpack_unused_export__=d;
+__webpack_unused_export__=g;__webpack_unused_export__=f;__webpack_unused_export__=p;__webpack_unused_export__=function(a){return A(a)||z(a)===l};__webpack_unused_export__=A;__webpack_unused_export__=function(a){return z(a)===k};__webpack_unused_export__=function(a){return z(a)===h};__webpack_unused_export__=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===c};__webpack_unused_export__=function(a){return z(a)===n};__webpack_unused_export__=function(a){return z(a)===e};__webpack_unused_export__=function(a){return z(a)===t};
+__webpack_unused_export__=function(a){return z(a)===r};__webpack_unused_export__=function(a){return z(a)===d};__webpack_unused_export__=function(a){return z(a)===g};__webpack_unused_export__=function(a){return z(a)===f};__webpack_unused_export__=function(a){return z(a)===p};
+__webpack_unused_export__=function(a){return"string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};__webpack_unused_export__=z;
+
+
+/***/ }),
+
+/***/ 7564:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+if (true) {
+  /* unused reexport */ __webpack_require__(4912);
+} else {}
 
 
 /***/ }),
@@ -30011,13 +30081,13 @@ __webpack_unused_export__ = exports.az = void 0;
 
 var _react = _interopRequireDefault(__webpack_require__(5046));
 
-var _styled = _interopRequireDefault(__webpack_require__(9218));
+var _styled = _interopRequireDefault(__webpack_require__(1172));
 
 var _styledSystem = __webpack_require__(1812);
 
 var _css = _interopRequireWildcard(__webpack_require__(402));
 
-var _shouldForwardProp = _interopRequireDefault(__webpack_require__(2842));
+var _shouldForwardProp = _interopRequireDefault(__webpack_require__(6649));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -31157,19 +31227,21 @@ __webpack_require__.r(__webpack_exports__);
   "projectName": "asmsite",
   "presets": [
     [
-      "classic",
+      "@docusaurus/preset-classic",
       {
         "docs": {
           "sidebarPath": "C:\\Ampps\\www\\asmsite\\client-docs\\sidebars.js",
-          "editUrl": "https://github.com/AliSafari-IT/asmsite",
-          "remarkPlugins": [],
+          "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/",
+          "remarkPlugins": [
+            null
+          ],
           "rehypePlugins": [],
           "showLastUpdateAuthor": true,
           "showLastUpdateTime": true
         },
         "blog": {
           "showReadingTime": true,
-          "editUrl": "https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/"
+          "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/"
         },
         "theme": {
           "customCss": "C:\\Ampps\\www\\asmsite\\client-docs\\src\\css\\custom.css"
@@ -31181,13 +31253,52 @@ __webpack_require__.r(__webpack_exports__);
     "https://fonts.googleapis.com/css?family=Sen|Source+Code+Pro",
     "https://at-ui.github.io/feather-font/css/iconfont.css"
   ],
+  "plugins": [
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        "id": "api",
+        "docsPluginId": "classic",
+        "config": {
+          "petstore": {
+            "specPath": "examples/petstore.yaml",
+            "outputDir": "api/petstore",
+            "sidebarOptions": {
+              "groupPathsBy": "tag"
+            }
+          },
+          "burgers": {
+            "specPath": "examples/food/burgers/openapi.yaml",
+            "outputDir": "api/food/burgers"
+          }
+        }
+      }
+    ]
+  ],
   "themeConfig": {
+    "colorMode": {
+      "defaultMode": "dark",
+      "disableSwitch": false,
+      "respectPrefersColorScheme": true
+    },
     "navbar": {
+      "style": "dark",
       "title": "ASafariM",
       "logo": {
         "alt": "ASafariM Logo",
         "src": "img/logoT.svg",
-        "width": "50px"
+        "className": "client-docs-navbar-logo",
+        "target": "_blank",
+        "style": {
+          "height": "auto",
+          "width": "20px",
+          "padding": "0px 0px 0px 0px",
+          "margin": "0px 10px 0px 20px",
+          "float": "left",
+          "display": "inline",
+          "verticalAlign": "middle",
+          "textAlign": "center"
+        }
       },
       "items": [
         {
@@ -31254,22 +31365,124 @@ __webpack_require__.r(__webpack_exports__);
       ],
       "copyright": "Copyright © 1970 My Project, Inc. Built with Docusaurus."
     },
+    "docs": {
+      "versionPersistence": "localStorage",
+      "sidebar": {
+        "hideable": false,
+        "autoCollapseCategories": false
+      }
+    },
+    "metadata": [],
     "prism": {
+      "additionalLanguages": [],
       "theme": {
         "plain": {
-          "color": "#393A34",
-          "backgroundColor": "#f6f8fa"
+          "color": "#bfc7d5",
+          "backgroundColor": "#292d3e"
         },
         "styles": [
           {
             "types": [
-              "comment",
-              "prolog",
-              "doctype",
-              "cdata"
+              "comment"
             ],
             "style": {
-              "color": "#999988",
+              "color": "rgb(105, 112, 152)",
+              "fontStyle": "italic"
+            }
+          },
+          {
+            "types": [
+              "string",
+              "inserted"
+            ],
+            "style": {
+              "color": "rgb(195, 232, 141)"
+            }
+          },
+          {
+            "types": [
+              "number"
+            ],
+            "style": {
+              "color": "rgb(247, 140, 108)"
+            }
+          },
+          {
+            "types": [
+              "builtin",
+              "char",
+              "constant",
+              "function"
+            ],
+            "style": {
+              "color": "rgb(130, 170, 255)"
+            }
+          },
+          {
+            "types": [
+              "punctuation",
+              "selector"
+            ],
+            "style": {
+              "color": "rgb(199, 146, 234)"
+            }
+          },
+          {
+            "types": [
+              "variable"
+            ],
+            "style": {
+              "color": "rgb(191, 199, 213)"
+            }
+          },
+          {
+            "types": [
+              "class-name",
+              "attr-name"
+            ],
+            "style": {
+              "color": "rgb(255, 203, 107)"
+            }
+          },
+          {
+            "types": [
+              "tag",
+              "deleted"
+            ],
+            "style": {
+              "color": "rgb(255, 85, 114)"
+            }
+          },
+          {
+            "types": [
+              "operator"
+            ],
+            "style": {
+              "color": "rgb(137, 221, 255)"
+            }
+          },
+          {
+            "types": [
+              "boolean"
+            ],
+            "style": {
+              "color": "rgb(255, 88, 116)"
+            }
+          },
+          {
+            "types": [
+              "keyword"
+            ],
+            "style": {
+              "fontStyle": "italic"
+            }
+          },
+          {
+            "types": [
+              "doctype"
+            ],
+            "style": {
+              "color": "rgb(199, 146, 234)",
               "fontStyle": "italic"
             }
           },
@@ -31278,229 +31491,19 @@ __webpack_require__.r(__webpack_exports__);
               "namespace"
             ],
             "style": {
-              "opacity": 0.7
+              "color": "rgb(178, 204, 214)"
             }
           },
           {
             "types": [
-              "string",
-              "attr-value"
+              "url"
             ],
             "style": {
-              "color": "#e3116c"
-            }
-          },
-          {
-            "types": [
-              "punctuation",
-              "operator"
-            ],
-            "style": {
-              "color": "#393A34"
-            }
-          },
-          {
-            "types": [
-              "entity",
-              "url",
-              "symbol",
-              "number",
-              "boolean",
-              "variable",
-              "constant",
-              "property",
-              "regex",
-              "inserted"
-            ],
-            "style": {
-              "color": "#36acaa"
-            }
-          },
-          {
-            "types": [
-              "atrule",
-              "keyword",
-              "attr-name",
-              "selector"
-            ],
-            "style": {
-              "color": "#00a4db"
-            }
-          },
-          {
-            "types": [
-              "function",
-              "deleted",
-              "tag"
-            ],
-            "style": {
-              "color": "#d73a49"
-            }
-          },
-          {
-            "types": [
-              "function-variable"
-            ],
-            "style": {
-              "color": "#6f42c1"
-            }
-          },
-          {
-            "types": [
-              "tag",
-              "selector",
-              "keyword"
-            ],
-            "style": {
-              "color": "#00009f"
+              "color": "rgb(221, 221, 221)"
             }
           }
         ]
       },
-      "darkTheme": {
-        "plain": {
-          "color": "#9CDCFE",
-          "backgroundColor": "#1E1E1E"
-        },
-        "styles": [
-          {
-            "types": [
-              "prolog"
-            ],
-            "style": {
-              "color": "rgb(0, 0, 128)"
-            }
-          },
-          {
-            "types": [
-              "comment"
-            ],
-            "style": {
-              "color": "rgb(106, 153, 85)"
-            }
-          },
-          {
-            "types": [
-              "builtin",
-              "changed",
-              "keyword",
-              "interpolation-punctuation"
-            ],
-            "style": {
-              "color": "rgb(86, 156, 214)"
-            }
-          },
-          {
-            "types": [
-              "number",
-              "inserted"
-            ],
-            "style": {
-              "color": "rgb(181, 206, 168)"
-            }
-          },
-          {
-            "types": [
-              "constant"
-            ],
-            "style": {
-              "color": "rgb(100, 102, 149)"
-            }
-          },
-          {
-            "types": [
-              "attr-name",
-              "variable"
-            ],
-            "style": {
-              "color": "rgb(156, 220, 254)"
-            }
-          },
-          {
-            "types": [
-              "deleted",
-              "string",
-              "attr-value",
-              "template-punctuation"
-            ],
-            "style": {
-              "color": "rgb(206, 145, 120)"
-            }
-          },
-          {
-            "types": [
-              "selector"
-            ],
-            "style": {
-              "color": "rgb(215, 186, 125)"
-            }
-          },
-          {
-            "types": [
-              "tag"
-            ],
-            "style": {
-              "color": "rgb(78, 201, 176)"
-            }
-          },
-          {
-            "types": [
-              "tag"
-            ],
-            "languages": [
-              "markup"
-            ],
-            "style": {
-              "color": "rgb(86, 156, 214)"
-            }
-          },
-          {
-            "types": [
-              "punctuation",
-              "operator"
-            ],
-            "style": {
-              "color": "rgb(212, 212, 212)"
-            }
-          },
-          {
-            "types": [
-              "punctuation"
-            ],
-            "languages": [
-              "markup"
-            ],
-            "style": {
-              "color": "#808080"
-            }
-          },
-          {
-            "types": [
-              "function"
-            ],
-            "style": {
-              "color": "rgb(220, 220, 170)"
-            }
-          },
-          {
-            "types": [
-              "class-name"
-            ],
-            "style": {
-              "color": "rgb(78, 201, 176)"
-            }
-          },
-          {
-            "types": [
-              "char"
-            ],
-            "style": {
-              "color": "rgb(209, 105, 105)"
-            }
-          }
-        ]
-      },
-      "additionalLanguages": [],
       "magicComments": [
         {
           "className": "theme-code-block-highlighted-line",
@@ -31512,46 +31515,11 @@ __webpack_require__.r(__webpack_exports__);
         }
       ]
     },
-    "colorMode": {
-      "defaultMode": "light",
-      "disableSwitch": false,
-      "respectPrefersColorScheme": false
-    },
-    "docs": {
-      "versionPersistence": "localStorage",
-      "sidebar": {
-        "hideable": false,
-        "autoCollapseCategories": false
-      }
-    },
-    "metadata": [],
     "tableOfContents": {
       "minHeadingLevel": 2,
       "maxHeadingLevel": 3
     }
   },
-  "plugins": [
-    [
-      "docusaurus-plugin-openapi-docs",
-      {
-        "id": "apiDocs",
-        "docsPluginId": "classic",
-        "config": {
-          "petstore": {
-            "specPath": "examples/petstore.yaml",
-            "outputDir": "api/petstore",
-            "sidebarOptions": {
-              "groupPathsBy": "tag"
-            }
-          },
-          "burgers": {
-            "specPath": "examples/food/burgers/openapi.yaml",
-            "outputDir": "api/food/burgers"
-          }
-        }
-      }
-    ]
-  ],
   "themes": [
     "docusaurus-theme-openapi-docs"
   ],
@@ -34845,7 +34813,7 @@ module.exports = {};
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"blogPosts":[{"id":"styletron-react","metadata":{"permalink":"/blog/styletron-react","editUrl":"https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-08-26-styletron/index.md","source":"@site/blog/2023-08-26-styletron/index.md","title":"What is happening behind the scene?","description":"Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:","date":"2023-08-26T00:00:00.000Z","tags":[{"label":"styletron-react","permalink":"/blog/tags/styletron-react"}],"readingTime":0.34,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari"}],"frontMatter":{"slug":"styletron-react","title":"What is happening behind the scene?","author":"Ali Safari","tags":["styletron-react"]},"unlisted":false,"nextItem":{"title":"Challenges in lab automation","permalink":"/blog/lab-automation-main-challenges"}},"content":"Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:\\n\\n```js\\nyarn add styletron-engine-atomic styletron-react\\n\\n```\\n\\n:::tip\\n\\nUse the power of React to create interactive blog posts.\\n\\n```js\\n<html>\\n  <head>\\n    <style>\\n      .foo {\\n        font-size: 20px;\\n      }\\n      .bar {\\n        color: red;\\n      }\\n    </style>\\n  </head>\\n  <body>\\n    <a href=\\"/welcome\\" class=\\"foo bar\\">Start!</a>\\n  </body>\\n</html>\\n```\\n\\n<button onClick={() => alert(\'button clicked!\')}>Click me!</button>\\n\\n:::"},{"id":"lab-automation-main-challenges","metadata":{"permalink":"/blog/lab-automation-main-challenges","editUrl":"https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-05-15-LabAutomationChallenges.md","source":"@site/blog/2023-05-15-LabAutomationChallenges.md","title":"Challenges in lab automation","description":"Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:","date":"2023-05-15T00:00:00.000Z","tags":[{"label":"automation","permalink":"/blog/tags/automation"},{"label":"lab automation","permalink":"/blog/tags/lab-automation"},{"label":"technology","permalink":"/blog/tags/technology"},{"label":"future challenges","permalink":"/blog/tags/future-challenges"}],"readingTime":0.985,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"lab-automation-main-challenges","title":"Challenges in lab automation","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["automation","lab automation","technology","future challenges"]},"unlisted":false,"prevItem":{"title":"What is happening behind the scene?","permalink":"/blog/styletron-react"},"nextItem":{"title":"Some general benefits of lab automation","permalink":"/blog/lab-automation-benefits"}},"content":"Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:\\r\\n<table>\\r\\n  <tr>\\r\\n    <th>Opportunities</th>\\r\\n    <th>Challenges</th>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Increased efficiency and accuracy of lab processes</td>\\r\\n    <td>Cost of implementing automation</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Improved reproducibility of experiments</td>\\r\\n    <td>Complexity of lab processes</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Ability to handle large volumes of data</td>\\r\\n    <td>Integration with existing lab systems</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Improved safety of lab personnel</td>\\r\\n    <td>Training of staff on how to use automated systems</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td></td>\\r\\n    <td>Temporary shut down of lab operations during implementation</td>\\r\\n  </tr>\\r\\n</table>\\r\\n\\r\\nTechnically, one of the most common concerns in lab automation is ensuring the accuracy and reproducibility of automated processes. Lab automation systems may introduce errors or variations that can impact experimental results. \\r\\nTherefore, it is critical to validate and verify the performance of automated systems to ensure that they are producing accurate and reliable results. Additionally, it is important to establish standard operating procedures (SOPs) and quality control measures to ensure that automated processes are consistent and reproducible over time."},{"id":"lab-automation-benefits","metadata":{"permalink":"/blog/lab-automation-benefits","editUrl":"https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2023-05-12-LabAutomationBenefits.md","source":"@site/blog/2023-05-12-LabAutomationBenefits.md","title":"Some general benefits of lab automation","description":"Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:","date":"2023-05-12T00:00:00.000Z","tags":[{"label":"automation","permalink":"/blog/tags/automation"},{"label":"lab automation","permalink":"/blog/tags/lab-automation"},{"label":"technology","permalink":"/blog/tags/technology"},{"label":"Data Management","permalink":"/blog/tags/data-management"}],"readingTime":0.935,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"lab-automation-benefits","title":"Some general benefits of lab automation","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["automation","lab automation","technology","Data Management"]},"unlisted":false,"prevItem":{"title":"Challenges in lab automation","permalink":"/blog/lab-automation-main-challenges"},"nextItem":{"title":"Computer coding for science","permalink":"/blog/opening-post"}},"content":"Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:\\r\\n\\r\\n-   ##### Increased Efficiency\\r\\nLab automation can help to streamline laboratory processes and workflows, reducing the time and effort required to perform routine tasks. This can lead to increased efficiency, productivity, and throughput.\\r\\n\\r\\n-   ##### Improved Accuracy\\r\\nAutomation can help to reduce errors and variability in laboratory processes, leading to more consistent and reliable results.\\r\\n\\r\\n-   ##### Cost Savings\\r\\nLab automation can help to reduce the cost of labor, materials, and equipment, leading to cost savings over time.\\r\\n\\r\\n-   ##### Data Management\\r\\nAutomation can help to manage and analyze large amounts of data generated by laboratory processes, leading to better insights and decision-making.\\r\\n\\r\\n-   ##### Standardization\\r\\nAutomation can help to standardize laboratory processes and workflows, ensuring consistency and compliance with regulatory requirements.\\r\\n\\r\\n-   ##### Scalability\\r\\n Automation can help to scale laboratory processes and workflows to meet changing demands and increasing throughput.\\r\\n\\r\\nOverall, lab automation can help to improve the efficiency, accuracy, and cost-effectiveness of laboratory processes, while also providing better data management and analysis capabilities."},{"id":"opening-post","metadata":{"permalink":"/blog/opening-post","editUrl":"https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2021-06-16-StartPost.md","source":"@site/blog/2021-06-16-StartPost.md","title":"Computer coding for science","description":"The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.","date":"2021-06-16T00:00:00.000Z","tags":[{"label":"xitechnix","permalink":"/blog/tags/xitechnix"},{"label":"programming","permalink":"/blog/tags/programming"}],"readingTime":1.145,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"opening-post","title":"Computer coding for science","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["xitechnix","programming"]},"unlisted":false,"prevItem":{"title":"Some general benefits of lab automation","permalink":"/blog/lab-automation-benefits"},"nextItem":{"title":"Welcome!","permalink":"/blog/welcome"}},"content":"The statistical package `R` for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization. \\r\\n\\r\\n However, programming for a reasearch focused branch is not limited to R any more, but highly likely starts often with R.\\r\\n\\r\\n Sometimes, having knowledge in other operating systems other than the popular Windows is needed. Sometimes, an analytical tool require a `Linux Operating System`. In such case, maybe you need to set up a virtual machine (VM), in order to install and work with a linux based software.\\r\\n\\r\\n Fortunately, by having the Internet and googling in you side, you can have access to a lot of open source packages and shared repositories that are developed by both researchers and professional developers. \\r\\n\\r\\n Nowadays, as a researcher if you want to do an analysis, most probably you can find a software or a tool that is available online, or can be further developed by you to fulfill your requirements.\\r\\n\\r\\n This is the way that science trajectory is leading to, and to be a successful researcher you need to gain some knowledge and skills in computer programming. \\r\\n\\r\\n As a developer for scientific applications, I have the passion and motivation to go further across deciplines and share my knowledge in programming with scientific comunities and developers."},{"id":"welcome","metadata":{"permalink":"/blog/welcome","editUrl":"https://github.com/AliSafari-IT/asmsite/edit/main/website/blog/blog/2021-06-15-welcome.md","source":"@site/blog/2021-06-15-welcome.md","title":"Welcome!","description":"Hi there!","date":"2021-06-15T00:00:00.000Z","tags":[{"label":"Docusaurus","permalink":"/blog/tags/docusaurus"},{"label":"Static Site Generator","permalink":"/blog/tags/static-site-generator"}],"readingTime":0.27,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"welcome","title":"Welcome!","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["Docusaurus","Static Site Generator"]},"unlisted":false,"prevItem":{"title":"Computer coding for science","permalink":"/blog/opening-post"}},"content":"##### Hi there!\\r\\n###### This is Ali! \\r\\nAnd [this is the repo](https://github.com/AliSafari-IT/asafarim-src) contains the code and content that empowers my website. All the content is generated with Docusaurus, a modern Static Site Generator, in which using a static contents hosting service the content can be served. You may view the site at [my website](https://asafarim.com)."}]}');
+module.exports = /*#__PURE__*/JSON.parse('{"blogPosts":[{"id":"styletron-react","metadata":{"permalink":"/blog/styletron-react","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-08-26-styletron/index.md","source":"@site/blog/2023-08-26-styletron/index.md","title":"What is happening behind the scene?","description":"Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:","date":"2023-08-26T00:00:00.000Z","tags":[{"label":"styletron-react","permalink":"/blog/tags/styletron-react"}],"readingTime":0.34,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari"}],"frontMatter":{"slug":"styletron-react","title":"What is happening behind the scene?","author":"Ali Safari","tags":["styletron-react"]},"unlisted":false,"nextItem":{"title":"Challenges in lab automation","permalink":"/blog/lab-automation-main-challenges"}},"content":"Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:\\n\\n```js\\nyarn add styletron-engine-atomic styletron-react\\n\\n```\\n\\n:::tip\\n\\nUse the power of React to create interactive blog posts.\\n\\n```js\\n<html>\\n  <head>\\n    <style>\\n      .foo {\\n        font-size: 20px;\\n      }\\n      .bar {\\n        color: red;\\n      }\\n    </style>\\n  </head>\\n  <body>\\n    <a href=\\"/welcome\\" class=\\"foo bar\\">Start!</a>\\n  </body>\\n</html>\\n```\\n\\n<button onClick={() => alert(\'button clicked!\')}>Click me!</button>\\n\\n:::"},{"id":"lab-automation-main-challenges","metadata":{"permalink":"/blog/lab-automation-main-challenges","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-15-LabAutomationChallenges.md","source":"@site/blog/2023-05-15-LabAutomationChallenges.md","title":"Challenges in lab automation","description":"Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:","date":"2023-05-15T00:00:00.000Z","tags":[{"label":"automation","permalink":"/blog/tags/automation"},{"label":"lab automation","permalink":"/blog/tags/lab-automation"},{"label":"technology","permalink":"/blog/tags/technology"},{"label":"future challenges","permalink":"/blog/tags/future-challenges"}],"readingTime":0.985,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"lab-automation-main-challenges","title":"Challenges in lab automation","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["automation","lab automation","technology","future challenges"]},"unlisted":false,"prevItem":{"title":"What is happening behind the scene?","permalink":"/blog/styletron-react"},"nextItem":{"title":"Some general benefits of lab automation","permalink":"/blog/lab-automation-benefits"}},"content":"Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:\\r\\n<table>\\r\\n  <tr>\\r\\n    <th>Opportunities</th>\\r\\n    <th>Challenges</th>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Increased efficiency and accuracy of lab processes</td>\\r\\n    <td>Cost of implementing automation</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Improved reproducibility of experiments</td>\\r\\n    <td>Complexity of lab processes</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Ability to handle large volumes of data</td>\\r\\n    <td>Integration with existing lab systems</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Improved safety of lab personnel</td>\\r\\n    <td>Training of staff on how to use automated systems</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td></td>\\r\\n    <td>Temporary shut down of lab operations during implementation</td>\\r\\n  </tr>\\r\\n</table>\\r\\n\\r\\nTechnically, one of the most common concerns in lab automation is ensuring the accuracy and reproducibility of automated processes. Lab automation systems may introduce errors or variations that can impact experimental results. \\r\\nTherefore, it is critical to validate and verify the performance of automated systems to ensure that they are producing accurate and reliable results. Additionally, it is important to establish standard operating procedures (SOPs) and quality control measures to ensure that automated processes are consistent and reproducible over time."},{"id":"lab-automation-benefits","metadata":{"permalink":"/blog/lab-automation-benefits","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-12-LabAutomationBenefits.md","source":"@site/blog/2023-05-12-LabAutomationBenefits.md","title":"Some general benefits of lab automation","description":"Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:","date":"2023-05-12T00:00:00.000Z","tags":[{"label":"automation","permalink":"/blog/tags/automation"},{"label":"lab automation","permalink":"/blog/tags/lab-automation"},{"label":"technology","permalink":"/blog/tags/technology"},{"label":"Data Management","permalink":"/blog/tags/data-management"}],"readingTime":0.935,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"lab-automation-benefits","title":"Some general benefits of lab automation","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["automation","lab automation","technology","Data Management"]},"unlisted":false,"prevItem":{"title":"Challenges in lab automation","permalink":"/blog/lab-automation-main-challenges"},"nextItem":{"title":"Computer coding for science","permalink":"/blog/opening-post"}},"content":"Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:\\r\\n\\r\\n-   ##### Increased Efficiency\\r\\nLab automation can help to streamline laboratory processes and workflows, reducing the time and effort required to perform routine tasks. This can lead to increased efficiency, productivity, and throughput.\\r\\n\\r\\n-   ##### Improved Accuracy\\r\\nAutomation can help to reduce errors and variability in laboratory processes, leading to more consistent and reliable results.\\r\\n\\r\\n-   ##### Cost Savings\\r\\nLab automation can help to reduce the cost of labor, materials, and equipment, leading to cost savings over time.\\r\\n\\r\\n-   ##### Data Management\\r\\nAutomation can help to manage and analyze large amounts of data generated by laboratory processes, leading to better insights and decision-making.\\r\\n\\r\\n-   ##### Standardization\\r\\nAutomation can help to standardize laboratory processes and workflows, ensuring consistency and compliance with regulatory requirements.\\r\\n\\r\\n-   ##### Scalability\\r\\n Automation can help to scale laboratory processes and workflows to meet changing demands and increasing throughput.\\r\\n\\r\\nOverall, lab automation can help to improve the efficiency, accuracy, and cost-effectiveness of laboratory processes, while also providing better data management and analysis capabilities."},{"id":"opening-post","metadata":{"permalink":"/blog/opening-post","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-16-StartPost.md","source":"@site/blog/2021-06-16-StartPost.md","title":"Computer coding for science","description":"The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.","date":"2021-06-16T00:00:00.000Z","tags":[{"label":"xitechnix","permalink":"/blog/tags/xitechnix"},{"label":"programming","permalink":"/blog/tags/programming"}],"readingTime":1.145,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"opening-post","title":"Computer coding for science","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["xitechnix","programming"]},"unlisted":false,"prevItem":{"title":"Some general benefits of lab automation","permalink":"/blog/lab-automation-benefits"},"nextItem":{"title":"Welcome!","permalink":"/blog/welcome"}},"content":"The statistical package `R` for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization. \\r\\n\\r\\n However, programming for a reasearch focused branch is not limited to R any more, but highly likely starts often with R.\\r\\n\\r\\n Sometimes, having knowledge in other operating systems other than the popular Windows is needed. Sometimes, an analytical tool require a `Linux Operating System`. In such case, maybe you need to set up a virtual machine (VM), in order to install and work with a linux based software.\\r\\n\\r\\n Fortunately, by having the Internet and googling in you side, you can have access to a lot of open source packages and shared repositories that are developed by both researchers and professional developers. \\r\\n\\r\\n Nowadays, as a researcher if you want to do an analysis, most probably you can find a software or a tool that is available online, or can be further developed by you to fulfill your requirements.\\r\\n\\r\\n This is the way that science trajectory is leading to, and to be a successful researcher you need to gain some knowledge and skills in computer programming. \\r\\n\\r\\n As a developer for scientific applications, I have the passion and motivation to go further across deciplines and share my knowledge in programming with scientific comunities and developers."},{"id":"welcome","metadata":{"permalink":"/blog/welcome","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-15-welcome.md","source":"@site/blog/2021-06-15-welcome.md","title":"Welcome!","description":"Hi there!","date":"2021-06-15T00:00:00.000Z","tags":[{"label":"Docusaurus","permalink":"/blog/tags/docusaurus"},{"label":"Static Site Generator","permalink":"/blog/tags/static-site-generator"}],"readingTime":0.27,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"welcome","title":"Welcome!","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["Docusaurus","Static Site Generator"]},"unlisted":false,"prevItem":{"title":"Computer coding for science","permalink":"/blog/opening-post"}},"content":"##### Hi there!\\r\\n###### This is Ali! \\r\\nAnd [this is the repo](https://github.com/AliSafari-IT/asafarim-src) contains the code and content that empowers my website. All the content is generated with Docusaurus, a modern Static Site Generator, in which using a static contents hosting service the content can be served. You may view the site at [my website](https://asafarim.com)."}]}');
 
 /***/ }),
 

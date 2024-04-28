@@ -15,7 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@asmsite/ui": ["ui/src/index.ts"]
+      "@asmsite/ng": ["client-ng/src/index.ts"],
+      "@asmsite/ng/*": ["client-ng/src/*"],
+      "@asmsite/react": ["client-react/src/index.ts"],
+      "@asmsite/react/*": ["client-react/src/*"],
+      "@asmsite/docs": ["client-docs/src/index.ts"],
+      "@asmsite/docs/*": ["client-docs/src/*"],
     }
   },
   "exclude": ["node_modules", "tmp"]

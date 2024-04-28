@@ -316,7 +316,7 @@
   --docusaurus-announcement-bar-height: auto;
 }
 
-[data-theme='light'] {
+[data-theme='dark'] {
   /* Dark mode variables */
   --primary-color: var(--clientdocs-color-primary);
   --background-color: var(--clientdocs-color-background);
@@ -338,6 +338,10 @@
   --avatar-intro-margin: var(--clientdocs-avatar-intro-margin);
 }
 
+html[data-theme='light'] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 body {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -352,9 +356,31 @@ hr {
 }
 
 
-path {
-  color: var(--svg-color);
+svg path {
+  color: var(--clientdocs-font-color);
   fill: currentcolor;
+}
+
+.client-docs-navbar-logo {
+  color: var(--clientdocs-font-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--clientdocs-font-color);
+}
+
+.features_client-docs-src-components-HomepageFeatures-module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  color: var(--clientdocs-color-primary);
+  background-color: var(--clientdocs-background-color);
 }
 
 .containerdouglas {
@@ -404,10 +430,6 @@ path {
   display: block;
   margin: 0 calc(-1 * var(--clientdocs-pre-padding));
   padding: 0 var(--clientdocs-pre-padding);
-}
-
-html[data-theme='dark'] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .docusaurus-highlight-code-line {
