@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkasmsite=self.webpackChunkasmsite||[]).push([[7190],{611:a=>{a.exports=JSON.parse('{"label":"Data Management","permalink":"/dist/client-docs/blog/tags/data-management","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}')}}]);

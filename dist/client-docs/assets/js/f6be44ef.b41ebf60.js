@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkasmsite=self.webpackChunkasmsite||[]).push([[6673],{6357:s=>{s.exports=JSON.parse('{"label":"Static Site Generator","permalink":"/dist/client-docs/blog/tags/static-site-generator","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}')}}]);

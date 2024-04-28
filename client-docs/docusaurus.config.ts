@@ -11,10 +11,10 @@ const config = {
   title: 'ASafariM Learn Docs',
   tagline: 'Learning material and blog posts',
   url: 'https://asafarim.com',
-  baseUrl: '/',
+  baseUrl: '/dist/client-docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: '/dist/client-docs/img/favicon.ico',
   organizationName: 'ASAFARIM', // Usually your GitHub org/user name.
   projectName: 'asmsite', // Usually your repo name.
 
@@ -36,7 +36,7 @@ const config = {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/',
+            'https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/',
         }, 
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -85,7 +85,7 @@ const config = {
           alt: 'ASafariM Logo',
           src: 'img/logoT.svg',
           className: 'client-docs-navbar-logo',
-          target: '_blank',
+          target: '_self',
           style: {
             height: 'auto',
             width: '20px',

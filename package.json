@@ -9,7 +9,7 @@
     "start:docs": "nx run client-docs:serve --open  --verbose",
     "build:ng": "nx build client-ng  --base-href=/dist/client-ng/browser/",
     "build:react": "npx nx build client-react",
-    "build:docs": "nx run client-docs:build",
+    "build:docs": "nx run client-docs:build --verbose --prod --base-href=/dist/client-docs",
     "test": "nx test client-ng",
     "lint": "nx lint client-ng",
     "do": "npm run lint && npm run build && npm run test",

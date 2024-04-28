@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkasmsite=self.webpackChunkasmsite||[]).push([[3429],{6716:s=>{s.exports=JSON.parse('{"label":"automation","permalink":"/dist/client-docs/blog/tags/automation","allTagsPath":"/dist/client-docs/blog/tags","count":2,"unlisted":false}')}}]);

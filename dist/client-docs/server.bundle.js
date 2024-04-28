@@ -24,7 +24,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "type": "mdx",
-  "permalink": "/about-us",
+  "permalink": "/dist/client-docs/about-us",
   "source": "@site/src/pages/about-us.md",
   "description": "Welcome to ASAFARIM.com. We're dedicated to giving you the very up-to-date information in the range of IT to it's use in science, with a focus on automatization, paperless, and data science.",
   "frontMatter": {
@@ -117,7 +117,7 @@ const frontMatter = {
 const contentTitle = 'Cookies policy';
 const metadata = {
   "type": "mdx",
-  "permalink": "/cookies_en",
+  "permalink": "/dist/client-docs/cookies_en",
   "source": "@site/src/pages/cookies_en.md",
   "title": "Cookies policy",
   "description": "What are cookies?",
@@ -260,7 +260,7 @@ const frontMatter = {
 const contentTitle = undefined;
 const metadata = {
   "type": "mdx",
-  "permalink": "/disclaimers",
+  "permalink": "/dist/client-docs/disclaimers",
   "source": "@site/src/pages/disclaimers.md",
   "frontMatter": {
     "sidebar_position": 100501
@@ -317,7 +317,7 @@ const frontMatter = {
 const contentTitle = 'End-User License Agreement';
 const metadata = {
   "type": "mdx",
-  "permalink": "/eula",
+  "permalink": "/dist/client-docs/eula",
   "source": "@site/src/pages/eula.md",
   "title": "End-User License Agreement",
   "description": "End-User License Agreement (&quot;Agreement&quot;)",
@@ -647,7 +647,7 @@ const frontMatter = {
 const contentTitle = 'Markdown page example';
 const metadata = {
   "type": "mdx",
-  "permalink": "/markdown-page",
+  "permalink": "/dist/client-docs/markdown-page",
   "source": "@site/src/pages/markdown-page.md",
   "title": "Markdown page example",
   "description": "You don't need React to write simple standalone pages.",
@@ -725,7 +725,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0101-Requirements/01-intro.md",
   "sourceDirName": "010-software-development/0101-Requirements",
   "slug": "/software-development/Requirements/intro",
-  "permalink": "/docs/software-development/Requirements/intro",
+  "permalink": "/dist/client-docs/docs/software-development/Requirements/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0101-Requirements/01-intro.md",
@@ -741,11 +741,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Outline",
-    "permalink": "/docs/intro"
+    "permalink": "/dist/client-docs/docs/intro"
   },
   "next": {
     "title": "Planning and management",
-    "permalink": "/docs/software-development/Planning/intro"
+    "permalink": "/dist/client-docs/docs/software-development/Planning/intro"
   }
 };
 const assets = {
@@ -811,7 +811,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0102-Planning/02-intro.md",
   "sourceDirName": "010-software-development/0102-Planning",
   "slug": "/software-development/Planning/intro",
-  "permalink": "/docs/software-development/Planning/intro",
+  "permalink": "/dist/client-docs/docs/software-development/Planning/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0102-Planning/02-intro.md",
@@ -827,11 +827,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "The needs of the stakeholders",
-    "permalink": "/docs/software-development/Requirements/intro"
+    "permalink": "/dist/client-docs/docs/software-development/Requirements/intro"
   },
   "next": {
     "title": "High-level design and architecture",
-    "permalink": "/docs/software-development/Designing/intro"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/intro"
   }
 };
 const assets = {
@@ -897,7 +897,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0103-Designing/001-designPatterns/façade-pattern.md",
   "sourceDirName": "010-software-development/0103-Designing/001-designPatterns",
   "slug": "/software-development/Designing/designPatterns/façade-pattern",
-  "permalink": "/docs/software-development/Designing/designPatterns/façade-pattern",
+  "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/façade-pattern",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/001-designPatterns/façade-pattern.md",
@@ -913,11 +913,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Overview",
-    "permalink": "/docs/software-development/Designing/designPatterns/overview"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/overview"
   },
   "next": {
     "title": "Singleton Pattern",
-    "permalink": "/docs/software-development/Designing/designPatterns/singleton-pattern"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/singleton-pattern"
   }
 };
 const assets = {
@@ -1016,7 +1016,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0103-Designing/001-designPatterns/overview.md",
   "sourceDirName": "010-software-development/0103-Designing/001-designPatterns",
   "slug": "/software-development/Designing/designPatterns/overview",
-  "permalink": "/docs/software-development/Designing/designPatterns/overview",
+  "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/overview",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/001-designPatterns/overview.md",
@@ -1032,11 +1032,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "High-level design and architecture",
-    "permalink": "/docs/software-development/Designing/intro"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/intro"
   },
   "next": {
     "title": "Façade Pattern",
-    "permalink": "/docs/software-development/Designing/designPatterns/façade-pattern"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/façade-pattern"
   }
 };
 const assets = {
@@ -1146,7 +1146,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0103-Designing/001-designPatterns/singleton-pattern.md",
   "sourceDirName": "010-software-development/0103-Designing/001-designPatterns",
   "slug": "/software-development/Designing/designPatterns/singleton-pattern",
-  "permalink": "/docs/software-development/Designing/designPatterns/singleton-pattern",
+  "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/singleton-pattern",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/001-designPatterns/singleton-pattern.md",
@@ -1162,11 +1162,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Façade Pattern",
-    "permalink": "/docs/software-development/Designing/designPatterns/façade-pattern"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/façade-pattern"
   },
   "next": {
     "title": "User Story vs User Case",
-    "permalink": "/docs/software-development/Designing/uml/user-story-user-case"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/uml/user-story-user-case"
   }
 };
 const assets = {
@@ -1269,7 +1269,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0103-Designing/03-intro.md",
   "sourceDirName": "010-software-development/0103-Designing",
   "slug": "/software-development/Designing/intro",
-  "permalink": "/docs/software-development/Designing/intro",
+  "permalink": "/dist/client-docs/docs/software-development/Designing/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/03-intro.md",
@@ -1285,11 +1285,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Planning and management",
-    "permalink": "/docs/software-development/Planning/intro"
+    "permalink": "/dist/client-docs/docs/software-development/Planning/intro"
   },
   "next": {
     "title": "Overview",
-    "permalink": "/docs/software-development/Designing/designPatterns/overview"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/overview"
   }
 };
 const assets = {
@@ -1364,7 +1364,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0103-Designing/uml/Wireframing.mdx",
   "sourceDirName": "010-software-development/0103-Designing/uml",
   "slug": "/software-development/Designing/uml/wireframing",
-  "permalink": "/docs/software-development/Designing/uml/wireframing",
+  "permalink": "/dist/client-docs/docs/software-development/Designing/uml/wireframing",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/uml/Wireframing.mdx",
@@ -1379,11 +1379,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "User Story vs User Case",
-    "permalink": "/docs/software-development/Designing/uml/user-story-user-case"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/uml/user-story-user-case"
   },
   "next": {
     "title": "Creating the codebase",
-    "permalink": "/docs/software-development/Coding/codebase/codebase"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/codebase/codebase"
   }
 };
 const assets = {
@@ -1471,7 +1471,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0103-Designing/uml/userStory-userCase.mdx",
   "sourceDirName": "010-software-development/0103-Designing/uml",
   "slug": "/software-development/Designing/uml/user-story-user-case",
-  "permalink": "/docs/software-development/Designing/uml/user-story-user-case",
+  "permalink": "/dist/client-docs/docs/software-development/Designing/uml/user-story-user-case",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0103-Designing/uml/userStory-userCase.mdx",
@@ -1488,11 +1488,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Singleton Pattern",
-    "permalink": "/docs/software-development/Designing/designPatterns/singleton-pattern"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/designPatterns/singleton-pattern"
   },
   "next": {
     "title": "Wireframing in UI",
-    "permalink": "/docs/software-development/Designing/uml/wireframing"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/uml/wireframing"
   }
 };
 const assets = {
@@ -1635,7 +1635,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0104-Coding/01-codebase/001-codebase.md",
   "sourceDirName": "010-software-development/0104-Coding/01-codebase",
   "slug": "/software-development/Coding/codebase/codebase",
-  "permalink": "/docs/software-development/Coding/codebase/codebase",
+  "permalink": "/dist/client-docs/docs/software-development/Coding/codebase/codebase",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/01-codebase/001-codebase.md",
@@ -1651,11 +1651,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Wireframing in UI",
-    "permalink": "/docs/software-development/Designing/uml/wireframing"
+    "permalink": "/dist/client-docs/docs/software-development/Designing/uml/wireframing"
   },
   "next": {
     "title": "Writing the code",
-    "permalink": "/docs/software-development/Coding/programming/writing-code"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/programming/writing-code"
   }
 };
 const assets = {
@@ -1721,7 +1721,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0104-Coding/02-programming/002-writing-code.md",
   "sourceDirName": "010-software-development/0104-Coding/02-programming",
   "slug": "/software-development/Coding/programming/writing-code",
-  "permalink": "/docs/software-development/Coding/programming/writing-code",
+  "permalink": "/dist/client-docs/docs/software-development/Coding/programming/writing-code",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/02-programming/002-writing-code.md",
@@ -1737,11 +1737,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Creating the codebase",
-    "permalink": "/docs/software-development/Coding/codebase/codebase"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/codebase/codebase"
   },
   "next": {
     "title": "Code-based testing",
-    "permalink": "/docs/software-development/Coding/testing/testing"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/testing/testing"
   }
 };
 const assets = {
@@ -1807,7 +1807,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0104-Coding/03-testing/003-testing.md",
   "sourceDirName": "010-software-development/0104-Coding/03-testing",
   "slug": "/software-development/Coding/testing/testing",
-  "permalink": "/docs/software-development/Coding/testing/testing",
+  "permalink": "/dist/client-docs/docs/software-development/Coding/testing/testing",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/03-testing/003-testing.md",
@@ -1823,11 +1823,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Writing the code",
-    "permalink": "/docs/software-development/Coding/programming/writing-code"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/programming/writing-code"
   },
   "next": {
     "title": "Debugging",
-    "permalink": "/docs/software-development/Coding/debugging/debugging"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/debugging/debugging"
   }
 };
 const assets = {
@@ -1899,7 +1899,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0104-Coding/04-debugging/004-debugging.md",
   "sourceDirName": "010-software-development/0104-Coding/04-debugging",
   "slug": "/software-development/Coding/debugging/debugging",
-  "permalink": "/docs/software-development/Coding/debugging/debugging",
+  "permalink": "/dist/client-docs/docs/software-development/Coding/debugging/debugging",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/04-debugging/004-debugging.md",
@@ -1915,11 +1915,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Code-based testing",
-    "permalink": "/docs/software-development/Coding/testing/testing"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/testing/testing"
   },
   "next": {
     "title": "Refactoring",
-    "permalink": "/docs/software-development/Coding/refactoring/refactoring"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/refactoring/refactoring"
   }
 };
 const assets = {
@@ -1985,7 +1985,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0104-Coding/05-refactoring/005-refactoring.md",
   "sourceDirName": "010-software-development/0104-Coding/05-refactoring",
   "slug": "/software-development/Coding/refactoring/refactoring",
-  "permalink": "/docs/software-development/Coding/refactoring/refactoring",
+  "permalink": "/dist/client-docs/docs/software-development/Coding/refactoring/refactoring",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/05-refactoring/005-refactoring.md",
@@ -2001,11 +2001,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Debugging",
-    "permalink": "/docs/software-development/Coding/debugging/debugging"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/debugging/debugging"
   },
   "next": {
     "title": "Documenting the code",
-    "permalink": "/docs/software-development/Coding/documentation/documenting"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/documentation/documenting"
   }
 };
 const assets = {
@@ -2071,7 +2071,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0104-Coding/06-documentation/006-documenting.md",
   "sourceDirName": "010-software-development/0104-Coding/06-documentation",
   "slug": "/software-development/Coding/documentation/documenting",
-  "permalink": "/docs/software-development/Coding/documentation/documenting",
+  "permalink": "/dist/client-docs/docs/software-development/Coding/documentation/documenting",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0104-Coding/06-documentation/006-documenting.md",
@@ -2087,11 +2087,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Refactoring",
-    "permalink": "/docs/software-development/Coding/refactoring/refactoring"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/refactoring/refactoring"
   },
   "next": {
     "title": "Testing in Software Development ",
-    "permalink": "/docs/software-development/Testing/intro"
+    "permalink": "/dist/client-docs/docs/software-development/Testing/intro"
   }
 };
 const assets = {
@@ -2161,7 +2161,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0105-Testing/03-intro.md",
   "sourceDirName": "010-software-development/0105-Testing",
   "slug": "/software-development/Testing/intro",
-  "permalink": "/docs/software-development/Testing/intro",
+  "permalink": "/dist/client-docs/docs/software-development/Testing/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0105-Testing/03-intro.md",
@@ -2177,11 +2177,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Documenting the code",
-    "permalink": "/docs/software-development/Coding/documentation/documenting"
+    "permalink": "/dist/client-docs/docs/software-development/Coding/documentation/documenting"
   },
   "next": {
     "title": "CI/CD automation steps",
-    "permalink": "/docs/cicd/overview"
+    "permalink": "/dist/client-docs/docs/cicd/overview"
   }
 };
 const assets = {
@@ -2241,7 +2241,7 @@ const metadata = {
   "source": "@site/docs/010-software-development/0106-Automation/01-cicd-processes.md",
   "sourceDirName": "010-software-development/0106-Automation",
   "slug": "/cicd/overview",
-  "permalink": "/docs/cicd/overview",
+  "permalink": "/dist/client-docs/docs/cicd/overview",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/010-software-development/0106-Automation/01-cicd-processes.md",
@@ -2258,11 +2258,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Testing in Software Development ",
-    "permalink": "/docs/software-development/Testing/intro"
+    "permalink": "/dist/client-docs/docs/software-development/Testing/intro"
   },
   "next": {
     "title": "Developer Tools",
-    "permalink": "/docs/devtools/intro"
+    "permalink": "/dist/client-docs/docs/devtools/intro"
   }
 };
 const assets = {
@@ -2380,7 +2380,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/01-languages/00-opp.md",
   "sourceDirName": "015-devtools/01-languages",
   "slug": "/devtools/languages/opp",
-  "permalink": "/docs/devtools/languages/opp",
+  "permalink": "/dist/client-docs/docs/devtools/languages/opp",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/01-languages/00-opp.md",
@@ -2396,11 +2396,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Developer Tools",
-    "permalink": "/docs/devtools/intro"
+    "permalink": "/dist/client-docs/docs/devtools/intro"
   },
   "next": {
     "title": "What, Why and How of Nx",
-    "permalink": "/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics"
+    "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics"
   }
 };
 const assets = {
@@ -2493,7 +2493,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/001-json/json-overview/01-json.md",
   "sourceDirName": "015-devtools/02-dataformats/001-json/json-overview",
   "slug": "/json-overview",
-  "permalink": "/docs/json-overview",
+  "permalink": "/dist/client-docs/docs/json-overview",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/001-json/json-overview/01-json.md",
@@ -2510,11 +2510,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Syncfusion",
-    "permalink": "/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics"
+    "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics"
   },
   "next": {
     "title": "Json: Schema",
-    "permalink": "/docs/json-schema"
+    "permalink": "/dist/client-docs/docs/json-schema"
   }
 };
 const assets = {
@@ -2615,7 +2615,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/001-json/json-overview/02-json-schema.md",
   "sourceDirName": "015-devtools/02-dataformats/001-json/json-overview",
   "slug": "/json-schema",
-  "permalink": "/docs/json-schema",
+  "permalink": "/dist/client-docs/docs/json-schema",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/001-json/json-overview/02-json-schema.md",
@@ -2632,11 +2632,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Json: Intro",
-    "permalink": "/docs/json-overview"
+    "permalink": "/dist/client-docs/docs/json-overview"
   },
   "next": {
     "title": "Schema-Driven Development",
-    "permalink": "/docs/devtools/dataformats/json/json-overview/sch-dev"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/json/json-overview/sch-dev"
   }
 };
 const assets = {
@@ -2795,7 +2795,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/001-json/json-overview/03-Schema-Driven-Development.md",
   "sourceDirName": "015-devtools/02-dataformats/001-json/json-overview",
   "slug": "/devtools/dataformats/json/json-overview/sch-dev",
-  "permalink": "/docs/devtools/dataformats/json/json-overview/sch-dev",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/json/json-overview/sch-dev",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/001-json/json-overview/03-Schema-Driven-Development.md",
@@ -2811,11 +2811,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Json: Schema",
-    "permalink": "/docs/json-schema"
+    "permalink": "/dist/client-docs/docs/json-schema"
   },
   "next": {
     "title": "How to use JSON",
-    "permalink": "/docs/how-to-use/json-in-ts"
+    "permalink": "/dist/client-docs/docs/how-to-use/json-in-ts"
   }
 };
 const assets = {
@@ -2895,7 +2895,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/001-json/json-overview/04-how-to-use-json-in-ts.md",
   "sourceDirName": "015-devtools/02-dataformats/001-json/json-overview",
   "slug": "/how-to-use/json-in-ts",
-  "permalink": "/docs/how-to-use/json-in-ts",
+  "permalink": "/dist/client-docs/docs/how-to-use/json-in-ts",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/001-json/json-overview/04-how-to-use-json-in-ts.md",
@@ -2912,11 +2912,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Schema-Driven Development",
-    "permalink": "/docs/devtools/dataformats/json/json-overview/sch-dev"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/json/json-overview/sch-dev"
   },
   "next": {
     "title": "XML",
-    "permalink": "/docs/devtools/dataformats/xml/xml"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/xml/xml"
   }
 };
 const assets = {
@@ -2991,7 +2991,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/002-xml/01-xml.md",
   "sourceDirName": "015-devtools/02-dataformats/002-xml",
   "slug": "/devtools/dataformats/xml/xml",
-  "permalink": "/docs/devtools/dataformats/xml/xml",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/xml/xml",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/002-xml/01-xml.md",
@@ -3007,11 +3007,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "How to use JSON",
-    "permalink": "/docs/how-to-use/json-in-ts"
+    "permalink": "/dist/client-docs/docs/how-to-use/json-in-ts"
   },
   "next": {
     "title": "CSV",
-    "permalink": "/docs/devtools/dataformats/csv/csv"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/csv/csv"
   }
 };
 const assets = {
@@ -3085,7 +3085,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/003-csv/01-csv.md",
   "sourceDirName": "015-devtools/02-dataformats/003-csv",
   "slug": "/devtools/dataformats/csv/csv",
-  "permalink": "/docs/devtools/dataformats/csv/csv",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/csv/csv",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/003-csv/01-csv.md",
@@ -3101,11 +3101,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "XML",
-    "permalink": "/docs/devtools/dataformats/xml/xml"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/xml/xml"
   },
   "next": {
     "title": "YAML",
-    "permalink": "/docs/devtools/dataformats/yaml/yaml"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/yaml/yaml"
   }
 };
 const assets = {
@@ -3171,7 +3171,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/004-yaml/01-yaml.md",
   "sourceDirName": "015-devtools/02-dataformats/004-yaml",
   "slug": "/devtools/dataformats/yaml/yaml",
-  "permalink": "/docs/devtools/dataformats/yaml/yaml",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/yaml/yaml",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/004-yaml/01-yaml.md",
@@ -3187,11 +3187,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "CSV",
-    "permalink": "/docs/devtools/dataformats/csv/csv"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/csv/csv"
   },
   "next": {
     "title": "Protocol Buffers",
-    "permalink": "/docs/devtools/dataformats/protobufjs/protobufjs"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/protobufjs/protobufjs"
   }
 };
 const assets = {
@@ -3257,7 +3257,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/005-protobufjs/01-protobufjs.md",
   "sourceDirName": "015-devtools/02-dataformats/005-protobufjs",
   "slug": "/devtools/dataformats/protobufjs/protobufjs",
-  "permalink": "/docs/devtools/dataformats/protobufjs/protobufjs",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/protobufjs/protobufjs",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/005-protobufjs/01-protobufjs.md",
@@ -3273,11 +3273,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "YAML",
-    "permalink": "/docs/devtools/dataformats/yaml/yaml"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/yaml/yaml"
   },
   "next": {
     "title": "Example in TypeScript",
-    "permalink": "/docs/devtools/dataformats/protobufjs/example"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/protobufjs/example"
   }
 };
 const assets = {
@@ -3363,7 +3363,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/005-protobufjs/02-example.md",
   "sourceDirName": "015-devtools/02-dataformats/005-protobufjs",
   "slug": "/devtools/dataformats/protobufjs/example",
-  "permalink": "/docs/devtools/dataformats/protobufjs/example",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/protobufjs/example",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/005-protobufjs/02-example.md",
@@ -3379,11 +3379,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Protocol Buffers",
-    "permalink": "/docs/devtools/dataformats/protobufjs/protobufjs"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/protobufjs/protobufjs"
   },
   "next": {
     "title": "MessagePack data format",
-    "permalink": "/docs/devtools/dataformats/msgpack-lite/msgpack"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/msgpack"
   }
 };
 const assets = {
@@ -3483,7 +3483,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/006-msgpack-lite/01-msgpack.md",
   "sourceDirName": "015-devtools/02-dataformats/006-msgpack-lite",
   "slug": "/devtools/dataformats/msgpack-lite/msgpack",
-  "permalink": "/docs/devtools/dataformats/msgpack-lite/msgpack",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/msgpack",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/006-msgpack-lite/01-msgpack.md",
@@ -3499,11 +3499,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Example in TypeScript",
-    "permalink": "/docs/devtools/dataformats/protobufjs/example"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/protobufjs/example"
   },
   "next": {
     "title": "Using MessagePack in TypeScript",
-    "permalink": "/docs/devtools/dataformats/msgpack-lite/ts-example"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/ts-example"
   }
 };
 const assets = {
@@ -3569,7 +3569,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/006-msgpack-lite/02-ts-example.md",
   "sourceDirName": "015-devtools/02-dataformats/006-msgpack-lite",
   "slug": "/devtools/dataformats/msgpack-lite/ts-example",
-  "permalink": "/docs/devtools/dataformats/msgpack-lite/ts-example",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/ts-example",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/006-msgpack-lite/02-ts-example.md",
@@ -3585,11 +3585,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "MessagePack data format",
-    "permalink": "/docs/devtools/dataformats/msgpack-lite/msgpack"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/msgpack"
   },
   "next": {
     "title": "Using MessagePack in .Net ",
-    "permalink": "/docs/devtools/dataformats/msgpack-lite/csharp-example"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/csharp-example"
   }
 };
 const assets = {
@@ -3684,7 +3684,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/02-dataformats/006-msgpack-lite/03-csharp-example.md",
   "sourceDirName": "015-devtools/02-dataformats/006-msgpack-lite",
   "slug": "/devtools/dataformats/msgpack-lite/csharp-example",
-  "permalink": "/docs/devtools/dataformats/msgpack-lite/csharp-example",
+  "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/csharp-example",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/02-dataformats/006-msgpack-lite/03-csharp-example.md",
@@ -3700,11 +3700,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Using MessagePack in TypeScript",
-    "permalink": "/docs/devtools/dataformats/msgpack-lite/ts-example"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/ts-example"
   },
   "next": {
     "title": "Introduction",
-    "permalink": "/docs/devtools/versioncontrol/intro"
+    "permalink": "/dist/client-docs/docs/devtools/versioncontrol/intro"
   }
 };
 const assets = {
@@ -3800,7 +3800,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/03-frameworks-libraries/01-nx-workspace/nx-Basics.md",
   "sourceDirName": "015-devtools/03-frameworks-libraries/01-nx-workspace",
   "slug": "/devtools/frameworks-libraries/nx-workspace/nx-Basics",
-  "permalink": "/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics",
+  "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/03-frameworks-libraries/01-nx-workspace/nx-Basics.md",
@@ -3816,11 +3816,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Object-oriented programming",
-    "permalink": "/docs/devtools/languages/opp"
+    "permalink": "/dist/client-docs/docs/devtools/languages/opp"
   },
   "next": {
     "title": "Docusaurus",
-    "permalink": "/docs/devtools/frameworks-libraries/site-generators/docusaurus"
+    "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus"
   }
 };
 const assets = {
@@ -3965,7 +3965,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/03-frameworks-libraries/02-site-generators/create-a-page.md",
   "sourceDirName": "015-devtools/03-frameworks-libraries/02-site-generators",
   "slug": "/devtools/frameworks-libraries/site-generators/create-a-page",
-  "permalink": "/docs/devtools/frameworks-libraries/site-generators/create-a-page",
+  "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/create-a-page",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/03-frameworks-libraries/02-site-generators/create-a-page.md",
@@ -3981,11 +3981,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Docusaurus",
-    "permalink": "/docs/devtools/frameworks-libraries/site-generators/docusaurus"
+    "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus"
   },
   "next": {
     "title": "Syncfusion",
-    "permalink": "/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics"
+    "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics"
   }
 };
 const assets = {
@@ -4010,7 +4010,7 @@ function _createMdxContent(props) {
       })
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
       children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        href: "/docs/devtools/frameworks-libraries/site-generators/docusaurus#links",
+        href: "/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus#links",
         children: "Back to previous point with relative file path"
       })
     })]
@@ -4063,7 +4063,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/03-frameworks-libraries/02-site-generators/docusaurus.md",
   "sourceDirName": "015-devtools/03-frameworks-libraries/02-site-generators",
   "slug": "/devtools/frameworks-libraries/site-generators/docusaurus",
-  "permalink": "/docs/devtools/frameworks-libraries/site-generators/docusaurus",
+  "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/03-frameworks-libraries/02-site-generators/docusaurus.md",
@@ -4079,11 +4079,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "What, Why and How of Nx",
-    "permalink": "/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics"
+    "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics"
   },
   "next": {
     "title": "Create a page",
-    "permalink": "/docs/devtools/frameworks-libraries/site-generators/create-a-page"
+    "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/create-a-page"
   }
 };
 const assets = {
@@ -4575,7 +4575,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/03-frameworks-libraries/03-syncfusion/syncfusion-Basics.md",
   "sourceDirName": "015-devtools/03-frameworks-libraries/03-syncfusion",
   "slug": "/devtools/frameworks-libraries/syncfusion/syncfusion-Basics",
-  "permalink": "/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics",
+  "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/03-frameworks-libraries/03-syncfusion/syncfusion-Basics.md",
@@ -4591,11 +4591,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Create a page",
-    "permalink": "/docs/devtools/frameworks-libraries/site-generators/create-a-page"
+    "permalink": "/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/create-a-page"
   },
   "next": {
     "title": "Json: Intro",
-    "permalink": "/docs/json-overview"
+    "permalink": "/dist/client-docs/docs/json-overview"
   }
 };
 const assets = {
@@ -4684,7 +4684,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/04-versioncontrol/00-intro.md",
   "sourceDirName": "015-devtools/04-versioncontrol",
   "slug": "/devtools/versioncontrol/intro",
-  "permalink": "/docs/devtools/versioncontrol/intro",
+  "permalink": "/dist/client-docs/docs/devtools/versioncontrol/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/04-versioncontrol/00-intro.md",
@@ -4700,11 +4700,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Using MessagePack in .Net ",
-    "permalink": "/docs/devtools/dataformats/msgpack-lite/csharp-example"
+    "permalink": "/dist/client-docs/docs/devtools/dataformats/msgpack-lite/csharp-example"
   },
   "next": {
     "title": "Git",
-    "permalink": "/docs/devtools/versioncontrol/git"
+    "permalink": "/dist/client-docs/docs/devtools/versioncontrol/git"
   }
 };
 const assets = {
@@ -4782,7 +4782,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/04-versioncontrol/01-git.md",
   "sourceDirName": "015-devtools/04-versioncontrol",
   "slug": "/devtools/versioncontrol/git",
-  "permalink": "/docs/devtools/versioncontrol/git",
+  "permalink": "/dist/client-docs/docs/devtools/versioncontrol/git",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/04-versioncontrol/01-git.md",
@@ -4798,11 +4798,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Introduction",
-    "permalink": "/docs/devtools/versioncontrol/intro"
+    "permalink": "/dist/client-docs/docs/devtools/versioncontrol/intro"
   },
   "next": {
     "title": "SVN",
-    "permalink": "/docs/devtools/versioncontrol/svn"
+    "permalink": "/dist/client-docs/docs/devtools/versioncontrol/svn"
   }
 };
 const assets = {
@@ -4913,7 +4913,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/04-versioncontrol/02-svn.md",
   "sourceDirName": "015-devtools/04-versioncontrol",
   "slug": "/devtools/versioncontrol/svn",
-  "permalink": "/docs/devtools/versioncontrol/svn",
+  "permalink": "/dist/client-docs/docs/devtools/versioncontrol/svn",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/04-versioncontrol/02-svn.md",
@@ -4929,11 +4929,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Git",
-    "permalink": "/docs/devtools/versioncontrol/git"
+    "permalink": "/dist/client-docs/docs/devtools/versioncontrol/git"
   },
   "next": {
     "title": "Mercurial",
-    "permalink": "/docs/devtools/versioncontrol/mercurial"
+    "permalink": "/dist/client-docs/docs/devtools/versioncontrol/mercurial"
   }
 };
 const assets = {
@@ -5044,7 +5044,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/04-versioncontrol/03-mercurial.md",
   "sourceDirName": "015-devtools/04-versioncontrol",
   "slug": "/devtools/versioncontrol/mercurial",
-  "permalink": "/docs/devtools/versioncontrol/mercurial",
+  "permalink": "/dist/client-docs/docs/devtools/versioncontrol/mercurial",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/04-versioncontrol/03-mercurial.md",
@@ -5060,11 +5060,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "SVN",
-    "permalink": "/docs/devtools/versioncontrol/svn"
+    "permalink": "/dist/client-docs/docs/devtools/versioncontrol/svn"
   },
   "next": {
     "title": "In brief",
-    "permalink": "/docs/learn/dotnet/dotnet.core/intro"
+    "permalink": "/dist/client-docs/docs/learn/dotnet/dotnet.core/intro"
   }
 };
 const assets = {
@@ -5175,7 +5175,7 @@ const metadata = {
   "source": "@site/docs/015-devtools/intro.md",
   "sourceDirName": "015-devtools",
   "slug": "/devtools/intro",
-  "permalink": "/docs/devtools/intro",
+  "permalink": "/dist/client-docs/docs/devtools/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/015-devtools/intro.md",
@@ -5191,11 +5191,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "CI/CD automation steps",
-    "permalink": "/docs/cicd/overview"
+    "permalink": "/dist/client-docs/docs/cicd/overview"
   },
   "next": {
     "title": "Object-oriented programming",
-    "permalink": "/docs/devtools/languages/opp"
+    "permalink": "/dist/client-docs/docs/devtools/languages/opp"
   }
 };
 const assets = {
@@ -5261,7 +5261,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0201-dotnet/dotnet.core/intro.md",
   "sourceDirName": "020-learn/0201-dotnet/dotnet.core",
   "slug": "/learn/dotnet/dotnet.core/intro",
-  "permalink": "/docs/learn/dotnet/dotnet.core/intro",
+  "permalink": "/dist/client-docs/docs/learn/dotnet/dotnet.core/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0201-dotnet/dotnet.core/intro.md",
@@ -5277,11 +5277,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Mercurial",
-    "permalink": "/docs/devtools/versioncontrol/mercurial"
+    "permalink": "/dist/client-docs/docs/devtools/versioncontrol/mercurial"
   },
   "next": {
     "title": "React Single Page Application",
-    "permalink": "/docs/learn/react/intro"
+    "permalink": "/dist/client-docs/docs/learn/react/intro"
   }
 };
 const assets = {
@@ -5347,7 +5347,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0202-react/Axios/axios.md",
   "sourceDirName": "020-learn/0202-react/Axios",
   "slug": "/learn/react/Axios/",
-  "permalink": "/docs/learn/react/Axios/",
+  "permalink": "/dist/client-docs/docs/learn/react/Axios/",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/Axios/axios.md",
@@ -5363,11 +5363,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "useFetch()",
-    "permalink": "/docs/learn/react/Hooks/useFetch"
+    "permalink": "/dist/client-docs/docs/learn/react/Hooks/useFetch"
   },
   "next": {
     "title": "Redux vs Redux toolkit",
-    "permalink": "/docs/learn/react/Redux/Redux-Basic-Example"
+    "permalink": "/dist/client-docs/docs/learn/react/Redux/Redux-Basic-Example"
   }
 };
 const assets = {
@@ -5456,7 +5456,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0202-react/Basics/handle-data-from-api.md",
   "sourceDirName": "020-learn/0202-react/Basics",
   "slug": "/learn/react/Basics/handle-data-from-api",
-  "permalink": "/docs/learn/react/Basics/handle-data-from-api",
+  "permalink": "/dist/client-docs/docs/learn/react/Basics/handle-data-from-api",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/Basics/handle-data-from-api.md",
@@ -5471,11 +5471,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "React Single Page Application",
-    "permalink": "/docs/learn/react/intro"
+    "permalink": "/dist/client-docs/docs/learn/react/intro"
   },
   "next": {
     "title": "useFetch()",
-    "permalink": "/docs/learn/react/Hooks/useFetch"
+    "permalink": "/dist/client-docs/docs/learn/react/Hooks/useFetch"
   }
 };
 const assets = {
@@ -5613,7 +5613,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0202-react/Hooks/useFetch.md",
   "sourceDirName": "020-learn/0202-react/Hooks",
   "slug": "/learn/react/Hooks/useFetch",
-  "permalink": "/docs/learn/react/Hooks/useFetch",
+  "permalink": "/dist/client-docs/docs/learn/react/Hooks/useFetch",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/Hooks/useFetch.md",
@@ -5628,11 +5628,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Handle Data from API",
-    "permalink": "/docs/learn/react/Basics/handle-data-from-api"
+    "permalink": "/dist/client-docs/docs/learn/react/Basics/handle-data-from-api"
   },
   "next": {
     "title": "Axios",
-    "permalink": "/docs/learn/react/Axios/"
+    "permalink": "/dist/client-docs/docs/learn/react/Axios/"
   }
 };
 const assets = {
@@ -5699,7 +5699,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0202-react/Redux/Redux-Basic-Example.md",
   "sourceDirName": "020-learn/0202-react/Redux",
   "slug": "/learn/react/Redux/Redux-Basic-Example",
-  "permalink": "/docs/learn/react/Redux/Redux-Basic-Example",
+  "permalink": "/dist/client-docs/docs/learn/react/Redux/Redux-Basic-Example",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/Redux/Redux-Basic-Example.md",
@@ -5715,11 +5715,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Axios",
-    "permalink": "/docs/learn/react/Axios/"
+    "permalink": "/dist/client-docs/docs/learn/react/Axios/"
   },
   "next": {
     "title": "What is GIT",
-    "permalink": "/docs/learn/git"
+    "permalink": "/dist/client-docs/docs/learn/git"
   }
 };
 const assets = {
@@ -5934,7 +5934,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0202-react/intro.md",
   "sourceDirName": "020-learn/0202-react",
   "slug": "/learn/react/intro",
-  "permalink": "/docs/learn/react/intro",
+  "permalink": "/dist/client-docs/docs/learn/react/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0202-react/intro.md",
@@ -5950,11 +5950,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "In brief",
-    "permalink": "/docs/learn/dotnet/dotnet.core/intro"
+    "permalink": "/dist/client-docs/docs/learn/dotnet/dotnet.core/intro"
   },
   "next": {
     "title": "Handle Data from API",
-    "permalink": "/docs/learn/react/Basics/handle-data-from-api"
+    "permalink": "/dist/client-docs/docs/learn/react/Basics/handle-data-from-api"
   }
 };
 const assets = {
@@ -6027,7 +6027,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0203-git/how-to/overwite-local-repo.md",
   "sourceDirName": "020-learn/0203-git/how-to",
   "slug": "/learn/git/overwriting-local-repo",
-  "permalink": "/docs/learn/git/overwriting-local-repo",
+  "permalink": "/dist/client-docs/docs/learn/git/overwriting-local-repo",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/how-to/overwite-local-repo.md",
@@ -6044,11 +6044,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Git Fetch vs Git Pull",
-    "permalink": "/docs/learn/git/fetchpull"
+    "permalink": "/dist/client-docs/docs/learn/git/fetchpull"
   },
   "next": {
     "title": "Remove last changes",
-    "permalink": "/docs/learn/git/deserialization"
+    "permalink": "/dist/client-docs/docs/learn/git/deserialization"
   }
 };
 const assets = {
@@ -6199,7 +6199,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0203-git/how-to/remove-last-changes.md",
   "sourceDirName": "020-learn/0203-git/how-to",
   "slug": "/learn/git/deserialization",
-  "permalink": "/docs/learn/git/deserialization",
+  "permalink": "/dist/client-docs/docs/learn/git/deserialization",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/how-to/remove-last-changes.md",
@@ -6216,11 +6216,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Overwriting local with remote repo",
-    "permalink": "/docs/learn/git/overwriting-local-repo"
+    "permalink": "/dist/client-docs/docs/learn/git/overwriting-local-repo"
   },
   "next": {
     "title": "Rollback to a previous state",
-    "permalink": "/docs/learn/git/rollback-commit"
+    "permalink": "/dist/client-docs/docs/learn/git/rollback-commit"
   }
 };
 const assets = {
@@ -6407,7 +6407,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0203-git/how-to/rollback.md",
   "sourceDirName": "020-learn/0203-git/how-to",
   "slug": "/learn/git/rollback-commit",
-  "permalink": "/docs/learn/git/rollback-commit",
+  "permalink": "/dist/client-docs/docs/learn/git/rollback-commit",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/how-to/rollback.md",
@@ -6424,11 +6424,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Remove last changes",
-    "permalink": "/docs/learn/git/deserialization"
+    "permalink": "/dist/client-docs/docs/learn/git/deserialization"
   },
   "next": {
     "title": ".Net Core",
-    "permalink": "/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core"
   }
 };
 const assets = {
@@ -6604,7 +6604,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0203-git/overview/fetch-pull.md",
   "sourceDirName": "020-learn/0203-git/overview",
   "slug": "/learn/git/fetchpull",
-  "permalink": "/docs/learn/git/fetchpull",
+  "permalink": "/dist/client-docs/docs/learn/git/fetchpull",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/overview/fetch-pull.md",
@@ -6621,11 +6621,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "What is GIT",
-    "permalink": "/docs/learn/git"
+    "permalink": "/dist/client-docs/docs/learn/git"
   },
   "next": {
     "title": "Overwriting local with remote repo",
-    "permalink": "/docs/learn/git/overwriting-local-repo"
+    "permalink": "/dist/client-docs/docs/learn/git/overwriting-local-repo"
   }
 };
 const assets = {
@@ -6734,7 +6734,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0203-git/overview/set-up-git.md",
   "sourceDirName": "020-learn/0203-git/overview",
   "slug": "/learn/git",
-  "permalink": "/docs/learn/git",
+  "permalink": "/dist/client-docs/docs/learn/git",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0203-git/overview/set-up-git.md",
@@ -6751,11 +6751,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Redux vs Redux toolkit",
-    "permalink": "/docs/learn/react/Redux/Redux-Basic-Example"
+    "permalink": "/dist/client-docs/docs/learn/react/Redux/Redux-Basic-Example"
   },
   "next": {
     "title": "Git Fetch vs Git Pull",
-    "permalink": "/docs/learn/git/fetchpull"
+    "permalink": "/dist/client-docs/docs/learn/git/fetchpull"
   }
 };
 const assets = {
@@ -6929,7 +6929,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-azure-devops-services.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops",
   "slug": "/learn/cicd-pipelines/azure-devops/azure-devops-services",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/azure-devops-services",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-devops-services",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-azure-devops-services.md",
@@ -6945,11 +6945,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Azure DevOps Server",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/intro"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/intro"
   },
   "next": {
     "title": "Testing pipeline",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-pipeline"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-pipeline"
   }
 };
 const assets = {
@@ -7093,7 +7093,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/01-print-dir-contents.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts",
   "slug": "/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/01-print-dir-contents.md",
@@ -7109,11 +7109,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Azure Pipelines",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/azure-pipelines"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-pipelines"
   },
   "next": {
     "title": "Triggers in YAML pipelines",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers"
   }
 };
 const assets = {
@@ -7204,7 +7204,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/02-triggers.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts",
   "slug": "/learn/cicd-pipelines/azure-devops/yamlscripts/triggers",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/02-triggers.md",
@@ -7220,11 +7220,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Print directory contents",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents"
   },
   "next": {
     "title": "YAML templates",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates"
   }
 };
 const assets = {
@@ -7354,7 +7354,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/03-Yaml-templates.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts",
   "slug": "/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/03-Yaml-templates.md",
@@ -7370,11 +7370,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Triggers in YAML pipelines",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers"
   },
   "next": {
     "title": "Re-use YAML templates",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template"
   }
 };
 const assets = {
@@ -7464,7 +7464,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/04-reuse-template.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts",
   "slug": "/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/04-reuse-template.md",
@@ -7480,11 +7480,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "YAML templates",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates"
   },
   "next": {
     "title": "Agent in YAML pipeline",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent"
   }
 };
 const assets = {
@@ -7663,7 +7663,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/05-agent.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts",
   "slug": "/learn/cicd-pipelines/azure-devops/yamlscripts/agent",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/05-agent.md",
@@ -7679,11 +7679,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Re-use YAML templates",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template"
   },
   "next": {
     "title": "Azure Test Plans",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans"
   }
 };
 const assets = {
@@ -7840,7 +7840,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0101-intro.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops",
   "slug": "/learn/cicd-pipelines/azure-devops/intro",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/intro",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0101-intro.md",
@@ -7856,11 +7856,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "intro",
-    "permalink": "/docs/learn/cicd-pipelines/azure/cloud-shell/intro"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/cloud-shell/intro"
   },
   "next": {
     "title": "Azure DevOps Services",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/azure-devops-services"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-devops-services"
   }
 };
 const assets = {
@@ -7986,7 +7986,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0102-test-pipeline.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops",
   "slug": "/learn/cicd-pipelines/azure-devops/test-pipeline",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-pipeline",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-pipeline",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0102-test-pipeline.md",
@@ -8002,11 +8002,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Azure DevOps Services",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/azure-devops-services"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-devops-services"
   },
   "next": {
     "title": "Azure Pipelines",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/azure-pipelines"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-pipelines"
   }
 };
 const assets = {
@@ -8128,7 +8128,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0103-azure-pipelines.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops",
   "slug": "/learn/cicd-pipelines/azure-devops/azure-pipelines",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/azure-pipelines",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-pipelines",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0103-azure-pipelines.md",
@@ -8144,11 +8144,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Testing pipeline",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-pipeline"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-pipeline"
   },
   "next": {
     "title": "Print directory contents",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents"
   }
 };
 const assets = {
@@ -8338,7 +8338,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/01-test-plans.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans",
   "slug": "/learn/cicd-pipelines/azure-devops/test-plans/test-plans",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/01-test-plans.md",
@@ -8354,11 +8354,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Agent in YAML pipeline",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent"
   },
   "next": {
     "title": "Create test cases",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases"
   }
 };
 const assets = {
@@ -8479,7 +8479,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/02-create-testcases.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans",
   "slug": "/learn/cicd-pipelines/azure-devops/test-plans/create-testcases",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/02-create-testcases.md",
@@ -8495,11 +8495,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Azure Test Plans",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans"
   },
   "next": {
     "title": "Test environment",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env"
   }
 };
 const assets = {
@@ -8619,7 +8619,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/03-test-env.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans",
   "slug": "/learn/cicd-pipelines/azure-devops/test-plans/test-env",
-  "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/03-test-env.md",
@@ -8635,11 +8635,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Create test cases",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases"
   },
   "next": {
     "title": "GitLab CI/CD overview",
-    "permalink": "/docs/learn/cicd-pipelines/gitlab-cicd/intro"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/gitlab-cicd/intro"
   }
 };
 const assets = {
@@ -8772,7 +8772,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure/010-intro.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure",
   "slug": "/learn/cicd-pipelines/azure/intro",
-  "permalink": "/docs/learn/cicd-pipelines/azure/intro",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure/010-intro.md",
@@ -8788,11 +8788,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": ".Net Core",
-    "permalink": "/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core"
   },
   "next": {
     "title": "vs. Azure DevOps Services",
-    "permalink": "/docs/learn/cicd-pipelines/azure/vs-devops-services"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/vs-devops-services"
   }
 };
 const assets = {
@@ -8883,7 +8883,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure/020-vs-devops-services.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure",
   "slug": "/learn/cicd-pipelines/azure/vs-devops-services",
-  "permalink": "/docs/learn/cicd-pipelines/azure/vs-devops-services",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/vs-devops-services",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure/020-vs-devops-services.md",
@@ -8899,11 +8899,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "App Service overview",
-    "permalink": "/docs/learn/cicd-pipelines/azure/intro"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/intro"
   },
   "next": {
     "title": "intro",
-    "permalink": "/docs/learn/cicd-pipelines/azure/cloud-shell/intro"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/cloud-shell/intro"
   }
 };
 const assets = {
@@ -9034,7 +9034,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure/cloud-shell/intro.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure/cloud-shell",
   "slug": "/learn/cicd-pipelines/azure/cloud-shell/intro",
-  "permalink": "/docs/learn/cicd-pipelines/azure/cloud-shell/intro",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/cloud-shell/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure/cloud-shell/intro.md",
@@ -9046,11 +9046,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "vs. Azure DevOps Services",
-    "permalink": "/docs/learn/cicd-pipelines/azure/vs-devops-services"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/vs-devops-services"
   },
   "next": {
     "title": "Azure DevOps Server",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/intro"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/intro"
   }
 };
 const assets = {
@@ -9116,7 +9116,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/azure/tasks/build-tasks/dotnet.core.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/azure/tasks/build-tasks",
   "slug": "/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core",
-  "permalink": "/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/azure/tasks/build-tasks/dotnet.core.md",
@@ -9132,11 +9132,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Rollback to a previous state",
-    "permalink": "/docs/learn/git/rollback-commit"
+    "permalink": "/dist/client-docs/docs/learn/git/rollback-commit"
   },
   "next": {
     "title": "App Service overview",
-    "permalink": "/docs/learn/cicd-pipelines/azure/intro"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure/intro"
   }
 };
 const assets = {
@@ -9202,7 +9202,7 @@ const metadata = {
   "source": "@site/docs/020-learn/0204-cicd-pipelines/gitlab-cicd/01-intro.md",
   "sourceDirName": "020-learn/0204-cicd-pipelines/gitlab-cicd",
   "slug": "/learn/cicd-pipelines/gitlab-cicd/intro",
-  "permalink": "/docs/learn/cicd-pipelines/gitlab-cicd/intro",
+  "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/gitlab-cicd/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/020-learn/0204-cicd-pipelines/gitlab-cicd/01-intro.md",
@@ -9218,11 +9218,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Test environment",
-    "permalink": "/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env"
   },
   "next": {
     "title": "Deploying a Web App on Azure",
-    "permalink": "/docs/guide/azure-deploy-webapp"
+    "permalink": "/dist/client-docs/docs/guide/azure-deploy-webapp"
   }
 };
 const assets = {
@@ -9342,7 +9342,7 @@ const metadata = {
   "source": "@site/docs/030-guide/azure-deploy-webapi.md",
   "sourceDirName": "030-guide",
   "slug": "/guide/azure-deploy-webapi",
-  "permalink": "/docs/guide/azure-deploy-webapi",
+  "permalink": "/dist/client-docs/docs/guide/azure-deploy-webapi",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/030-guide/azure-deploy-webapi.md",
@@ -9358,11 +9358,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "template",
-    "permalink": "/docs/guide/guide-list"
+    "permalink": "/dist/client-docs/docs/guide/guide-list"
   },
   "next": {
     "title": "Applications of Science",
-    "permalink": "/docs/science-applications"
+    "permalink": "/dist/client-docs/docs/science-applications"
   }
 };
 const assets = {
@@ -9444,7 +9444,7 @@ const metadata = {
   "source": "@site/docs/030-guide/azure-deploy-webapp.md",
   "sourceDirName": "030-guide",
   "slug": "/guide/azure-deploy-webapp",
-  "permalink": "/docs/guide/azure-deploy-webapp",
+  "permalink": "/dist/client-docs/docs/guide/azure-deploy-webapp",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/030-guide/azure-deploy-webapp.md",
@@ -9460,11 +9460,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "GitLab CI/CD overview",
-    "permalink": "/docs/learn/cicd-pipelines/gitlab-cicd/intro"
+    "permalink": "/dist/client-docs/docs/learn/cicd-pipelines/gitlab-cicd/intro"
   },
   "next": {
     "title": "template",
-    "permalink": "/docs/guide/guide-list"
+    "permalink": "/dist/client-docs/docs/guide/guide-list"
   }
 };
 const assets = {
@@ -9546,7 +9546,7 @@ const metadata = {
   "source": "@site/docs/030-guide/guide-list.md",
   "sourceDirName": "030-guide",
   "slug": "/guide/guide-list",
-  "permalink": "/docs/guide/guide-list",
+  "permalink": "/dist/client-docs/docs/guide/guide-list",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/030-guide/guide-list.md",
@@ -9562,11 +9562,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Deploying a Web App on Azure",
-    "permalink": "/docs/guide/azure-deploy-webapp"
+    "permalink": "/dist/client-docs/docs/guide/azure-deploy-webapp"
   },
   "next": {
     "title": "Deploying .NET Core application to App Service",
-    "permalink": "/docs/guide/azure-deploy-webapi"
+    "permalink": "/dist/client-docs/docs/guide/azure-deploy-webapi"
   }
 };
 const assets = {
@@ -9626,7 +9626,7 @@ const metadata = {
   "source": "@site/docs/Glossary/MIME-type.md",
   "sourceDirName": "Glossary",
   "slug": "/content-type-mime",
-  "permalink": "/docs/content-type-mime",
+  "permalink": "/dist/client-docs/docs/content-type-mime",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/MIME-type.md",
@@ -9643,11 +9643,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Engineering",
-    "permalink": "/docs/engineering"
+    "permalink": "/dist/client-docs/docs/engineering"
   },
   "next": {
     "title": "JSON Serialization",
-    "permalink": "/docs/serialization"
+    "permalink": "/dist/client-docs/docs/serialization"
   }
 };
 const assets = {
@@ -9842,7 +9842,7 @@ const metadata = {
   "source": "@site/docs/Glossary/Serialization.md",
   "sourceDirName": "Glossary",
   "slug": "/serialization",
-  "permalink": "/docs/serialization",
+  "permalink": "/dist/client-docs/docs/serialization",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/Serialization.md",
@@ -9859,11 +9859,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "MIME/Media/Content Type",
-    "permalink": "/docs/content-type-mime"
+    "permalink": "/dist/client-docs/docs/content-type-mime"
   },
   "next": {
     "title": "Technology",
-    "permalink": "/docs/technology"
+    "permalink": "/dist/client-docs/docs/technology"
   }
 };
 const assets = {
@@ -9951,7 +9951,7 @@ const metadata = {
   "source": "@site/docs/Glossary/applications-of-science.md",
   "sourceDirName": "Glossary",
   "slug": "/science-applications",
-  "permalink": "/docs/science-applications",
+  "permalink": "/dist/client-docs/docs/science-applications",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/applications-of-science.md",
@@ -9968,11 +9968,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Deploying .NET Core application to App Service",
-    "permalink": "/docs/guide/azure-deploy-webapi"
+    "permalink": "/dist/client-docs/docs/guide/azure-deploy-webapi"
   },
   "next": {
     "title": "JSON Deserialization",
-    "permalink": "/docs/deserialization"
+    "permalink": "/dist/client-docs/docs/deserialization"
   }
 };
 const assets = {
@@ -10052,7 +10052,7 @@ const metadata = {
   "source": "@site/docs/Glossary/deserialization.md",
   "sourceDirName": "Glossary",
   "slug": "/deserialization",
-  "permalink": "/docs/deserialization",
+  "permalink": "/dist/client-docs/docs/deserialization",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/deserialization.md",
@@ -10069,11 +10069,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "Applications of Science",
-    "permalink": "/docs/science-applications"
+    "permalink": "/dist/client-docs/docs/science-applications"
   },
   "next": {
     "title": "Engineering",
-    "permalink": "/docs/engineering"
+    "permalink": "/dist/client-docs/docs/engineering"
   }
 };
 const assets = {
@@ -10178,7 +10178,7 @@ const metadata = {
   "source": "@site/docs/Glossary/engineering.md",
   "sourceDirName": "Glossary",
   "slug": "/engineering",
-  "permalink": "/docs/engineering",
+  "permalink": "/dist/client-docs/docs/engineering",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/engineering.md",
@@ -10195,11 +10195,11 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "JSON Deserialization",
-    "permalink": "/docs/deserialization"
+    "permalink": "/dist/client-docs/docs/deserialization"
   },
   "next": {
     "title": "MIME/Media/Content Type",
-    "permalink": "/docs/content-type-mime"
+    "permalink": "/dist/client-docs/docs/content-type-mime"
   }
 };
 const assets = {
@@ -10292,7 +10292,7 @@ const metadata = {
   "source": "@site/docs/Glossary/technology.md",
   "sourceDirName": "Glossary",
   "slug": "/technology",
-  "permalink": "/docs/technology",
+  "permalink": "/dist/client-docs/docs/technology",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/Glossary/technology.md",
@@ -10309,7 +10309,7 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "previous": {
     "title": "JSON Serialization",
-    "permalink": "/docs/serialization"
+    "permalink": "/dist/client-docs/docs/serialization"
   }
 };
 const assets = {
@@ -10382,7 +10382,7 @@ const metadata = {
   "source": "@site/docs/intro.md",
   "sourceDirName": ".",
   "slug": "/intro",
-  "permalink": "/docs/intro",
+  "permalink": "/dist/client-docs/docs/intro",
   "draft": false,
   "unlisted": false,
   "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/docs/intro.md",
@@ -10398,7 +10398,7 @@ const metadata = {
   "sidebar": "tutorialSidebar",
   "next": {
     "title": "The needs of the stakeholders",
-    "permalink": "/docs/software-development/Requirements/intro"
+    "permalink": "/dist/client-docs/docs/software-development/Requirements/intro"
   }
 };
 const assets = {
@@ -10521,8 +10521,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/welcome",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-15-welcome.md",
+  "permalink": "/dist/client-docs/blog/welcome",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2021-06-15-welcome.md",
   "source": "@site/blog/2021-06-15-welcome.md",
   "title": "Welcome!",
   "description": "Hi there!",
@@ -10530,11 +10530,11 @@ const metadata = {
   "tags": [
     {
       "label": "Docusaurus",
-      "permalink": "/blog/tags/docusaurus"
+      "permalink": "/dist/client-docs/blog/tags/docusaurus"
     },
     {
       "label": "Static Site Generator",
-      "permalink": "/blog/tags/static-site-generator"
+      "permalink": "/dist/client-docs/blog/tags/static-site-generator"
     }
   ],
   "readingTime": 0.27,
@@ -10562,7 +10562,7 @@ const metadata = {
   "unlisted": false,
   "prevItem": {
     "title": "Computer coding for science",
-    "permalink": "/blog/opening-post"
+    "permalink": "/dist/client-docs/blog/opening-post"
   }
 };
 const assets = {
@@ -10655,8 +10655,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/welcome",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-15-welcome.md",
+  "permalink": "/dist/client-docs/blog/welcome",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2021-06-15-welcome.md",
   "source": "@site/blog/2021-06-15-welcome.md",
   "title": "Welcome!",
   "description": "Hi there!",
@@ -10664,11 +10664,11 @@ const metadata = {
   "tags": [
     {
       "label": "Docusaurus",
-      "permalink": "/blog/tags/docusaurus"
+      "permalink": "/dist/client-docs/blog/tags/docusaurus"
     },
     {
       "label": "Static Site Generator",
-      "permalink": "/blog/tags/static-site-generator"
+      "permalink": "/dist/client-docs/blog/tags/static-site-generator"
     }
   ],
   "readingTime": 0.27,
@@ -10696,7 +10696,7 @@ const metadata = {
   "unlisted": false,
   "prevItem": {
     "title": "Computer coding for science",
-    "permalink": "/blog/opening-post"
+    "permalink": "/dist/client-docs/blog/opening-post"
   }
 };
 const assets = {
@@ -10789,8 +10789,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/opening-post",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-16-StartPost.md",
+  "permalink": "/dist/client-docs/blog/opening-post",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2021-06-16-StartPost.md",
   "source": "@site/blog/2021-06-16-StartPost.md",
   "title": "Computer coding for science",
   "description": "The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.",
@@ -10798,11 +10798,11 @@ const metadata = {
   "tags": [
     {
       "label": "xitechnix",
-      "permalink": "/blog/tags/xitechnix"
+      "permalink": "/dist/client-docs/blog/tags/xitechnix"
     },
     {
       "label": "programming",
-      "permalink": "/blog/tags/programming"
+      "permalink": "/dist/client-docs/blog/tags/programming"
     }
   ],
   "readingTime": 1.145,
@@ -10830,11 +10830,11 @@ const metadata = {
   "unlisted": false,
   "prevItem": {
     "title": "Some general benefits of lab automation",
-    "permalink": "/blog/lab-automation-benefits"
+    "permalink": "/dist/client-docs/blog/lab-automation-benefits"
   },
   "nextItem": {
     "title": "Welcome!",
-    "permalink": "/blog/welcome"
+    "permalink": "/dist/client-docs/blog/welcome"
   }
 };
 const assets = {
@@ -10921,8 +10921,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/opening-post",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-16-StartPost.md",
+  "permalink": "/dist/client-docs/blog/opening-post",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2021-06-16-StartPost.md",
   "source": "@site/blog/2021-06-16-StartPost.md",
   "title": "Computer coding for science",
   "description": "The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.",
@@ -10930,11 +10930,11 @@ const metadata = {
   "tags": [
     {
       "label": "xitechnix",
-      "permalink": "/blog/tags/xitechnix"
+      "permalink": "/dist/client-docs/blog/tags/xitechnix"
     },
     {
       "label": "programming",
-      "permalink": "/blog/tags/programming"
+      "permalink": "/dist/client-docs/blog/tags/programming"
     }
   ],
   "readingTime": 1.145,
@@ -10962,11 +10962,11 @@ const metadata = {
   "unlisted": false,
   "prevItem": {
     "title": "Some general benefits of lab automation",
-    "permalink": "/blog/lab-automation-benefits"
+    "permalink": "/dist/client-docs/blog/lab-automation-benefits"
   },
   "nextItem": {
     "title": "Welcome!",
-    "permalink": "/blog/welcome"
+    "permalink": "/dist/client-docs/blog/welcome"
   }
 };
 const assets = {
@@ -11055,8 +11055,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/lab-automation-benefits",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-12-LabAutomationBenefits.md",
+  "permalink": "/dist/client-docs/blog/lab-automation-benefits",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-05-12-LabAutomationBenefits.md",
   "source": "@site/blog/2023-05-12-LabAutomationBenefits.md",
   "title": "Some general benefits of lab automation",
   "description": "Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:",
@@ -11064,19 +11064,19 @@ const metadata = {
   "tags": [
     {
       "label": "automation",
-      "permalink": "/blog/tags/automation"
+      "permalink": "/dist/client-docs/blog/tags/automation"
     },
     {
       "label": "lab automation",
-      "permalink": "/blog/tags/lab-automation"
+      "permalink": "/dist/client-docs/blog/tags/lab-automation"
     },
     {
       "label": "technology",
-      "permalink": "/blog/tags/technology"
+      "permalink": "/dist/client-docs/blog/tags/technology"
     },
     {
       "label": "Data Management",
-      "permalink": "/blog/tags/data-management"
+      "permalink": "/dist/client-docs/blog/tags/data-management"
     }
   ],
   "readingTime": 0.935,
@@ -11106,11 +11106,11 @@ const metadata = {
   "unlisted": false,
   "prevItem": {
     "title": "Challenges in lab automation",
-    "permalink": "/blog/lab-automation-main-challenges"
+    "permalink": "/dist/client-docs/blog/lab-automation-main-challenges"
   },
   "nextItem": {
     "title": "Computer coding for science",
-    "permalink": "/blog/opening-post"
+    "permalink": "/dist/client-docs/blog/opening-post"
   }
 };
 const assets = {
@@ -11265,8 +11265,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/lab-automation-benefits",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-12-LabAutomationBenefits.md",
+  "permalink": "/dist/client-docs/blog/lab-automation-benefits",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-05-12-LabAutomationBenefits.md",
   "source": "@site/blog/2023-05-12-LabAutomationBenefits.md",
   "title": "Some general benefits of lab automation",
   "description": "Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:",
@@ -11274,19 +11274,19 @@ const metadata = {
   "tags": [
     {
       "label": "automation",
-      "permalink": "/blog/tags/automation"
+      "permalink": "/dist/client-docs/blog/tags/automation"
     },
     {
       "label": "lab automation",
-      "permalink": "/blog/tags/lab-automation"
+      "permalink": "/dist/client-docs/blog/tags/lab-automation"
     },
     {
       "label": "technology",
-      "permalink": "/blog/tags/technology"
+      "permalink": "/dist/client-docs/blog/tags/technology"
     },
     {
       "label": "Data Management",
-      "permalink": "/blog/tags/data-management"
+      "permalink": "/dist/client-docs/blog/tags/data-management"
     }
   ],
   "readingTime": 0.935,
@@ -11316,11 +11316,11 @@ const metadata = {
   "unlisted": false,
   "prevItem": {
     "title": "Challenges in lab automation",
-    "permalink": "/blog/lab-automation-main-challenges"
+    "permalink": "/dist/client-docs/blog/lab-automation-main-challenges"
   },
   "nextItem": {
     "title": "Computer coding for science",
-    "permalink": "/blog/opening-post"
+    "permalink": "/dist/client-docs/blog/opening-post"
   }
 };
 const assets = {
@@ -11475,8 +11475,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/lab-automation-main-challenges",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-15-LabAutomationChallenges.md",
+  "permalink": "/dist/client-docs/blog/lab-automation-main-challenges",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-05-15-LabAutomationChallenges.md",
   "source": "@site/blog/2023-05-15-LabAutomationChallenges.md",
   "title": "Challenges in lab automation",
   "description": "Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:",
@@ -11484,19 +11484,19 @@ const metadata = {
   "tags": [
     {
       "label": "automation",
-      "permalink": "/blog/tags/automation"
+      "permalink": "/dist/client-docs/blog/tags/automation"
     },
     {
       "label": "lab automation",
-      "permalink": "/blog/tags/lab-automation"
+      "permalink": "/dist/client-docs/blog/tags/lab-automation"
     },
     {
       "label": "technology",
-      "permalink": "/blog/tags/technology"
+      "permalink": "/dist/client-docs/blog/tags/technology"
     },
     {
       "label": "future challenges",
-      "permalink": "/blog/tags/future-challenges"
+      "permalink": "/dist/client-docs/blog/tags/future-challenges"
     }
   ],
   "readingTime": 0.985,
@@ -11526,11 +11526,11 @@ const metadata = {
   "unlisted": false,
   "prevItem": {
     "title": "What is happening behind the scene?",
-    "permalink": "/blog/styletron-react"
+    "permalink": "/dist/client-docs/blog/styletron-react"
   },
   "nextItem": {
     "title": "Some general benefits of lab automation",
-    "permalink": "/blog/lab-automation-benefits"
+    "permalink": "/dist/client-docs/blog/lab-automation-benefits"
   }
 };
 const assets = {
@@ -11640,8 +11640,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/lab-automation-main-challenges",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-15-LabAutomationChallenges.md",
+  "permalink": "/dist/client-docs/blog/lab-automation-main-challenges",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-05-15-LabAutomationChallenges.md",
   "source": "@site/blog/2023-05-15-LabAutomationChallenges.md",
   "title": "Challenges in lab automation",
   "description": "Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:",
@@ -11649,19 +11649,19 @@ const metadata = {
   "tags": [
     {
       "label": "automation",
-      "permalink": "/blog/tags/automation"
+      "permalink": "/dist/client-docs/blog/tags/automation"
     },
     {
       "label": "lab automation",
-      "permalink": "/blog/tags/lab-automation"
+      "permalink": "/dist/client-docs/blog/tags/lab-automation"
     },
     {
       "label": "technology",
-      "permalink": "/blog/tags/technology"
+      "permalink": "/dist/client-docs/blog/tags/technology"
     },
     {
       "label": "future challenges",
-      "permalink": "/blog/tags/future-challenges"
+      "permalink": "/dist/client-docs/blog/tags/future-challenges"
     }
   ],
   "readingTime": 0.985,
@@ -11691,11 +11691,11 @@ const metadata = {
   "unlisted": false,
   "prevItem": {
     "title": "What is happening behind the scene?",
-    "permalink": "/blog/styletron-react"
+    "permalink": "/dist/client-docs/blog/styletron-react"
   },
   "nextItem": {
     "title": "Some general benefits of lab automation",
-    "permalink": "/blog/lab-automation-benefits"
+    "permalink": "/dist/client-docs/blog/lab-automation-benefits"
   }
 };
 const assets = {
@@ -11799,8 +11799,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/styletron-react",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-08-26-styletron/index.md",
+  "permalink": "/dist/client-docs/blog/styletron-react",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-08-26-styletron/index.md",
   "source": "@site/blog/2023-08-26-styletron/index.md",
   "title": "What is happening behind the scene?",
   "description": "Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:",
@@ -11808,7 +11808,7 @@ const metadata = {
   "tags": [
     {
       "label": "styletron-react",
-      "permalink": "/blog/tags/styletron-react"
+      "permalink": "/dist/client-docs/blog/tags/styletron-react"
     }
   ],
   "readingTime": 0.34,
@@ -11829,7 +11829,7 @@ const metadata = {
   "unlisted": false,
   "nextItem": {
     "title": "Challenges in lab automation",
-    "permalink": "/blog/lab-automation-main-challenges"
+    "permalink": "/dist/client-docs/blog/lab-automation-main-challenges"
   }
 };
 const assets = {
@@ -11916,8 +11916,8 @@ const frontMatter = {
 };
 const contentTitle = undefined;
 const metadata = {
-  "permalink": "/blog/styletron-react",
-  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-08-26-styletron/index.md",
+  "permalink": "/dist/client-docs/blog/styletron-react",
+  "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-08-26-styletron/index.md",
   "source": "@site/blog/2023-08-26-styletron/index.md",
   "title": "What is happening behind the scene?",
   "description": "Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:",
@@ -11925,7 +11925,7 @@ const metadata = {
   "tags": [
     {
       "label": "styletron-react",
-      "permalink": "/blog/tags/styletron-react"
+      "permalink": "/dist/client-docs/blog/tags/styletron-react"
     }
   ],
   "readingTime": 0.34,
@@ -11946,7 +11946,7 @@ const metadata = {
   "unlisted": false,
   "nextItem": {
     "title": "Challenges in lab automation",
-    "permalink": "/blog/lab-automation-main-challenges"
+    "permalink": "/dist/client-docs/blog/lab-automation-main-challenges"
   }
 };
 const assets = {
@@ -14635,9 +14635,9 @@ function _interopRequireWildcard(e, r) {
 var lib = __webpack_require__(3259);
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 ;// CONCATENATED MODULE: ./client-docs/.docusaurus/routesChunkNames.json
-const routesChunkNames_namespaceObject = /*#__PURE__*/JSON.parse('{"/about-us-b0c":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"ccee9b10"},"/blog-2ba":{"__comp":"a6aa9e1f","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"0e6a07db"},{"content":"babce472"},{"content":"39cd7291"},{"content":"1e8aa8e5"},{"content":"a8d51800"}],"metadata":"b2b675dd"},"/blog/archive-4f6":{"__comp":"9e4087bc","__context":{"plugin":"04f5f57a"},"archive":"b2f554cd"},"/blog/lab-automation-benefits-cf5":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"dfacd4f5"},"/blog/lab-automation-main-challenges-842":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"597c8688"},"/blog/opening-post-09f":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"90981a12"},"/blog/styletron-react-575":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"3ac80af1"},"/blog/tags-cc3":{"__comp":"01a85c17","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","tags":"a7023ddc"},"/blog/tags/automation-234":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"4bd5fd33","listMetadata":"0abe3c97"},"/blog/tags/data-management-445":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"39cd7291"}],"tag":"9b5de985","listMetadata":"6db22764"},"/blog/tags/docusaurus-953":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"a8d51800"}],"tag":"a80da1cf","listMetadata":"608ae6a4"},"/blog/tags/future-challenges-a67":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"}],"tag":"d809e4f5","listMetadata":"328d46a1"},"/blog/tags/lab-automation-82d":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"774607ab","listMetadata":"ed737e2e"},"/blog/tags/programming-b0d":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"1e8aa8e5"}],"tag":"f5426078","listMetadata":"448c2acc"},"/blog/tags/static-site-generator-a71":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"a8d51800"}],"tag":"8a248bbe","listMetadata":"92dacbd5"},"/blog/tags/styletron-react-8cb":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"0e6a07db"}],"tag":"673128bd","listMetadata":"d3cf3c3b"},"/blog/tags/technology-0e8":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"55207995","listMetadata":"d7f54ba9"},"/blog/tags/xitechnix-ad8":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"1e8aa8e5"}],"tag":"9dd638df","listMetadata":"fa0dcaff"},"/blog/welcome-a71":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"5372cbae"},"/contact/-c63":{"__comp":"08462523","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/ContactUs-0f7":{"__comp":"a2685df2","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/cookies_en-8ef":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"8ac4b9bc"},"/disclaimers-ce1":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"2cc5ab56"},"/eula-0d2":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"a6735169"},"/markdown-page-b04":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"393be207"},"/docs-81b":{"__comp":"5e95c892","__context":{"plugin":"76741422"}},"/docs-dcb":{"__comp":"a7bd4aaa","version":"935f2afb"},"/docs-c9a":{"__comp":"a94703ab"},"/docs/cicd/overview-432":{"__comp":"17896441","content":"4eaedc3c"},"/docs/content-type-mime-d7c":{"__comp":"17896441","content":"8d47eece"},"/docs/deserialization-7dd":{"__comp":"17896441","content":"9c2ff75d"},"/docs/devtools/dataformats/csv/csv-ca9":{"__comp":"17896441","content":"7abb66ec"},"/docs/devtools/dataformats/json/json-overview/sch-dev-17e":{"__comp":"17896441","content":"a4a0a316"},"/docs/devtools/dataformats/msgpack-lite/csharp-example-48a":{"__comp":"17896441","content":"87454bc4"},"/docs/devtools/dataformats/msgpack-lite/msgpack-4aa":{"__comp":"17896441","content":"a76e5ed3"},"/docs/devtools/dataformats/msgpack-lite/ts-example-77d":{"__comp":"17896441","content":"46f3c203"},"/docs/devtools/dataformats/protobufjs/example-e85":{"__comp":"17896441","content":"68629bfb"},"/docs/devtools/dataformats/protobufjs/protobufjs-f02":{"__comp":"17896441","content":"666b7c06"},"/docs/devtools/dataformats/xml/xml-693":{"__comp":"17896441","content":"a2511f1c"},"/docs/devtools/dataformats/yaml/yaml-d41":{"__comp":"17896441","content":"42aca346"},"/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics-6a6":{"__comp":"17896441","content":"0e6d2c2e"},"/docs/devtools/frameworks-libraries/site-generators/create-a-page-ed1":{"__comp":"17896441","content":"8c8ad2a2"},"/docs/devtools/frameworks-libraries/site-generators/docusaurus-f5f":{"__comp":"17896441","content":"ed179930"},"/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics-5d5":{"__comp":"17896441","content":"e7b604ac"},"/docs/devtools/intro-37b":{"__comp":"17896441","content":"21d4c7f5"},"/docs/devtools/languages/opp-972":{"__comp":"17896441","content":"4feea794"},"/docs/devtools/versioncontrol/git-6d4":{"__comp":"17896441","content":"7e6e2bc0"},"/docs/devtools/versioncontrol/intro-456":{"__comp":"17896441","content":"a0992fef"},"/docs/devtools/versioncontrol/mercurial-1e2":{"__comp":"17896441","content":"62abd68f"},"/docs/devtools/versioncontrol/svn-9c5":{"__comp":"17896441","content":"e5339692"},"/docs/engineering-35b":{"__comp":"17896441","content":"3bfb1537"},"/docs/guide/azure-deploy-webapi-323":{"__comp":"17896441","content":"002585d6"},"/docs/guide/azure-deploy-webapp-3a5":{"__comp":"17896441","content":"fc06f22a"},"/docs/guide/guide-list-9f8":{"__comp":"17896441","content":"ac7b6bfe"},"/docs/how-to-use/json-in-ts-860":{"__comp":"17896441","content":"b7042d0a"},"/docs/intro-e66":{"__comp":"17896441","content":"0e384e19"},"/docs/json-overview-5c2":{"__comp":"17896441","content":"7944e72e"},"/docs/json-schema-1dd":{"__comp":"17896441","content":"7c72bda6"},"/docs/learn/cicd-pipelines/azure-devops/azure-devops-services-265":{"__comp":"17896441","content":"7970ee92"},"/docs/learn/cicd-pipelines/azure-devops/azure-pipelines-ef0":{"__comp":"17896441","content":"ebb30ef0"},"/docs/learn/cicd-pipelines/azure-devops/intro-89e":{"__comp":"17896441","content":"0736b6f5"},"/docs/learn/cicd-pipelines/azure-devops/test-pipeline-2a6":{"__comp":"17896441","content":"3acce02b"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases-4bb":{"__comp":"17896441","content":"baa60d94"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env-ac8":{"__comp":"17896441","content":"a72842ee"},"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans-aaa":{"__comp":"17896441","content":"c2f2b10c"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent-18c":{"__comp":"17896441","content":"555e935d"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents-d42":{"__comp":"17896441","content":"90bb0703"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template-7da":{"__comp":"17896441","content":"92f97443"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers-1b0":{"__comp":"17896441","content":"42e7a3d0"},"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates-648":{"__comp":"17896441","content":"9bdd6486"},"/docs/learn/cicd-pipelines/azure/cloud-shell/intro-fef":{"__comp":"17896441","content":"834bd84e"},"/docs/learn/cicd-pipelines/azure/intro-58b":{"__comp":"17896441","content":"f80db4b4"},"/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core-6f5":{"__comp":"17896441","content":"702381eb"},"/docs/learn/cicd-pipelines/azure/vs-devops-services-8ea":{"__comp":"17896441","content":"bdeef73b"},"/docs/learn/cicd-pipelines/gitlab-cicd/intro-5f7":{"__comp":"17896441","content":"f1115065"},"/docs/learn/dotnet/dotnet.core/intro-94e":{"__comp":"17896441","content":"1233c84f"},"/docs/learn/git-1b9":{"__comp":"17896441","content":"0e083131"},"/docs/learn/git/deserialization-3ea":{"__comp":"17896441","content":"84bfc253"},"/docs/learn/git/fetchpull-f09":{"__comp":"17896441","content":"ad033327"},"/docs/learn/git/overwriting-local-repo-fcf":{"__comp":"17896441","content":"36476823"},"/docs/learn/git/rollback-commit-f73":{"__comp":"17896441","content":"ce35382b"},"/docs/learn/react/Axios/-ab3":{"__comp":"17896441","content":"8069f130"},"/docs/learn/react/Basics/handle-data-from-api-b83":{"__comp":"17896441","content":"7c9df2f0"},"/docs/learn/react/Hooks/useFetch-6bb":{"__comp":"17896441","content":"3ecb155c"},"/docs/learn/react/intro-168":{"__comp":"17896441","content":"6267104f"},"/docs/learn/react/Redux/Redux-Basic-Example-c55":{"__comp":"17896441","content":"f2dc99bb"},"/docs/science-applications-6fd":{"__comp":"17896441","content":"6cbee453"},"/docs/serialization-434":{"__comp":"17896441","content":"a9a111a3"},"/docs/software-development/Coding/codebase/codebase-670":{"__comp":"17896441","content":"f7c7000c"},"/docs/software-development/Coding/debugging/debugging-9ce":{"__comp":"17896441","content":"b370d96e"},"/docs/software-development/Coding/documentation/documenting-2bf":{"__comp":"17896441","content":"2b0d8931"},"/docs/software-development/Coding/programming/writing-code-e25":{"__comp":"17896441","content":"32bf57e0"},"/docs/software-development/Coding/refactoring/refactoring-601":{"__comp":"17896441","content":"45075572"},"/docs/software-development/Coding/testing/testing-4b0":{"__comp":"17896441","content":"f87193e1"},"/docs/software-development/Designing/designPatterns/façade-pattern-400":{"__comp":"17896441","content":"a89ecf35"},"/docs/software-development/Designing/designPatterns/overview-311":{"__comp":"17896441","content":"b5a51f93"},"/docs/software-development/Designing/designPatterns/singleton-pattern-e5d":{"__comp":"17896441","content":"482f5955"},"/docs/software-development/Designing/intro-8cd":{"__comp":"17896441","content":"d85ea180"},"/docs/software-development/Designing/uml/user-story-user-case-d33":{"__comp":"17896441","content":"f0930f4f"},"/docs/software-development/Designing/uml/wireframing-01b":{"__comp":"17896441","content":"430c9138"},"/docs/software-development/Planning/intro-747":{"__comp":"17896441","content":"ef2cc497"},"/docs/software-development/Requirements/intro-140":{"__comp":"17896441","content":"d14fd6d9"},"/docs/software-development/Testing/intro-a38":{"__comp":"17896441","content":"6e8c7bbb"},"/docs/technology-d2a":{"__comp":"17896441","content":"22bae8f6"},"/-558":{"__comp":"c4f5d8e4","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/-dc3":{"__comp":"1df93b7f","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"}}');
+const routesChunkNames_namespaceObject = /*#__PURE__*/JSON.parse('{"/dist/client-docs/-6dd":{"__comp":"c4f5d8e4","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/dist/client-docs/-03c":{"__comp":"1df93b7f","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/dist/client-docs/about-us-e3a":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"ccee9b10"},"/dist/client-docs/blog-f8d":{"__comp":"a6aa9e1f","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"0e6a07db"},{"content":"babce472"},{"content":"39cd7291"},{"content":"1e8aa8e5"},{"content":"a8d51800"}],"metadata":"5e58b802"},"/dist/client-docs/blog/archive-867":{"__comp":"9e4087bc","__context":{"plugin":"04f5f57a"},"archive":"2d570a02"},"/dist/client-docs/blog/lab-automation-benefits-b39":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"dfacd4f5"},"/dist/client-docs/blog/lab-automation-main-challenges-a30":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"597c8688"},"/dist/client-docs/blog/opening-post-b04":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"90981a12"},"/dist/client-docs/blog/styletron-react-7c6":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"3ac80af1"},"/dist/client-docs/blog/tags-bf6":{"__comp":"01a85c17","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","tags":"cb10743d"},"/dist/client-docs/blog/tags/automation-34d":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"e7c788b2","listMetadata":"db775a8a"},"/dist/client-docs/blog/tags/data-management-4ee":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"39cd7291"}],"tag":"fe1b0652","listMetadata":"482c574f"},"/dist/client-docs/blog/tags/docusaurus-74c":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"a8d51800"}],"tag":"c667f2fe","listMetadata":"866cf6cc"},"/dist/client-docs/blog/tags/future-challenges-7c1":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"}],"tag":"d210872d","listMetadata":"f30fec47"},"/dist/client-docs/blog/tags/lab-automation-9f1":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"2df0259e","listMetadata":"55815c04"},"/dist/client-docs/blog/tags/programming-f07":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"1e8aa8e5"}],"tag":"e7c3d54c","listMetadata":"954ae021"},"/dist/client-docs/blog/tags/static-site-generator-41e":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"a8d51800"}],"tag":"f6be44ef","listMetadata":"0a465583"},"/dist/client-docs/blog/tags/styletron-react-23b":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"0e6a07db"}],"tag":"81ad7313","listMetadata":"f7fce95f"},"/dist/client-docs/blog/tags/technology-414":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"babce472"},{"content":"39cd7291"}],"tag":"591f7ee0","listMetadata":"fc2cca76"},"/dist/client-docs/blog/tags/xitechnix-cfd":{"__comp":"6875c492","__context":{"plugin":"04f5f57a"},"sidebar":"814f3328","items":[{"content":"1e8aa8e5"}],"tag":"0f5594cb","listMetadata":"ae5dca9d"},"/dist/client-docs/blog/welcome-114":{"__comp":"ccc49370","__context":{"data":{"blogMetadata":"acecf23e"},"plugin":"04f5f57a"},"sidebar":"814f3328","content":"5372cbae"},"/dist/client-docs/contact/-0ab":{"__comp":"08462523","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/dist/client-docs/ContactUs-1c9":{"__comp":"a2685df2","__context":{"plugin":"3d259b09"},"config":"5e9f5e1a"},"/dist/client-docs/cookies_en-c35":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"8ac4b9bc"},"/dist/client-docs/disclaimers-305":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"2cc5ab56"},"/dist/client-docs/eula-8d5":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"a6735169"},"/dist/client-docs/markdown-page-979":{"__comp":"1f391b9e","__context":{"plugin":"3d259b09"},"content":"393be207"},"/dist/client-docs/docs-8e6":{"__comp":"5e95c892","__context":{"plugin":"76741422"}},"/dist/client-docs/docs-5c3":{"__comp":"a7bd4aaa","version":"935f2afb"},"/dist/client-docs/docs-280":{"__comp":"a94703ab"},"/dist/client-docs/docs/cicd/overview-444":{"__comp":"17896441","content":"4eaedc3c"},"/dist/client-docs/docs/content-type-mime-610":{"__comp":"17896441","content":"8d47eece"},"/dist/client-docs/docs/deserialization-3a8":{"__comp":"17896441","content":"9c2ff75d"},"/dist/client-docs/docs/devtools/dataformats/csv/csv-07c":{"__comp":"17896441","content":"7abb66ec"},"/dist/client-docs/docs/devtools/dataformats/json/json-overview/sch-dev-87b":{"__comp":"17896441","content":"a4a0a316"},"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/csharp-example-ebf":{"__comp":"17896441","content":"87454bc4"},"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/msgpack-51a":{"__comp":"17896441","content":"a76e5ed3"},"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/ts-example-5b1":{"__comp":"17896441","content":"46f3c203"},"/dist/client-docs/docs/devtools/dataformats/protobufjs/example-535":{"__comp":"17896441","content":"68629bfb"},"/dist/client-docs/docs/devtools/dataformats/protobufjs/protobufjs-e15":{"__comp":"17896441","content":"666b7c06"},"/dist/client-docs/docs/devtools/dataformats/xml/xml-966":{"__comp":"17896441","content":"a2511f1c"},"/dist/client-docs/docs/devtools/dataformats/yaml/yaml-c86":{"__comp":"17896441","content":"42aca346"},"/dist/client-docs/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics-85a":{"__comp":"17896441","content":"0e6d2c2e"},"/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/create-a-page-4a7":{"__comp":"17896441","content":"8c8ad2a2"},"/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus-b10":{"__comp":"17896441","content":"ed179930"},"/dist/client-docs/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics-449":{"__comp":"17896441","content":"e7b604ac"},"/dist/client-docs/docs/devtools/intro-dab":{"__comp":"17896441","content":"21d4c7f5"},"/dist/client-docs/docs/devtools/languages/opp-514":{"__comp":"17896441","content":"4feea794"},"/dist/client-docs/docs/devtools/versioncontrol/git-c03":{"__comp":"17896441","content":"7e6e2bc0"},"/dist/client-docs/docs/devtools/versioncontrol/intro-8ad":{"__comp":"17896441","content":"a0992fef"},"/dist/client-docs/docs/devtools/versioncontrol/mercurial-7b4":{"__comp":"17896441","content":"62abd68f"},"/dist/client-docs/docs/devtools/versioncontrol/svn-da7":{"__comp":"17896441","content":"e5339692"},"/dist/client-docs/docs/engineering-8ac":{"__comp":"17896441","content":"3bfb1537"},"/dist/client-docs/docs/guide/azure-deploy-webapi-269":{"__comp":"17896441","content":"002585d6"},"/dist/client-docs/docs/guide/azure-deploy-webapp-7a9":{"__comp":"17896441","content":"fc06f22a"},"/dist/client-docs/docs/guide/guide-list-166":{"__comp":"17896441","content":"ac7b6bfe"},"/dist/client-docs/docs/how-to-use/json-in-ts-dab":{"__comp":"17896441","content":"b7042d0a"},"/dist/client-docs/docs/intro-c32":{"__comp":"17896441","content":"0e384e19"},"/dist/client-docs/docs/json-overview-47d":{"__comp":"17896441","content":"7944e72e"},"/dist/client-docs/docs/json-schema-7e1":{"__comp":"17896441","content":"7c72bda6"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-devops-services-8b2":{"__comp":"17896441","content":"7970ee92"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-pipelines-2d7":{"__comp":"17896441","content":"ebb30ef0"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/intro-782":{"__comp":"17896441","content":"0736b6f5"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-pipeline-198":{"__comp":"17896441","content":"3acce02b"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases-f0b":{"__comp":"17896441","content":"baa60d94"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env-328":{"__comp":"17896441","content":"a72842ee"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans-8b7":{"__comp":"17896441","content":"c2f2b10c"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent-1ef":{"__comp":"17896441","content":"555e935d"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents-054":{"__comp":"17896441","content":"90bb0703"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template-2fd":{"__comp":"17896441","content":"92f97443"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers-b11":{"__comp":"17896441","content":"42e7a3d0"},"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates-f1b":{"__comp":"17896441","content":"9bdd6486"},"/dist/client-docs/docs/learn/cicd-pipelines/azure/cloud-shell/intro-cf2":{"__comp":"17896441","content":"834bd84e"},"/dist/client-docs/docs/learn/cicd-pipelines/azure/intro-ec7":{"__comp":"17896441","content":"f80db4b4"},"/dist/client-docs/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core-16e":{"__comp":"17896441","content":"702381eb"},"/dist/client-docs/docs/learn/cicd-pipelines/azure/vs-devops-services-b65":{"__comp":"17896441","content":"bdeef73b"},"/dist/client-docs/docs/learn/cicd-pipelines/gitlab-cicd/intro-fca":{"__comp":"17896441","content":"f1115065"},"/dist/client-docs/docs/learn/dotnet/dotnet.core/intro-df9":{"__comp":"17896441","content":"1233c84f"},"/dist/client-docs/docs/learn/git-1f2":{"__comp":"17896441","content":"0e083131"},"/dist/client-docs/docs/learn/git/deserialization-882":{"__comp":"17896441","content":"84bfc253"},"/dist/client-docs/docs/learn/git/fetchpull-7e8":{"__comp":"17896441","content":"ad033327"},"/dist/client-docs/docs/learn/git/overwriting-local-repo-f11":{"__comp":"17896441","content":"36476823"},"/dist/client-docs/docs/learn/git/rollback-commit-85f":{"__comp":"17896441","content":"ce35382b"},"/dist/client-docs/docs/learn/react/Axios/-9a0":{"__comp":"17896441","content":"8069f130"},"/dist/client-docs/docs/learn/react/Basics/handle-data-from-api-5c0":{"__comp":"17896441","content":"7c9df2f0"},"/dist/client-docs/docs/learn/react/Hooks/useFetch-26a":{"__comp":"17896441","content":"3ecb155c"},"/dist/client-docs/docs/learn/react/intro-ddf":{"__comp":"17896441","content":"6267104f"},"/dist/client-docs/docs/learn/react/Redux/Redux-Basic-Example-2f6":{"__comp":"17896441","content":"f2dc99bb"},"/dist/client-docs/docs/science-applications-34c":{"__comp":"17896441","content":"6cbee453"},"/dist/client-docs/docs/serialization-abd":{"__comp":"17896441","content":"a9a111a3"},"/dist/client-docs/docs/software-development/Coding/codebase/codebase-f2f":{"__comp":"17896441","content":"f7c7000c"},"/dist/client-docs/docs/software-development/Coding/debugging/debugging-0ed":{"__comp":"17896441","content":"b370d96e"},"/dist/client-docs/docs/software-development/Coding/documentation/documenting-da6":{"__comp":"17896441","content":"2b0d8931"},"/dist/client-docs/docs/software-development/Coding/programming/writing-code-2a3":{"__comp":"17896441","content":"32bf57e0"},"/dist/client-docs/docs/software-development/Coding/refactoring/refactoring-b37":{"__comp":"17896441","content":"45075572"},"/dist/client-docs/docs/software-development/Coding/testing/testing-2fd":{"__comp":"17896441","content":"f87193e1"},"/dist/client-docs/docs/software-development/Designing/designPatterns/façade-pattern-78c":{"__comp":"17896441","content":"a89ecf35"},"/dist/client-docs/docs/software-development/Designing/designPatterns/overview-4c3":{"__comp":"17896441","content":"b5a51f93"},"/dist/client-docs/docs/software-development/Designing/designPatterns/singleton-pattern-489":{"__comp":"17896441","content":"482f5955"},"/dist/client-docs/docs/software-development/Designing/intro-6e5":{"__comp":"17896441","content":"d85ea180"},"/dist/client-docs/docs/software-development/Designing/uml/user-story-user-case-1cb":{"__comp":"17896441","content":"f0930f4f"},"/dist/client-docs/docs/software-development/Designing/uml/wireframing-6b0":{"__comp":"17896441","content":"430c9138"},"/dist/client-docs/docs/software-development/Planning/intro-ace":{"__comp":"17896441","content":"ef2cc497"},"/dist/client-docs/docs/software-development/Requirements/intro-ac9":{"__comp":"17896441","content":"d14fd6d9"},"/dist/client-docs/docs/software-development/Testing/intro-31d":{"__comp":"17896441","content":"6e8c7bbb"},"/dist/client-docs/docs/technology-e50":{"__comp":"17896441","content":"22bae8f6"}}');
 ;// CONCATENATED MODULE: ./client-docs/.docusaurus/registry.js
-/* harmony default export */ const registry = ({"002585d6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2187))),"@site/docs/030-guide/azure-deploy-webapi.md",/*require.resolve*/(2187)],"01a85c17":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5068))),"@theme/BlogTagsListPage",/*require.resolve*/(5068)],"04f5f57a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4535))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-blog\\default\\plugin-route-context-module-100.json",/*require.resolve*/(4535)],"0736b6f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2414))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0101-intro.md",/*require.resolve*/(2414)],"08462523":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1964))),"@site/src/pages/contact/index.js",/*require.resolve*/(1964)],"0abe3c97":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8295))),"~blog/default/blog-tags-automation-1d1-list.json",/*require.resolve*/(8295)],"0e083131":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1894))),"@site/docs/020-learn/0203-git/overview/set-up-git.md",/*require.resolve*/(1894)],"0e384e19":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2598))),"@site/docs/intro.md",/*require.resolve*/(2598)],"0e6a07db":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8159))),"@site/blog/2023-08-26-styletron/index.md?truncated=true",/*require.resolve*/(8159)],"0e6d2c2e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9887))),"@site/docs/015-devtools/03-frameworks-libraries/01-nx-workspace/nx-Basics.md",/*require.resolve*/(9887)],"1233c84f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1897))),"@site/docs/020-learn/0201-dotnet/dotnet.core/intro.md",/*require.resolve*/(1897)],"17896441":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3628))),"@theme/DocItem",/*require.resolve*/(3628)],"1df93b7f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1472))),"@site/src/pages/index.tsx",/*require.resolve*/(1472)],"1e8aa8e5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6135))),"@site/blog/2021-06-16-StartPost.md?truncated=true",/*require.resolve*/(6135)],"1f391b9e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4250))),"@theme/MDXPage",/*require.resolve*/(4250)],"21d4c7f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6008))),"@site/docs/015-devtools/intro.md",/*require.resolve*/(6008)],"22bae8f6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6935))),"@site/docs/Glossary/technology.md",/*require.resolve*/(6935)],"2b0d8931":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4541))),"@site/docs/010-software-development/0104-Coding/06-documentation/006-documenting.md",/*require.resolve*/(4541)],"2cc5ab56":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1231))),"@site/src/pages/disclaimers.md",/*require.resolve*/(1231)],"328d46a1":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2075))),"~blog/default/blog-tags-future-challenges-81b-list.json",/*require.resolve*/(2075)],"32bf57e0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1239))),"@site/docs/010-software-development/0104-Coding/02-programming/002-writing-code.md",/*require.resolve*/(1239)],"36476823":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9452))),"@site/docs/020-learn/0203-git/how-to/overwite-local-repo.md",/*require.resolve*/(9452)],"393be207":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(256))),"@site/src/pages/markdown-page.md",/*require.resolve*/(256)],"39cd7291":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7806))),"@site/blog/2023-05-12-LabAutomationBenefits.md?truncated=true",/*require.resolve*/(7806)],"3ac80af1":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7805))),"@site/blog/2023-08-26-styletron/index.md",/*require.resolve*/(7805)],"3acce02b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8091))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0102-test-pipeline.md",/*require.resolve*/(8091)],"3bfb1537":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4418))),"@site/docs/Glossary/engineering.md",/*require.resolve*/(4418)],"3d259b09":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9843))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-pages\\default\\plugin-route-context-module-100.json",/*require.resolve*/(9843)],"3ecb155c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5085))),"@site/docs/020-learn/0202-react/Hooks/useFetch.md",/*require.resolve*/(5085)],"42aca346":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7628))),"@site/docs/015-devtools/02-dataformats/004-yaml/01-yaml.md",/*require.resolve*/(7628)],"42e7a3d0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1921))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/02-triggers.md",/*require.resolve*/(1921)],"430c9138":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2664))),"@site/docs/010-software-development/0103-Designing/uml/Wireframing.mdx",/*require.resolve*/(2664)],"448c2acc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4590))),"~blog/default/blog-tags-programming-1aa-list.json",/*require.resolve*/(4590)],"45075572":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5344))),"@site/docs/010-software-development/0104-Coding/05-refactoring/005-refactoring.md",/*require.resolve*/(5344)],"46f3c203":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3128))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/02-ts-example.md",/*require.resolve*/(3128)],"482f5955":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2524))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/singleton-pattern.md",/*require.resolve*/(2524)],"4bd5fd33":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8240))),"~blog/default/blog-tags-automation-1d1.json",/*require.resolve*/(8240)],"4eaedc3c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3741))),"@site/docs/010-software-development/0106-Automation/01-cicd-processes.md",/*require.resolve*/(3741)],"4feea794":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8156))),"@site/docs/015-devtools/01-languages/00-opp.md",/*require.resolve*/(8156)],"5372cbae":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9622))),"@site/blog/2021-06-15-welcome.md",/*require.resolve*/(9622)],"55207995":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2311))),"~blog/default/blog-tags-technology-3f7.json",/*require.resolve*/(2311)],"555e935d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1182))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/05-agent.md",/*require.resolve*/(1182)],"597c8688":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9997))),"@site/blog/2023-05-15-LabAutomationChallenges.md",/*require.resolve*/(9997)],"5e95c892":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7121))),"@theme/DocsRoot",/*require.resolve*/(7121)],"5e9f5e1a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3050))),"@generated/docusaurus.config",/*require.resolve*/(3050)],"608ae6a4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1079))),"~blog/default/blog-tags-docusaurus-0e0-list.json",/*require.resolve*/(1079)],"6267104f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9163))),"@site/docs/020-learn/0202-react/intro.md",/*require.resolve*/(9163)],"62abd68f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2635))),"@site/docs/015-devtools/04-versioncontrol/03-mercurial.md",/*require.resolve*/(2635)],"666b7c06":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1041))),"@site/docs/015-devtools/02-dataformats/005-protobufjs/01-protobufjs.md",/*require.resolve*/(1041)],"673128bd":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3258))),"~blog/default/blog-tags-styletron-react-d94.json",/*require.resolve*/(3258)],"68629bfb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4726))),"@site/docs/015-devtools/02-dataformats/005-protobufjs/02-example.md",/*require.resolve*/(4726)],"6875c492":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3069))),"@theme/BlogTagsPostsPage",/*require.resolve*/(3069)],"6cbee453":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6749))),"@site/docs/Glossary/applications-of-science.md",/*require.resolve*/(6749)],"6db22764":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7337))),"~blog/default/blog-tags-data-management-f89-list.json",/*require.resolve*/(7337)],"6e8c7bbb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5780))),"@site/docs/010-software-development/0105-Testing/03-intro.md",/*require.resolve*/(5780)],"702381eb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3087))),"@site/docs/020-learn/0204-cicd-pipelines/azure/tasks/build-tasks/dotnet.core.md",/*require.resolve*/(3087)],"76741422":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(156))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-docs\\default\\plugin-route-context-module-100.json",/*require.resolve*/(156)],"774607ab":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8624))),"~blog/default/blog-tags-lab-automation-c05.json",/*require.resolve*/(8624)],"7944e72e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3980))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/01-json.md",/*require.resolve*/(3980)],"7970ee92":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1137))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-azure-devops-services.md",/*require.resolve*/(1137)],"7abb66ec":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9529))),"@site/docs/015-devtools/02-dataformats/003-csv/01-csv.md",/*require.resolve*/(9529)],"7c72bda6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7211))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/02-json-schema.md",/*require.resolve*/(7211)],"7c9df2f0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5336))),"@site/docs/020-learn/0202-react/Basics/handle-data-from-api.md",/*require.resolve*/(5336)],"7e6e2bc0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9745))),"@site/docs/015-devtools/04-versioncontrol/01-git.md",/*require.resolve*/(9745)],"8069f130":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9549))),"@site/docs/020-learn/0202-react/Axios/axios.md",/*require.resolve*/(9549)],"814f3328":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8363))),"~blog/default/blog-post-list-prop-default.json",/*require.resolve*/(8363)],"834bd84e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6934))),"@site/docs/020-learn/0204-cicd-pipelines/azure/cloud-shell/intro.md",/*require.resolve*/(6934)],"84bfc253":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8233))),"@site/docs/020-learn/0203-git/how-to/remove-last-changes.md",/*require.resolve*/(8233)],"87454bc4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1911))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/03-csharp-example.md",/*require.resolve*/(1911)],"8a248bbe":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3742))),"~blog/default/blog-tags-static-site-generator-8b7.json",/*require.resolve*/(3742)],"8ac4b9bc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8740))),"@site/src/pages/cookies_en.md",/*require.resolve*/(8740)],"8c8ad2a2":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4042))),"@site/docs/015-devtools/03-frameworks-libraries/02-site-generators/create-a-page.md",/*require.resolve*/(4042)],"8d47eece":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7566))),"@site/docs/Glossary/MIME-type.md",/*require.resolve*/(7566)],"90981a12":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8149))),"@site/blog/2021-06-16-StartPost.md",/*require.resolve*/(8149)],"90bb0703":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6033))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/01-print-dir-contents.md",/*require.resolve*/(6033)],"92dacbd5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9093))),"~blog/default/blog-tags-static-site-generator-8b7-list.json",/*require.resolve*/(9093)],"92f97443":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8499))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/04-reuse-template.md",/*require.resolve*/(8499)],"935f2afb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9120))),"~docs/default/version-current-metadata-prop-751.json",/*require.resolve*/(9120)],"9b5de985":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5122))),"~blog/default/blog-tags-data-management-f89.json",/*require.resolve*/(5122)],"9bdd6486":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5100))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/03-Yaml-templates.md",/*require.resolve*/(5100)],"9c2ff75d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(416))),"@site/docs/Glossary/deserialization.md",/*require.resolve*/(416)],"9dd638df":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1744))),"~blog/default/blog-tags-xitechnix-dd7.json",/*require.resolve*/(1744)],"9e4087bc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9331))),"@theme/BlogArchivePage",/*require.resolve*/(9331)],"a0992fef":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3948))),"@site/docs/015-devtools/04-versioncontrol/00-intro.md",/*require.resolve*/(3948)],"a2511f1c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3974))),"@site/docs/015-devtools/02-dataformats/002-xml/01-xml.md",/*require.resolve*/(3974)],"a2685df2":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2294))),"@site/src/pages/ContactUs.js",/*require.resolve*/(2294)],"a4a0a316":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9094))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/03-Schema-Driven-Development.md",/*require.resolve*/(9094)],"a6735169":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4446))),"@site/src/pages/eula.md",/*require.resolve*/(4446)],"a6aa9e1f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5124))),"@theme/BlogListPage",/*require.resolve*/(5124)],"a7023ddc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3471))),"~blog/default/blog-tags-tags-4c2.json",/*require.resolve*/(3471)],"a72842ee":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7196))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/03-test-env.md",/*require.resolve*/(7196)],"a76e5ed3":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6537))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/01-msgpack.md",/*require.resolve*/(6537)],"a7bd4aaa":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4532))),"@theme/DocVersionRoot",/*require.resolve*/(4532)],"a80da1cf":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3616))),"~blog/default/blog-tags-docusaurus-0e0.json",/*require.resolve*/(3616)],"a89ecf35":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5421))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/façade-pattern.md",/*require.resolve*/(5421)],"a8d51800":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4314))),"@site/blog/2021-06-15-welcome.md?truncated=true",/*require.resolve*/(4314)],"a94703ab":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7151))),"@theme/DocRoot",/*require.resolve*/(7151)],"a9a111a3":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6973))),"@site/docs/Glossary/Serialization.md",/*require.resolve*/(6973)],"ac7b6bfe":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1098))),"@site/docs/030-guide/guide-list.md",/*require.resolve*/(1098)],"acecf23e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5746))),"~blog/default/blogMetadata-default.json",/*require.resolve*/(5746)],"ad033327":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3909))),"@site/docs/020-learn/0203-git/overview/fetch-pull.md",/*require.resolve*/(3909)],"b2b675dd":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4197))),"~blog/default/blog-c06.json",/*require.resolve*/(4197)],"b2f554cd":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9752))),"~blog/default/blog-archive-80c.json",/*require.resolve*/(9752)],"b370d96e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(400))),"@site/docs/010-software-development/0104-Coding/04-debugging/004-debugging.md",/*require.resolve*/(400)],"b5a51f93":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3991))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/overview.md",/*require.resolve*/(3991)],"b7042d0a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1174))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/04-how-to-use-json-in-ts.md",/*require.resolve*/(1174)],"baa60d94":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1811))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/02-create-testcases.md",/*require.resolve*/(1811)],"babce472":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7503))),"@site/blog/2023-05-15-LabAutomationChallenges.md?truncated=true",/*require.resolve*/(7503)],"bdeef73b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5942))),"@site/docs/020-learn/0204-cicd-pipelines/azure/020-vs-devops-services.md",/*require.resolve*/(5942)],"c2f2b10c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(81))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/01-test-plans.md",/*require.resolve*/(81)],"c4f5d8e4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8522))),"@site/src/pages/index.js",/*require.resolve*/(8522)],"ccc49370":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3858))),"@theme/BlogPostPage",/*require.resolve*/(3858)],"ccee9b10":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8775))),"@site/src/pages/about-us.md",/*require.resolve*/(8775)],"ce35382b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7499))),"@site/docs/020-learn/0203-git/how-to/rollback.md",/*require.resolve*/(7499)],"d14fd6d9":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8974))),"@site/docs/010-software-development/0101-Requirements/01-intro.md",/*require.resolve*/(8974)],"d3cf3c3b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9585))),"~blog/default/blog-tags-styletron-react-d94-list.json",/*require.resolve*/(9585)],"d7f54ba9":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8166))),"~blog/default/blog-tags-technology-3f7-list.json",/*require.resolve*/(8166)],"d809e4f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2276))),"~blog/default/blog-tags-future-challenges-81b.json",/*require.resolve*/(2276)],"d85ea180":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1448))),"@site/docs/010-software-development/0103-Designing/03-intro.md",/*require.resolve*/(1448)],"dfacd4f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3594))),"@site/blog/2023-05-12-LabAutomationBenefits.md",/*require.resolve*/(3594)],"e5339692":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4213))),"@site/docs/015-devtools/04-versioncontrol/02-svn.md",/*require.resolve*/(4213)],"e7b604ac":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5995))),"@site/docs/015-devtools/03-frameworks-libraries/03-syncfusion/syncfusion-Basics.md",/*require.resolve*/(5995)],"ebb30ef0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4219))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0103-azure-pipelines.md",/*require.resolve*/(4219)],"ed179930":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9256))),"@site/docs/015-devtools/03-frameworks-libraries/02-site-generators/docusaurus.md",/*require.resolve*/(9256)],"ed737e2e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7671))),"~blog/default/blog-tags-lab-automation-c05-list.json",/*require.resolve*/(7671)],"ef2cc497":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5529))),"@site/docs/010-software-development/0102-Planning/02-intro.md",/*require.resolve*/(5529)],"f0930f4f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1919))),"@site/docs/010-software-development/0103-Designing/uml/userStory-userCase.mdx",/*require.resolve*/(1919)],"f1115065":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4899))),"@site/docs/020-learn/0204-cicd-pipelines/gitlab-cicd/01-intro.md",/*require.resolve*/(4899)],"f2dc99bb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8978))),"@site/docs/020-learn/0202-react/Redux/Redux-Basic-Example.md",/*require.resolve*/(8978)],"f5426078":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4639))),"~blog/default/blog-tags-programming-1aa.json",/*require.resolve*/(4639)],"f7c7000c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9922))),"@site/docs/010-software-development/0104-Coding/01-codebase/001-codebase.md",/*require.resolve*/(9922)],"f80db4b4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(491))),"@site/docs/020-learn/0204-cicd-pipelines/azure/010-intro.md",/*require.resolve*/(491)],"f87193e1":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5800))),"@site/docs/010-software-development/0104-Coding/03-testing/003-testing.md",/*require.resolve*/(5800)],"fa0dcaff":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1319))),"~blog/default/blog-tags-xitechnix-dd7-list.json",/*require.resolve*/(1319)],"fc06f22a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7644))),"@site/docs/030-guide/azure-deploy-webapp.md",/*require.resolve*/(7644)]});
+/* harmony default export */ const registry = ({"002585d6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2187))),"@site/docs/030-guide/azure-deploy-webapi.md",/*require.resolve*/(2187)],"01a85c17":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5068))),"@theme/BlogTagsListPage",/*require.resolve*/(5068)],"04f5f57a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4535))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-blog\\default\\plugin-route-context-module-100.json",/*require.resolve*/(4535)],"0736b6f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2414))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0101-intro.md",/*require.resolve*/(2414)],"08462523":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1964))),"@site/src/pages/contact/index.js",/*require.resolve*/(1964)],"0a465583":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7284))),"~blog/default/dist-client-docs-blog-tags-static-site-generator-75e-list.json",/*require.resolve*/(7284)],"0e083131":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1894))),"@site/docs/020-learn/0203-git/overview/set-up-git.md",/*require.resolve*/(1894)],"0e384e19":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2598))),"@site/docs/intro.md",/*require.resolve*/(2598)],"0e6a07db":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8159))),"@site/blog/2023-08-26-styletron/index.md?truncated=true",/*require.resolve*/(8159)],"0e6d2c2e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9887))),"@site/docs/015-devtools/03-frameworks-libraries/01-nx-workspace/nx-Basics.md",/*require.resolve*/(9887)],"0f5594cb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(143))),"~blog/default/dist-client-docs-blog-tags-xitechnix-e64.json",/*require.resolve*/(143)],"1233c84f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1897))),"@site/docs/020-learn/0201-dotnet/dotnet.core/intro.md",/*require.resolve*/(1897)],"17896441":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3628))),"@theme/DocItem",/*require.resolve*/(3628)],"1df93b7f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1472))),"@site/src/pages/index.tsx",/*require.resolve*/(1472)],"1e8aa8e5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6135))),"@site/blog/2021-06-16-StartPost.md?truncated=true",/*require.resolve*/(6135)],"1f391b9e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4250))),"@theme/MDXPage",/*require.resolve*/(4250)],"21d4c7f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6008))),"@site/docs/015-devtools/intro.md",/*require.resolve*/(6008)],"22bae8f6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6935))),"@site/docs/Glossary/technology.md",/*require.resolve*/(6935)],"2b0d8931":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4541))),"@site/docs/010-software-development/0104-Coding/06-documentation/006-documenting.md",/*require.resolve*/(4541)],"2cc5ab56":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1231))),"@site/src/pages/disclaimers.md",/*require.resolve*/(1231)],"2d570a02":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4395))),"~blog/default/dist-client-docs-blog-archive-d27.json",/*require.resolve*/(4395)],"2df0259e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3182))),"~blog/default/dist-client-docs-blog-tags-lab-automation-371.json",/*require.resolve*/(3182)],"32bf57e0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1239))),"@site/docs/010-software-development/0104-Coding/02-programming/002-writing-code.md",/*require.resolve*/(1239)],"36476823":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9452))),"@site/docs/020-learn/0203-git/how-to/overwite-local-repo.md",/*require.resolve*/(9452)],"393be207":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(256))),"@site/src/pages/markdown-page.md",/*require.resolve*/(256)],"39cd7291":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7806))),"@site/blog/2023-05-12-LabAutomationBenefits.md?truncated=true",/*require.resolve*/(7806)],"3ac80af1":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7805))),"@site/blog/2023-08-26-styletron/index.md",/*require.resolve*/(7805)],"3acce02b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8091))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0102-test-pipeline.md",/*require.resolve*/(8091)],"3bfb1537":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4418))),"@site/docs/Glossary/engineering.md",/*require.resolve*/(4418)],"3d259b09":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9843))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-pages\\default\\plugin-route-context-module-100.json",/*require.resolve*/(9843)],"3ecb155c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5085))),"@site/docs/020-learn/0202-react/Hooks/useFetch.md",/*require.resolve*/(5085)],"42aca346":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7628))),"@site/docs/015-devtools/02-dataformats/004-yaml/01-yaml.md",/*require.resolve*/(7628)],"42e7a3d0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1921))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/02-triggers.md",/*require.resolve*/(1921)],"430c9138":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2664))),"@site/docs/010-software-development/0103-Designing/uml/Wireframing.mdx",/*require.resolve*/(2664)],"45075572":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5344))),"@site/docs/010-software-development/0104-Coding/05-refactoring/005-refactoring.md",/*require.resolve*/(5344)],"46f3c203":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3128))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/02-ts-example.md",/*require.resolve*/(3128)],"482c574f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3058))),"~blog/default/dist-client-docs-blog-tags-data-management-2c2-list.json",/*require.resolve*/(3058)],"482f5955":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2524))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/singleton-pattern.md",/*require.resolve*/(2524)],"4eaedc3c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3741))),"@site/docs/010-software-development/0106-Automation/01-cicd-processes.md",/*require.resolve*/(3741)],"4feea794":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8156))),"@site/docs/015-devtools/01-languages/00-opp.md",/*require.resolve*/(8156)],"5372cbae":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9622))),"@site/blog/2021-06-15-welcome.md",/*require.resolve*/(9622)],"555e935d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1182))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/05-agent.md",/*require.resolve*/(1182)],"55815c04":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7061))),"~blog/default/dist-client-docs-blog-tags-lab-automation-371-list.json",/*require.resolve*/(7061)],"591f7ee0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1665))),"~blog/default/dist-client-docs-blog-tags-technology-9e1.json",/*require.resolve*/(1665)],"597c8688":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9997))),"@site/blog/2023-05-15-LabAutomationChallenges.md",/*require.resolve*/(9997)],"5e58b802":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3491))),"~blog/default/dist-client-docs-blog-bf4.json",/*require.resolve*/(3491)],"5e95c892":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7121))),"@theme/DocsRoot",/*require.resolve*/(7121)],"5e9f5e1a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3050))),"@generated/docusaurus.config",/*require.resolve*/(3050)],"6267104f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9163))),"@site/docs/020-learn/0202-react/intro.md",/*require.resolve*/(9163)],"62abd68f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2635))),"@site/docs/015-devtools/04-versioncontrol/03-mercurial.md",/*require.resolve*/(2635)],"666b7c06":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1041))),"@site/docs/015-devtools/02-dataformats/005-protobufjs/01-protobufjs.md",/*require.resolve*/(1041)],"68629bfb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4726))),"@site/docs/015-devtools/02-dataformats/005-protobufjs/02-example.md",/*require.resolve*/(4726)],"6875c492":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3069))),"@theme/BlogTagsPostsPage",/*require.resolve*/(3069)],"6cbee453":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6749))),"@site/docs/Glossary/applications-of-science.md",/*require.resolve*/(6749)],"6e8c7bbb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5780))),"@site/docs/010-software-development/0105-Testing/03-intro.md",/*require.resolve*/(5780)],"702381eb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3087))),"@site/docs/020-learn/0204-cicd-pipelines/azure/tasks/build-tasks/dotnet.core.md",/*require.resolve*/(3087)],"76741422":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(156))),"C:\\Ampps\\www\\asmsite\\client-docs\\.docusaurus\\docusaurus-plugin-content-docs\\default\\plugin-route-context-module-100.json",/*require.resolve*/(156)],"7944e72e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3980))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/01-json.md",/*require.resolve*/(3980)],"7970ee92":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1137))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-azure-devops-services.md",/*require.resolve*/(1137)],"7abb66ec":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9529))),"@site/docs/015-devtools/02-dataformats/003-csv/01-csv.md",/*require.resolve*/(9529)],"7c72bda6":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7211))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/02-json-schema.md",/*require.resolve*/(7211)],"7c9df2f0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5336))),"@site/docs/020-learn/0202-react/Basics/handle-data-from-api.md",/*require.resolve*/(5336)],"7e6e2bc0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9745))),"@site/docs/015-devtools/04-versioncontrol/01-git.md",/*require.resolve*/(9745)],"8069f130":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9549))),"@site/docs/020-learn/0202-react/Axios/axios.md",/*require.resolve*/(9549)],"814f3328":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8363))),"~blog/default/blog-post-list-prop-default.json",/*require.resolve*/(8363)],"81ad7313":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2588))),"~blog/default/dist-client-docs-blog-tags-styletron-react-b68.json",/*require.resolve*/(2588)],"834bd84e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6934))),"@site/docs/020-learn/0204-cicd-pipelines/azure/cloud-shell/intro.md",/*require.resolve*/(6934)],"84bfc253":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8233))),"@site/docs/020-learn/0203-git/how-to/remove-last-changes.md",/*require.resolve*/(8233)],"866cf6cc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3571))),"~blog/default/dist-client-docs-blog-tags-docusaurus-a67-list.json",/*require.resolve*/(3571)],"87454bc4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1911))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/03-csharp-example.md",/*require.resolve*/(1911)],"8ac4b9bc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8740))),"@site/src/pages/cookies_en.md",/*require.resolve*/(8740)],"8c8ad2a2":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4042))),"@site/docs/015-devtools/03-frameworks-libraries/02-site-generators/create-a-page.md",/*require.resolve*/(4042)],"8d47eece":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7566))),"@site/docs/Glossary/MIME-type.md",/*require.resolve*/(7566)],"90981a12":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8149))),"@site/blog/2021-06-16-StartPost.md",/*require.resolve*/(8149)],"90bb0703":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6033))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/01-print-dir-contents.md",/*require.resolve*/(6033)],"92f97443":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8499))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/04-reuse-template.md",/*require.resolve*/(8499)],"935f2afb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9120))),"~docs/default/version-current-metadata-prop-751.json",/*require.resolve*/(9120)],"954ae021":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(877))),"~blog/default/dist-client-docs-blog-tags-programming-4d1-list.json",/*require.resolve*/(877)],"9bdd6486":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5100))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0100-yamlscripts/03-Yaml-templates.md",/*require.resolve*/(5100)],"9c2ff75d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(416))),"@site/docs/Glossary/deserialization.md",/*require.resolve*/(416)],"9e4087bc":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9331))),"@theme/BlogArchivePage",/*require.resolve*/(9331)],"a0992fef":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3948))),"@site/docs/015-devtools/04-versioncontrol/00-intro.md",/*require.resolve*/(3948)],"a2511f1c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3974))),"@site/docs/015-devtools/02-dataformats/002-xml/01-xml.md",/*require.resolve*/(3974)],"a2685df2":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(2294))),"@site/src/pages/ContactUs.js",/*require.resolve*/(2294)],"a4a0a316":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9094))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/03-Schema-Driven-Development.md",/*require.resolve*/(9094)],"a6735169":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4446))),"@site/src/pages/eula.md",/*require.resolve*/(4446)],"a6aa9e1f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5124))),"@theme/BlogListPage",/*require.resolve*/(5124)],"a72842ee":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7196))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/03-test-env.md",/*require.resolve*/(7196)],"a76e5ed3":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6537))),"@site/docs/015-devtools/02-dataformats/006-msgpack-lite/01-msgpack.md",/*require.resolve*/(6537)],"a7bd4aaa":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4532))),"@theme/DocVersionRoot",/*require.resolve*/(4532)],"a89ecf35":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5421))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/façade-pattern.md",/*require.resolve*/(5421)],"a8d51800":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4314))),"@site/blog/2021-06-15-welcome.md?truncated=true",/*require.resolve*/(4314)],"a94703ab":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7151))),"@theme/DocRoot",/*require.resolve*/(7151)],"a9a111a3":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6973))),"@site/docs/Glossary/Serialization.md",/*require.resolve*/(6973)],"ac7b6bfe":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1098))),"@site/docs/030-guide/guide-list.md",/*require.resolve*/(1098)],"acecf23e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5746))),"~blog/default/blogMetadata-default.json",/*require.resolve*/(5746)],"ad033327":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3909))),"@site/docs/020-learn/0203-git/overview/fetch-pull.md",/*require.resolve*/(3909)],"ae5dca9d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1934))),"~blog/default/dist-client-docs-blog-tags-xitechnix-e64-list.json",/*require.resolve*/(1934)],"b370d96e":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(400))),"@site/docs/010-software-development/0104-Coding/04-debugging/004-debugging.md",/*require.resolve*/(400)],"b5a51f93":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3991))),"@site/docs/010-software-development/0103-Designing/001-designPatterns/overview.md",/*require.resolve*/(3991)],"b7042d0a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1174))),"@site/docs/015-devtools/02-dataformats/001-json/json-overview/04-how-to-use-json-in-ts.md",/*require.resolve*/(1174)],"baa60d94":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1811))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/02-create-testcases.md",/*require.resolve*/(1811)],"babce472":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7503))),"@site/blog/2023-05-15-LabAutomationChallenges.md?truncated=true",/*require.resolve*/(7503)],"bdeef73b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5942))),"@site/docs/020-learn/0204-cicd-pipelines/azure/020-vs-devops-services.md",/*require.resolve*/(5942)],"c2f2b10c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(81))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0200-test-plans/01-test-plans.md",/*require.resolve*/(81)],"c4f5d8e4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8522))),"@site/src/pages/index.js",/*require.resolve*/(8522)],"c667f2fe":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7260))),"~blog/default/dist-client-docs-blog-tags-docusaurus-a67.json",/*require.resolve*/(7260)],"cb10743d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(679))),"~blog/default/dist-client-docs-blog-tags-tags-6ee.json",/*require.resolve*/(679)],"ccc49370":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3858))),"@theme/BlogPostPage",/*require.resolve*/(3858)],"ccee9b10":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8775))),"@site/src/pages/about-us.md",/*require.resolve*/(8775)],"ce35382b":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7499))),"@site/docs/020-learn/0203-git/how-to/rollback.md",/*require.resolve*/(7499)],"d14fd6d9":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8974))),"@site/docs/010-software-development/0101-Requirements/01-intro.md",/*require.resolve*/(8974)],"d210872d":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5118))),"~blog/default/dist-client-docs-blog-tags-future-challenges-b68.json",/*require.resolve*/(5118)],"d85ea180":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1448))),"@site/docs/010-software-development/0103-Designing/03-intro.md",/*require.resolve*/(1448)],"db775a8a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4931))),"~blog/default/dist-client-docs-blog-tags-automation-c5c-list.json",/*require.resolve*/(4931)],"dfacd4f5":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3594))),"@site/blog/2023-05-12-LabAutomationBenefits.md",/*require.resolve*/(3594)],"e5339692":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4213))),"@site/docs/015-devtools/04-versioncontrol/02-svn.md",/*require.resolve*/(4213)],"e7b604ac":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5995))),"@site/docs/015-devtools/03-frameworks-libraries/03-syncfusion/syncfusion-Basics.md",/*require.resolve*/(5995)],"e7c3d54c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4310))),"~blog/default/dist-client-docs-blog-tags-programming-4d1.json",/*require.resolve*/(4310)],"e7c788b2":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6716))),"~blog/default/dist-client-docs-blog-tags-automation-c5c.json",/*require.resolve*/(6716)],"ebb30ef0":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4219))),"@site/docs/020-learn/0204-cicd-pipelines/azure-devops/0103-azure-pipelines.md",/*require.resolve*/(4219)],"ed179930":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9256))),"@site/docs/015-devtools/03-frameworks-libraries/02-site-generators/docusaurus.md",/*require.resolve*/(9256)],"ef2cc497":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5529))),"@site/docs/010-software-development/0102-Planning/02-intro.md",/*require.resolve*/(5529)],"f0930f4f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(1919))),"@site/docs/010-software-development/0103-Designing/uml/userStory-userCase.mdx",/*require.resolve*/(1919)],"f1115065":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(4899))),"@site/docs/020-learn/0204-cicd-pipelines/gitlab-cicd/01-intro.md",/*require.resolve*/(4899)],"f2dc99bb":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(8978))),"@site/docs/020-learn/0202-react/Redux/Redux-Basic-Example.md",/*require.resolve*/(8978)],"f30fec47":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(3231))),"~blog/default/dist-client-docs-blog-tags-future-challenges-b68-list.json",/*require.resolve*/(3231)],"f6be44ef":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(6357))),"~blog/default/dist-client-docs-blog-tags-static-site-generator-75e.json",/*require.resolve*/(6357)],"f7c7000c":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(9922))),"@site/docs/010-software-development/0104-Coding/01-codebase/001-codebase.md",/*require.resolve*/(9922)],"f7fce95f":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(643))),"~blog/default/dist-client-docs-blog-tags-styletron-react-b68-list.json",/*require.resolve*/(643)],"f80db4b4":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(491))),"@site/docs/020-learn/0204-cicd-pipelines/azure/010-intro.md",/*require.resolve*/(491)],"f87193e1":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5800))),"@site/docs/010-software-development/0104-Coding/03-testing/003-testing.md",/*require.resolve*/(5800)],"fc06f22a":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(7644))),"@site/docs/030-guide/azure-deploy-webapp.md",/*require.resolve*/(7644)],"fc2cca76":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(5312))),"~blog/default/dist-client-docs-blog-tags-technology-9e1-list.json",/*require.resolve*/(5312)],"fe1b0652":[()=>Promise.resolve().then(()=>_interopRequireWildcard(__webpack_require__(611))),"~blog/default/dist-client-docs-blog-tags-data-management-2c2.json",/*require.resolve*/(611)]});
 // EXTERNAL MODULE: ./node_modules/react/jsx-runtime.js
 var jsx_runtime = __webpack_require__(4848);
 ;// CONCATENATED MODULE: ./node_modules/@docusaurus/core/lib/client/theme-fallback/Loading/index.js
@@ -14701,7 +14701,7 @@ if(typeof chunk==='object'||typeof chunk==='function'){Object.keys(loadedModule)
 let val=loadedModules;const keyPaths=keyPath.split('.');keyPaths.slice(0,-1).forEach(k=>{val=val[k];});val[keyPaths[keyPaths.length-1]]=chunk;});/* eslint-disable no-underscore-dangle */const Component=loadedModules.__comp;delete loadedModules.__comp;const routeContext=loadedModules.__context;delete loadedModules.__context;/* eslint-enable no-underscore-dangle */ // Is there any way to put this RouteContextProvider upper in the tree?
 return/*#__PURE__*/(0,jsx_runtime.jsx)(client_routeContext/* RouteContextProvider */.W,{value:routeContext,children:/*#__PURE__*/(0,jsx_runtime.jsx)(Component,{...loadedModules,...props})});}});}
 ;// CONCATENATED MODULE: ./client-docs/.docusaurus/routes.js
-/* harmony default export */ const routes = ([{path:'/about-us',component:ComponentCreator('/about-us','b0c'),exact:true},{path:'/blog',component:ComponentCreator('/blog','2ba'),exact:true},{path:'/blog/archive',component:ComponentCreator('/blog/archive','4f6'),exact:true},{path:'/blog/lab-automation-benefits',component:ComponentCreator('/blog/lab-automation-benefits','cf5'),exact:true},{path:'/blog/lab-automation-main-challenges',component:ComponentCreator('/blog/lab-automation-main-challenges','842'),exact:true},{path:'/blog/opening-post',component:ComponentCreator('/blog/opening-post','09f'),exact:true},{path:'/blog/styletron-react',component:ComponentCreator('/blog/styletron-react','575'),exact:true},{path:'/blog/tags',component:ComponentCreator('/blog/tags','cc3'),exact:true},{path:'/blog/tags/automation',component:ComponentCreator('/blog/tags/automation','234'),exact:true},{path:'/blog/tags/data-management',component:ComponentCreator('/blog/tags/data-management','445'),exact:true},{path:'/blog/tags/docusaurus',component:ComponentCreator('/blog/tags/docusaurus','953'),exact:true},{path:'/blog/tags/future-challenges',component:ComponentCreator('/blog/tags/future-challenges','a67'),exact:true},{path:'/blog/tags/lab-automation',component:ComponentCreator('/blog/tags/lab-automation','82d'),exact:true},{path:'/blog/tags/programming',component:ComponentCreator('/blog/tags/programming','b0d'),exact:true},{path:'/blog/tags/static-site-generator',component:ComponentCreator('/blog/tags/static-site-generator','a71'),exact:true},{path:'/blog/tags/styletron-react',component:ComponentCreator('/blog/tags/styletron-react','8cb'),exact:true},{path:'/blog/tags/technology',component:ComponentCreator('/blog/tags/technology','0e8'),exact:true},{path:'/blog/tags/xitechnix',component:ComponentCreator('/blog/tags/xitechnix','ad8'),exact:true},{path:'/blog/welcome',component:ComponentCreator('/blog/welcome','a71'),exact:true},{path:'/contact/',component:ComponentCreator('/contact/','c63'),exact:true},{path:'/ContactUs',component:ComponentCreator('/ContactUs','0f7'),exact:true},{path:'/cookies_en',component:ComponentCreator('/cookies_en','8ef'),exact:true},{path:'/disclaimers',component:ComponentCreator('/disclaimers','ce1'),exact:true},{path:'/eula',component:ComponentCreator('/eula','0d2'),exact:true},{path:'/markdown-page',component:ComponentCreator('/markdown-page','b04'),exact:true},{path:'/docs',component:ComponentCreator('/docs','81b'),routes:[{path:'/docs',component:ComponentCreator('/docs','dcb'),routes:[{path:'/docs',component:ComponentCreator('/docs','c9a'),routes:[{path:'/docs/cicd/overview',component:ComponentCreator('/docs/cicd/overview','432'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/content-type-mime',component:ComponentCreator('/docs/content-type-mime','d7c'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/deserialization',component:ComponentCreator('/docs/deserialization','7dd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/csv/csv',component:ComponentCreator('/docs/devtools/dataformats/csv/csv','ca9'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/json/json-overview/sch-dev',component:ComponentCreator('/docs/devtools/dataformats/json/json-overview/sch-dev','17e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/csharp-example',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/csharp-example','48a'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/msgpack',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/msgpack','4aa'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/msgpack-lite/ts-example',component:ComponentCreator('/docs/devtools/dataformats/msgpack-lite/ts-example','77d'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/protobufjs/example',component:ComponentCreator('/docs/devtools/dataformats/protobufjs/example','e85'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/protobufjs/protobufjs',component:ComponentCreator('/docs/devtools/dataformats/protobufjs/protobufjs','f02'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/xml/xml',component:ComponentCreator('/docs/devtools/dataformats/xml/xml','693'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/dataformats/yaml/yaml',component:ComponentCreator('/docs/devtools/dataformats/yaml/yaml','d41'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics',component:ComponentCreator('/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics','6a6'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/site-generators/create-a-page',component:ComponentCreator('/docs/devtools/frameworks-libraries/site-generators/create-a-page','ed1'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/site-generators/docusaurus',component:ComponentCreator('/docs/devtools/frameworks-libraries/site-generators/docusaurus','f5f'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics',component:ComponentCreator('/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics','5d5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/intro',component:ComponentCreator('/docs/devtools/intro','37b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/languages/opp',component:ComponentCreator('/docs/devtools/languages/opp','972'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/git',component:ComponentCreator('/docs/devtools/versioncontrol/git','6d4'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/intro',component:ComponentCreator('/docs/devtools/versioncontrol/intro','456'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/mercurial',component:ComponentCreator('/docs/devtools/versioncontrol/mercurial','1e2'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/devtools/versioncontrol/svn',component:ComponentCreator('/docs/devtools/versioncontrol/svn','9c5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/engineering',component:ComponentCreator('/docs/engineering','35b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/azure-deploy-webapi',component:ComponentCreator('/docs/guide/azure-deploy-webapi','323'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/azure-deploy-webapp',component:ComponentCreator('/docs/guide/azure-deploy-webapp','3a5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/guide/guide-list',component:ComponentCreator('/docs/guide/guide-list','9f8'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/how-to-use/json-in-ts',component:ComponentCreator('/docs/how-to-use/json-in-ts','860'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/intro',component:ComponentCreator('/docs/intro','e66'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/json-overview',component:ComponentCreator('/docs/json-overview','5c2'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/json-schema',component:ComponentCreator('/docs/json-schema','1dd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/azure-devops-services',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/azure-devops-services','265'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/azure-pipelines',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/azure-pipelines','ef0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/intro','89e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-pipeline',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-pipeline','2a6'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases','4bb'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env','ac8'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans','aaa'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent','18c'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents','d42'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template','7da'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers','1b0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates',component:ComponentCreator('/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates','648'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/cloud-shell/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/cloud-shell/intro','fef'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/intro','58b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core','6f5'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/azure/vs-devops-services',component:ComponentCreator('/docs/learn/cicd-pipelines/azure/vs-devops-services','8ea'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/cicd-pipelines/gitlab-cicd/intro',component:ComponentCreator('/docs/learn/cicd-pipelines/gitlab-cicd/intro','5f7'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/dotnet/dotnet.core/intro',component:ComponentCreator('/docs/learn/dotnet/dotnet.core/intro','94e'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git',component:ComponentCreator('/docs/learn/git','1b9'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/deserialization',component:ComponentCreator('/docs/learn/git/deserialization','3ea'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/fetchpull',component:ComponentCreator('/docs/learn/git/fetchpull','f09'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/overwriting-local-repo',component:ComponentCreator('/docs/learn/git/overwriting-local-repo','fcf'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/git/rollback-commit',component:ComponentCreator('/docs/learn/git/rollback-commit','f73'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Axios/',component:ComponentCreator('/docs/learn/react/Axios/','ab3'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Basics/handle-data-from-api',component:ComponentCreator('/docs/learn/react/Basics/handle-data-from-api','b83'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Hooks/useFetch',component:ComponentCreator('/docs/learn/react/Hooks/useFetch','6bb'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/intro',component:ComponentCreator('/docs/learn/react/intro','168'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/learn/react/Redux/Redux-Basic-Example',component:ComponentCreator('/docs/learn/react/Redux/Redux-Basic-Example','c55'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/science-applications',component:ComponentCreator('/docs/science-applications','6fd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/serialization',component:ComponentCreator('/docs/serialization','434'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/codebase/codebase',component:ComponentCreator('/docs/software-development/Coding/codebase/codebase','670'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/debugging/debugging',component:ComponentCreator('/docs/software-development/Coding/debugging/debugging','9ce'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/documentation/documenting',component:ComponentCreator('/docs/software-development/Coding/documentation/documenting','2bf'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/programming/writing-code',component:ComponentCreator('/docs/software-development/Coding/programming/writing-code','e25'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/refactoring/refactoring',component:ComponentCreator('/docs/software-development/Coding/refactoring/refactoring','601'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Coding/testing/testing',component:ComponentCreator('/docs/software-development/Coding/testing/testing','4b0'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/façade-pattern',component:ComponentCreator('/docs/software-development/Designing/designPatterns/façade-pattern','400'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/overview',component:ComponentCreator('/docs/software-development/Designing/designPatterns/overview','311'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/designPatterns/singleton-pattern',component:ComponentCreator('/docs/software-development/Designing/designPatterns/singleton-pattern','e5d'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/intro',component:ComponentCreator('/docs/software-development/Designing/intro','8cd'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/uml/user-story-user-case',component:ComponentCreator('/docs/software-development/Designing/uml/user-story-user-case','d33'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Designing/uml/wireframing',component:ComponentCreator('/docs/software-development/Designing/uml/wireframing','01b'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Planning/intro',component:ComponentCreator('/docs/software-development/Planning/intro','747'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Requirements/intro',component:ComponentCreator('/docs/software-development/Requirements/intro','140'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/software-development/Testing/intro',component:ComponentCreator('/docs/software-development/Testing/intro','a38'),exact:true,sidebar:"tutorialSidebar"},{path:'/docs/technology',component:ComponentCreator('/docs/technology','d2a'),exact:true,sidebar:"tutorialSidebar"}]}]}]},{path:'/',component:ComponentCreator('/','558'),exact:true},{path:'/',component:ComponentCreator('/','dc3'),exact:true},{path:'*',component:ComponentCreator('*')}]);
+/* harmony default export */ const routes = ([{path:'/dist/client-docs/',component:ComponentCreator('/dist/client-docs/','6dd'),exact:true},{path:'/dist/client-docs/',component:ComponentCreator('/dist/client-docs/','03c'),exact:true},{path:'/dist/client-docs/about-us',component:ComponentCreator('/dist/client-docs/about-us','e3a'),exact:true},{path:'/dist/client-docs/blog',component:ComponentCreator('/dist/client-docs/blog','f8d'),exact:true},{path:'/dist/client-docs/blog/archive',component:ComponentCreator('/dist/client-docs/blog/archive','867'),exact:true},{path:'/dist/client-docs/blog/lab-automation-benefits',component:ComponentCreator('/dist/client-docs/blog/lab-automation-benefits','b39'),exact:true},{path:'/dist/client-docs/blog/lab-automation-main-challenges',component:ComponentCreator('/dist/client-docs/blog/lab-automation-main-challenges','a30'),exact:true},{path:'/dist/client-docs/blog/opening-post',component:ComponentCreator('/dist/client-docs/blog/opening-post','b04'),exact:true},{path:'/dist/client-docs/blog/styletron-react',component:ComponentCreator('/dist/client-docs/blog/styletron-react','7c6'),exact:true},{path:'/dist/client-docs/blog/tags',component:ComponentCreator('/dist/client-docs/blog/tags','bf6'),exact:true},{path:'/dist/client-docs/blog/tags/automation',component:ComponentCreator('/dist/client-docs/blog/tags/automation','34d'),exact:true},{path:'/dist/client-docs/blog/tags/data-management',component:ComponentCreator('/dist/client-docs/blog/tags/data-management','4ee'),exact:true},{path:'/dist/client-docs/blog/tags/docusaurus',component:ComponentCreator('/dist/client-docs/blog/tags/docusaurus','74c'),exact:true},{path:'/dist/client-docs/blog/tags/future-challenges',component:ComponentCreator('/dist/client-docs/blog/tags/future-challenges','7c1'),exact:true},{path:'/dist/client-docs/blog/tags/lab-automation',component:ComponentCreator('/dist/client-docs/blog/tags/lab-automation','9f1'),exact:true},{path:'/dist/client-docs/blog/tags/programming',component:ComponentCreator('/dist/client-docs/blog/tags/programming','f07'),exact:true},{path:'/dist/client-docs/blog/tags/static-site-generator',component:ComponentCreator('/dist/client-docs/blog/tags/static-site-generator','41e'),exact:true},{path:'/dist/client-docs/blog/tags/styletron-react',component:ComponentCreator('/dist/client-docs/blog/tags/styletron-react','23b'),exact:true},{path:'/dist/client-docs/blog/tags/technology',component:ComponentCreator('/dist/client-docs/blog/tags/technology','414'),exact:true},{path:'/dist/client-docs/blog/tags/xitechnix',component:ComponentCreator('/dist/client-docs/blog/tags/xitechnix','cfd'),exact:true},{path:'/dist/client-docs/blog/welcome',component:ComponentCreator('/dist/client-docs/blog/welcome','114'),exact:true},{path:'/dist/client-docs/contact/',component:ComponentCreator('/dist/client-docs/contact/','0ab'),exact:true},{path:'/dist/client-docs/ContactUs',component:ComponentCreator('/dist/client-docs/ContactUs','1c9'),exact:true},{path:'/dist/client-docs/cookies_en',component:ComponentCreator('/dist/client-docs/cookies_en','c35'),exact:true},{path:'/dist/client-docs/disclaimers',component:ComponentCreator('/dist/client-docs/disclaimers','305'),exact:true},{path:'/dist/client-docs/eula',component:ComponentCreator('/dist/client-docs/eula','8d5'),exact:true},{path:'/dist/client-docs/markdown-page',component:ComponentCreator('/dist/client-docs/markdown-page','979'),exact:true},{path:'/dist/client-docs/docs',component:ComponentCreator('/dist/client-docs/docs','8e6'),routes:[{path:'/dist/client-docs/docs',component:ComponentCreator('/dist/client-docs/docs','5c3'),routes:[{path:'/dist/client-docs/docs',component:ComponentCreator('/dist/client-docs/docs','280'),routes:[{path:'/dist/client-docs/docs/cicd/overview',component:ComponentCreator('/dist/client-docs/docs/cicd/overview','444'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/content-type-mime',component:ComponentCreator('/dist/client-docs/docs/content-type-mime','610'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/deserialization',component:ComponentCreator('/dist/client-docs/docs/deserialization','3a8'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/csv/csv',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/csv/csv','07c'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/json/json-overview/sch-dev',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/json/json-overview/sch-dev','87b'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/msgpack-lite/csharp-example',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/msgpack-lite/csharp-example','ebf'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/msgpack-lite/msgpack',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/msgpack-lite/msgpack','51a'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/msgpack-lite/ts-example',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/msgpack-lite/ts-example','5b1'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/protobufjs/example',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/protobufjs/example','535'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/protobufjs/protobufjs',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/protobufjs/protobufjs','e15'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/xml/xml',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/xml/xml','966'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/dataformats/yaml/yaml',component:ComponentCreator('/dist/client-docs/docs/devtools/dataformats/yaml/yaml','c86'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics',component:ComponentCreator('/dist/client-docs/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics','85a'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/create-a-page',component:ComponentCreator('/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/create-a-page','4a7'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus',component:ComponentCreator('/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus','b10'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics',component:ComponentCreator('/dist/client-docs/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics','449'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/intro',component:ComponentCreator('/dist/client-docs/docs/devtools/intro','dab'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/languages/opp',component:ComponentCreator('/dist/client-docs/docs/devtools/languages/opp','514'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/versioncontrol/git',component:ComponentCreator('/dist/client-docs/docs/devtools/versioncontrol/git','c03'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/versioncontrol/intro',component:ComponentCreator('/dist/client-docs/docs/devtools/versioncontrol/intro','8ad'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/versioncontrol/mercurial',component:ComponentCreator('/dist/client-docs/docs/devtools/versioncontrol/mercurial','7b4'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/devtools/versioncontrol/svn',component:ComponentCreator('/dist/client-docs/docs/devtools/versioncontrol/svn','da7'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/engineering',component:ComponentCreator('/dist/client-docs/docs/engineering','8ac'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/guide/azure-deploy-webapi',component:ComponentCreator('/dist/client-docs/docs/guide/azure-deploy-webapi','269'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/guide/azure-deploy-webapp',component:ComponentCreator('/dist/client-docs/docs/guide/azure-deploy-webapp','7a9'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/guide/guide-list',component:ComponentCreator('/dist/client-docs/docs/guide/guide-list','166'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/how-to-use/json-in-ts',component:ComponentCreator('/dist/client-docs/docs/how-to-use/json-in-ts','dab'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/intro',component:ComponentCreator('/dist/client-docs/docs/intro','c32'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/json-overview',component:ComponentCreator('/dist/client-docs/docs/json-overview','47d'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/json-schema',component:ComponentCreator('/dist/client-docs/docs/json-schema','7e1'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-devops-services',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-devops-services','8b2'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-pipelines',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-pipelines','2d7'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/intro',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/intro','782'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-pipeline',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-pipeline','198'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases','f0b'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env','328'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans','8b7'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent','1ef'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents','054'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template','2fd'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers','b11'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates','f1b'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure/cloud-shell/intro',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure/cloud-shell/intro','cf2'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure/intro',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure/intro','ec7'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core','16e'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/azure/vs-devops-services',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/azure/vs-devops-services','b65'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/cicd-pipelines/gitlab-cicd/intro',component:ComponentCreator('/dist/client-docs/docs/learn/cicd-pipelines/gitlab-cicd/intro','fca'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/dotnet/dotnet.core/intro',component:ComponentCreator('/dist/client-docs/docs/learn/dotnet/dotnet.core/intro','df9'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/git',component:ComponentCreator('/dist/client-docs/docs/learn/git','1f2'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/git/deserialization',component:ComponentCreator('/dist/client-docs/docs/learn/git/deserialization','882'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/git/fetchpull',component:ComponentCreator('/dist/client-docs/docs/learn/git/fetchpull','7e8'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/git/overwriting-local-repo',component:ComponentCreator('/dist/client-docs/docs/learn/git/overwriting-local-repo','f11'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/git/rollback-commit',component:ComponentCreator('/dist/client-docs/docs/learn/git/rollback-commit','85f'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/react/Axios/',component:ComponentCreator('/dist/client-docs/docs/learn/react/Axios/','9a0'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/react/Basics/handle-data-from-api',component:ComponentCreator('/dist/client-docs/docs/learn/react/Basics/handle-data-from-api','5c0'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/react/Hooks/useFetch',component:ComponentCreator('/dist/client-docs/docs/learn/react/Hooks/useFetch','26a'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/react/intro',component:ComponentCreator('/dist/client-docs/docs/learn/react/intro','ddf'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/learn/react/Redux/Redux-Basic-Example',component:ComponentCreator('/dist/client-docs/docs/learn/react/Redux/Redux-Basic-Example','2f6'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/science-applications',component:ComponentCreator('/dist/client-docs/docs/science-applications','34c'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/serialization',component:ComponentCreator('/dist/client-docs/docs/serialization','abd'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Coding/codebase/codebase',component:ComponentCreator('/dist/client-docs/docs/software-development/Coding/codebase/codebase','f2f'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Coding/debugging/debugging',component:ComponentCreator('/dist/client-docs/docs/software-development/Coding/debugging/debugging','0ed'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Coding/documentation/documenting',component:ComponentCreator('/dist/client-docs/docs/software-development/Coding/documentation/documenting','da6'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Coding/programming/writing-code',component:ComponentCreator('/dist/client-docs/docs/software-development/Coding/programming/writing-code','2a3'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Coding/refactoring/refactoring',component:ComponentCreator('/dist/client-docs/docs/software-development/Coding/refactoring/refactoring','b37'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Coding/testing/testing',component:ComponentCreator('/dist/client-docs/docs/software-development/Coding/testing/testing','2fd'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Designing/designPatterns/façade-pattern',component:ComponentCreator('/dist/client-docs/docs/software-development/Designing/designPatterns/façade-pattern','78c'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Designing/designPatterns/overview',component:ComponentCreator('/dist/client-docs/docs/software-development/Designing/designPatterns/overview','4c3'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Designing/designPatterns/singleton-pattern',component:ComponentCreator('/dist/client-docs/docs/software-development/Designing/designPatterns/singleton-pattern','489'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Designing/intro',component:ComponentCreator('/dist/client-docs/docs/software-development/Designing/intro','6e5'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Designing/uml/user-story-user-case',component:ComponentCreator('/dist/client-docs/docs/software-development/Designing/uml/user-story-user-case','1cb'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Designing/uml/wireframing',component:ComponentCreator('/dist/client-docs/docs/software-development/Designing/uml/wireframing','6b0'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Planning/intro',component:ComponentCreator('/dist/client-docs/docs/software-development/Planning/intro','ace'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Requirements/intro',component:ComponentCreator('/dist/client-docs/docs/software-development/Requirements/intro','ac9'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/software-development/Testing/intro',component:ComponentCreator('/dist/client-docs/docs/software-development/Testing/intro','31d'),exact:true,sidebar:"tutorialSidebar"},{path:'/dist/client-docs/docs/technology',component:ComponentCreator('/dist/client-docs/docs/technology','e50'),exact:true,sidebar:"tutorialSidebar"}]}]}]},{path:'*',component:ComponentCreator('*')}]);
 
 /***/ }),
 
@@ -18999,7 +18999,7 @@ var react = __webpack_require__(6540);
 // EXTERNAL MODULE: ./client-docs/.docusaurus/docusaurus.config.mjs
 var docusaurus_config = __webpack_require__(3050);
 ;// CONCATENATED MODULE: ./client-docs/.docusaurus/globalData.json
-const globalData_namespaceObject = /*#__PURE__*/JSON.parse('{"docusaurus-plugin-content-docs":{"default":{"path":"/docs","versions":[{"name":"current","label":"Next","isLast":true,"path":"/docs","mainDocId":"intro","docs":[{"id":"devtools/dataformats/csv/csv","path":"/docs/devtools/dataformats/csv/csv","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/json/json-overview/how-to-use-json-in-ts","path":"/docs/how-to-use/json-in-ts","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/json/json-overview/json","path":"/docs/json-overview","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/json/json-overview/json-schema","path":"/docs/json-schema","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/json/json-overview/Schema-Driven-Development","path":"/docs/devtools/dataformats/json/json-overview/sch-dev","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/msgpack-lite/csharp-example","path":"/docs/devtools/dataformats/msgpack-lite/csharp-example","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/msgpack-lite/msgpack","path":"/docs/devtools/dataformats/msgpack-lite/msgpack","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/msgpack-lite/ts-example","path":"/docs/devtools/dataformats/msgpack-lite/ts-example","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/protobufjs/example","path":"/docs/devtools/dataformats/protobufjs/example","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/protobufjs/protobufjs","path":"/docs/devtools/dataformats/protobufjs/protobufjs","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/xml/xml","path":"/docs/devtools/dataformats/xml/xml","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/yaml/yaml","path":"/docs/devtools/dataformats/yaml/yaml","sidebar":"tutorialSidebar"},{"id":"devtools/frameworks-libraries/nx-workspace/nx-Basics","path":"/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics","sidebar":"tutorialSidebar"},{"id":"devtools/frameworks-libraries/site-generators/create-a-page","path":"/docs/devtools/frameworks-libraries/site-generators/create-a-page","sidebar":"tutorialSidebar"},{"id":"devtools/frameworks-libraries/site-generators/docusaurus","path":"/docs/devtools/frameworks-libraries/site-generators/docusaurus","sidebar":"tutorialSidebar"},{"id":"devtools/frameworks-libraries/syncfusion/syncfusion-Basics","path":"/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics","sidebar":"tutorialSidebar"},{"id":"devtools/intro","path":"/docs/devtools/intro","sidebar":"tutorialSidebar"},{"id":"devtools/languages/opp","path":"/docs/devtools/languages/opp","sidebar":"tutorialSidebar"},{"id":"devtools/versioncontrol/git","path":"/docs/devtools/versioncontrol/git","sidebar":"tutorialSidebar"},{"id":"devtools/versioncontrol/intro","path":"/docs/devtools/versioncontrol/intro","sidebar":"tutorialSidebar"},{"id":"devtools/versioncontrol/mercurial","path":"/docs/devtools/versioncontrol/mercurial","sidebar":"tutorialSidebar"},{"id":"devtools/versioncontrol/svn","path":"/docs/devtools/versioncontrol/svn","sidebar":"tutorialSidebar"},{"id":"Glossary/applications-of-science","path":"/docs/science-applications","sidebar":"tutorialSidebar"},{"id":"Glossary/deserialization","path":"/docs/deserialization","sidebar":"tutorialSidebar"},{"id":"Glossary/engineering","path":"/docs/engineering","sidebar":"tutorialSidebar"},{"id":"Glossary/MIME-type","path":"/docs/content-type-mime","sidebar":"tutorialSidebar"},{"id":"Glossary/Serialization","path":"/docs/serialization","sidebar":"tutorialSidebar"},{"id":"Glossary/technology","path":"/docs/technology","sidebar":"tutorialSidebar"},{"id":"guide/azure-deploy-webapi","path":"/docs/guide/azure-deploy-webapi","sidebar":"tutorialSidebar"},{"id":"guide/azure-deploy-webapp","path":"/docs/guide/azure-deploy-webapp","sidebar":"tutorialSidebar"},{"id":"guide/guide-list","path":"/docs/guide/guide-list","sidebar":"tutorialSidebar"},{"id":"intro","path":"/docs/intro","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/azure-devops-services","path":"/docs/learn/cicd-pipelines/azure-devops/azure-devops-services","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/azure-pipelines","path":"/docs/learn/cicd-pipelines/azure-devops/azure-pipelines","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/intro","path":"/docs/learn/cicd-pipelines/azure-devops/intro","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/test-pipeline","path":"/docs/learn/cicd-pipelines/azure-devops/test-pipeline","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/test-plans/create-testcases","path":"/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/test-plans/test-env","path":"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/test-plans/test-plans","path":"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/agent","path":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","path":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","path":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/triggers","path":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","path":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure/cloud-shell/intro","path":"/docs/learn/cicd-pipelines/azure/cloud-shell/intro","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure/intro","path":"/docs/learn/cicd-pipelines/azure/intro","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","path":"/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure/vs-devops-services","path":"/docs/learn/cicd-pipelines/azure/vs-devops-services","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/gitlab-cicd/intro","path":"/docs/learn/cicd-pipelines/gitlab-cicd/intro","sidebar":"tutorialSidebar"},{"id":"learn/dotnet/dotnet.core/intro","path":"/docs/learn/dotnet/dotnet.core/intro","sidebar":"tutorialSidebar"},{"id":"learn/git/how-to/overwite-local-repo","path":"/docs/learn/git/overwriting-local-repo","sidebar":"tutorialSidebar"},{"id":"learn/git/how-to/remove-last-changes","path":"/docs/learn/git/deserialization","sidebar":"tutorialSidebar"},{"id":"learn/git/how-to/rollback","path":"/docs/learn/git/rollback-commit","sidebar":"tutorialSidebar"},{"id":"learn/git/overview/fetch-pull","path":"/docs/learn/git/fetchpull","sidebar":"tutorialSidebar"},{"id":"learn/git/overview/set-up-git","path":"/docs/learn/git","sidebar":"tutorialSidebar"},{"id":"learn/react/Axios/axios","path":"/docs/learn/react/Axios/","sidebar":"tutorialSidebar"},{"id":"learn/react/Basics/handle-data-from-api","path":"/docs/learn/react/Basics/handle-data-from-api","sidebar":"tutorialSidebar"},{"id":"learn/react/Hooks/useFetch","path":"/docs/learn/react/Hooks/useFetch","sidebar":"tutorialSidebar"},{"id":"learn/react/intro","path":"/docs/learn/react/intro","sidebar":"tutorialSidebar"},{"id":"learn/react/Redux/Redux-Basic-Example","path":"/docs/learn/react/Redux/Redux-Basic-Example","sidebar":"tutorialSidebar"},{"id":"software-development/Automation/cicd-processes","path":"/docs/cicd/overview","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/codebase/codebase","path":"/docs/software-development/Coding/codebase/codebase","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/debugging/debugging","path":"/docs/software-development/Coding/debugging/debugging","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/documentation/documenting","path":"/docs/software-development/Coding/documentation/documenting","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/programming/writing-code","path":"/docs/software-development/Coding/programming/writing-code","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/refactoring/refactoring","path":"/docs/software-development/Coding/refactoring/refactoring","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/testing/testing","path":"/docs/software-development/Coding/testing/testing","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/designPatterns/façade-pattern","path":"/docs/software-development/Designing/designPatterns/façade-pattern","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/designPatterns/overview","path":"/docs/software-development/Designing/designPatterns/overview","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/designPatterns/singleton-pattern","path":"/docs/software-development/Designing/designPatterns/singleton-pattern","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/intro","path":"/docs/software-development/Designing/intro","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/uml/userStory-userCase","path":"/docs/software-development/Designing/uml/user-story-user-case","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/uml/Wireframing","path":"/docs/software-development/Designing/uml/wireframing","sidebar":"tutorialSidebar"},{"id":"software-development/Planning/intro","path":"/docs/software-development/Planning/intro","sidebar":"tutorialSidebar"},{"id":"software-development/Requirements/intro","path":"/docs/software-development/Requirements/intro","sidebar":"tutorialSidebar"},{"id":"software-development/Testing/intro","path":"/docs/software-development/Testing/intro","sidebar":"tutorialSidebar"}],"draftIds":[],"sidebars":{"tutorialSidebar":{"link":{"path":"/docs/intro","label":"intro"}}}}],"breadcrumbs":true}}}');
+const globalData_namespaceObject = /*#__PURE__*/JSON.parse('{"docusaurus-plugin-content-docs":{"default":{"path":"/dist/client-docs/docs","versions":[{"name":"current","label":"Next","isLast":true,"path":"/dist/client-docs/docs","mainDocId":"intro","docs":[{"id":"devtools/dataformats/csv/csv","path":"/dist/client-docs/docs/devtools/dataformats/csv/csv","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/json/json-overview/how-to-use-json-in-ts","path":"/dist/client-docs/docs/how-to-use/json-in-ts","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/json/json-overview/json","path":"/dist/client-docs/docs/json-overview","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/json/json-overview/json-schema","path":"/dist/client-docs/docs/json-schema","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/json/json-overview/Schema-Driven-Development","path":"/dist/client-docs/docs/devtools/dataformats/json/json-overview/sch-dev","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/msgpack-lite/csharp-example","path":"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/csharp-example","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/msgpack-lite/msgpack","path":"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/msgpack","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/msgpack-lite/ts-example","path":"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/ts-example","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/protobufjs/example","path":"/dist/client-docs/docs/devtools/dataformats/protobufjs/example","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/protobufjs/protobufjs","path":"/dist/client-docs/docs/devtools/dataformats/protobufjs/protobufjs","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/xml/xml","path":"/dist/client-docs/docs/devtools/dataformats/xml/xml","sidebar":"tutorialSidebar"},{"id":"devtools/dataformats/yaml/yaml","path":"/dist/client-docs/docs/devtools/dataformats/yaml/yaml","sidebar":"tutorialSidebar"},{"id":"devtools/frameworks-libraries/nx-workspace/nx-Basics","path":"/dist/client-docs/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics","sidebar":"tutorialSidebar"},{"id":"devtools/frameworks-libraries/site-generators/create-a-page","path":"/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/create-a-page","sidebar":"tutorialSidebar"},{"id":"devtools/frameworks-libraries/site-generators/docusaurus","path":"/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus","sidebar":"tutorialSidebar"},{"id":"devtools/frameworks-libraries/syncfusion/syncfusion-Basics","path":"/dist/client-docs/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics","sidebar":"tutorialSidebar"},{"id":"devtools/intro","path":"/dist/client-docs/docs/devtools/intro","sidebar":"tutorialSidebar"},{"id":"devtools/languages/opp","path":"/dist/client-docs/docs/devtools/languages/opp","sidebar":"tutorialSidebar"},{"id":"devtools/versioncontrol/git","path":"/dist/client-docs/docs/devtools/versioncontrol/git","sidebar":"tutorialSidebar"},{"id":"devtools/versioncontrol/intro","path":"/dist/client-docs/docs/devtools/versioncontrol/intro","sidebar":"tutorialSidebar"},{"id":"devtools/versioncontrol/mercurial","path":"/dist/client-docs/docs/devtools/versioncontrol/mercurial","sidebar":"tutorialSidebar"},{"id":"devtools/versioncontrol/svn","path":"/dist/client-docs/docs/devtools/versioncontrol/svn","sidebar":"tutorialSidebar"},{"id":"Glossary/applications-of-science","path":"/dist/client-docs/docs/science-applications","sidebar":"tutorialSidebar"},{"id":"Glossary/deserialization","path":"/dist/client-docs/docs/deserialization","sidebar":"tutorialSidebar"},{"id":"Glossary/engineering","path":"/dist/client-docs/docs/engineering","sidebar":"tutorialSidebar"},{"id":"Glossary/MIME-type","path":"/dist/client-docs/docs/content-type-mime","sidebar":"tutorialSidebar"},{"id":"Glossary/Serialization","path":"/dist/client-docs/docs/serialization","sidebar":"tutorialSidebar"},{"id":"Glossary/technology","path":"/dist/client-docs/docs/technology","sidebar":"tutorialSidebar"},{"id":"guide/azure-deploy-webapi","path":"/dist/client-docs/docs/guide/azure-deploy-webapi","sidebar":"tutorialSidebar"},{"id":"guide/azure-deploy-webapp","path":"/dist/client-docs/docs/guide/azure-deploy-webapp","sidebar":"tutorialSidebar"},{"id":"guide/guide-list","path":"/dist/client-docs/docs/guide/guide-list","sidebar":"tutorialSidebar"},{"id":"intro","path":"/dist/client-docs/docs/intro","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/azure-devops-services","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-devops-services","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/azure-pipelines","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-pipelines","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/intro","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/intro","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/test-pipeline","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-pipeline","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/test-plans/create-testcases","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/test-plans/test-env","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/test-plans/test-plans","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/agent","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/triggers","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure/cloud-shell/intro","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure/cloud-shell/intro","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure/intro","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure/intro","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/azure/vs-devops-services","path":"/dist/client-docs/docs/learn/cicd-pipelines/azure/vs-devops-services","sidebar":"tutorialSidebar"},{"id":"learn/cicd-pipelines/gitlab-cicd/intro","path":"/dist/client-docs/docs/learn/cicd-pipelines/gitlab-cicd/intro","sidebar":"tutorialSidebar"},{"id":"learn/dotnet/dotnet.core/intro","path":"/dist/client-docs/docs/learn/dotnet/dotnet.core/intro","sidebar":"tutorialSidebar"},{"id":"learn/git/how-to/overwite-local-repo","path":"/dist/client-docs/docs/learn/git/overwriting-local-repo","sidebar":"tutorialSidebar"},{"id":"learn/git/how-to/remove-last-changes","path":"/dist/client-docs/docs/learn/git/deserialization","sidebar":"tutorialSidebar"},{"id":"learn/git/how-to/rollback","path":"/dist/client-docs/docs/learn/git/rollback-commit","sidebar":"tutorialSidebar"},{"id":"learn/git/overview/fetch-pull","path":"/dist/client-docs/docs/learn/git/fetchpull","sidebar":"tutorialSidebar"},{"id":"learn/git/overview/set-up-git","path":"/dist/client-docs/docs/learn/git","sidebar":"tutorialSidebar"},{"id":"learn/react/Axios/axios","path":"/dist/client-docs/docs/learn/react/Axios/","sidebar":"tutorialSidebar"},{"id":"learn/react/Basics/handle-data-from-api","path":"/dist/client-docs/docs/learn/react/Basics/handle-data-from-api","sidebar":"tutorialSidebar"},{"id":"learn/react/Hooks/useFetch","path":"/dist/client-docs/docs/learn/react/Hooks/useFetch","sidebar":"tutorialSidebar"},{"id":"learn/react/intro","path":"/dist/client-docs/docs/learn/react/intro","sidebar":"tutorialSidebar"},{"id":"learn/react/Redux/Redux-Basic-Example","path":"/dist/client-docs/docs/learn/react/Redux/Redux-Basic-Example","sidebar":"tutorialSidebar"},{"id":"software-development/Automation/cicd-processes","path":"/dist/client-docs/docs/cicd/overview","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/codebase/codebase","path":"/dist/client-docs/docs/software-development/Coding/codebase/codebase","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/debugging/debugging","path":"/dist/client-docs/docs/software-development/Coding/debugging/debugging","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/documentation/documenting","path":"/dist/client-docs/docs/software-development/Coding/documentation/documenting","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/programming/writing-code","path":"/dist/client-docs/docs/software-development/Coding/programming/writing-code","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/refactoring/refactoring","path":"/dist/client-docs/docs/software-development/Coding/refactoring/refactoring","sidebar":"tutorialSidebar"},{"id":"software-development/Coding/testing/testing","path":"/dist/client-docs/docs/software-development/Coding/testing/testing","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/designPatterns/façade-pattern","path":"/dist/client-docs/docs/software-development/Designing/designPatterns/façade-pattern","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/designPatterns/overview","path":"/dist/client-docs/docs/software-development/Designing/designPatterns/overview","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/designPatterns/singleton-pattern","path":"/dist/client-docs/docs/software-development/Designing/designPatterns/singleton-pattern","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/intro","path":"/dist/client-docs/docs/software-development/Designing/intro","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/uml/userStory-userCase","path":"/dist/client-docs/docs/software-development/Designing/uml/user-story-user-case","sidebar":"tutorialSidebar"},{"id":"software-development/Designing/uml/Wireframing","path":"/dist/client-docs/docs/software-development/Designing/uml/wireframing","sidebar":"tutorialSidebar"},{"id":"software-development/Planning/intro","path":"/dist/client-docs/docs/software-development/Planning/intro","sidebar":"tutorialSidebar"},{"id":"software-development/Requirements/intro","path":"/dist/client-docs/docs/software-development/Requirements/intro","sidebar":"tutorialSidebar"},{"id":"software-development/Testing/intro","path":"/dist/client-docs/docs/software-development/Testing/intro","sidebar":"tutorialSidebar"}],"draftIds":[],"sidebars":{"tutorialSidebar":{"link":{"path":"/dist/client-docs/docs/intro","label":"intro"}}}}],"breadcrumbs":true}}}');
 ;// CONCATENATED MODULE: ./client-docs/.docusaurus/i18n.json
 const i18n_namespaceObject = /*#__PURE__*/JSON.parse('{"defaultLocale":"en","locales":["en"],"path":"i18n","currentLocale":"en","localeConfigs":{"en":{"label":"English","direction":"ltr","htmlLang":"en","calendar":"gregory","path":"en"}}}');
 // EXTERNAL MODULE: ./client-docs/.docusaurus/codeTranslations.json
@@ -31219,10 +31219,10 @@ __webpack_require__.r(__webpack_exports__);
   "title": "ASafariM Learn Docs",
   "tagline": "Learning material and blog posts",
   "url": "https://asafarim.com",
-  "baseUrl": "/",
+  "baseUrl": "/dist/client-docs/",
   "onBrokenLinks": "throw",
   "onBrokenMarkdownLinks": "warn",
-  "favicon": "img/favicon.ico",
+  "favicon": "/dist/client-docs/img/favicon.ico",
   "organizationName": "ASAFARIM",
   "projectName": "asmsite",
   "presets": [
@@ -31241,7 +31241,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         "blog": {
           "showReadingTime": true,
-          "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/"
+          "editUrl": "https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/"
         },
         "theme": {
           "customCss": "C:\\Ampps\\www\\asmsite\\client-docs\\src\\css\\custom.css"
@@ -31288,7 +31288,7 @@ __webpack_require__.r(__webpack_exports__);
         "alt": "ASafariM Logo",
         "src": "img/logoT.svg",
         "className": "client-docs-navbar-logo",
-        "target": "_blank",
+        "target": "_self",
         "style": {
           "height": "auto",
           "width": "20px",
@@ -34809,195 +34809,11 @@ module.exports = {};
 
 /***/ }),
 
-/***/ 9752:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"blogPosts":[{"id":"styletron-react","metadata":{"permalink":"/blog/styletron-react","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-08-26-styletron/index.md","source":"@site/blog/2023-08-26-styletron/index.md","title":"What is happening behind the scene?","description":"Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:","date":"2023-08-26T00:00:00.000Z","tags":[{"label":"styletron-react","permalink":"/blog/tags/styletron-react"}],"readingTime":0.34,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari"}],"frontMatter":{"slug":"styletron-react","title":"What is happening behind the scene?","author":"Ali Safari","tags":["styletron-react"]},"unlisted":false,"nextItem":{"title":"Challenges in lab automation","permalink":"/blog/lab-automation-main-challenges"}},"content":"Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:\\n\\n```js\\nyarn add styletron-engine-atomic styletron-react\\n\\n```\\n\\n:::tip\\n\\nUse the power of React to create interactive blog posts.\\n\\n```js\\n<html>\\n  <head>\\n    <style>\\n      .foo {\\n        font-size: 20px;\\n      }\\n      .bar {\\n        color: red;\\n      }\\n    </style>\\n  </head>\\n  <body>\\n    <a href=\\"/welcome\\" class=\\"foo bar\\">Start!</a>\\n  </body>\\n</html>\\n```\\n\\n<button onClick={() => alert(\'button clicked!\')}>Click me!</button>\\n\\n:::"},{"id":"lab-automation-main-challenges","metadata":{"permalink":"/blog/lab-automation-main-challenges","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-15-LabAutomationChallenges.md","source":"@site/blog/2023-05-15-LabAutomationChallenges.md","title":"Challenges in lab automation","description":"Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:","date":"2023-05-15T00:00:00.000Z","tags":[{"label":"automation","permalink":"/blog/tags/automation"},{"label":"lab automation","permalink":"/blog/tags/lab-automation"},{"label":"technology","permalink":"/blog/tags/technology"},{"label":"future challenges","permalink":"/blog/tags/future-challenges"}],"readingTime":0.985,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"lab-automation-main-challenges","title":"Challenges in lab automation","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["automation","lab automation","technology","future challenges"]},"unlisted":false,"prevItem":{"title":"What is happening behind the scene?","permalink":"/blog/styletron-react"},"nextItem":{"title":"Some general benefits of lab automation","permalink":"/blog/lab-automation-benefits"}},"content":"Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:\\r\\n<table>\\r\\n  <tr>\\r\\n    <th>Opportunities</th>\\r\\n    <th>Challenges</th>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Increased efficiency and accuracy of lab processes</td>\\r\\n    <td>Cost of implementing automation</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Improved reproducibility of experiments</td>\\r\\n    <td>Complexity of lab processes</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Ability to handle large volumes of data</td>\\r\\n    <td>Integration with existing lab systems</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Improved safety of lab personnel</td>\\r\\n    <td>Training of staff on how to use automated systems</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td></td>\\r\\n    <td>Temporary shut down of lab operations during implementation</td>\\r\\n  </tr>\\r\\n</table>\\r\\n\\r\\nTechnically, one of the most common concerns in lab automation is ensuring the accuracy and reproducibility of automated processes. Lab automation systems may introduce errors or variations that can impact experimental results. \\r\\nTherefore, it is critical to validate and verify the performance of automated systems to ensure that they are producing accurate and reliable results. Additionally, it is important to establish standard operating procedures (SOPs) and quality control measures to ensure that automated processes are consistent and reproducible over time."},{"id":"lab-automation-benefits","metadata":{"permalink":"/blog/lab-automation-benefits","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2023-05-12-LabAutomationBenefits.md","source":"@site/blog/2023-05-12-LabAutomationBenefits.md","title":"Some general benefits of lab automation","description":"Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:","date":"2023-05-12T00:00:00.000Z","tags":[{"label":"automation","permalink":"/blog/tags/automation"},{"label":"lab automation","permalink":"/blog/tags/lab-automation"},{"label":"technology","permalink":"/blog/tags/technology"},{"label":"Data Management","permalink":"/blog/tags/data-management"}],"readingTime":0.935,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"lab-automation-benefits","title":"Some general benefits of lab automation","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["automation","lab automation","technology","Data Management"]},"unlisted":false,"prevItem":{"title":"Challenges in lab automation","permalink":"/blog/lab-automation-main-challenges"},"nextItem":{"title":"Computer coding for science","permalink":"/blog/opening-post"}},"content":"Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:\\r\\n\\r\\n-   ##### Increased Efficiency\\r\\nLab automation can help to streamline laboratory processes and workflows, reducing the time and effort required to perform routine tasks. This can lead to increased efficiency, productivity, and throughput.\\r\\n\\r\\n-   ##### Improved Accuracy\\r\\nAutomation can help to reduce errors and variability in laboratory processes, leading to more consistent and reliable results.\\r\\n\\r\\n-   ##### Cost Savings\\r\\nLab automation can help to reduce the cost of labor, materials, and equipment, leading to cost savings over time.\\r\\n\\r\\n-   ##### Data Management\\r\\nAutomation can help to manage and analyze large amounts of data generated by laboratory processes, leading to better insights and decision-making.\\r\\n\\r\\n-   ##### Standardization\\r\\nAutomation can help to standardize laboratory processes and workflows, ensuring consistency and compliance with regulatory requirements.\\r\\n\\r\\n-   ##### Scalability\\r\\n Automation can help to scale laboratory processes and workflows to meet changing demands and increasing throughput.\\r\\n\\r\\nOverall, lab automation can help to improve the efficiency, accuracy, and cost-effectiveness of laboratory processes, while also providing better data management and analysis capabilities."},{"id":"opening-post","metadata":{"permalink":"/blog/opening-post","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-16-StartPost.md","source":"@site/blog/2021-06-16-StartPost.md","title":"Computer coding for science","description":"The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.","date":"2021-06-16T00:00:00.000Z","tags":[{"label":"xitechnix","permalink":"/blog/tags/xitechnix"},{"label":"programming","permalink":"/blog/tags/programming"}],"readingTime":1.145,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"opening-post","title":"Computer coding for science","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["xitechnix","programming"]},"unlisted":false,"prevItem":{"title":"Some general benefits of lab automation","permalink":"/blog/lab-automation-benefits"},"nextItem":{"title":"Welcome!","permalink":"/blog/welcome"}},"content":"The statistical package `R` for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization. \\r\\n\\r\\n However, programming for a reasearch focused branch is not limited to R any more, but highly likely starts often with R.\\r\\n\\r\\n Sometimes, having knowledge in other operating systems other than the popular Windows is needed. Sometimes, an analytical tool require a `Linux Operating System`. In such case, maybe you need to set up a virtual machine (VM), in order to install and work with a linux based software.\\r\\n\\r\\n Fortunately, by having the Internet and googling in you side, you can have access to a lot of open source packages and shared repositories that are developed by both researchers and professional developers. \\r\\n\\r\\n Nowadays, as a researcher if you want to do an analysis, most probably you can find a software or a tool that is available online, or can be further developed by you to fulfill your requirements.\\r\\n\\r\\n This is the way that science trajectory is leading to, and to be a successful researcher you need to gain some knowledge and skills in computer programming. \\r\\n\\r\\n As a developer for scientific applications, I have the passion and motivation to go further across deciplines and share my knowledge in programming with scientific comunities and developers."},{"id":"welcome","metadata":{"permalink":"/blog/welcome","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/blog/2021-06-15-welcome.md","source":"@site/blog/2021-06-15-welcome.md","title":"Welcome!","description":"Hi there!","date":"2021-06-15T00:00:00.000Z","tags":[{"label":"Docusaurus","permalink":"/blog/tags/docusaurus"},{"label":"Static Site Generator","permalink":"/blog/tags/static-site-generator"}],"readingTime":0.27,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"welcome","title":"Welcome!","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["Docusaurus","Static Site Generator"]},"unlisted":false,"prevItem":{"title":"Computer coding for science","permalink":"/blog/opening-post"}},"content":"##### Hi there!\\r\\n###### This is Ali! \\r\\nAnd [this is the repo](https://github.com/AliSafari-IT/asafarim-src) contains the code and content that empowers my website. All the content is generated with Docusaurus, a modern Static Site Generator, in which using a static contents hosting service the content can be served. You may view the site at [my website](https://asafarim.com)."}]}');
-
-/***/ }),
-
-/***/ 4197:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":5,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
 /***/ 8363:
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"title":"Recent posts","items":[{"title":"What is happening behind the scene?","permalink":"/blog/styletron-react","unlisted":false},{"title":"Challenges in lab automation","permalink":"/blog/lab-automation-main-challenges","unlisted":false},{"title":"Some general benefits of lab automation","permalink":"/blog/lab-automation-benefits","unlisted":false},{"title":"Computer coding for science","permalink":"/blog/opening-post","unlisted":false},{"title":"Welcome!","permalink":"/blog/welcome","unlisted":false}]}');
-
-/***/ }),
-
-/***/ 8295:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/automation","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 8240:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"automation","permalink":"/blog/tags/automation","allTagsPath":"/blog/tags","count":2,"unlisted":false}');
-
-/***/ }),
-
-/***/ 7337:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/data-management","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 5122:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"Data Management","permalink":"/blog/tags/data-management","allTagsPath":"/blog/tags","count":1,"unlisted":false}');
-
-/***/ }),
-
-/***/ 1079:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/docusaurus","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 3616:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"Docusaurus","permalink":"/blog/tags/docusaurus","allTagsPath":"/blog/tags","count":1,"unlisted":false}');
-
-/***/ }),
-
-/***/ 2075:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/future-challenges","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 2276:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"future challenges","permalink":"/blog/tags/future-challenges","allTagsPath":"/blog/tags","count":1,"unlisted":false}');
-
-/***/ }),
-
-/***/ 7671:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/lab-automation","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 8624:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"lab automation","permalink":"/blog/tags/lab-automation","allTagsPath":"/blog/tags","count":2,"unlisted":false}');
-
-/***/ }),
-
-/***/ 4590:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/programming","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 4639:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"programming","permalink":"/blog/tags/programming","allTagsPath":"/blog/tags","count":1,"unlisted":false}');
-
-/***/ }),
-
-/***/ 9093:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/static-site-generator","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 3742:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"Static Site Generator","permalink":"/blog/tags/static-site-generator","allTagsPath":"/blog/tags","count":1,"unlisted":false}');
-
-/***/ }),
-
-/***/ 9585:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/styletron-react","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 3258:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"styletron-react","permalink":"/blog/tags/styletron-react","allTagsPath":"/blog/tags","count":1,"unlisted":false}');
-
-/***/ }),
-
-/***/ 3471:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('[{"label":"styletron-react","permalink":"/blog/tags/styletron-react","count":1},{"label":"automation","permalink":"/blog/tags/automation","count":2},{"label":"lab automation","permalink":"/blog/tags/lab-automation","count":2},{"label":"technology","permalink":"/blog/tags/technology","count":2},{"label":"future challenges","permalink":"/blog/tags/future-challenges","count":1},{"label":"Data Management","permalink":"/blog/tags/data-management","count":1},{"label":"xitechnix","permalink":"/blog/tags/xitechnix","count":1},{"label":"programming","permalink":"/blog/tags/programming","count":1},{"label":"Docusaurus","permalink":"/blog/tags/docusaurus","count":1},{"label":"Static Site Generator","permalink":"/blog/tags/static-site-generator","count":1}]');
-
-/***/ }),
-
-/***/ 8166:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/technology","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 2311:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"technology","permalink":"/blog/tags/technology","allTagsPath":"/blog/tags","count":2,"unlisted":false}');
-
-/***/ }),
-
-/***/ 1319:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/blog/tags/xitechnix","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
-
-/***/ }),
-
-/***/ 1744:
-/***/ ((module) => {
-
-"use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"label":"xitechnix","permalink":"/blog/tags/xitechnix","allTagsPath":"/blog/tags","count":1,"unlisted":false}');
+module.exports = /*#__PURE__*/JSON.parse('{"title":"Recent posts","items":[{"title":"What is happening behind the scene?","permalink":"/dist/client-docs/blog/styletron-react","unlisted":false},{"title":"Challenges in lab automation","permalink":"/dist/client-docs/blog/lab-automation-main-challenges","unlisted":false},{"title":"Some general benefits of lab automation","permalink":"/dist/client-docs/blog/lab-automation-benefits","unlisted":false},{"title":"Computer coding for science","permalink":"/dist/client-docs/blog/opening-post","unlisted":false},{"title":"Welcome!","permalink":"/dist/client-docs/blog/welcome","unlisted":false}]}');
 
 /***/ }),
 
@@ -35005,7 +34821,191 @@ module.exports = /*#__PURE__*/JSON.parse('{"label":"xitechnix","permalink":"/blo
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"blogBasePath":"/blog","blogTitle":"Blog"}');
+module.exports = /*#__PURE__*/JSON.parse('{"blogBasePath":"/dist/client-docs/blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 4395:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"blogPosts":[{"id":"styletron-react","metadata":{"permalink":"/dist/client-docs/blog/styletron-react","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-08-26-styletron/index.md","source":"@site/blog/2023-08-26-styletron/index.md","title":"What is happening behind the scene?","description":"Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:","date":"2023-08-26T00:00:00.000Z","tags":[{"label":"styletron-react","permalink":"/dist/client-docs/blog/tags/styletron-react"}],"readingTime":0.34,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari"}],"frontMatter":{"slug":"styletron-react","title":"What is happening behind the scene?","author":"Ali Safari","tags":["styletron-react"]},"unlisted":false,"nextItem":{"title":"Challenges in lab automation","permalink":"/dist/client-docs/blog/lab-automation-main-challenges"}},"content":"Styletron is distributed through npmjs.com. It consists of a few packages. The basic React setup requires adding two of them:\\n\\n```js\\nyarn add styletron-engine-atomic styletron-react\\n\\n```\\n\\n:::tip\\n\\nUse the power of React to create interactive blog posts.\\n\\n```js\\n<html>\\n  <head>\\n    <style>\\n      .foo {\\n        font-size: 20px;\\n      }\\n      .bar {\\n        color: red;\\n      }\\n    </style>\\n  </head>\\n  <body>\\n    <a href=\\"/welcome\\" class=\\"foo bar\\">Start!</a>\\n  </body>\\n</html>\\n```\\n\\n<button onClick={() => alert(\'button clicked!\')}>Click me!</button>\\n\\n:::"},{"id":"lab-automation-main-challenges","metadata":{"permalink":"/dist/client-docs/blog/lab-automation-main-challenges","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-05-15-LabAutomationChallenges.md","source":"@site/blog/2023-05-15-LabAutomationChallenges.md","title":"Challenges in lab automation","description":"Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:","date":"2023-05-15T00:00:00.000Z","tags":[{"label":"automation","permalink":"/dist/client-docs/blog/tags/automation"},{"label":"lab automation","permalink":"/dist/client-docs/blog/tags/lab-automation"},{"label":"technology","permalink":"/dist/client-docs/blog/tags/technology"},{"label":"future challenges","permalink":"/dist/client-docs/blog/tags/future-challenges"}],"readingTime":0.985,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"lab-automation-main-challenges","title":"Challenges in lab automation","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["automation","lab automation","technology","future challenges"]},"unlisted":false,"prevItem":{"title":"What is happening behind the scene?","permalink":"/dist/client-docs/blog/styletron-react"},"nextItem":{"title":"Some general benefits of lab automation","permalink":"/dist/client-docs/blog/lab-automation-benefits"}},"content":"Identifying the most pressing or important challenge in automation and lab automation can depend on various factors, such as the specific industry, organization, or application of automation. However, here are some common challenges that are often considered most pressing or important in automation and lab automation respectively:\\r\\n<table>\\r\\n  <tr>\\r\\n    <th>Opportunities</th>\\r\\n    <th>Challenges</th>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Increased efficiency and accuracy of lab processes</td>\\r\\n    <td>Cost of implementing automation</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Improved reproducibility of experiments</td>\\r\\n    <td>Complexity of lab processes</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Ability to handle large volumes of data</td>\\r\\n    <td>Integration with existing lab systems</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td>Improved safety of lab personnel</td>\\r\\n    <td>Training of staff on how to use automated systems</td>\\r\\n  </tr>\\r\\n  <tr>\\r\\n    <td></td>\\r\\n    <td>Temporary shut down of lab operations during implementation</td>\\r\\n  </tr>\\r\\n</table>\\r\\n\\r\\nTechnically, one of the most common concerns in lab automation is ensuring the accuracy and reproducibility of automated processes. Lab automation systems may introduce errors or variations that can impact experimental results. \\r\\nTherefore, it is critical to validate and verify the performance of automated systems to ensure that they are producing accurate and reliable results. Additionally, it is important to establish standard operating procedures (SOPs) and quality control measures to ensure that automated processes are consistent and reproducible over time."},{"id":"lab-automation-benefits","metadata":{"permalink":"/dist/client-docs/blog/lab-automation-benefits","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2023-05-12-LabAutomationBenefits.md","source":"@site/blog/2023-05-12-LabAutomationBenefits.md","title":"Some general benefits of lab automation","description":"Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:","date":"2023-05-12T00:00:00.000Z","tags":[{"label":"automation","permalink":"/dist/client-docs/blog/tags/automation"},{"label":"lab automation","permalink":"/dist/client-docs/blog/tags/lab-automation"},{"label":"technology","permalink":"/dist/client-docs/blog/tags/technology"},{"label":"Data Management","permalink":"/dist/client-docs/blog/tags/data-management"}],"readingTime":0.935,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"lab-automation-benefits","title":"Some general benefits of lab automation","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["automation","lab automation","technology","Data Management"]},"unlisted":false,"prevItem":{"title":"Challenges in lab automation","permalink":"/dist/client-docs/blog/lab-automation-main-challenges"},"nextItem":{"title":"Computer coding for science","permalink":"/dist/client-docs/blog/opening-post"}},"content":"Lab automation is the process of using technology to automate laboratory processes and workflows. Here are some general benefits of lab automation:\\r\\n\\r\\n-   ##### Increased Efficiency\\r\\nLab automation can help to streamline laboratory processes and workflows, reducing the time and effort required to perform routine tasks. This can lead to increased efficiency, productivity, and throughput.\\r\\n\\r\\n-   ##### Improved Accuracy\\r\\nAutomation can help to reduce errors and variability in laboratory processes, leading to more consistent and reliable results.\\r\\n\\r\\n-   ##### Cost Savings\\r\\nLab automation can help to reduce the cost of labor, materials, and equipment, leading to cost savings over time.\\r\\n\\r\\n-   ##### Data Management\\r\\nAutomation can help to manage and analyze large amounts of data generated by laboratory processes, leading to better insights and decision-making.\\r\\n\\r\\n-   ##### Standardization\\r\\nAutomation can help to standardize laboratory processes and workflows, ensuring consistency and compliance with regulatory requirements.\\r\\n\\r\\n-   ##### Scalability\\r\\n Automation can help to scale laboratory processes and workflows to meet changing demands and increasing throughput.\\r\\n\\r\\nOverall, lab automation can help to improve the efficiency, accuracy, and cost-effectiveness of laboratory processes, while also providing better data management and analysis capabilities."},{"id":"opening-post","metadata":{"permalink":"/dist/client-docs/blog/opening-post","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2021-06-16-StartPost.md","source":"@site/blog/2021-06-16-StartPost.md","title":"Computer coding for science","description":"The statistical package R for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization.","date":"2021-06-16T00:00:00.000Z","tags":[{"label":"xitechnix","permalink":"/dist/client-docs/blog/tags/xitechnix"},{"label":"programming","permalink":"/dist/client-docs/blog/tags/programming"}],"readingTime":1.145,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"opening-post","title":"Computer coding for science","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["xitechnix","programming"]},"unlisted":false,"prevItem":{"title":"Some general benefits of lab automation","permalink":"/dist/client-docs/blog/lab-automation-benefits"},"nextItem":{"title":"Welcome!","permalink":"/dist/client-docs/blog/welcome"}},"content":"The statistical package `R` for many researchers is their first experience to the programming world. This free and popular statistical language is available in online repositories. R can perform powerful data manipulation as well as data visualization. \\r\\n\\r\\n However, programming for a reasearch focused branch is not limited to R any more, but highly likely starts often with R.\\r\\n\\r\\n Sometimes, having knowledge in other operating systems other than the popular Windows is needed. Sometimes, an analytical tool require a `Linux Operating System`. In such case, maybe you need to set up a virtual machine (VM), in order to install and work with a linux based software.\\r\\n\\r\\n Fortunately, by having the Internet and googling in you side, you can have access to a lot of open source packages and shared repositories that are developed by both researchers and professional developers. \\r\\n\\r\\n Nowadays, as a researcher if you want to do an analysis, most probably you can find a software or a tool that is available online, or can be further developed by you to fulfill your requirements.\\r\\n\\r\\n This is the way that science trajectory is leading to, and to be a successful researcher you need to gain some knowledge and skills in computer programming. \\r\\n\\r\\n As a developer for scientific applications, I have the passion and motivation to go further across deciplines and share my knowledge in programming with scientific comunities and developers."},{"id":"welcome","metadata":{"permalink":"/dist/client-docs/blog/welcome","editUrl":"https://github.com/AliSafari-IT/asmsite/blob/main-branch/client-docs/blog/2021-06-15-welcome.md","source":"@site/blog/2021-06-15-welcome.md","title":"Welcome!","description":"Hi there!","date":"2021-06-15T00:00:00.000Z","tags":[{"label":"Docusaurus","permalink":"/dist/client-docs/blog/tags/docusaurus"},{"label":"Static Site Generator","permalink":"/dist/client-docs/blog/tags/static-site-generator"}],"readingTime":0.27,"hasTruncateMarker":false,"authors":[{"name":"Ali Safari","title":"Sci. App Dev. @ XiTechniX","url":"https://github.com/AliSafari-IT","imageURL":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4"}],"frontMatter":{"slug":"welcome","title":"Welcome!","author":"Ali Safari","author_title":"Sci. App Dev. @ XiTechniX","author_url":"https://github.com/AliSafari-IT","author_image_url":"https://avatars.githubusercontent.com/u/58768873?s=300&v=4","tags":["Docusaurus","Static Site Generator"]},"unlisted":false,"prevItem":{"title":"Computer coding for science","permalink":"/dist/client-docs/blog/opening-post"}},"content":"##### Hi there!\\r\\n###### This is Ali! \\r\\nAnd [this is the repo](https://github.com/AliSafari-IT/asafarim-src) contains the code and content that empowers my website. All the content is generated with Docusaurus, a modern Static Site Generator, in which using a static contents hosting service the content can be served. You may view the site at [my website](https://asafarim.com)."}]}');
+
+/***/ }),
+
+/***/ 3491:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":5,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 4931:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/automation","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 6716:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"automation","permalink":"/dist/client-docs/blog/tags/automation","allTagsPath":"/dist/client-docs/blog/tags","count":2,"unlisted":false}');
+
+/***/ }),
+
+/***/ 3058:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/data-management","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 611:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"Data Management","permalink":"/dist/client-docs/blog/tags/data-management","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}');
+
+/***/ }),
+
+/***/ 3571:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/docusaurus","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 7260:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"Docusaurus","permalink":"/dist/client-docs/blog/tags/docusaurus","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}');
+
+/***/ }),
+
+/***/ 3231:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/future-challenges","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 5118:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"future challenges","permalink":"/dist/client-docs/blog/tags/future-challenges","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}');
+
+/***/ }),
+
+/***/ 7061:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/lab-automation","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 3182:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"lab automation","permalink":"/dist/client-docs/blog/tags/lab-automation","allTagsPath":"/dist/client-docs/blog/tags","count":2,"unlisted":false}');
+
+/***/ }),
+
+/***/ 877:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/programming","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 4310:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"programming","permalink":"/dist/client-docs/blog/tags/programming","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}');
+
+/***/ }),
+
+/***/ 7284:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/static-site-generator","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 6357:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"Static Site Generator","permalink":"/dist/client-docs/blog/tags/static-site-generator","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}');
+
+/***/ }),
+
+/***/ 643:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/styletron-react","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 2588:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"styletron-react","permalink":"/dist/client-docs/blog/tags/styletron-react","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}');
+
+/***/ }),
+
+/***/ 679:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('[{"label":"styletron-react","permalink":"/dist/client-docs/blog/tags/styletron-react","count":1},{"label":"automation","permalink":"/dist/client-docs/blog/tags/automation","count":2},{"label":"lab automation","permalink":"/dist/client-docs/blog/tags/lab-automation","count":2},{"label":"technology","permalink":"/dist/client-docs/blog/tags/technology","count":2},{"label":"future challenges","permalink":"/dist/client-docs/blog/tags/future-challenges","count":1},{"label":"Data Management","permalink":"/dist/client-docs/blog/tags/data-management","count":1},{"label":"xitechnix","permalink":"/dist/client-docs/blog/tags/xitechnix","count":1},{"label":"programming","permalink":"/dist/client-docs/blog/tags/programming","count":1},{"label":"Docusaurus","permalink":"/dist/client-docs/blog/tags/docusaurus","count":1},{"label":"Static Site Generator","permalink":"/dist/client-docs/blog/tags/static-site-generator","count":1}]');
+
+/***/ }),
+
+/***/ 5312:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/technology","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 1665:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"technology","permalink":"/dist/client-docs/blog/tags/technology","allTagsPath":"/dist/client-docs/blog/tags","count":2,"unlisted":false}');
+
+/***/ }),
+
+/***/ 1934:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"permalink":"/dist/client-docs/blog/tags/xitechnix","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}');
+
+/***/ }),
+
+/***/ 143:
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"label":"xitechnix","permalink":"/dist/client-docs/blog/tags/xitechnix","allTagsPath":"/dist/client-docs/blog/tags","count":1,"unlisted":false}');
 
 /***/ }),
 
@@ -35029,7 +35029,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"docusaurus-plugin-content-doc
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"pluginId":"default","version":"current","label":"Next","banner":null,"badge":false,"noIndex":false,"className":"docs-version-current","isLast":true,"docsSidebars":{"tutorialSidebar":[{"type":"link","label":"Outline","href":"/docs/intro","docId":"intro","unlisted":false},{"type":"category","label":"Software Develepment","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Requirements","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"The needs of the stakeholders","href":"/docs/software-development/Requirements/intro","docId":"software-development/Requirements/intro","unlisted":false}]},{"type":"category","label":"Planning stage","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Planning and management","href":"/docs/software-development/Planning/intro","docId":"software-development/Planning/intro","unlisted":false}]},{"type":"category","label":"Design & architecture","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"High-level design and architecture","href":"/docs/software-development/Designing/intro","docId":"software-development/Designing/intro","unlisted":false},{"type":"category","label":"Design Patterns","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Overview","href":"/docs/software-development/Designing/designPatterns/overview","docId":"software-development/Designing/designPatterns/overview","unlisted":false},{"type":"link","label":"Façade Pattern","href":"/docs/software-development/Designing/designPatterns/façade-pattern","docId":"software-development/Designing/designPatterns/façade-pattern","unlisted":false},{"type":"link","label":"Singleton Pattern","href":"/docs/software-development/Designing/designPatterns/singleton-pattern","docId":"software-development/Designing/designPatterns/singleton-pattern","unlisted":false}]},{"type":"category","label":"UML","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"User Story vs User Case","href":"/docs/software-development/Designing/uml/user-story-user-case","docId":"software-development/Designing/uml/userStory-userCase","unlisted":false},{"type":"link","label":"Wireframing in UI","href":"/docs/software-development/Designing/uml/wireframing","docId":"software-development/Designing/uml/Wireframing","unlisted":false}]}]},{"type":"category","label":"Coding stage","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Codebase","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Creating the codebase","href":"/docs/software-development/Coding/codebase/codebase","docId":"software-development/Coding/codebase/codebase","unlisted":false}]},{"type":"category","label":"Writing/Programming","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Writing the code","href":"/docs/software-development/Coding/programming/writing-code","docId":"software-development/Coding/programming/writing-code","unlisted":false}]},{"type":"category","label":"Code-based testing","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Code-based testing","href":"/docs/software-development/Coding/testing/testing","docId":"software-development/Coding/testing/testing","unlisted":false}]},{"type":"category","label":"Debug errors","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Debugging","href":"/docs/software-development/Coding/debugging/debugging","docId":"software-development/Coding/debugging/debugging","unlisted":false}]},{"type":"category","label":"Code refactoring","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Refactoring","href":"/docs/software-development/Coding/refactoring/refactoring","docId":"software-development/Coding/refactoring/refactoring","unlisted":false}]},{"type":"category","label":"Code documentation","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Documenting the code","href":"/docs/software-development/Coding/documentation/documenting","docId":"software-development/Coding/documentation/documenting","unlisted":false}]}]},{"type":"category","label":"Testing stage","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Testing in Software Development ","href":"/docs/software-development/Testing/intro","docId":"software-development/Testing/intro","unlisted":false}]},{"type":"category","label":"CI/CD automation","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"CI/CD automation steps","href":"/docs/cicd/overview","docId":"software-development/Automation/cicd-processes","unlisted":false}]}]},{"type":"category","label":"Developer tools","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Developer Tools","href":"/docs/devtools/intro","docId":"devtools/intro","unlisted":false},{"type":"category","label":"Programming language","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Object-oriented programming","href":"/docs/devtools/languages/opp","docId":"devtools/languages/opp","unlisted":false}]},{"type":"category","label":"Frameworks & libraries","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"nx Build Framework","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"What, Why and How of Nx","href":"/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics","docId":"devtools/frameworks-libraries/nx-workspace/nx-Basics","unlisted":false}]},{"type":"category","label":"Static Site Generators","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Docusaurus","href":"/docs/devtools/frameworks-libraries/site-generators/docusaurus","docId":"devtools/frameworks-libraries/site-generators/docusaurus","unlisted":false},{"type":"link","label":"Create a page","href":"/docs/devtools/frameworks-libraries/site-generators/create-a-page","docId":"devtools/frameworks-libraries/site-generators/create-a-page","unlisted":false}]},{"type":"category","label":"Syncfusion","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Syncfusion","href":"/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics","docId":"devtools/frameworks-libraries/syncfusion/syncfusion-Basics","unlisted":false}]}]},{"type":"category","label":"Data Formatter","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"JSON","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"JSON Overview","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Json: Intro","href":"/docs/json-overview","docId":"devtools/dataformats/json/json-overview/json","unlisted":false},{"type":"link","label":"Json: Schema","href":"/docs/json-schema","docId":"devtools/dataformats/json/json-overview/json-schema","unlisted":false},{"type":"link","label":"Schema-Driven Development","href":"/docs/devtools/dataformats/json/json-overview/sch-dev","docId":"devtools/dataformats/json/json-overview/Schema-Driven-Development","unlisted":false},{"type":"link","label":"How to use JSON","href":"/docs/how-to-use/json-in-ts","docId":"devtools/dataformats/json/json-overview/how-to-use-json-in-ts","unlisted":false}]}]},{"type":"category","label":"XML","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"XML","href":"/docs/devtools/dataformats/xml/xml","docId":"devtools/dataformats/xml/xml","unlisted":false}]},{"type":"category","label":"CSV","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"CSV","href":"/docs/devtools/dataformats/csv/csv","docId":"devtools/dataformats/csv/csv","unlisted":false}]},{"type":"category","label":"YAML","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"YAML","href":"/docs/devtools/dataformats/yaml/yaml","docId":"devtools/dataformats/yaml/yaml","unlisted":false}]},{"type":"category","label":"Protocol Buffers","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Protocol Buffers","href":"/docs/devtools/dataformats/protobufjs/protobufjs","docId":"devtools/dataformats/protobufjs/protobufjs","unlisted":false},{"type":"link","label":"Example in TypeScript","href":"/docs/devtools/dataformats/protobufjs/example","docId":"devtools/dataformats/protobufjs/example","unlisted":false}]},{"type":"category","label":"MessagePack","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"MessagePack data format","href":"/docs/devtools/dataformats/msgpack-lite/msgpack","docId":"devtools/dataformats/msgpack-lite/msgpack","unlisted":false},{"type":"link","label":"Using MessagePack in TypeScript","href":"/docs/devtools/dataformats/msgpack-lite/ts-example","docId":"devtools/dataformats/msgpack-lite/ts-example","unlisted":false},{"type":"link","label":"Using MessagePack in .Net ","href":"/docs/devtools/dataformats/msgpack-lite/csharp-example","docId":"devtools/dataformats/msgpack-lite/csharp-example","unlisted":false}]}]},{"type":"category","label":"Version control systems (VCS)","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Introduction","href":"/docs/devtools/versioncontrol/intro","docId":"devtools/versioncontrol/intro","unlisted":false},{"type":"link","label":"Git","href":"/docs/devtools/versioncontrol/git","docId":"devtools/versioncontrol/git","unlisted":false},{"type":"link","label":"SVN","href":"/docs/devtools/versioncontrol/svn","docId":"devtools/versioncontrol/svn","unlisted":false},{"type":"link","label":"Mercurial","href":"/docs/devtools/versioncontrol/mercurial","docId":"devtools/versioncontrol/mercurial","unlisted":false}]}]},{"type":"category","label":"Learn","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"DotNet","collapsible":true,"collapsed":true,"items":[{"type":"category","label":".NET Core","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"In brief","href":"/docs/learn/dotnet/dotnet.core/intro","docId":"learn/dotnet/dotnet.core/intro","unlisted":false}]}]},{"type":"category","label":"React","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"React Single Page Application","href":"/docs/learn/react/intro","docId":"learn/react/intro","unlisted":false},{"type":"category","label":"React Basics","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Handle Data from API","href":"/docs/learn/react/Basics/handle-data-from-api","docId":"learn/react/Basics/handle-data-from-api","unlisted":false}]},{"type":"category","label":"React Hooks","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"useFetch()","href":"/docs/learn/react/Hooks/useFetch","docId":"learn/react/Hooks/useFetch","unlisted":false}]},{"type":"link","label":"Axios","href":"/docs/learn/react/Axios/","docId":"learn/react/Axios/axios","unlisted":false},{"type":"category","label":"Redux","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Redux vs Redux toolkit","href":"/docs/learn/react/Redux/Redux-Basic-Example","docId":"learn/react/Redux/Redux-Basic-Example","unlisted":false}]}]},{"type":"category","label":"GIT","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Overview","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"What is GIT","href":"/docs/learn/git","docId":"learn/git/overview/set-up-git","unlisted":false},{"type":"link","label":"Git Fetch vs Git Pull","href":"/docs/learn/git/fetchpull","docId":"learn/git/overview/fetch-pull","unlisted":false}]},{"type":"category","label":"How-to","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Overwriting local with remote repo","href":"/docs/learn/git/overwriting-local-repo","docId":"learn/git/how-to/overwite-local-repo","unlisted":false},{"type":"link","label":"Remove last changes","href":"/docs/learn/git/deserialization","docId":"learn/git/how-to/remove-last-changes","unlisted":false},{"type":"link","label":"Rollback to a previous state","href":"/docs/learn/git/rollback-commit","docId":"learn/git/how-to/rollback","unlisted":false}]}]},{"type":"category","label":"CI/CD pipelines","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Microsoft Azure","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Azure tasks","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Build tasks","collapsible":true,"collapsed":true,"items":[{"type":"link","label":".Net Core","href":"/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","docId":"learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","unlisted":false}]}]},{"type":"link","label":"App Service overview","href":"/docs/learn/cicd-pipelines/azure/intro","docId":"learn/cicd-pipelines/azure/intro","unlisted":false},{"type":"link","label":"vs. Azure DevOps Services","href":"/docs/learn/cicd-pipelines/azure/vs-devops-services","docId":"learn/cicd-pipelines/azure/vs-devops-services","unlisted":false},{"type":"category","label":"cloud-shell","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"intro","href":"/docs/learn/cicd-pipelines/azure/cloud-shell/intro","docId":"learn/cicd-pipelines/azure/cloud-shell/intro","unlisted":false}]}]},{"type":"category","label":"Azure DevOps","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Azure DevOps Server","href":"/docs/learn/cicd-pipelines/azure-devops/intro","docId":"learn/cicd-pipelines/azure-devops/intro","unlisted":false},{"type":"link","label":"Azure DevOps Services","href":"/docs/learn/cicd-pipelines/azure-devops/azure-devops-services","docId":"learn/cicd-pipelines/azure-devops/azure-devops-services","unlisted":false},{"type":"link","label":"Testing pipeline","href":"/docs/learn/cicd-pipelines/azure-devops/test-pipeline","docId":"learn/cicd-pipelines/azure-devops/test-pipeline","unlisted":false},{"type":"link","label":"Azure Pipelines","href":"/docs/learn/cicd-pipelines/azure-devops/azure-pipelines","docId":"learn/cicd-pipelines/azure-devops/azure-pipelines","unlisted":false},{"type":"category","label":"YAML pipeline","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Print directory contents","href":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","unlisted":false},{"type":"link","label":"Triggers in YAML pipelines","href":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/triggers","unlisted":false},{"type":"link","label":"YAML templates","href":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","unlisted":false},{"type":"link","label":"Re-use YAML templates","href":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","unlisted":false},{"type":"link","label":"Agent in YAML pipeline","href":"/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/agent","unlisted":false}]},{"type":"category","label":"Azure Test Plans","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Azure Test Plans","href":"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans","docId":"learn/cicd-pipelines/azure-devops/test-plans/test-plans","unlisted":false},{"type":"link","label":"Create test cases","href":"/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases","docId":"learn/cicd-pipelines/azure-devops/test-plans/create-testcases","unlisted":false},{"type":"link","label":"Test environment","href":"/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env","docId":"learn/cicd-pipelines/azure-devops/test-plans/test-env","unlisted":false}]}]},{"type":"category","label":"GitLab CI/CD","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"GitLab CI/CD overview","href":"/docs/learn/cicd-pipelines/gitlab-cicd/intro","docId":"learn/cicd-pipelines/gitlab-cicd/intro","unlisted":false}]}]}]},{"type":"category","label":"A Step-by-Step Guide","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Deploying a Web App on Azure","href":"/docs/guide/azure-deploy-webapp","docId":"guide/azure-deploy-webapp","unlisted":false},{"type":"link","label":"template","href":"/docs/guide/guide-list","docId":"guide/guide-list","unlisted":false},{"type":"link","label":"Deploying .NET Core application to App Service","href":"/docs/guide/azure-deploy-webapi","docId":"guide/azure-deploy-webapi","unlisted":false}]},{"type":"category","label":"Web Glossary","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Applications of Science","href":"/docs/science-applications","docId":"Glossary/applications-of-science","unlisted":false},{"type":"link","label":"JSON Deserialization","href":"/docs/deserialization","docId":"Glossary/deserialization","unlisted":false},{"type":"link","label":"Engineering","href":"/docs/engineering","docId":"Glossary/engineering","unlisted":false},{"type":"link","label":"MIME/Media/Content Type","href":"/docs/content-type-mime","docId":"Glossary/MIME-type","unlisted":false},{"type":"link","label":"JSON Serialization","href":"/docs/serialization","docId":"Glossary/Serialization","unlisted":false},{"type":"link","label":"Technology","href":"/docs/technology","docId":"Glossary/technology","unlisted":false}]}]},"docs":{"devtools/dataformats/csv/csv":{"id":"devtools/dataformats/csv/csv","title":"CSV","description":"CSV (Comma-Separated Values): A simple text-based format that is used to represent tabular data, where each row represents a record and each column represents a field.","sidebar":"tutorialSidebar"},"devtools/dataformats/json/json-overview/how-to-use-json-in-ts":{"id":"devtools/dataformats/json/json-overview/how-to-use-json-in-ts","title":"How to use JSON","description":"Here\'s a small example of how to use JSON in TypeScript:","sidebar":"tutorialSidebar"},"devtools/dataformats/json/json-overview/json":{"id":"devtools/dataformats/json/json-overview/json","title":"Json: Intro","description":"JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays. It is a very common data format, with a diverse range of applications, one example being web applications that communicate with a server.","sidebar":"tutorialSidebar"},"devtools/dataformats/json/json-overview/json-schema":{"id":"devtools/dataformats/json/json-overview/json-schema","title":"Json: Schema","description":"What is JSON Schema?","sidebar":"tutorialSidebar"},"devtools/dataformats/json/json-overview/Schema-Driven-Development":{"id":"devtools/dataformats/json/json-overview/Schema-Driven-Development","title":"Schema-Driven Development","description":"The basic use of JSON-Schema is to generate clear, human/machine readable documentation. Moreover, JSON-Schema can be a great tool for data modeling, even more efficient as a data modeling tool to that of a validation tool. Meaning that its inability to validate a value based on another value, keeps its validation feature at a basic level for development. For example, to say that the value of ageOne is less than the value of ageTwo, JSON-Schema is unable to validate that and the most it can do for us is that these are both numbers.","sidebar":"tutorialSidebar"},"devtools/dataformats/msgpack-lite/csharp-example":{"id":"devtools/dataformats/msgpack-lite/csharp-example","title":"Using MessagePack in .Net ","description":"HHere\'s an example of how to use MessagePack in .NET Core 3.1 or later with C# using the MessagePack NuGet package:","sidebar":"tutorialSidebar"},"devtools/dataformats/msgpack-lite/msgpack":{"id":"devtools/dataformats/msgpack-lite/msgpack","title":"MessagePack data format","description":"A binary-based data serialization format that is designed to be fast and compact. It is often used in high-performance systems where speed and efficiency are critical.","sidebar":"tutorialSidebar"},"devtools/dataformats/msgpack-lite/ts-example":{"id":"devtools/dataformats/msgpack-lite/ts-example","title":"Using MessagePack in TypeScript","description":"Here\'s an example of how to use MessagePack in TypeScript using the msgpack-lite library:","sidebar":"tutorialSidebar"},"devtools/dataformats/protobufjs/example":{"id":"devtools/dataformats/protobufjs/example","title":"Example in TypeScript","description":"Here\'s an example of how to define and use a Protocol Buffers message type in TypeScript using the protobufjs library:","sidebar":"tutorialSidebar"},"devtools/dataformats/protobufjs/protobufjs":{"id":"devtools/dataformats/protobufjs/protobufjs","title":"Protocol Buffers","description":"A language- and platform-neutral data serialization format that is used to transmit data between different services and systems. It is designed to be fast, compact, and efficient, and is often used in large-scale distributed systems.","sidebar":"tutorialSidebar"},"devtools/dataformats/xml/xml":{"id":"devtools/dataformats/xml/xml","title":"XML","description":"XML, which stands for Extensible Markup Language, is a markup language used to store and transport data in a structured format. It provides a way to describe the structure and content of a document or data source using tags and attributes.","sidebar":"tutorialSidebar"},"devtools/dataformats/yaml/yaml":{"id":"devtools/dataformats/yaml/yaml","title":"YAML","description":"YAML (YAML Ain\'t Markup Language): A human-readable data serialization format that is designed to be easily readable by humans and machines. It is often used for configuration files and data exchange between different programming languages.","sidebar":"tutorialSidebar"},"devtools/frameworks-libraries/nx-workspace/nx-Basics":{"id":"devtools/frameworks-libraries/nx-workspace/nx-Basics","title":"What, Why and How of Nx","description":"What is Nx?","sidebar":"tutorialSidebar"},"devtools/frameworks-libraries/site-generators/create-a-page":{"id":"devtools/frameworks-libraries/site-generators/create-a-page","title":"Create a page","description":"Back to previous point using url paths","sidebar":"tutorialSidebar"},"devtools/frameworks-libraries/site-generators/docusaurus":{"id":"devtools/frameworks-libraries/site-generators/docusaurus","title":"Docusaurus","description":"Docusaurus is open-source and can be used for free under the MIT License. It has a growing community of contributors and users, and is actively maintained and developed.","sidebar":"tutorialSidebar"},"devtools/frameworks-libraries/syncfusion/syncfusion-Basics":{"id":"devtools/frameworks-libraries/syncfusion/syncfusion-Basics","title":"Syncfusion","description":"syncfusion","sidebar":"tutorialSidebar"},"devtools/intro":{"id":"devtools/intro","title":"Developer Tools","description":"Developer tools are software applications or programs that help software developers write, test, debug, and deploy their code. These tools can include code editors, integrated development environments (IDEs), version control systems, debuggers, compilers, and testing frameworks. They are designed to make the development process more efficient and effective, by providing features such as syntax highlighting, code completion, error checking, and automation of repetitive tasks. Developer tools can be specific to a particular programming language or technology stack, or they can be more general-purpose tools that work across multiple languages and platforms.","sidebar":"tutorialSidebar"},"devtools/languages/opp":{"id":"devtools/languages/opp","title":"Object-oriented programming","description":"A programming language is a set of rules and instructions that are used to write computer programs. It provides a way for software developers to express their ideas and algorithms in a way that can be understood by a computer. Programming languages come in many different forms, from low-level assembly languages to high-level scripting languages.","sidebar":"tutorialSidebar"},"devtools/versioncontrol/git":{"id":"devtools/versioncontrol/git","title":"Git","description":"Git is a distributed version control system that is widely used in software development to manage changes to source code and other files. It was created by Linus Torvalds, the creator of Linux, and is now maintained by a large open-source community.","sidebar":"tutorialSidebar"},"devtools/versioncontrol/intro":{"id":"devtools/versioncontrol/intro","title":"Introduction","description":"Version control systems (VCS) are software tools that help developers manage changes to source code or other types of files over time. They provide a way to track and manage different versions of code, as well as to collaborate with other developers on a project.","sidebar":"tutorialSidebar"},"devtools/versioncontrol/mercurial":{"id":"devtools/versioncontrol/mercurial","title":"Mercurial","description":"Mercurial is a distributed version control system (DVCS) that is used to manage changes to source code and other files in software development. It was created in 2005 as an open-source alternative to Git, another popular DVCS.","sidebar":"tutorialSidebar"},"devtools/versioncontrol/svn":{"id":"devtools/versioncontrol/svn","title":"SVN","description":"SVN, or Subversion, is a centralized version control system that is used to manage changes to source code and other files in software development. It was created in 2000 as an open-source alternative to CVS, another popular version control system at the time.","sidebar":"tutorialSidebar"},"Glossary/applications-of-science":{"id":"Glossary/applications-of-science","title":"Applications of Science","description":"An application of science is any use of scientific knowledge for a specific purpose, whether to do more science; to design a product, process, or medical treatment; to develop a new technology; or to predict the impacts of human actions.","sidebar":"tutorialSidebar"},"Glossary/deserialization":{"id":"Glossary/deserialization","title":"JSON Deserialization","description":"In brief","sidebar":"tutorialSidebar"},"Glossary/engineering":{"id":"Glossary/engineering","title":"Engineering","description":"Engineering is a systematic and often iterative approach to designing objects, processes, and systems to meet human needs and wants.","sidebar":"tutorialSidebar"},"Glossary/MIME-type":{"id":"Glossary/MIME-type","title":"MIME/Media/Content Type","description":"Internet media type","sidebar":"tutorialSidebar"},"Glossary/Serialization":{"id":"Glossary/Serialization","title":"JSON Serialization","description":"In brief","sidebar":"tutorialSidebar"},"Glossary/technology":{"id":"Glossary/technology","title":"Technology","description":"Technology is any modification of the natural world made to fulfill human needs or desires.","sidebar":"tutorialSidebar"},"guide/azure-deploy-webapi":{"id":"guide/azure-deploy-webapi","title":"Deploying .NET Core application to App Service","description":"-   Create an Azure account and login to the Azure portal.","sidebar":"tutorialSidebar"},"guide/azure-deploy-webapp":{"id":"guide/azure-deploy-webapp","title":"Deploying a Web App on Azure","description":"-   Create an Azure account and login to the Azure portal.","sidebar":"tutorialSidebar"},"guide/guide-list":{"id":"guide/guide-list","title":"template","description":"","sidebar":"tutorialSidebar"},"intro":{"id":"intro","title":"Outline","description":"Following shows what information each section will contain, and in what order:","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/azure-devops-services":{"id":"learn/cicd-pipelines/azure-devops/azure-devops-services","title":"Azure DevOps Services","description":"In brief","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/azure-pipelines":{"id":"learn/cicd-pipelines/azure-devops/azure-pipelines","title":"Azure Pipelines","description":"When we can use Azure Pipelines?","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/intro":{"id":"learn/cicd-pipelines/azure-devops/intro","title":"Azure DevOps Server","description":"In brief","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/test-pipeline":{"id":"learn/cicd-pipelines/azure-devops/test-pipeline","title":"Testing pipeline","description":"How to test a pipeline  in Azure DevOps","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/test-plans/create-testcases":{"id":"learn/cicd-pipelines/azure-devops/test-plans/create-testcases","title":"Create test cases","description":"To create test cases in Azure Test Plans, follow these steps:","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/test-plans/test-env":{"id":"learn/cicd-pipelines/azure-devops/test-plans/test-env","title":"Test environment","description":"Steps to Run Test Suites in Azure Test Plans","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/test-plans/test-plans":{"id":"learn/cicd-pipelines/azure-devops/test-plans/test-plans","title":"Azure Test Plans","description":"In brief","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/agent":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/agent","title":"Agent in YAML pipeline","description":"Agent","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","title":"Print directory contents","description":"info","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","title":"Re-use YAML templates","description":"How to reuse a YAML template in Azure DevOps","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/triggers":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/triggers","title":"Triggers in YAML pipelines","description":"info","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","title":"YAML templates","description":"Pipeline structure and configuration","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure/cloud-shell/intro":{"id":"learn/cicd-pipelines/azure/cloud-shell/intro","title":"intro","description":"Azure Cloud Shell","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure/intro":{"id":"learn/cicd-pipelines/azure/intro","title":"App Service overview","description":"Microsoft Azure overview","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core":{"id":"learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","title":".Net Core","description":"Build, test, package, or publish a dotnet application, or run a custom dotnet command.","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure/vs-devops-services":{"id":"learn/cicd-pipelines/azure/vs-devops-services","title":"vs. Azure DevOps Services","description":"Azure App Service and Azure DevOps Services are two different services provided by Microsoft.","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/gitlab-cicd/intro":{"id":"learn/cicd-pipelines/gitlab-cicd/intro","title":"GitLab CI/CD overview","description":"GitLab CI/CD is a built-in CI/CD solution provided by GitLab, a popular source code management platform. It allows you to automate your entire CI/CD pipeline using a single, integrated solution.","sidebar":"tutorialSidebar"},"learn/dotnet/dotnet.core/intro":{"id":"learn/dotnet/dotnet.core/intro","title":"In brief","description":".NET Core is a free, open-source, cross-platform framework for building modern software applications. It allows developers to write and run applications on multiple operating systems, such as Windows, Linux, and macOS. It also provides access to a large library of pre-built code and tools that help developers create high-performance, scalable, and secure applications.","sidebar":"tutorialSidebar"},"learn/git/how-to/overwite-local-repo":{"id":"learn/git/how-to/overwite-local-repo","title":"Overwriting local with remote repo","description":"How to overwrite local repository with remote repo","sidebar":"tutorialSidebar"},"learn/git/how-to/remove-last-changes":{"id":"learn/git/how-to/remove-last-changes","title":"Remove last changes","description":"How to remove changes since last git commit","sidebar":"tutorialSidebar"},"learn/git/how-to/rollback":{"id":"learn/git/how-to/rollback","title":"Rollback to a previous state","description":"Reverting a Git repository to an earlier commit","sidebar":"tutorialSidebar"},"learn/git/overview/fetch-pull":{"id":"learn/git/overview/fetch-pull","title":"Git Fetch vs Git Pull","description":"git fetch vs git pull","sidebar":"tutorialSidebar"},"learn/git/overview/set-up-git":{"id":"learn/git/overview/set-up-git","title":"What is GIT","description":"Git is software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development. Its goals include speed, data integrity, and support for distributed, non-linear workflows. Wikipedia","sidebar":"tutorialSidebar"},"learn/react/Axios/axios":{"id":"learn/react/Axios/axios","title":"Axios","description":"Axios library","sidebar":"tutorialSidebar"},"learn/react/Basics/handle-data-from-api":{"id":"learn/react/Basics/handle-data-from-api","title":"Handle Data from API","description":"XMLHttpRequest &amp; Ajax","sidebar":"tutorialSidebar"},"learn/react/Hooks/useFetch":{"id":"learn/react/Hooks/useFetch","title":"useFetch()","description":"","sidebar":"tutorialSidebar"},"learn/react/intro":{"id":"learn/react/intro","title":"React Single Page Application","description":"React SPA stands for React Single Page Application. It is a web application or website that is built using the React JavaScript library and is designed to be a single page that dynamically updates as the user interacts with it, without requiring a full page reload.","sidebar":"tutorialSidebar"},"learn/react/Redux/Redux-Basic-Example":{"id":"learn/react/Redux/Redux-Basic-Example","title":"Redux vs Redux toolkit","description":"Redux in React","sidebar":"tutorialSidebar"},"software-development/Automation/cicd-processes":{"id":"software-development/Automation/cicd-processes","title":"CI/CD automation steps","description":"An example of the CI/CD automation process is shown in the table below:","sidebar":"tutorialSidebar"},"software-development/Coding/codebase/codebase":{"id":"software-development/Coding/codebase/codebase","title":"Creating the codebase","description":"Developers create the codebase for the software, which includes the files and directories that will hold the code.","sidebar":"tutorialSidebar"},"software-development/Coding/debugging/debugging":{"id":"software-development/Coding/debugging/debugging","title":"Debugging","description":"Developers debug the code to identify and fix any errors or bugs that are found during testing.","sidebar":"tutorialSidebar"},"software-development/Coding/documentation/documenting":{"id":"software-development/Coding/documentation/documenting","title":"Documenting the code","description":"Developers document the code to ensure that it can be understood by other developers and maintained over time.","sidebar":"tutorialSidebar"},"software-development/Coding/programming/writing-code":{"id":"software-development/Coding/programming/writing-code","title":"Writing the code","description":"Developers write the code for the software, following the design and architecture that were created during the planning stage.","sidebar":"tutorialSidebar"},"software-development/Coding/refactoring/refactoring":{"id":"software-development/Coding/refactoring/refactoring","title":"Refactoring","description":"Developers refactor the code to improve its quality and maintainability.","sidebar":"tutorialSidebar"},"software-development/Coding/testing/testing":{"id":"software-development/Coding/testing/testing","title":"Code-based testing","description":"Code-based testing involves using automated testing tools to check whether software code behaves as expected under different conditions and inputs. This type of testing is often performed by developers during the software development process, and it involves writing test cases that check the functionality of individual code modules or components.","sidebar":"tutorialSidebar"},"software-development/Designing/designPatterns/façade-pattern":{"id":"software-development/Designing/designPatterns/façade-pattern","title":"Façade Pattern","description":"Façade is a structural design pattern that presents a simplified interface to a library, a framework, or any other complex set of classes.","sidebar":"tutorialSidebar"},"software-development/Designing/designPatterns/overview":{"id":"software-development/Designing/designPatterns/overview","title":"Overview","description":"What’s a design pattern?","sidebar":"tutorialSidebar"},"software-development/Designing/designPatterns/singleton-pattern":{"id":"software-development/Designing/designPatterns/singleton-pattern","title":"Singleton Pattern","description":"Singleton is a creational design pattern that restricts the instantiation of a class to one \\"single\\" instance by providing a single point of access to the class for any other code. This is useful when exactly one object is needed to coordinate actions across the system, but it is frequently used in scenarios where it is not beneficial, introduces unnecessary restrictions in situations where a sole instance of a class is not actually required. This makes the singleton as an antipattern architecture. That\'s why, its usage trend is declining.","sidebar":"tutorialSidebar"},"software-development/Designing/intro":{"id":"software-development/Designing/intro","title":"High-level design and architecture","description":"Effective project planning and management can help ensure that a software development project is completed successfully. By defining the project scope and goals, creating a detailed plan, assigning roles and responsibilities, monitoring progress, communicating with stakeholders, managing risks, and evaluating the project, software development teams can increase their chances of delivering a high-quality product that meets the needs of the stakeholders.","sidebar":"tutorialSidebar"},"software-development/Designing/uml/userStory-userCase":{"id":"software-development/Designing/uml/userStory-userCase","title":"User Story vs User Case","description":"User stories","sidebar":"tutorialSidebar"},"software-development/Designing/uml/Wireframing":{"id":"software-development/Designing/uml/Wireframing","title":"Wireframing in UI","description":"Why wireframing?","sidebar":"tutorialSidebar"},"software-development/Planning/intro":{"id":"software-development/Planning/intro","title":"Planning and management","description":"Effective project planning and management can help ensure that a software development project is completed successfully. By defining the project scope and goals, creating a detailed plan, assigning roles and responsibilities, monitoring progress, communicating with stakeholders, managing risks, and evaluating the project, software development teams can increase their chances of delivering a high-quality product that meets the needs of the stakeholders.","sidebar":"tutorialSidebar"},"software-development/Requirements/intro":{"id":"software-development/Requirements/intro","title":"The needs of the stakeholders","description":"Functional requirements are important in software development because they provide a clear and specific description of what the software should do. They help ensure that the software meets the needs of the stakeholders, and they provide a basis for testing and evaluation of the software.","sidebar":"tutorialSidebar"},"software-development/Testing/intro":{"id":"software-development/Testing/intro","title":"Testing in Software Development ","description":"","sidebar":"tutorialSidebar"}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"pluginId":"default","version":"current","label":"Next","banner":null,"badge":false,"noIndex":false,"className":"docs-version-current","isLast":true,"docsSidebars":{"tutorialSidebar":[{"type":"link","label":"Outline","href":"/dist/client-docs/docs/intro","docId":"intro","unlisted":false},{"type":"category","label":"Software Develepment","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Requirements","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"The needs of the stakeholders","href":"/dist/client-docs/docs/software-development/Requirements/intro","docId":"software-development/Requirements/intro","unlisted":false}]},{"type":"category","label":"Planning stage","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Planning and management","href":"/dist/client-docs/docs/software-development/Planning/intro","docId":"software-development/Planning/intro","unlisted":false}]},{"type":"category","label":"Design & architecture","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"High-level design and architecture","href":"/dist/client-docs/docs/software-development/Designing/intro","docId":"software-development/Designing/intro","unlisted":false},{"type":"category","label":"Design Patterns","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Overview","href":"/dist/client-docs/docs/software-development/Designing/designPatterns/overview","docId":"software-development/Designing/designPatterns/overview","unlisted":false},{"type":"link","label":"Façade Pattern","href":"/dist/client-docs/docs/software-development/Designing/designPatterns/façade-pattern","docId":"software-development/Designing/designPatterns/façade-pattern","unlisted":false},{"type":"link","label":"Singleton Pattern","href":"/dist/client-docs/docs/software-development/Designing/designPatterns/singleton-pattern","docId":"software-development/Designing/designPatterns/singleton-pattern","unlisted":false}]},{"type":"category","label":"UML","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"User Story vs User Case","href":"/dist/client-docs/docs/software-development/Designing/uml/user-story-user-case","docId":"software-development/Designing/uml/userStory-userCase","unlisted":false},{"type":"link","label":"Wireframing in UI","href":"/dist/client-docs/docs/software-development/Designing/uml/wireframing","docId":"software-development/Designing/uml/Wireframing","unlisted":false}]}]},{"type":"category","label":"Coding stage","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Codebase","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Creating the codebase","href":"/dist/client-docs/docs/software-development/Coding/codebase/codebase","docId":"software-development/Coding/codebase/codebase","unlisted":false}]},{"type":"category","label":"Writing/Programming","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Writing the code","href":"/dist/client-docs/docs/software-development/Coding/programming/writing-code","docId":"software-development/Coding/programming/writing-code","unlisted":false}]},{"type":"category","label":"Code-based testing","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Code-based testing","href":"/dist/client-docs/docs/software-development/Coding/testing/testing","docId":"software-development/Coding/testing/testing","unlisted":false}]},{"type":"category","label":"Debug errors","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Debugging","href":"/dist/client-docs/docs/software-development/Coding/debugging/debugging","docId":"software-development/Coding/debugging/debugging","unlisted":false}]},{"type":"category","label":"Code refactoring","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Refactoring","href":"/dist/client-docs/docs/software-development/Coding/refactoring/refactoring","docId":"software-development/Coding/refactoring/refactoring","unlisted":false}]},{"type":"category","label":"Code documentation","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Documenting the code","href":"/dist/client-docs/docs/software-development/Coding/documentation/documenting","docId":"software-development/Coding/documentation/documenting","unlisted":false}]}]},{"type":"category","label":"Testing stage","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Testing in Software Development ","href":"/dist/client-docs/docs/software-development/Testing/intro","docId":"software-development/Testing/intro","unlisted":false}]},{"type":"category","label":"CI/CD automation","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"CI/CD automation steps","href":"/dist/client-docs/docs/cicd/overview","docId":"software-development/Automation/cicd-processes","unlisted":false}]}]},{"type":"category","label":"Developer tools","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Developer Tools","href":"/dist/client-docs/docs/devtools/intro","docId":"devtools/intro","unlisted":false},{"type":"category","label":"Programming language","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Object-oriented programming","href":"/dist/client-docs/docs/devtools/languages/opp","docId":"devtools/languages/opp","unlisted":false}]},{"type":"category","label":"Frameworks & libraries","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"nx Build Framework","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"What, Why and How of Nx","href":"/dist/client-docs/docs/devtools/frameworks-libraries/nx-workspace/nx-Basics","docId":"devtools/frameworks-libraries/nx-workspace/nx-Basics","unlisted":false}]},{"type":"category","label":"Static Site Generators","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Docusaurus","href":"/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/docusaurus","docId":"devtools/frameworks-libraries/site-generators/docusaurus","unlisted":false},{"type":"link","label":"Create a page","href":"/dist/client-docs/docs/devtools/frameworks-libraries/site-generators/create-a-page","docId":"devtools/frameworks-libraries/site-generators/create-a-page","unlisted":false}]},{"type":"category","label":"Syncfusion","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Syncfusion","href":"/dist/client-docs/docs/devtools/frameworks-libraries/syncfusion/syncfusion-Basics","docId":"devtools/frameworks-libraries/syncfusion/syncfusion-Basics","unlisted":false}]}]},{"type":"category","label":"Data Formatter","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"JSON","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"JSON Overview","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Json: Intro","href":"/dist/client-docs/docs/json-overview","docId":"devtools/dataformats/json/json-overview/json","unlisted":false},{"type":"link","label":"Json: Schema","href":"/dist/client-docs/docs/json-schema","docId":"devtools/dataformats/json/json-overview/json-schema","unlisted":false},{"type":"link","label":"Schema-Driven Development","href":"/dist/client-docs/docs/devtools/dataformats/json/json-overview/sch-dev","docId":"devtools/dataformats/json/json-overview/Schema-Driven-Development","unlisted":false},{"type":"link","label":"How to use JSON","href":"/dist/client-docs/docs/how-to-use/json-in-ts","docId":"devtools/dataformats/json/json-overview/how-to-use-json-in-ts","unlisted":false}]}]},{"type":"category","label":"XML","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"XML","href":"/dist/client-docs/docs/devtools/dataformats/xml/xml","docId":"devtools/dataformats/xml/xml","unlisted":false}]},{"type":"category","label":"CSV","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"CSV","href":"/dist/client-docs/docs/devtools/dataformats/csv/csv","docId":"devtools/dataformats/csv/csv","unlisted":false}]},{"type":"category","label":"YAML","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"YAML","href":"/dist/client-docs/docs/devtools/dataformats/yaml/yaml","docId":"devtools/dataformats/yaml/yaml","unlisted":false}]},{"type":"category","label":"Protocol Buffers","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Protocol Buffers","href":"/dist/client-docs/docs/devtools/dataformats/protobufjs/protobufjs","docId":"devtools/dataformats/protobufjs/protobufjs","unlisted":false},{"type":"link","label":"Example in TypeScript","href":"/dist/client-docs/docs/devtools/dataformats/protobufjs/example","docId":"devtools/dataformats/protobufjs/example","unlisted":false}]},{"type":"category","label":"MessagePack","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"MessagePack data format","href":"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/msgpack","docId":"devtools/dataformats/msgpack-lite/msgpack","unlisted":false},{"type":"link","label":"Using MessagePack in TypeScript","href":"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/ts-example","docId":"devtools/dataformats/msgpack-lite/ts-example","unlisted":false},{"type":"link","label":"Using MessagePack in .Net ","href":"/dist/client-docs/docs/devtools/dataformats/msgpack-lite/csharp-example","docId":"devtools/dataformats/msgpack-lite/csharp-example","unlisted":false}]}]},{"type":"category","label":"Version control systems (VCS)","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Introduction","href":"/dist/client-docs/docs/devtools/versioncontrol/intro","docId":"devtools/versioncontrol/intro","unlisted":false},{"type":"link","label":"Git","href":"/dist/client-docs/docs/devtools/versioncontrol/git","docId":"devtools/versioncontrol/git","unlisted":false},{"type":"link","label":"SVN","href":"/dist/client-docs/docs/devtools/versioncontrol/svn","docId":"devtools/versioncontrol/svn","unlisted":false},{"type":"link","label":"Mercurial","href":"/dist/client-docs/docs/devtools/versioncontrol/mercurial","docId":"devtools/versioncontrol/mercurial","unlisted":false}]}]},{"type":"category","label":"Learn","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"DotNet","collapsible":true,"collapsed":true,"items":[{"type":"category","label":".NET Core","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"In brief","href":"/dist/client-docs/docs/learn/dotnet/dotnet.core/intro","docId":"learn/dotnet/dotnet.core/intro","unlisted":false}]}]},{"type":"category","label":"React","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"React Single Page Application","href":"/dist/client-docs/docs/learn/react/intro","docId":"learn/react/intro","unlisted":false},{"type":"category","label":"React Basics","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Handle Data from API","href":"/dist/client-docs/docs/learn/react/Basics/handle-data-from-api","docId":"learn/react/Basics/handle-data-from-api","unlisted":false}]},{"type":"category","label":"React Hooks","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"useFetch()","href":"/dist/client-docs/docs/learn/react/Hooks/useFetch","docId":"learn/react/Hooks/useFetch","unlisted":false}]},{"type":"link","label":"Axios","href":"/dist/client-docs/docs/learn/react/Axios/","docId":"learn/react/Axios/axios","unlisted":false},{"type":"category","label":"Redux","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Redux vs Redux toolkit","href":"/dist/client-docs/docs/learn/react/Redux/Redux-Basic-Example","docId":"learn/react/Redux/Redux-Basic-Example","unlisted":false}]}]},{"type":"category","label":"GIT","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Overview","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"What is GIT","href":"/dist/client-docs/docs/learn/git","docId":"learn/git/overview/set-up-git","unlisted":false},{"type":"link","label":"Git Fetch vs Git Pull","href":"/dist/client-docs/docs/learn/git/fetchpull","docId":"learn/git/overview/fetch-pull","unlisted":false}]},{"type":"category","label":"How-to","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Overwriting local with remote repo","href":"/dist/client-docs/docs/learn/git/overwriting-local-repo","docId":"learn/git/how-to/overwite-local-repo","unlisted":false},{"type":"link","label":"Remove last changes","href":"/dist/client-docs/docs/learn/git/deserialization","docId":"learn/git/how-to/remove-last-changes","unlisted":false},{"type":"link","label":"Rollback to a previous state","href":"/dist/client-docs/docs/learn/git/rollback-commit","docId":"learn/git/how-to/rollback","unlisted":false}]}]},{"type":"category","label":"CI/CD pipelines","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Microsoft Azure","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Azure tasks","collapsible":true,"collapsed":true,"items":[{"type":"category","label":"Build tasks","collapsible":true,"collapsed":true,"items":[{"type":"link","label":".Net Core","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","docId":"learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","unlisted":false}]}]},{"type":"link","label":"App Service overview","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure/intro","docId":"learn/cicd-pipelines/azure/intro","unlisted":false},{"type":"link","label":"vs. Azure DevOps Services","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure/vs-devops-services","docId":"learn/cicd-pipelines/azure/vs-devops-services","unlisted":false},{"type":"category","label":"cloud-shell","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"intro","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure/cloud-shell/intro","docId":"learn/cicd-pipelines/azure/cloud-shell/intro","unlisted":false}]}]},{"type":"category","label":"Azure DevOps","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Azure DevOps Server","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/intro","docId":"learn/cicd-pipelines/azure-devops/intro","unlisted":false},{"type":"link","label":"Azure DevOps Services","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-devops-services","docId":"learn/cicd-pipelines/azure-devops/azure-devops-services","unlisted":false},{"type":"link","label":"Testing pipeline","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-pipeline","docId":"learn/cicd-pipelines/azure-devops/test-pipeline","unlisted":false},{"type":"link","label":"Azure Pipelines","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/azure-pipelines","docId":"learn/cicd-pipelines/azure-devops/azure-pipelines","unlisted":false},{"type":"category","label":"YAML pipeline","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Print directory contents","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","unlisted":false},{"type":"link","label":"Triggers in YAML pipelines","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/triggers","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/triggers","unlisted":false},{"type":"link","label":"YAML templates","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","unlisted":false},{"type":"link","label":"Re-use YAML templates","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","unlisted":false},{"type":"link","label":"Agent in YAML pipeline","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/yamlscripts/agent","docId":"learn/cicd-pipelines/azure-devops/yamlscripts/agent","unlisted":false}]},{"type":"category","label":"Azure Test Plans","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Azure Test Plans","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-plans","docId":"learn/cicd-pipelines/azure-devops/test-plans/test-plans","unlisted":false},{"type":"link","label":"Create test cases","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/create-testcases","docId":"learn/cicd-pipelines/azure-devops/test-plans/create-testcases","unlisted":false},{"type":"link","label":"Test environment","href":"/dist/client-docs/docs/learn/cicd-pipelines/azure-devops/test-plans/test-env","docId":"learn/cicd-pipelines/azure-devops/test-plans/test-env","unlisted":false}]}]},{"type":"category","label":"GitLab CI/CD","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"GitLab CI/CD overview","href":"/dist/client-docs/docs/learn/cicd-pipelines/gitlab-cicd/intro","docId":"learn/cicd-pipelines/gitlab-cicd/intro","unlisted":false}]}]}]},{"type":"category","label":"A Step-by-Step Guide","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Deploying a Web App on Azure","href":"/dist/client-docs/docs/guide/azure-deploy-webapp","docId":"guide/azure-deploy-webapp","unlisted":false},{"type":"link","label":"template","href":"/dist/client-docs/docs/guide/guide-list","docId":"guide/guide-list","unlisted":false},{"type":"link","label":"Deploying .NET Core application to App Service","href":"/dist/client-docs/docs/guide/azure-deploy-webapi","docId":"guide/azure-deploy-webapi","unlisted":false}]},{"type":"category","label":"Web Glossary","collapsible":true,"collapsed":true,"items":[{"type":"link","label":"Applications of Science","href":"/dist/client-docs/docs/science-applications","docId":"Glossary/applications-of-science","unlisted":false},{"type":"link","label":"JSON Deserialization","href":"/dist/client-docs/docs/deserialization","docId":"Glossary/deserialization","unlisted":false},{"type":"link","label":"Engineering","href":"/dist/client-docs/docs/engineering","docId":"Glossary/engineering","unlisted":false},{"type":"link","label":"MIME/Media/Content Type","href":"/dist/client-docs/docs/content-type-mime","docId":"Glossary/MIME-type","unlisted":false},{"type":"link","label":"JSON Serialization","href":"/dist/client-docs/docs/serialization","docId":"Glossary/Serialization","unlisted":false},{"type":"link","label":"Technology","href":"/dist/client-docs/docs/technology","docId":"Glossary/technology","unlisted":false}]}]},"docs":{"devtools/dataformats/csv/csv":{"id":"devtools/dataformats/csv/csv","title":"CSV","description":"CSV (Comma-Separated Values): A simple text-based format that is used to represent tabular data, where each row represents a record and each column represents a field.","sidebar":"tutorialSidebar"},"devtools/dataformats/json/json-overview/how-to-use-json-in-ts":{"id":"devtools/dataformats/json/json-overview/how-to-use-json-in-ts","title":"How to use JSON","description":"Here\'s a small example of how to use JSON in TypeScript:","sidebar":"tutorialSidebar"},"devtools/dataformats/json/json-overview/json":{"id":"devtools/dataformats/json/json-overview/json","title":"Json: Intro","description":"JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays. It is a very common data format, with a diverse range of applications, one example being web applications that communicate with a server.","sidebar":"tutorialSidebar"},"devtools/dataformats/json/json-overview/json-schema":{"id":"devtools/dataformats/json/json-overview/json-schema","title":"Json: Schema","description":"What is JSON Schema?","sidebar":"tutorialSidebar"},"devtools/dataformats/json/json-overview/Schema-Driven-Development":{"id":"devtools/dataformats/json/json-overview/Schema-Driven-Development","title":"Schema-Driven Development","description":"The basic use of JSON-Schema is to generate clear, human/machine readable documentation. Moreover, JSON-Schema can be a great tool for data modeling, even more efficient as a data modeling tool to that of a validation tool. Meaning that its inability to validate a value based on another value, keeps its validation feature at a basic level for development. For example, to say that the value of ageOne is less than the value of ageTwo, JSON-Schema is unable to validate that and the most it can do for us is that these are both numbers.","sidebar":"tutorialSidebar"},"devtools/dataformats/msgpack-lite/csharp-example":{"id":"devtools/dataformats/msgpack-lite/csharp-example","title":"Using MessagePack in .Net ","description":"HHere\'s an example of how to use MessagePack in .NET Core 3.1 or later with C# using the MessagePack NuGet package:","sidebar":"tutorialSidebar"},"devtools/dataformats/msgpack-lite/msgpack":{"id":"devtools/dataformats/msgpack-lite/msgpack","title":"MessagePack data format","description":"A binary-based data serialization format that is designed to be fast and compact. It is often used in high-performance systems where speed and efficiency are critical.","sidebar":"tutorialSidebar"},"devtools/dataformats/msgpack-lite/ts-example":{"id":"devtools/dataformats/msgpack-lite/ts-example","title":"Using MessagePack in TypeScript","description":"Here\'s an example of how to use MessagePack in TypeScript using the msgpack-lite library:","sidebar":"tutorialSidebar"},"devtools/dataformats/protobufjs/example":{"id":"devtools/dataformats/protobufjs/example","title":"Example in TypeScript","description":"Here\'s an example of how to define and use a Protocol Buffers message type in TypeScript using the protobufjs library:","sidebar":"tutorialSidebar"},"devtools/dataformats/protobufjs/protobufjs":{"id":"devtools/dataformats/protobufjs/protobufjs","title":"Protocol Buffers","description":"A language- and platform-neutral data serialization format that is used to transmit data between different services and systems. It is designed to be fast, compact, and efficient, and is often used in large-scale distributed systems.","sidebar":"tutorialSidebar"},"devtools/dataformats/xml/xml":{"id":"devtools/dataformats/xml/xml","title":"XML","description":"XML, which stands for Extensible Markup Language, is a markup language used to store and transport data in a structured format. It provides a way to describe the structure and content of a document or data source using tags and attributes.","sidebar":"tutorialSidebar"},"devtools/dataformats/yaml/yaml":{"id":"devtools/dataformats/yaml/yaml","title":"YAML","description":"YAML (YAML Ain\'t Markup Language): A human-readable data serialization format that is designed to be easily readable by humans and machines. It is often used for configuration files and data exchange between different programming languages.","sidebar":"tutorialSidebar"},"devtools/frameworks-libraries/nx-workspace/nx-Basics":{"id":"devtools/frameworks-libraries/nx-workspace/nx-Basics","title":"What, Why and How of Nx","description":"What is Nx?","sidebar":"tutorialSidebar"},"devtools/frameworks-libraries/site-generators/create-a-page":{"id":"devtools/frameworks-libraries/site-generators/create-a-page","title":"Create a page","description":"Back to previous point using url paths","sidebar":"tutorialSidebar"},"devtools/frameworks-libraries/site-generators/docusaurus":{"id":"devtools/frameworks-libraries/site-generators/docusaurus","title":"Docusaurus","description":"Docusaurus is open-source and can be used for free under the MIT License. It has a growing community of contributors and users, and is actively maintained and developed.","sidebar":"tutorialSidebar"},"devtools/frameworks-libraries/syncfusion/syncfusion-Basics":{"id":"devtools/frameworks-libraries/syncfusion/syncfusion-Basics","title":"Syncfusion","description":"syncfusion","sidebar":"tutorialSidebar"},"devtools/intro":{"id":"devtools/intro","title":"Developer Tools","description":"Developer tools are software applications or programs that help software developers write, test, debug, and deploy their code. These tools can include code editors, integrated development environments (IDEs), version control systems, debuggers, compilers, and testing frameworks. They are designed to make the development process more efficient and effective, by providing features such as syntax highlighting, code completion, error checking, and automation of repetitive tasks. Developer tools can be specific to a particular programming language or technology stack, or they can be more general-purpose tools that work across multiple languages and platforms.","sidebar":"tutorialSidebar"},"devtools/languages/opp":{"id":"devtools/languages/opp","title":"Object-oriented programming","description":"A programming language is a set of rules and instructions that are used to write computer programs. It provides a way for software developers to express their ideas and algorithms in a way that can be understood by a computer. Programming languages come in many different forms, from low-level assembly languages to high-level scripting languages.","sidebar":"tutorialSidebar"},"devtools/versioncontrol/git":{"id":"devtools/versioncontrol/git","title":"Git","description":"Git is a distributed version control system that is widely used in software development to manage changes to source code and other files. It was created by Linus Torvalds, the creator of Linux, and is now maintained by a large open-source community.","sidebar":"tutorialSidebar"},"devtools/versioncontrol/intro":{"id":"devtools/versioncontrol/intro","title":"Introduction","description":"Version control systems (VCS) are software tools that help developers manage changes to source code or other types of files over time. They provide a way to track and manage different versions of code, as well as to collaborate with other developers on a project.","sidebar":"tutorialSidebar"},"devtools/versioncontrol/mercurial":{"id":"devtools/versioncontrol/mercurial","title":"Mercurial","description":"Mercurial is a distributed version control system (DVCS) that is used to manage changes to source code and other files in software development. It was created in 2005 as an open-source alternative to Git, another popular DVCS.","sidebar":"tutorialSidebar"},"devtools/versioncontrol/svn":{"id":"devtools/versioncontrol/svn","title":"SVN","description":"SVN, or Subversion, is a centralized version control system that is used to manage changes to source code and other files in software development. It was created in 2000 as an open-source alternative to CVS, another popular version control system at the time.","sidebar":"tutorialSidebar"},"Glossary/applications-of-science":{"id":"Glossary/applications-of-science","title":"Applications of Science","description":"An application of science is any use of scientific knowledge for a specific purpose, whether to do more science; to design a product, process, or medical treatment; to develop a new technology; or to predict the impacts of human actions.","sidebar":"tutorialSidebar"},"Glossary/deserialization":{"id":"Glossary/deserialization","title":"JSON Deserialization","description":"In brief","sidebar":"tutorialSidebar"},"Glossary/engineering":{"id":"Glossary/engineering","title":"Engineering","description":"Engineering is a systematic and often iterative approach to designing objects, processes, and systems to meet human needs and wants.","sidebar":"tutorialSidebar"},"Glossary/MIME-type":{"id":"Glossary/MIME-type","title":"MIME/Media/Content Type","description":"Internet media type","sidebar":"tutorialSidebar"},"Glossary/Serialization":{"id":"Glossary/Serialization","title":"JSON Serialization","description":"In brief","sidebar":"tutorialSidebar"},"Glossary/technology":{"id":"Glossary/technology","title":"Technology","description":"Technology is any modification of the natural world made to fulfill human needs or desires.","sidebar":"tutorialSidebar"},"guide/azure-deploy-webapi":{"id":"guide/azure-deploy-webapi","title":"Deploying .NET Core application to App Service","description":"-   Create an Azure account and login to the Azure portal.","sidebar":"tutorialSidebar"},"guide/azure-deploy-webapp":{"id":"guide/azure-deploy-webapp","title":"Deploying a Web App on Azure","description":"-   Create an Azure account and login to the Azure portal.","sidebar":"tutorialSidebar"},"guide/guide-list":{"id":"guide/guide-list","title":"template","description":"","sidebar":"tutorialSidebar"},"intro":{"id":"intro","title":"Outline","description":"Following shows what information each section will contain, and in what order:","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/azure-devops-services":{"id":"learn/cicd-pipelines/azure-devops/azure-devops-services","title":"Azure DevOps Services","description":"In brief","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/azure-pipelines":{"id":"learn/cicd-pipelines/azure-devops/azure-pipelines","title":"Azure Pipelines","description":"When we can use Azure Pipelines?","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/intro":{"id":"learn/cicd-pipelines/azure-devops/intro","title":"Azure DevOps Server","description":"In brief","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/test-pipeline":{"id":"learn/cicd-pipelines/azure-devops/test-pipeline","title":"Testing pipeline","description":"How to test a pipeline  in Azure DevOps","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/test-plans/create-testcases":{"id":"learn/cicd-pipelines/azure-devops/test-plans/create-testcases","title":"Create test cases","description":"To create test cases in Azure Test Plans, follow these steps:","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/test-plans/test-env":{"id":"learn/cicd-pipelines/azure-devops/test-plans/test-env","title":"Test environment","description":"Steps to Run Test Suites in Azure Test Plans","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/test-plans/test-plans":{"id":"learn/cicd-pipelines/azure-devops/test-plans/test-plans","title":"Azure Test Plans","description":"In brief","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/agent":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/agent","title":"Agent in YAML pipeline","description":"Agent","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/print-dir-contents","title":"Print directory contents","description":"info","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/reuse-template","title":"Re-use YAML templates","description":"How to reuse a YAML template in Azure DevOps","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/triggers":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/triggers","title":"Triggers in YAML pipelines","description":"info","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates":{"id":"learn/cicd-pipelines/azure-devops/yamlscripts/Yaml-templates","title":"YAML templates","description":"Pipeline structure and configuration","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure/cloud-shell/intro":{"id":"learn/cicd-pipelines/azure/cloud-shell/intro","title":"intro","description":"Azure Cloud Shell","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure/intro":{"id":"learn/cicd-pipelines/azure/intro","title":"App Service overview","description":"Microsoft Azure overview","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core":{"id":"learn/cicd-pipelines/azure/tasks/build-tasks/dotnet.core","title":".Net Core","description":"Build, test, package, or publish a dotnet application, or run a custom dotnet command.","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/azure/vs-devops-services":{"id":"learn/cicd-pipelines/azure/vs-devops-services","title":"vs. Azure DevOps Services","description":"Azure App Service and Azure DevOps Services are two different services provided by Microsoft.","sidebar":"tutorialSidebar"},"learn/cicd-pipelines/gitlab-cicd/intro":{"id":"learn/cicd-pipelines/gitlab-cicd/intro","title":"GitLab CI/CD overview","description":"GitLab CI/CD is a built-in CI/CD solution provided by GitLab, a popular source code management platform. It allows you to automate your entire CI/CD pipeline using a single, integrated solution.","sidebar":"tutorialSidebar"},"learn/dotnet/dotnet.core/intro":{"id":"learn/dotnet/dotnet.core/intro","title":"In brief","description":".NET Core is a free, open-source, cross-platform framework for building modern software applications. It allows developers to write and run applications on multiple operating systems, such as Windows, Linux, and macOS. It also provides access to a large library of pre-built code and tools that help developers create high-performance, scalable, and secure applications.","sidebar":"tutorialSidebar"},"learn/git/how-to/overwite-local-repo":{"id":"learn/git/how-to/overwite-local-repo","title":"Overwriting local with remote repo","description":"How to overwrite local repository with remote repo","sidebar":"tutorialSidebar"},"learn/git/how-to/remove-last-changes":{"id":"learn/git/how-to/remove-last-changes","title":"Remove last changes","description":"How to remove changes since last git commit","sidebar":"tutorialSidebar"},"learn/git/how-to/rollback":{"id":"learn/git/how-to/rollback","title":"Rollback to a previous state","description":"Reverting a Git repository to an earlier commit","sidebar":"tutorialSidebar"},"learn/git/overview/fetch-pull":{"id":"learn/git/overview/fetch-pull","title":"Git Fetch vs Git Pull","description":"git fetch vs git pull","sidebar":"tutorialSidebar"},"learn/git/overview/set-up-git":{"id":"learn/git/overview/set-up-git","title":"What is GIT","description":"Git is software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development. Its goals include speed, data integrity, and support for distributed, non-linear workflows. Wikipedia","sidebar":"tutorialSidebar"},"learn/react/Axios/axios":{"id":"learn/react/Axios/axios","title":"Axios","description":"Axios library","sidebar":"tutorialSidebar"},"learn/react/Basics/handle-data-from-api":{"id":"learn/react/Basics/handle-data-from-api","title":"Handle Data from API","description":"XMLHttpRequest &amp; Ajax","sidebar":"tutorialSidebar"},"learn/react/Hooks/useFetch":{"id":"learn/react/Hooks/useFetch","title":"useFetch()","description":"","sidebar":"tutorialSidebar"},"learn/react/intro":{"id":"learn/react/intro","title":"React Single Page Application","description":"React SPA stands for React Single Page Application. It is a web application or website that is built using the React JavaScript library and is designed to be a single page that dynamically updates as the user interacts with it, without requiring a full page reload.","sidebar":"tutorialSidebar"},"learn/react/Redux/Redux-Basic-Example":{"id":"learn/react/Redux/Redux-Basic-Example","title":"Redux vs Redux toolkit","description":"Redux in React","sidebar":"tutorialSidebar"},"software-development/Automation/cicd-processes":{"id":"software-development/Automation/cicd-processes","title":"CI/CD automation steps","description":"An example of the CI/CD automation process is shown in the table below:","sidebar":"tutorialSidebar"},"software-development/Coding/codebase/codebase":{"id":"software-development/Coding/codebase/codebase","title":"Creating the codebase","description":"Developers create the codebase for the software, which includes the files and directories that will hold the code.","sidebar":"tutorialSidebar"},"software-development/Coding/debugging/debugging":{"id":"software-development/Coding/debugging/debugging","title":"Debugging","description":"Developers debug the code to identify and fix any errors or bugs that are found during testing.","sidebar":"tutorialSidebar"},"software-development/Coding/documentation/documenting":{"id":"software-development/Coding/documentation/documenting","title":"Documenting the code","description":"Developers document the code to ensure that it can be understood by other developers and maintained over time.","sidebar":"tutorialSidebar"},"software-development/Coding/programming/writing-code":{"id":"software-development/Coding/programming/writing-code","title":"Writing the code","description":"Developers write the code for the software, following the design and architecture that were created during the planning stage.","sidebar":"tutorialSidebar"},"software-development/Coding/refactoring/refactoring":{"id":"software-development/Coding/refactoring/refactoring","title":"Refactoring","description":"Developers refactor the code to improve its quality and maintainability.","sidebar":"tutorialSidebar"},"software-development/Coding/testing/testing":{"id":"software-development/Coding/testing/testing","title":"Code-based testing","description":"Code-based testing involves using automated testing tools to check whether software code behaves as expected under different conditions and inputs. This type of testing is often performed by developers during the software development process, and it involves writing test cases that check the functionality of individual code modules or components.","sidebar":"tutorialSidebar"},"software-development/Designing/designPatterns/façade-pattern":{"id":"software-development/Designing/designPatterns/façade-pattern","title":"Façade Pattern","description":"Façade is a structural design pattern that presents a simplified interface to a library, a framework, or any other complex set of classes.","sidebar":"tutorialSidebar"},"software-development/Designing/designPatterns/overview":{"id":"software-development/Designing/designPatterns/overview","title":"Overview","description":"What’s a design pattern?","sidebar":"tutorialSidebar"},"software-development/Designing/designPatterns/singleton-pattern":{"id":"software-development/Designing/designPatterns/singleton-pattern","title":"Singleton Pattern","description":"Singleton is a creational design pattern that restricts the instantiation of a class to one \\"single\\" instance by providing a single point of access to the class for any other code. This is useful when exactly one object is needed to coordinate actions across the system, but it is frequently used in scenarios where it is not beneficial, introduces unnecessary restrictions in situations where a sole instance of a class is not actually required. This makes the singleton as an antipattern architecture. That\'s why, its usage trend is declining.","sidebar":"tutorialSidebar"},"software-development/Designing/intro":{"id":"software-development/Designing/intro","title":"High-level design and architecture","description":"Effective project planning and management can help ensure that a software development project is completed successfully. By defining the project scope and goals, creating a detailed plan, assigning roles and responsibilities, monitoring progress, communicating with stakeholders, managing risks, and evaluating the project, software development teams can increase their chances of delivering a high-quality product that meets the needs of the stakeholders.","sidebar":"tutorialSidebar"},"software-development/Designing/uml/userStory-userCase":{"id":"software-development/Designing/uml/userStory-userCase","title":"User Story vs User Case","description":"User stories","sidebar":"tutorialSidebar"},"software-development/Designing/uml/Wireframing":{"id":"software-development/Designing/uml/Wireframing","title":"Wireframing in UI","description":"Why wireframing?","sidebar":"tutorialSidebar"},"software-development/Planning/intro":{"id":"software-development/Planning/intro","title":"Planning and management","description":"Effective project planning and management can help ensure that a software development project is completed successfully. By defining the project scope and goals, creating a detailed plan, assigning roles and responsibilities, monitoring progress, communicating with stakeholders, managing risks, and evaluating the project, software development teams can increase their chances of delivering a high-quality product that meets the needs of the stakeholders.","sidebar":"tutorialSidebar"},"software-development/Requirements/intro":{"id":"software-development/Requirements/intro","title":"The needs of the stakeholders","description":"Functional requirements are important in software development because they provide a clear and specific description of what the software should do. They help ensure that the software meets the needs of the stakeholders, and they provide a basis for testing and evaluation of the software.","sidebar":"tutorialSidebar"},"software-development/Testing/intro":{"id":"software-development/Testing/intro","title":"Testing in Software Development ","description":"","sidebar":"tutorialSidebar"}}}');
 
 /***/ }),
 
@@ -35119,7 +35119,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"docusaurus-plugin-content-pag
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/";
+/******/ 		__webpack_require__.p = "/dist/client-docs/";
 /******/ 	})();
 /******/ 	
 /************************************************************************/
