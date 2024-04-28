@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkasmsite=self.webpackChunkasmsite||[]).push([[2885],{1744:s=>{s.exports=JSON.parse('{"label":"xitechnix","permalink":"/blog/tags/xitechnix","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

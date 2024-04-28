@@ -9,6 +9,7 @@
     "noImplicitAny": false,
     "types": [
       "node",
+      "docusaurus-plugin-sass",
       "@docusaurus/module-type-aliases",
       "@docusaurus/theme-classic"
     ],

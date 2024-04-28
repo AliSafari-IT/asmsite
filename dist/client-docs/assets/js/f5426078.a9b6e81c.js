@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkasmsite=self.webpackChunkasmsite||[]).push([[725],{4639:s=>{s.exports=JSON.parse('{"label":"programming","permalink":"/blog/tags/programming","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

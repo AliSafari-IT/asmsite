@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkasmsite=self.webpackChunkasmsite||[]).push([[8355],{8295:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/automation","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

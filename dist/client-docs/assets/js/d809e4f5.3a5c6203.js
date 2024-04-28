@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkasmsite=self.webpackChunkasmsite||[]).push([[4910],{2276:e=>{e.exports=JSON.parse('{"label":"future challenges","permalink":"/blog/tags/future-challenges","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
