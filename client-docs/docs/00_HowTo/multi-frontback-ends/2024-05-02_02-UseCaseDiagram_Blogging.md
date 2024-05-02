@@ -1,7 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 title: Blogging Use Case Diagram
 authors: [Ali, ]
+slug: "/usecase-diagram-blogging"
 ---
 
 ## Overview
@@ -36,8 +37,8 @@ The following usecase diagram defines the interactions between the actors and th
 
 <p class="text-center">
 
-![Use Case Diagram](./uml_usecases_blogging.svg 'Use Case Diagram')
+    ![Use Case Diagram](./uml_usecases_blogging.svg 'Use Case Diagram')
 
-<h6 > Use Case Diagram </h6>
+    <h6 > Use Case Diagram </h6>
 
 </p>
