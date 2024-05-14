@@ -1,0 +1,101 @@
+{
+  "name": "blogsys",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "clients/react/blogsys/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project blogsys --web",
+  "targets": {
+    "build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^default",
+        {
+          "externalDependencies": [
+            "vite"
+          ]
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}\\dist\\clients\\react\\blogsys"
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "clients/react/blogsys",
+        "command": "vite build"
+      },
+      "configurations": {}
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "clients/react/blogsys",
+        "command": "vite serve"
+      },
+      "configurations": {}
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "clients/react/blogsys",
+        "command": "vite preview"
+      },
+      "configurations": {}
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "build",
+        "spa": true
+      },
+      "configurations": {}
+    },
+    "test": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        {
+          "externalDependencies": [
+            "vitest"
+          ]
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}\\coverage\\clients\\react\\blogsys"
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "clients/react/blogsys",
+        "command": "vitest run"
+      },
+      "configurations": {}
+    },
+    "eslint:lint": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{projectRoot}/.eslintrc.json",
+        "{workspaceRoot}/tools/eslint-rules/**/*",
+        {
+          "externalDependencies": [
+            "eslint"
+          ]
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "clients/react/blogsys",
+        "command": "eslint ."
+      },
+      "configurations": {}
+    }
+  },
+  "implicitDependencies": []
+}

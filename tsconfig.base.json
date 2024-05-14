@@ -8,19 +8,20 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2020",
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@asmsite/docs": ["client-docs/src/index.ts"],
+      "@asmsite/docs/*": ["client-docs/src/*"],
       "@asmsite/ng": ["client-ng/src/index.ts"],
       "@asmsite/ng/*": ["client-ng/src/*"],
       "@asmsite/react": ["client-react/src/index.ts"],
       "@asmsite/react/*": ["client-react/src/*"],
-      "@asmsite/docs": ["client-docs/src/index.ts"],
-      "@asmsite/docs/*": ["client-docs/src/*"],
+      "@asmsite/auth": ["server/userAuth/public/index.php"],
     }
   },
   "exclude": ["node_modules", "tmp"]

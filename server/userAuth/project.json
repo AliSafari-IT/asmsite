@@ -1,0 +1,21 @@
+{
+    "projects": {
+      "userAuth": {
+        "root": "server/userAuth",
+        "architect": {
+          "serve": {
+            "builder": "@nrwl/workspace:run-commands",
+            "options": {
+              "commands": [
+                {
+                  "command": "cd server/userAuth && php artisan serve"
+                }
+              ],
+              "cwd": "server/userAuth"
+            }
+          }
+        }
+      }
+    }
+  }
+  

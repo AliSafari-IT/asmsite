@@ -1,0 +1,89 @@
+{
+  "name": "user-base",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {},
+  "sourceRoot": "clients/angular/userbase/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "options": {
+        "outputPath": "dist/user-base",
+        "index": "clients/angular/userbase/src/index.html",
+        "browser": "clients/angular/userbase/src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "clients/angular/userbase/tsconfig.app.json",
+        "assets": [
+          "clients/angular/userbase/src/favicon.ico",
+          "clients/angular/userbase/src/assets"
+        ],
+        "styles": [
+          "clients/angular/userbase/src/styles.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "user-base:build:production"
+        },
+        "development": {
+          "buildTarget": "user-base:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "user-base:build"
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
+        "tsConfig": "clients/angular/userbase/tsconfig.spec.json",
+        "assets": [
+          "clients/angular/userbase/src/favicon.ico",
+          "clients/angular/userbase/src/assets"
+        ],
+        "styles": [
+          "clients/angular/userbase/src/styles.css"
+        ],
+        "scripts": []
+      }
+    }
+  }
+}

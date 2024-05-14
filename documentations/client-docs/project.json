@@ -1,0 +1,46 @@
+{
+  "name": "client-docs",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "./client-docs/src",
+  "targets": {
+    "eslint:lint": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/tools/eslint-rules/**/*",
+        {
+          "externalDependencies": [
+            "eslint"
+          ]
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "documentations/client-docs",
+        "command": "eslint ."
+      },
+      "configurations": {}
+    },
+    "build": {
+      "executor": "@nx-plus/docusaurus:browser",
+      "options": {
+        "outputPath": "dist/client-docs",
+        "baseHref": "https://asafarim.com/dist/client-docs/",
+        "root": "client-docs/src"
+      },
+      "configurations": {}
+    },
+    "serve": {
+      "executor": "@nx-plus/docusaurus:dev-server",
+      "options": {
+        "port": 3000
+      },
+      "configurations": {}
+    }
+  },
+  "tags": [],
+  "implicitDependencies": []
+}

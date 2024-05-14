@@ -4,19 +4,51 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "client-ng/src",
-  "tags": ["ASAFARIM"],
+  "tags": [
+    "ASAFARIM"
+  ],
   "targets": {
+    "eslint:lint": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{projectRoot}/.eslintrc.json",
+        "{workspaceRoot}/tools/eslint-rules/**/*",
+        {
+          "externalDependencies": [
+            "eslint"
+          ]
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "client-ng",
+        "command": "eslint ."
+      },
+      "configurations": {}
+    },
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/client-ng/browser",
         "index": "client-ng/src/index.html",
         "main": "client-ng/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "client-ng/tsconfig.app.json",
-        "assets": ["client-ng/src/favicon.ico", "client-ng/src/assets"],
-        "styles": ["client-ng/src/styles.css"],
+        "assets": [
+          "client-ng/src/favicon.ico",
+          "client-ng/src/assets"
+        ],
+        "styles": [
+          "client-ng/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -65,17 +97,23 @@
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
         "buildTarget": "client-ng:build"
-      }
+      },
+      "configurations": {}
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "options": {},
+      "configurations": {}
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "client-ng/jest.config.ts"
-      }
+      },
+      "configurations": {}
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
@@ -83,10 +121,13 @@
         "buildTarget": "client-ng:build",
         "port": 4200,
         "spa": true
-      }
+      },
+      "configurations": {}
     },
     "server": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "executor": "@angular-devkit/build-angular:server",
       "options": {
         "outputPath": "dist/client-ng/server",
@@ -119,12 +160,15 @@
           "serverTarget": "client-ng:server:production"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {}
     },
     "prerender": {
       "executor": "@angular-devkit/build-angular:prerender",
       "options": {
-        "routes": ["/"]
+        "routes": [
+          "/"
+        ]
       },
       "configurations": {
         "development": {
@@ -138,5 +182,6 @@
       },
       "defaultConfiguration": "production"
     }
-  }
+  },
+  "implicitDependencies": []
 }

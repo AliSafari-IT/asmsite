@@ -1,0 +1,205 @@
+{
+  "name": "asmsite",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": ".",
+  "projectType": "library",
+  "targets": {
+    "start:ng": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "start:ng"
+      },
+      "configurations": {}
+    },
+    "start:react": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "start:react"
+      },
+      "configurations": {}
+    },
+    "start:docs": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "start:docs"
+      },
+      "configurations": {}
+    },
+    "start:auth": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "start:auth"
+      },
+      "configurations": {
+        "production": {
+          "environment": "production"
+        },
+        "development": {
+          "environment": "development"
+        }
+      }
+      
+    },
+    "build:ng": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:ng"
+      },
+      "configurations": {}
+    },
+    "build:react": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:react"
+      },
+      "configurations": {}
+    },
+    "build:docs": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build:docs"
+      },
+      "configurations": {}
+    },
+    "test": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "test"
+      },
+      "configurations": {}
+    },
+    "lint": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "lint"
+      },
+      "configurations": {}
+    },
+    "do": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "do"
+      },
+      "configurations": {}
+    },
+    "docusaurus": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "docusaurus"
+      },
+      "configurations": {}
+    },
+    "start": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "start"
+      },
+      "configurations": {}
+    },
+    "build": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "build"
+      },
+      "configurations": {}
+    },
+    "swizzle": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "swizzle"
+      },
+      "configurations": {}
+    },
+    "deploy": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "deploy"
+      },
+      "configurations": {}
+    },
+    "clear": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "clear"
+      },
+      "configurations": {}
+    },
+    "serve": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "serve"
+      },
+      "configurations": {}
+    },
+    "write-translations": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "write-translations"
+      },
+      "configurations": {}
+    },
+    "write-heading-ids": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "write-heading-ids"
+      },
+      "configurations": {}
+    },
+    "typecheck": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "typecheck"
+      },
+      "configurations": {}
+    },
+    "reset": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "reset"
+      },
+      "configurations": {}
+    },
+    "client-ng": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "options": {
+        "buildTarget": "client-ng:build",
+        "tsConfig": "client-ng/tsconfig.app.json",
+        "devServerTarget": "client-ng:serve"
+      },
+      "configurations": {}
+    },
+    "client-react": {
+      "defaultConfiguration": "development",
+      "executor": "@nrwl/vite:dev-server",
+      "options": {
+        "buildTarget": "client-react:build",
+        "devServerTarget": "client-react:serve"
+      },
+      "configurations": {}
+    },
+    "client-docs": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "options": {
+        "buildTarget": "client-docs:build",
+        "tsConfig": "documentations/client-docs/tsconfig.app.json",
+        "devServerTarget": "client-docs:serve"
+      },
+      "configurations": {}
+    },
+    "nx-release-publish": {
+      "dependsOn": [
+        "^nx-release-publish"
+      ],
+      "executor": "@nx/js:release-publish",
+      "options": {},
+      "configurations": {}
+    },
+    "nx-release": {
+      "dependsOn": [
+        "^nx-release"
+      ]
+    }
+  },
+  "implicitDependencies": [],
+  "tags": []
+}

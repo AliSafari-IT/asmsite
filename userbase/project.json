@@ -1,0 +1,114 @@
+{
+  "name": "userbase",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {},
+  "sourceRoot": "userbase/src",
+  "prefix": "app",
+  "targets": {
+    "eslint:lint": {
+      "cache": true,
+      "options": {
+        "cwd": "userbase",
+        "command": "eslint ."
+      },
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/tools/eslint-rules/**/*",
+        {
+          "externalDependencies": [
+            "eslint"
+          ]
+        }
+      ],
+      "executor": "nx:run-commands",
+      "configurations": {}
+    },
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "options": {
+        "outputPath": "dist/userbase",
+        "index": "userbase/src/index.html",
+        "browser": "userbase/src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "userbase/tsconfig.app.json",
+        "assets": [
+          "userbase/src/favicon.ico",
+          "userbase/src/assets"
+        ],
+        "styles": [
+          "userbase/src/styles.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "userbase:build:production"
+        },
+        "development": {
+          "buildTarget": "userbase:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {}
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "userbase:build"
+      },
+      "configurations": {}
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
+        "tsConfig": "userbase/tsconfig.spec.json",
+        "assets": [
+          "userbase/src/favicon.ico",
+          "userbase/src/assets"
+        ],
+        "styles": [
+          "userbase/src/styles.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {}
+    }
+  },
+  "implicitDependencies": [],
+  "tags": []
+}

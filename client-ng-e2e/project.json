@@ -4,7 +4,237 @@
   "projectType": "application",
   "sourceRoot": "client-ng-e2e/src",
   "tags": [],
-  "implicitDependencies": ["client-ng"],
+  "implicitDependencies": [
+    "client-ng"
+  ],
   "// targets": "to see all targets run: nx show project client-ng-e2e --web",
-  "targets": {}
+  "targets": {
+    "eslint:lint": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{projectRoot}/.eslintrc.json",
+        "{workspaceRoot}/tools/eslint-rules/**/*",
+        {
+          "externalDependencies": [
+            "eslint"
+          ]
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "client-ng-e2e",
+        "command": "eslint ."
+      },
+      "configurations": {}
+    },
+    "e2e": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        {
+          "externalDependencies": [
+            "cypress"
+          ]
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist/cypress/client-ng-e2e/videos",
+        "{workspaceRoot}/dist/cypress/client-ng-e2e/screenshots"
+      ],
+      "metadata": {
+        "technologies": [
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress"
+        ],
+        "description": "Runs Cypress Tests"
+      },
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "client-ng-e2e",
+        "command": "cypress run"
+      },
+      "configurations": {
+        "production": {
+          "command": "cypress run --env webServerCommand=\"nx run client-ng:serve:production\""
+        }
+      }
+    },
+    "e2e-ci--src/e2e/app.cy.ts": {
+      "outputs": [
+        "{workspaceRoot}/dist/cypress/client-ng-e2e/videos",
+        "{workspaceRoot}/dist/cypress/client-ng-e2e/screenshots"
+      ],
+      "inputs": [
+        "default",
+        "^default",
+        {
+          "externalDependencies": [
+            "cypress"
+          ]
+        }
+      ],
+      "cache": true,
+      "metadata": {
+        "technologies": [
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress"
+        ],
+        "description": "Runs Cypress Tests in src/e2e/app.cy.ts in CI"
+      },
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "client-ng-e2e",
+        "command": "cypress run --env webServerCommand=\"nx run client-ng:serve-static\" --spec src/e2e/app.cy.ts"
+      },
+      "configurations": {}
+    },
+    "e2e-ci": {
+      "executor": "nx:noop",
+      "cache": true,
+      "inputs": [
+        "default",
+        "^default",
+        {
+          "externalDependencies": [
+            "cypress"
+          ]
+        }
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist/cypress/client-ng-e2e/videos",
+        "{workspaceRoot}/dist/cypress/client-ng-e2e/screenshots"
+      ],
+      "dependsOn": [
+        {
+          "target": "e2e-ci--src/e2e/app.cy.ts",
+          "projects": "self",
+          "params": "forward"
+        }
+      ],
+      "metadata": {
+        "technologies": [
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress"
+        ],
+        "description": "Runs Cypress Tests in CI"
+      },
+      "options": {},
+      "configurations": {}
+    },
+    "open-cypress": {
+      "metadata": {
+        "technologies": [
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress",
+          "cypress"
+        ],
+        "description": "Opens Cypress"
+      },
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "client-ng-e2e",
+        "command": "cypress open"
+      },
+      "configurations": {}
+    }
+  }
 }

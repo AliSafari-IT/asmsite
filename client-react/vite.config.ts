@@ -5,34 +5,13 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   root: __dirname,
-  base: '/dist/client-react/',
-  cacheDir: '../node_modules/.vite/client-react',
-
-  server: {
-    port: 4200,
-    host: 'localhost',
-  },
-
-  preview: {
-    port: 4300,
-    host: 'localhost',
-  },
-
-  plugins: [react(), nxViteTsPaths()],
-
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
-
   build: {
     outDir: '../dist/client-react',
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
-  },
-
+  },  
   test: {
     globals: true,
     cache: {
@@ -47,4 +26,8 @@ export default defineConfig({
       provider: 'v8',
     },
   },
+  cacheDir: 'node_modules/.vite',
+  logLevel: 'info',
+  plugins: [react(), nxViteTsPaths()],
 });
+

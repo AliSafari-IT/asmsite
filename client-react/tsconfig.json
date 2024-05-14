@@ -1,21 +1,27 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
     "jsx": "react-jsx",
-    "allowJs": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
     "strict": true,
-    "types": ["vite/client", "vitest"]
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["vitest", "vitest/globals", "vitest/importMeta"],
+    "resolveJsonModule": true,
+    "declaration": true
   },
   "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
+  "include": ["*.ts", "*.tsx"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ],
   "extends": "../tsconfig.base.json"
 }

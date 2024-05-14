@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "localhost",
+            "database": "${workspaceFolder:asmsite}/server/userAuth/database/database.sqlite"
+        }
+    ]
+}
